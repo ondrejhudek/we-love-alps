@@ -1,1 +1,1 @@
-![we-love-alps](https://user-images.githubusercontent.com/2676643/215068771-a5d18e34-dfe3-42da-b4a1-821236d1f681.png)
+![logo](https://user-images.githubusercontent.com/2676643/215292978-239b11d5-58c1-465b-9657-eee76e1fa74c.png)
