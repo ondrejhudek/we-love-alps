@@ -1,4 +1,27 @@
 import { extendTheme } from "@chakra-ui/react";
+import { modalAnatomy as parts } from "@chakra-ui/anatomy";
+import {
+  createMultiStyleConfigHelpers,
+  defineStyle,
+} from "@chakra-ui/styled-system";
+
+const { definePartsStyle, defineMultiStyleConfig } =
+  createMultiStyleConfigHelpers(parts.keys);
+
+const almostFull = definePartsStyle({
+  dialog: defineStyle({
+    minH: "90dvh",
+    w: "90vw",
+    borderRadius: "md",
+  }),
+  dialogContainer: defineStyle({
+    alignItems: "center",
+  }),
+});
+
+const Modal = defineMultiStyleConfig({
+  variants: { almostFull },
+});
 
 const theme = extendTheme({
   fonts: {
@@ -44,6 +67,7 @@ const theme = extendTheme({
       900: "#030f14",
     },
   },
+  components: { Modal },
   transition: {
     primary: "all 0.2s ease-in-out 0s",
   },

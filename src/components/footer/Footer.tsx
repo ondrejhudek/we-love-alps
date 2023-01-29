@@ -6,6 +6,7 @@ const Footer = () => (
   <Box
     mt={10}
     mb={2}
+    px={{ base: 4, md: 0 }}
     marginInlineStart="auto"
     marginInlineEnd="auto"
     maxW="container.lg"

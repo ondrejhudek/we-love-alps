@@ -48,7 +48,7 @@ const Navbar = () => {
         mx="auto"
       >
         {/* Logo */}
-        <Image src="images/logo-navbar2.png" alt="We love Alps" h={7} mr={4} />
+        <Image src="images/logo-navbar.png" alt="We love Alps" h={7} mr={4} />
 
         {/* Desktop */}
         <Flex
