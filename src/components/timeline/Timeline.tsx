@@ -183,8 +183,8 @@ const TimelineRow = ({
           >
             {members.map((id) =>
               MEMBERS.filter((member) => member.id === id).map(
-                ({ firstname, lastname }) => (
-                  <TooltipAvatar name={`${firstname} ${lastname}`} />
+                ({ id, firstname, lastname }) => (
+                  <TooltipAvatar key={id} name={`${firstname} ${lastname}`} />
                 )
               )
             )}
