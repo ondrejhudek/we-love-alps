@@ -155,7 +155,14 @@ const TimelineRow = ({
                 alt={COUNTRIES[countryCode]}
                 width={20}
                 height={20}
-                // quality={100}
+              />
+            </Box>
+            <Box ml={2}>
+              <Image
+                src={`/images/flags/IT.png`}
+                alt="IT"
+                width={20}
+                height={20}
               />
             </Box>
           </Heading>
@@ -294,7 +301,6 @@ const Timeline = () => {
                     alt={COUNTRIES[modalTrip.countryCode]}
                     width={32}
                     height={32}
-                    // quality={100}
                   />
                 </Box>
               </Heading>
