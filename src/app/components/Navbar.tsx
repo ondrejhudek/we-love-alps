@@ -1,3 +1,5 @@
+import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import {
   Box,
@@ -10,31 +12,33 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
-const LINKS = ["Domů", "Členové", "Destinace", "Foto", "Video"];
+import { NAV_LINKS, NAV_LINK_KEYS, NavLinkKey } from "./utils";
 
-const NavLink: React.FC<{ children: React.ReactNode; i: number }> = ({
-  children,
-  i,
-}) => (
-  <Link
-    display="block"
-    mx={4}
-    my={2}
-    py={5}
-    color={i === 0 ? "gray.900" : "gray.600"}
-    fontWeight="medium"
-    borderBottomWidth={2}
-    borderStyle="solid"
-    borderColor={i === 0 ? "primary.700" : "transparent"}
-    _hover={{
-      color: "gray.900",
-      borderColor: "primary.500",
-    }}
-    href="#"
-  >
-    {children}
-  </Link>
-);
+const NavLink = ({ link, i }: { link: NavLinkKey; i: number }) => {
+  const pathname = usePathname();
+
+  return (
+    <Link
+      as={NextLink}
+      href={link}
+      display="block"
+      mx={4}
+      my={2}
+      py={5}
+      color={pathname === link ? "gray.800" : "gray.600"}
+      fontWeight="medium"
+      borderBottomWidth={2}
+      borderStyle="solid"
+      borderColor={pathname === link ? "primary.600" : "transparent"}
+      _hover={{
+        color: "gray.900",
+        borderColor: "primary.500",
+      }}
+    >
+      {NAV_LINKS[link]}
+    </Link>
+  );
+};
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -49,12 +53,15 @@ const Navbar = () => {
       >
         {/* Logo */}
         <Box mr={4}>
-          <Image
-            src="/images/logo-navbar.png"
-            alt="We love Alps"
-            width={246}
-            height={28}
-          />
+          <NextLink href="/">
+            <Image
+              src="/images/logo-navbar.png"
+              alt="We love Alps"
+              width={246}
+              height={28}
+              priority
+            />
+          </NextLink>
         </Box>
 
         {/* Desktop */}
@@ -64,10 +71,8 @@ const Navbar = () => {
           justify="center"
           alignItems="center"
         >
-          {LINKS.map((link, i) => (
-            <NavLink key={link} i={i}>
-              {link}
-            </NavLink>
+          {NAV_LINK_KEYS.map((link, i) => (
+            <NavLink key={link} link={link} i={i} />
           ))}
         </Flex>
 
@@ -92,10 +97,8 @@ const Navbar = () => {
       {isOpen ? (
         <Box pb={4} display={{ md: "none" }}>
           <Stack as="nav" spacing={4}>
-            {LINKS.map((link, i) => (
-              <NavLink key={link} i={i}>
-                {link}
-              </NavLink>
+            {NAV_LINK_KEYS.map((link, i) => (
+              <NavLink key={link} link={link} i={i} />
             ))}
           </Stack>
         </Box>

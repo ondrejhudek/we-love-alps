@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { useState } from "react";
 import {
@@ -143,10 +145,10 @@ const TimelineRow = ({
           <Heading
             as="h3"
             size="md"
-            textTransform="uppercase"
-            mb={2}
             display="flex"
+            mb={2}
             alignItems="center"
+            textTransform="uppercase"
           >
             {title}
             <Box ml={2}>
@@ -157,16 +159,13 @@ const TimelineRow = ({
                 height={20}
               />
             </Box>
-            <Box ml={2}>
-              <Image src="/images/IT.png" alt="IT" width={20} height={20} />
-            </Box>
           </Heading>
 
           {/* Resorts */}
           <Flex align="center">
             <Icon as={FaSkiing} color="secondary.600" fontSize="sm" mr={3} />
 
-            <Text fontSize="sm">
+            <Text fontSize="sm" color="gray.600">
               {resorts
                 .map((id) =>
                   RESORTS.filter((resort) => resort.id === id).map(
@@ -217,12 +216,9 @@ const Timeline = () => {
   };
 
   return (
-    <Box>
+    <>
       <Box
         pos="relative"
-        maxW="container.lg"
-        my={{ base: 6, sm: 8, md: 10 }}
-        mx="auto"
         _after={{
           content: '""',
           pos: "absolute",
@@ -261,6 +257,7 @@ const Timeline = () => {
         >
           <ModalOverlay />
           <ModalContent>
+            {/* Title / Year and month */}
             <ModalHeader display="flex">
               <Badge
                 color="white"
@@ -283,7 +280,10 @@ const Timeline = () => {
               </Text>
             </ModalHeader>
             <ModalCloseButton />
+
+            {/* Body */}
             <ModalBody py={0}>
+              {/* Title */}
               <Heading
                 display="flex"
                 alignItems="center"
@@ -301,6 +301,7 @@ const Timeline = () => {
               </Heading>
             </ModalBody>
 
+            {/* Footer */}
             <ModalFooter>
               <Button variant="ghost" onClick={onClose}>
                 Close
@@ -309,7 +310,7 @@ const Timeline = () => {
           </ModalContent>
         </Modal>
       )}
-    </Box>
+    </>
   );
 };
 

@@ -1,18 +1,5 @@
-"use client";
+import Timeline from "./components/Timeline";
 
-import { ChakraProvider } from "@chakra-ui/react";
-
-import theme from "./theme";
-import Footer from "../components/footer/Footer";
-import Timeline from "../components/timeline/Timeline";
-import Navbar from "../components/navbar/Navbar";
-
-const Page = () => (
-  <ChakraProvider theme={theme}>
-    <Navbar />
-    <Timeline />
-    <Footer />
-  </ChakraProvider>
-);
+const Page = () => <Timeline />;
 
 export default Page;

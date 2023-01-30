@@ -33,7 +33,7 @@ const TRIPS: Trip[] = [
   {
     id: 2,
     title: "Tauplitz",
-    resorts: ["tauplitz"],
+    resorts: ["tauplitzalm"],
     countryCode: "AT",
     year: 2011,
     month: 3,

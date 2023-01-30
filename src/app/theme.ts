@@ -4,6 +4,7 @@ import {
   createMultiStyleConfigHelpers,
   defineStyle,
 } from "@chakra-ui/styled-system";
+import { Styles } from "@chakra-ui/theme-tools";
 
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(parts.keys);
@@ -22,6 +23,23 @@ const almostFull = definePartsStyle({
 const Modal = defineMultiStyleConfig({
   variants: { almostFull },
 });
+
+const styles: Styles = {
+  global: {
+    "html, body": {
+      color: "gray.700",
+    },
+    h1: {
+      color: "primary.700",
+    },
+    "h2, h3, h4, h5, h6": {
+      color: "tertiary.700",
+    },
+    a: {
+      color: "secondary.600",
+    },
+  },
+};
 
 const theme = extendTheme({
   fonts: {
@@ -68,6 +86,7 @@ const theme = extendTheme({
     },
   },
   components: { Modal },
+  styles,
   transition: {
     primary: "all 0.2s ease-in-out 0s",
   },
