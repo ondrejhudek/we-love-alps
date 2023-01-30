@@ -54,7 +54,6 @@ const Navbar = () => {
             alt="We love Alps"
             width={246}
             height={28}
-            // quality={100}
           />
         </Box>
 

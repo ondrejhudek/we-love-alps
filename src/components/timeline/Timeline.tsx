@@ -158,12 +158,7 @@ const TimelineRow = ({
               />
             </Box>
             <Box ml={2}>
-              <Image
-                src={`/images/flags/IT.png`}
-                alt="IT"
-                width={20}
-                height={20}
-              />
+              <Image src="/images/it.png" alt="IT" width={20} height={20} />
             </Box>
           </Heading>
 
