@@ -3,6 +3,8 @@ export interface Member {
   firstname: string;
   lastname: string;
   nickname: string;
+  facebook?: string;
+  instagram?: string;
 }
 
 const MEMBERS: Member[] = [
@@ -11,6 +13,8 @@ const MEMBERS: Member[] = [
     firstname: "Ondřej",
     lastname: "Hudek",
     nickname: "hudy",
+    facebook: "ondrej.hudek",
+    instagram: "ondrejhudek",
   },
   {
     id: 1,
@@ -35,6 +39,8 @@ const MEMBERS: Member[] = [
     firstname: "Jan",
     lastname: "Stuchlík",
     nickname: "stuchla",
+    facebook: "honza.stuchlik.5",
+    instagram: "johnyst",
   },
   {
     id: 5,

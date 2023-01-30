@@ -5,12 +5,12 @@ import {
   Heading,
   AspectRatio,
   Badge,
-  Card,
-  CardHeader,
+  Text,
   Flex,
   SimpleGrid,
 } from "@chakra-ui/react";
 
+import Card from "../components/Card";
 import Header from "../components/Header";
 
 import TRIPS from "../../data/trips";
@@ -23,7 +23,10 @@ const Page = () => {
     <>
       <Header pathname={pathname} />
 
-      <SimpleGrid columns={3} spacing={6}>
+      <SimpleGrid
+        columns={{ base: 1, sm: 2, md: 3 }}
+        spacing={{ base: 3, md: 6 }}
+      >
         {Object.keys(VIDEOS)
           .sort((a, b) => parseInt(b) - parseInt(a))
           .map((tripId) => {
@@ -33,8 +36,9 @@ const Page = () => {
             if (!trip) return null;
 
             return (
-              <Card key={tripId} bgColor="gray.50">
-                <CardHeader>
+              <Card
+                key={tripId}
+                header={
                   <Flex align="center">
                     {/* Year */}
                     <Badge
@@ -54,19 +58,24 @@ const Page = () => {
                       {trip.title}
                     </Heading>
                   </Flex>
-                </CardHeader>
-
+                }
+                footer={
+                  <Text color="gray.600" fontSize="xs">
+                    Video od{" "}
+                    <Text as="span" color="gray.500" fontWeight={500}>
+                      @stuchla
+                    </Text>
+                  </Text>
+                }
+                bodyPadding={0}
+              >
                 {/* Youtube video */}
-                <AspectRatio key={tripId} ratio={16 / 9} overflow="hidden">
+                <AspectRatio key={tripId} ratio={16 / 9}>
                   <iframe
                     src={`https://www.youtube.com/embed/${VIDEOS[tripIdAsNum]}`}
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
-                    style={{
-                      borderBottomLeftRadius: "var(--card-radius)",
-                      borderBottomRightRadius: "var(--card-radius)",
-                    }}
                   ></iframe>
                 </AspectRatio>
               </Card>

@@ -12,8 +12,8 @@ import {
   Badge,
 } from "@chakra-ui/react";
 
-import Header from "../components/Header";
 import Card from "../components/Card";
+import Header from "../components/Header";
 
 import COUNTRIES from "../../data/countries";
 import RESORTS from "../../data/resorts";
@@ -29,7 +29,6 @@ const Page = () => {
       <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={6}>
         {RESORTS.map(({ id, name, region, countryCode, map }) => {
           const trips = TRIPS.filter((trip) => trip.resorts.includes(id));
-          console.log("trips", trips);
 
           return (
             <Card key={id}>
@@ -59,7 +58,7 @@ const Page = () => {
               </Flex>
 
               {/* Map */}
-              <AspectRatio ratio={2.35 / 1} my={4} mx={-6}>
+              <AspectRatio ratio={2.35 / 1} my={4} mx={-5}>
                 <iframe
                   src={`https://www.google.com/maps/embed?pb=${encodeURIComponent(
                     map

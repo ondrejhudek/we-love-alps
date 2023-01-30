@@ -138,7 +138,7 @@ const TimelineRow = ({
         >
           {/* Month */}
           <Text fontSize="xs" color="gray.400" textTransform="uppercase">
-            {MONTHS[month]}
+            {MONTHS[month - 1]}
           </Text>
 
           {/* Title */}
@@ -276,7 +276,7 @@ const Timeline = () => {
                 textTransform="uppercase"
                 fontWeight="400"
               >
-                {MONTHS[modalTrip.month]}
+                {MONTHS[modalTrip.month - 1]}
               </Text>
             </ModalHeader>
             <ModalCloseButton />

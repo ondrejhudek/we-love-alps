@@ -108,6 +108,16 @@ const TRIPS: Trip[] = [
   },
   {
     id: 10,
+    title: "Zell am See",
+    resorts: ["kitzsteinhorn", "schmitten"],
+    countryCode: "AT",
+    year: 2020,
+    month: 3,
+    members: [0, 1],
+    nonMembers: 2,
+  },
+  {
+    id: 11,
     title: "Kitzbühel",
     resorts: ["kitzbuhel", "brixen"],
     countryCode: "AT",
@@ -116,7 +126,7 @@ const TRIPS: Trip[] = [
     members: [0, 1, 2, 4, 10, 11],
   },
   {
-    id: 11,
+    id: 12,
     title: "Passo del Tonale",
     resorts: ["tonale"],
     countryCode: "IT",

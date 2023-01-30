@@ -1,8 +1,24 @@
-import { Box, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  useColorModeValue,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+} from "@chakra-ui/react";
 
-const Card = ({ children }: { children: React.ReactNode }) => (
-  <Box
-    p={6}
+const MyCard = ({
+  children,
+  header,
+  footer,
+  bodyPadding,
+}: {
+  children: React.ReactNode;
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
+  bodyPadding?: number;
+}) => (
+  <Card
     bg={useColorModeValue("white", "gray.900")}
     rounded="lg"
     borderWidth={1}
@@ -10,8 +26,10 @@ const Card = ({ children }: { children: React.ReactNode }) => (
     borderColor="gray.100"
     boxShadow="xl"
   >
-    {children}
-  </Box>
+    {header && <CardHeader>{header}</CardHeader>}
+    <CardBody p={bodyPadding}>{children}</CardBody>
+    {footer && <CardFooter>{footer}</CardFooter>}
+  </Card>
 );
 
-export default Card;
+export default MyCard;
