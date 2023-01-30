@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState } from "react";
 import {
   Avatar,
@@ -9,7 +10,6 @@ import {
   Heading,
   Text,
   Icon,
-  Image,
   Tooltip,
   Modal,
   ModalOverlay,
@@ -149,12 +149,15 @@ const TimelineRow = ({
             alignItems="center"
           >
             {title}
-            <Image
-              src={`/images/flags/${countryCode}.png`}
-              alt={COUNTRIES[countryCode]}
-              boxSize={5}
-              ml={2}
-            />
+            <Box ml={2}>
+              <Image
+                src={`/images/flags/${countryCode}.png`}
+                alt={COUNTRIES[countryCode]}
+                width={20}
+                height={20}
+                // quality={100}
+              />
+            </Box>
           </Heading>
 
           {/* Resorts */}
@@ -285,12 +288,15 @@ const Timeline = () => {
                 textTransform="uppercase"
               >
                 {modalTrip.title}
-                <Image
-                  src={`/images/flags/${modalTrip.countryCode}.png`}
-                  alt={COUNTRIES[modalTrip.countryCode]}
-                  boxSize={8}
-                  ml={3}
-                />
+                <Box ml={3}>
+                  <Image
+                    src={`/images/flags/${modalTrip.countryCode}.png`}
+                    alt={COUNTRIES[modalTrip.countryCode]}
+                    width={32}
+                    height={32}
+                    // quality={100}
+                  />
+                </Box>
               </Heading>
             </ModalBody>
 

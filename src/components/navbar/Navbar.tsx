@@ -1,8 +1,8 @@
+import Image from "next/image";
 import {
   Box,
   Flex,
   Link,
-  Image,
   IconButton,
   useDisclosure,
   useColorModeValue,
@@ -48,7 +48,15 @@ const Navbar = () => {
         mx="auto"
       >
         {/* Logo */}
-        <Image src="images/logo-navbar.png" alt="We love Alps" h={7} mr={4} />
+        <Box mr={4}>
+          <Image
+            src="/images/logo-navbar.png"
+            alt="We love Alps"
+            width={246}
+            height={28}
+            // quality={100}
+          />
+        </Box>
 
         {/* Desktop */}
         <Flex
