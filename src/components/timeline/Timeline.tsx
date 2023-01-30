@@ -151,14 +151,14 @@ const TimelineRow = ({
             {title}
             <Box ml={2}>
               <Image
-                src={`/images/flags/${countryCode}.png`}
+                src={`/images/flags/${countryCode.toLowerCase()}.png`}
                 alt={COUNTRIES[countryCode]}
                 width={20}
                 height={20}
               />
             </Box>
             <Box ml={2}>
-              <Image src="/images/it.png" alt="IT" width={20} height={20} />
+              <Image src="/images/IT.png" alt="IT" width={20} height={20} />
             </Box>
           </Heading>
 
@@ -292,7 +292,7 @@ const Timeline = () => {
                 {modalTrip.title}
                 <Box ml={3}>
                   <Image
-                    src={`/images/flags/${modalTrip.countryCode}.png`}
+                    src={`/images/flags/${modalTrip.countryCode.toLowerCase()}.png`}
                     alt={COUNTRIES[modalTrip.countryCode]}
                     width={32}
                     height={32}
