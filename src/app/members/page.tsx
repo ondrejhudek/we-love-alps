@@ -19,6 +19,38 @@ import Card from "../components/Card";
 
 import MEMBERS from "../../data/members";
 import TRIPS from "../../data/trips";
+import RESORTS from "../../data/resorts";
+
+const Stat = ({ list, term }: { list: string[]; term: string }) => (
+  <Tooltip
+    label={
+      <Box textAlign="center" py={1} px={2}>
+        {list.map((item) => (
+          <Text key={item}>{item}</Text>
+        ))}
+      </Box>
+    }
+    placement="top"
+    hasArrow
+  >
+    <Flex
+      direction="column"
+      justify="center"
+      boxSize={20}
+      textAlign="center"
+      color="white"
+      bgColor="primary.600"
+      rounded="full"
+    >
+      <Text as="span" fontSize="3xl" fontWeight="800" lineHeight={7}>
+        {list.length}
+      </Text>
+      <Text fontSize="xs" fontWeight={500} color="gray.200">
+        {term}
+      </Text>
+    </Flex>
+  </Tooltip>
+);
 
 const Page = () => {
   const pathname = usePathname();
@@ -27,11 +59,20 @@ const Page = () => {
     <>
       <Header pathname={pathname} />
 
-      <SimpleGrid columns={4} spacing={4}>
+      <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={4}>
         {MEMBERS.map(
           ({ id, firstname, lastname, nickname, facebook, instagram }) => {
             const name = `${firstname} ${lastname}`;
             const trips = TRIPS.filter((trip) => trip.members.includes(id));
+            const tripNames = trips.map(
+              ({ title, year }) => `${title} (${year})`
+            );
+            const resortNames = [
+              ...new Set(trips.flatMap(({ resorts }) => resorts)),
+            ].map(
+              (resortId) =>
+                RESORTS.find(({ id }) => id === resortId)?.name || ""
+            );
 
             return (
               <Card
@@ -90,21 +131,13 @@ const Page = () => {
                   )
                 }
               >
-                <Box>
-                  <Tooltip
-                    label={
-                      <Box textAlign="center" py={1} px={2}>
-                        {trips.map(({ id, title }) => (
-                          <Text key={id}>{title}</Text>
-                        ))}
-                      </Box>
-                    }
-                    placement="top"
-                    hasArrow
-                  >
-                    <Text>Celkem se zůčastnil {trips.length} zájezdů.</Text>
-                  </Tooltip>
-                </Box>
+                <Flex justify="space-evenly">
+                  {/* Trips */}
+                  <Stat list={tripNames} term="zájezdů" />
+
+                  {/* Resorts */}
+                  <Stat list={resortNames} term="středisek" />
+                </Flex>
               </Card>
             );
           }
