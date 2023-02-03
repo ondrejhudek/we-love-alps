@@ -6,9 +6,10 @@ import {
   Flex,
   Link,
   IconButton,
+  Stack,
+  Show,
   useDisclosure,
   useColorModeValue,
-  Stack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
@@ -48,19 +49,30 @@ const Navbar = () => {
       <Flex
         align="center"
         justify="space-between"
-        maxW="container.lg"
+        maxW="container.xl"
         mx="auto"
       >
         {/* Logo */}
         <Box mr={4}>
           <NextLink href="/">
-            <Image
-              src="/images/logo-navbar.png"
-              alt="We love Alps"
-              width={246}
-              height={28}
-              priority
-            />
+            <Show above="xs">
+              <Image
+                src="/images/logo-navbar.png"
+                alt="We love Alps"
+                width={246}
+                height={28}
+                priority
+              />
+            </Show>
+            <Show below="xs">
+              <Image
+                src="/images/logo-icon.png"
+                alt="We love Alps"
+                width={48}
+                height={28}
+                priority
+              />
+            </Show>
           </NextLink>
         </Box>
 

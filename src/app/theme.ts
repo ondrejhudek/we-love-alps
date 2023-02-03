@@ -29,6 +29,9 @@ const styles: Styles = {
     "html, body": {
       color: "gray.700",
     },
+    body: {
+      backgroundColor: "gray.100",
+    },
     h1: {
       color: "primary.700",
     },
@@ -42,6 +45,9 @@ const styles: Styles = {
 };
 
 const theme = extendTheme({
+  breakpoints: {
+    xs: "22em",
+  },
   fonts: {
     heading:
       'var(--font-ubuntu), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',

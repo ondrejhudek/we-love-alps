@@ -8,6 +8,8 @@ import {
   Badge,
   Box,
   Button,
+  Card,
+  CardBody,
   Flex,
   Heading,
   Text,
@@ -87,16 +89,13 @@ const TimelineRow = ({
           zIndex: 1,
         }}
       >
-        <Box
-          py={6}
-          px={8}
+        <Card
+          position="static"
           color="primary.900"
-          bgColor="gray.100"
-          borderRadius="lg"
-          borderBottom={4}
+          bgColor="white"
+          borderBottom={5}
           borderStyle="solid"
           borderColor="transparent"
-          boxShadow="sm"
           overflow="auto"
           _before={{
             content: '" "',
@@ -113,10 +112,10 @@ const TimelineRow = ({
             },
             borderStyle: "solid",
             borderColor: {
-              base: "transparent var(--chakra-colors-gray-100) transparent transparent",
+              base: "transparent var(--chakra-colors-white) transparent transparent",
               md: even
-                ? "transparent transparent transparent var(--chakra-colors-gray-100)"
-                : "transparent var(--chakra-colors-gray-100) transparent transparent",
+                ? "transparent transparent transparent var(--chakra-colors-white)"
+                : "transparent var(--chakra-colors-white) transparent transparent",
             },
           }}
           _hover={{
@@ -136,71 +135,73 @@ const TimelineRow = ({
             })
           }
         >
-          {/* Month */}
-          <Text fontSize="xs" color="gray.400" textTransform="uppercase">
-            {MONTHS[month - 1]}
-          </Text>
+          <CardBody py={6} px={8}>
+            {/* Month */}
+            <Text fontSize="xs" color="gray.400" textTransform="uppercase">
+              {MONTHS[month - 1]}
+            </Text>
 
-          {/* Title */}
-          <Heading
-            as="h3"
-            size="md"
-            display="flex"
-            mb={2}
-            alignItems="center"
-            textTransform="uppercase"
-          >
-            {title}
-            <Box ml={2}>
-              <Image
-                src={`/images/flags/${countryCode.toLowerCase()}.png`}
-                alt={COUNTRIES[countryCode]}
-                width={20}
-                height={20}
-              />
-            </Box>
-          </Heading>
+            {/* Title */}
+            <Heading
+              as="h3"
+              size="md"
+              display="flex"
+              mb={2}
+              alignItems="center"
+              textTransform="uppercase"
+            >
+              {title}
+              <Box ml={2}>
+                <Image
+                  src={`/images/flags/${countryCode.toLowerCase()}.png`}
+                  alt={COUNTRIES[countryCode]}
+                  width={20}
+                  height={20}
+                />
+              </Box>
+            </Heading>
 
-          {/* Resorts */}
-          <Flex align="center">
-            <Icon as={FaSkiing} color="secondary.600" fontSize="sm" mr={3} />
+            {/* Resorts */}
+            <Flex align="center">
+              <Icon as={FaSkiing} color="secondary.600" fontSize="sm" mr={3} />
 
-            <Text fontSize="sm" color="gray.600">
-              {resorts
-                .map((id) =>
-                  RESORTS.filter((resort) => resort.id === id).map(
-                    (resort) => resort.name
+              <Text fontSize="sm" color="gray.600">
+                {resorts
+                  .map((id) =>
+                    RESORTS.filter((resort) => resort.id === id).map(
+                      (resort) => resort.name
+                    )
+                  )
+                  .join(", ")}
+              </Text>
+            </Flex>
+
+            {/* Members */}
+            <AvatarGroup
+              size="sm"
+              spacing={-1.5}
+              mt={3}
+              max={members.length}
+              color="white"
+              fontSize="sm"
+            >
+              {members.map((id) =>
+                MEMBERS.filter((member) => member.id === id).map(
+                  ({ id, firstname, lastname }) => (
+                    <TooltipAvatar key={id} name={`${firstname} ${lastname}`} />
                   )
                 )
-                .join(", ")}
-            </Text>
-          </Flex>
+              )}
 
-          {/* Members */}
-          <AvatarGroup
-            size="sm"
-            spacing={-1.5}
-            mt={3}
-            max={members.length}
-            color="white"
-            fontSize="sm"
-          >
-            {members.map((id) =>
-              MEMBERS.filter((member) => member.id === id).map(
-                ({ id, firstname, lastname }) => (
-                  <TooltipAvatar key={id} name={`${firstname} ${lastname}`} />
-                )
-              )
-            )}
-
-            {/* Non members */}
-            {nonMembers &&
-              nonMembers > 0 &&
-              [...Array(nonMembers)].map((_, i) => (
-                <Avatar key={`nonMember-${i}`} />
-              ))}
-          </AvatarGroup>
-        </Box>
+              {/* Non members */}
+              {nonMembers &&
+                nonMembers > 0 &&
+                [...Array(nonMembers)].map((_, i) => (
+                  <Avatar key={`nonMember-${i}`} />
+                ))}
+            </AvatarGroup>
+          </CardBody>
+        </Card>
       </Box>
     </Box>
   );
@@ -243,7 +244,7 @@ const Timeline = () => {
         as="h4"
         fontSize="2xl"
         textAlign={{ md: "center" }}
-        color="primary.800"
+        color="primary.600"
       >
         Kam příště?
       </Heading>

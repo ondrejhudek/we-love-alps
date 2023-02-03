@@ -23,10 +23,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
       <ChakraProvider theme={theme}>
         <Navbar />
         <Box
-          maxW="container.lg"
+          maxW="container.xl"
           mx="auto"
           my={{ base: 4, sm: 6, md: 8 }}
-          px={{ base: 2, sm: 4, md: 6, lg: 0 }}
+          px={{ base: 4, sm: 5, md: 6, xl: 0 }}
         >
           {children}
         </Box>
