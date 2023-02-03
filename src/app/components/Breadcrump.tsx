@@ -1,6 +1,11 @@
 import Link from "next/link";
 import * as React from "react";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 
 const Breadcrump = ({ name }: { name: string }) => (
@@ -8,7 +13,7 @@ const Breadcrump = ({ name }: { name: string }) => (
     spacing="8px"
     fontWeight="medium"
     fontSize="sm"
-    color="tertiary.400"
+    color={useColorModeValue("gray.400", "gray.600")}
     separator={<ChevronRightIcon color="gray.500" />}
   >
     <BreadcrumbItem>

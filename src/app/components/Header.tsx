@@ -10,7 +10,7 @@ const Header = ({ pathname }: { pathname: string | null }) => {
   return (
     <>
       {pathname && <Breadcrump name={name} />}
-      <Heading as="h1" mb={{ base: 2, sm: 4, md: 6 }}>
+      <Heading as="h1" mt={1} mb={{ base: 2, sm: 4, md: 6 }}>
         {name}
       </Heading>
     </>

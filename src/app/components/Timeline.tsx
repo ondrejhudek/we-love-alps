@@ -23,6 +23,7 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { FaSkiing } from "react-icons/fa";
 
@@ -41,9 +42,9 @@ const TooltipAvatar: typeof Avatar = (props: any) => (
     <Avatar
       {...props}
       borderWidth={1}
-      borderColor="gray.100"
-      color="white"
-      bg="tertiary.300"
+      borderColor={useColorModeValue("white", "gray.900")}
+      color={useColorModeValue("white", "gray.900")}
+      bg={useColorModeValue("gray.400", "gray.500")}
     />
   </Tooltip>
 );
@@ -79,8 +80,8 @@ const TimelineRow = ({
           },
           w: DOT_SIZE_PX,
           h: DOT_SIZE_PX,
-          color: "white",
-          bgColor: "secondary.600",
+          color: useColorModeValue("white", "gray.900"),
+          bgColor: useColorModeValue("secondary.600", "secondary.500"),
           lineHeight: DOT_SIZE_PX,
           textAlign: "center",
           fontSize: "sm",
@@ -92,7 +93,7 @@ const TimelineRow = ({
         <Card
           position="static"
           color="primary.900"
-          bgColor="white"
+          bgColor={useColorModeValue("white", "gray.900")}
           borderBottom={5}
           borderStyle="solid"
           borderColor="transparent"
@@ -112,15 +113,23 @@ const TimelineRow = ({
             },
             borderStyle: "solid",
             borderColor: {
-              base: "transparent var(--chakra-colors-white) transparent transparent",
-              md: even
-                ? "transparent transparent transparent var(--chakra-colors-white)"
-                : "transparent var(--chakra-colors-white) transparent transparent",
+              base: useColorModeValue(
+                "transparent var(--chakra-colors-white) transparent transparent",
+                "transparent var(--chakra-colors-gray-900) transparent transparent"
+              ),
+              md: useColorModeValue(
+                even
+                  ? "transparent transparent transparent var(--chakra-colors-gray-900)"
+                  : "transparent var(--chakra-colors-gray-900) transparent transparent",
+                even
+                  ? "transparent transparent transparent var(--chakra-colors-gray-900)"
+                  : "transparent var(--chakra-colors-gray-900) transparent transparent"
+              ),
             },
           }}
           _hover={{
             cursor: "pointer",
-            borderColor: "secondary.600",
+            borderColor: useColorModeValue("secondary.600", "secondary.500"),
           }}
           onClick={() =>
             handleOpen({
@@ -137,7 +146,11 @@ const TimelineRow = ({
         >
           <CardBody py={6} px={8}>
             {/* Month */}
-            <Text fontSize="xs" color="gray.400" textTransform="uppercase">
+            <Text
+              fontSize="xs"
+              color={useColorModeValue("gray.400", "gray.600")}
+              textTransform="uppercase"
+            >
               {MONTHS[month - 1]}
             </Text>
 
@@ -165,7 +178,10 @@ const TimelineRow = ({
             <Flex align="center">
               <Icon as={FaSkiing} color="secondary.600" fontSize="sm" mr={3} />
 
-              <Text fontSize="sm" color="gray.600">
+              <Text
+                fontSize="sm"
+                color={useColorModeValue("gray.600", "gray.400")}
+              >
                 {resorts
                   .map((id) =>
                     RESORTS.filter((resort) => resort.id === id).map(
@@ -227,7 +243,7 @@ const Timeline = () => {
           bottom: 0,
           left: { base: "42px", sm: "52px", md: "50%" },
           w: "2px",
-          bgColor: "tertiary.100",
+          bgColor: useColorModeValue("gray.300", "gray.700"),
           ml: "-1px",
         }}
       >
@@ -244,12 +260,12 @@ const Timeline = () => {
         as="h4"
         fontSize="2xl"
         textAlign={{ md: "center" }}
-        color="primary.600"
+        color={useColorModeValue("secondary.600", "secondary.500")}
       >
         Kam příště?
       </Heading>
 
-      {modalTrip && (
+      {
         <Modal
           isOpen={isOpen}
           onClose={onClose}
@@ -262,22 +278,22 @@ const Timeline = () => {
             <ModalHeader display="flex">
               <Badge
                 color="white"
-                bgColor="secondary.600"
+                bgColor={useColorModeValue("secondary.600", "secondary.500")}
                 fontSize="lg"
                 display="flex"
                 alignItems="center"
                 px={2}
                 borderRadius="md"
               >
-                {modalTrip.year}
+                {modalTrip?.year}
               </Badge>
               <Text
                 ml={1.5}
-                color="gray.600"
+                color={useColorModeValue("gray.600", "gray.400")}
                 textTransform="uppercase"
                 fontWeight="400"
               >
-                {MONTHS[modalTrip.month - 1]}
+                {MONTHS[(modalTrip?.month || 1) - 1]}
               </Text>
             </ModalHeader>
             <ModalCloseButton />
@@ -290,11 +306,11 @@ const Timeline = () => {
                 alignItems="center"
                 textTransform="uppercase"
               >
-                {modalTrip.title}
+                {modalTrip?.title}
                 <Box ml={3}>
                   <Image
-                    src={`/images/flags/${modalTrip.countryCode.toLowerCase()}.png`}
-                    alt={COUNTRIES[modalTrip.countryCode]}
+                    src={`/images/flags/${modalTrip?.countryCode.toLowerCase()}.png`}
+                    alt={COUNTRIES[modalTrip?.countryCode || ""]}
                     width={32}
                     height={32}
                   />
@@ -310,7 +326,7 @@ const Timeline = () => {
             </ModalFooter>
           </ModalContent>
         </Modal>
-      )}
+      }
     </>
   );
 };

@@ -11,15 +11,39 @@ import {
   Icon,
   Link,
   Tooltip,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  HStack,
+  StackDivider,
+  Badge,
+  useColorModeValue,
 } from "@chakra-ui/react";
-import { FaFacebookSquare, FaInstagramSquare } from "react-icons/fa";
+import { IconType } from "react-icons";
+import { FaInstagram, FaFacebook } from "react-icons/fa";
 
 import Header from "../components/Header";
-import Card from "../components/Card";
 
 import MEMBERS from "../../data/members";
 import TRIPS from "../../data/trips";
 import RESORTS from "../../data/resorts";
+
+const TRIP_CS: Record<number, string> = {
+  1: "zájezd",
+  2: "zájezdy",
+  3: "zájezdy",
+  4: "zájezdy",
+  5: "zájezdů",
+};
+
+const RESORT_CS: Record<number, string> = {
+  1: "středisko",
+  2: "střediska",
+  3: "střediska",
+  4: "střediska",
+  5: "středisek",
+};
 
 const Stat = ({ list, term }: { list: string[]; term: string }) => (
   <Tooltip
@@ -33,33 +57,72 @@ const Stat = ({ list, term }: { list: string[]; term: string }) => (
     placement="top"
     hasArrow
   >
-    <Flex
-      direction="column"
-      justify="center"
-      boxSize={20}
-      textAlign="center"
-      color="white"
-      bgColor="primary.600"
+    <Badge
+      variant="subtle"
+      colorScheme="primary"
+      my={1}
+      py={1}
+      px={4}
       rounded="full"
+      fontWeight={500}
     >
-      <Text as="span" fontSize="3xl" fontWeight="800" lineHeight={7}>
-        {list.length}
-      </Text>
-      <Text fontSize="xs" fontWeight={500} color="gray.200">
-        {term}
-      </Text>
-    </Flex>
+      {list.length} {term}
+    </Badge>
   </Tooltip>
+);
+
+const SocialButton = ({
+  name,
+  icon,
+  color,
+  link,
+}: {
+  name: string;
+  icon: IconType;
+  color: string;
+  link: string;
+}) => (
+  <Flex
+    as={Link}
+    href={link}
+    target="_blank"
+    role="group"
+    align="center"
+    justify="center"
+    flex="1"
+    py={4}
+    textAlign="center"
+    fontSize="sm"
+    fontWeight={500}
+    _hover={{
+      textDecoration: "none",
+      color: "white",
+      bgColor: color,
+    }}
+  >
+    <Icon
+      as={icon}
+      boxSize={5}
+      mr={2}
+      color={color}
+      _groupHover={{ color: "white" }}
+    />
+    {name}
+  </Flex>
 );
 
 const Page = () => {
   const pathname = usePathname();
+  const borderColor = useColorModeValue("gray.200", "gray.800");
 
   return (
     <>
       <Header pathname={pathname} />
 
-      <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={4}>
+      <SimpleGrid
+        columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
+        spacing={{ base: 3, sm: 4, lg: 5 }}
+      >
         {MEMBERS.map(
           ({ id, firstname, lastname, nickname, facebook, instagram }) => {
             const name = `${firstname} ${lastname}`;
@@ -75,69 +138,69 @@ const Page = () => {
             );
 
             return (
-              <Card
-                key={id}
-                header={
+              <Card key={id} overflow="hidden">
+                {/* Header */}
+                <CardHeader pt={8}>
                   <Box textAlign="center">
                     <Avatar
                       src={`/images/members/${nickname}.jpg`}
-                      size="xl"
+                      size="2xl"
                       mb={4}
                     />
-                    <Heading fontSize="xl">{name}</Heading>
-                    <Text fontWeight={600} color={"gray.500"}>
+                    <Heading fontSize="lg" fontWeight={500}>
+                      {name}
+                    </Heading>
+                    <Text mt={1} fontSize="sm" color={"gray.500"}>
                       @{nickname}
                     </Text>
                   </Box>
-                }
-                footer={
-                  (facebook || instagram) && (
-                    <Flex flex="1" justify="center">
-                      {/* Facebook */}
-                      {facebook && (
-                        <Link
-                          href={`https://www.facebook.com/${facebook}`}
-                          target="_blank"
-                        >
-                          <Icon
-                            as={FaFacebookSquare}
-                            boxSize={8}
-                            mr={1}
-                            color="facebook.500"
-                            _hover={{
-                              color: "facebook.300",
-                            }}
-                          />
-                        </Link>
-                      )}
-                      {/* Instagram */}
-                      {instagram && (
-                        <Link
-                          href={`https://www.instagram.com/${instagram}`}
-                          target="_blank"
-                        >
-                          <Icon
-                            as={FaInstagramSquare}
-                            boxSize={8}
-                            ml={1}
-                            color="#E1306C"
-                            _hover={{
-                              color: "#e96290",
-                            }}
-                          />
-                        </Link>
-                      )}
-                    </Flex>
-                  )
-                }
-              >
-                <Flex justify="space-evenly">
-                  {/* Trips */}
-                  <Stat list={tripNames} term="zájezdů" />
+                </CardHeader>
+                {/* Body */}
+                <CardBody pt={0}>
+                  <Flex justify="space-evenly" py={2} wrap="wrap">
+                    {/* Trips */}
+                    <Stat
+                      list={tripNames}
+                      term={TRIP_CS[tripNames.length] || TRIP_CS[5]}
+                    />
 
-                  {/* Resorts */}
-                  <Stat list={resortNames} term="středisek" />
-                </Flex>
+                    {/* Resorts */}
+                    <Stat
+                      list={resortNames}
+                      term={RESORT_CS[tripNames.length] || RESORT_CS[5]}
+                    />
+                  </Flex>
+                </CardBody>
+                {/* Footer */}
+                <CardFooter
+                  p={0}
+                  borderTopWidth={1}
+                  borderStyle="solid"
+                  borderColor={borderColor}
+                >
+                  <HStack
+                    flex="1"
+                    divider={<StackDivider borderColor={borderColor} />}
+                    spacing={0}
+                  >
+                    {facebook && (
+                      <SocialButton
+                        name="Facebook"
+                        icon={FaFacebook}
+                        color="facebook.500"
+                        link={`https://www.facebook.com/${facebook}`}
+                      />
+                    )}
+                    {instagram && (
+                      <SocialButton
+                        name="Instagram"
+                        icon={FaInstagram}
+                        color="#E1306C"
+                        link={`https://www.instagram.com/${instagram}`}
+                      />
+                    )}
+                  </HStack>
+                </CardFooter>
               </Card>
             );
           }

@@ -8,9 +8,9 @@ import {
   Stat,
   StatLabel,
   StatNumber,
-  StatHelpText,
   Icon,
   Link,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 
@@ -20,9 +20,10 @@ export interface StatProps {
   icon: IconType;
   path: string;
   pathLabel: string;
+  color: string;
 }
 
-const MyStat = ({ title, value, icon, path, pathLabel }: StatProps) => (
+const MyStat = ({ title, value, icon, path, pathLabel, color }: StatProps) => (
   <Box>
     <Card>
       <CardBody>
@@ -33,11 +34,15 @@ const MyStat = ({ title, value, icon, path, pathLabel }: StatProps) => (
               align="center"
               justify="center"
               boxSize={12}
-              bgColor="primary.600"
+              bgColor={useColorModeValue(`${color}.200`, `${color}.700`)}
               rounded="lg"
               mr={4}
             >
-              <Icon as={icon} boxSize={6} color="white" />
+              <Icon
+                as={icon}
+                boxSize={6}
+                color={useColorModeValue(`${color}.800`, `${color}.300`)}
+              />
             </Flex>
             <Box>
               {/* Title */}
@@ -51,7 +56,7 @@ const MyStat = ({ title, value, icon, path, pathLabel }: StatProps) => (
       {/* Link */}
       <CardFooter
         py={4}
-        bgColor="gray.50"
+        bgColor={useColorModeValue("gray.50", "gray.900")}
         fontSize="sm"
         fontWeight={500}
         borderBottomRadius="var(--card-radius)"
@@ -59,7 +64,7 @@ const MyStat = ({ title, value, icon, path, pathLabel }: StatProps) => (
         <Link
           as={NextLink}
           href={path}
-          color="primary.600"
+          color={useColorModeValue(`${color}.600`, `${color}.400`)}
           _hover={{ textDecoration: "underline" }}
         >
           {pathLabel}

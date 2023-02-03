@@ -6,7 +6,6 @@ import { ChakraProvider, Box } from "@chakra-ui/react";
 import theme from "./theme";
 import AnalyticsWrapper from "./components/Analytics";
 import Footer from "./components/Footer";
-import Timeline from "./components/Timeline";
 import Navbar from "./components/Navbar";
 
 const ubuntu = Ubuntu({

@@ -1,5 +1,13 @@
 import * as React from "react";
-import { Box, Flex, Text, Divider, Link, Icon } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Divider,
+  Link,
+  Icon,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { FaHeart } from "react-icons/fa";
 
 const Footer = () => (
@@ -9,7 +17,7 @@ const Footer = () => (
     px={{ base: 4, md: 0 }}
     marginInlineStart="auto"
     marginInlineEnd="auto"
-    maxW="container.lg"
+    maxW="container.xl"
   >
     <Divider />
     <Flex justify="center">
@@ -19,12 +27,12 @@ const Footer = () => (
         my={5}
         textAlign="center"
         fontSize="sm"
-        color="gray.700"
+        color={useColorModeValue("gray.700", "gray.300")}
       >
         S láskou vytvořil{" "}
         <Link
           href="mailto:ondrej.hudek@gmail.com"
-          color="tertiary.400"
+          color="gray.500"
           fontWeight={600}
           ml="3px"
         >

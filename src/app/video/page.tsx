@@ -8,9 +8,12 @@ import {
   Text,
   Flex,
   SimpleGrid,
+  Card,
+  CardHeader,
+  CardFooter,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
-import Card from "../components/Card";
 import Header from "../components/Header";
 
 import TRIPS from "../../data/trips";
@@ -18,6 +21,8 @@ import VIDEOS from "../../data/videos";
 
 const Page = () => {
   const pathname = usePathname();
+  const footerColor = useColorModeValue("gray.600", "gray.300");
+  const footerColorAssign = useColorModeValue("gray.500", "gray.400");
 
   return (
     <>
@@ -36,9 +41,9 @@ const Page = () => {
             if (!trip) return null;
 
             return (
-              <Card
-                key={tripId}
-                header={
+              <Card key={tripId}>
+                {/* Header */}
+                <CardHeader>
                   <Flex align="center">
                     {/* Year */}
                     <Badge
@@ -58,17 +63,8 @@ const Page = () => {
                       {trip.title}
                     </Heading>
                   </Flex>
-                }
-                footer={
-                  <Text color="gray.600" fontSize="xs">
-                    Video od{" "}
-                    <Text as="span" color="gray.500" fontWeight={500}>
-                      @stuchla
-                    </Text>
-                  </Text>
-                }
-                bodyPadding={0}
-              >
+                </CardHeader>
+
                 {/* Youtube video */}
                 <AspectRatio key={tripId} ratio={16 / 9}>
                   <iframe
@@ -78,6 +74,16 @@ const Page = () => {
                     allowFullScreen
                   ></iframe>
                 </AspectRatio>
+
+                {/* Footer */}
+                <CardFooter>
+                  <Text color={footerColor} fontSize="xs">
+                    Video od{" "}
+                    <Text as="span" color={footerColorAssign} fontWeight={500}>
+                      @stuchla
+                    </Text>
+                  </Text>
+                </CardFooter>
               </Card>
             );
           })}

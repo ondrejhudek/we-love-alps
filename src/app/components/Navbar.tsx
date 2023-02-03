@@ -13,10 +13,16 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
+import ColorModeSwitcher from "./ColorModeSwitcher";
 import { NAV_LINKS, NAV_LINK_KEYS, NavLinkKey } from "./utils";
 
-const NavLink = ({ link, i }: { link: NavLinkKey; i: number }) => {
+const NavLink = ({ link }: { link: NavLinkKey }) => {
   const pathname = usePathname();
+  const color = useColorModeValue("gray.600", "gray.300");
+  const activeColor = useColorModeValue("gray.800", "gray.50");
+  const hoverColor = useColorModeValue("gray.900", "white");
+  const activeBorderColor = useColorModeValue("primary.600", "primary.300");
+  const hoverBorderColor = useColorModeValue("primary.500", "primary.400");
 
   return (
     <Link
@@ -26,14 +32,14 @@ const NavLink = ({ link, i }: { link: NavLinkKey; i: number }) => {
       mx={4}
       my={2}
       py={5}
-      color={pathname === link ? "gray.800" : "gray.600"}
+      color={pathname === link ? activeColor : color}
       fontWeight="medium"
       borderBottomWidth={2}
       borderStyle="solid"
-      borderColor={pathname === link ? "primary.600" : "transparent"}
+      borderColor={pathname === link ? activeBorderColor : "transparent"}
       _hover={{
-        color: "gray.900",
-        borderColor: "primary.500",
+        color: hoverColor,
+        borderColor: hoverBorderColor,
       }}
     >
       {NAV_LINKS[link]}
@@ -45,7 +51,7 @@ const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box bg={useColorModeValue("gray.50", "gray.900")} px={4} boxShadow="md">
+    <Box bg={useColorModeValue("white", "gray.900")} px={4} boxShadow="md">
       <Flex
         align="center"
         justify="space-between"
@@ -83,9 +89,11 @@ const Navbar = () => {
           justify="center"
           alignItems="center"
         >
-          {NAV_LINK_KEYS.map((link, i) => (
-            <NavLink key={link} link={link} i={i} />
+          {NAV_LINK_KEYS.map((link) => (
+            <NavLink key={link} link={link} />
           ))}
+
+          <ColorModeSwitcher />
         </Flex>
 
         {/* Mobile */}
@@ -109,8 +117,8 @@ const Navbar = () => {
       {isOpen ? (
         <Box pb={4} display={{ md: "none" }}>
           <Stack as="nav" spacing={4}>
-            {NAV_LINK_KEYS.map((link, i) => (
-              <NavLink key={link} link={link} i={i} />
+            {NAV_LINK_KEYS.map((link) => (
+              <NavLink key={link} link={link} />
             ))}
           </Stack>
         </Box>

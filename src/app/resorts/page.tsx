@@ -10,9 +10,12 @@ import {
   Box,
   Flex,
   Badge,
+  Card,
+  CardHeader,
+  CardFooter,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
-import Card from "../components/Card";
 import Header from "../components/Header";
 
 import COUNTRIES from "../../data/countries";
@@ -21,44 +24,52 @@ import TRIPS from "../../data/trips";
 
 const Page = () => {
   const pathname = usePathname();
+  const regionColor = useColorModeValue("gray.400", "gray.500");
+  const yearColor = useColorModeValue("white", "gray.900");
+  const yearBgColor = useColorModeValue("secondary.600", "secondary.400");
 
   return (
     <>
       <Header pathname={pathname} />
 
-      <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={6}>
+      <SimpleGrid
+        columns={{ base: 1, sm: 2, md: 3 }}
+        spacing={{ base: 3, sm: 4, lg: 5 }}
+      >
         {RESORTS.map(({ id, name, region, countryCode, map }) => {
           const trips = TRIPS.filter((trip) => trip.resorts.includes(id));
 
           return (
             <Card key={id}>
-              <Flex align="center">
-                <Box mr={2}>
-                  <Image
-                    src={`/images/flags/${countryCode.toLowerCase()}.png`}
-                    alt={COUNTRIES[countryCode]}
-                    width={26}
-                    height={26}
-                  />
-                </Box>
-                <Box>
-                  {/* Region */}
-                  <Text
-                    color="tertiary.300"
-                    fontSize="xs"
-                    textTransform="uppercase"
-                  >
-                    {region}
-                  </Text>
-                  {/* Name */}
-                  <Heading as="h2" mt={-0.5} fontSize="lg">
-                    {name}
-                  </Heading>
-                </Box>
-              </Flex>
+              <CardHeader>
+                <Flex align="center">
+                  <Box mr={2}>
+                    <Image
+                      src={`/images/flags/${countryCode.toLowerCase()}.png`}
+                      alt={COUNTRIES[countryCode]}
+                      width={26}
+                      height={26}
+                    />
+                  </Box>
+                  <Box>
+                    {/* Region */}
+                    <Text
+                      color={regionColor}
+                      fontSize="xs"
+                      textTransform="uppercase"
+                    >
+                      {region}
+                    </Text>
+                    {/* Name */}
+                    <Heading as="h2" mt={-0.5} fontSize="lg">
+                      {name}
+                    </Heading>
+                  </Box>
+                </Flex>
+              </CardHeader>
 
               {/* Map */}
-              <AspectRatio ratio={2.35 / 1} my={4} mx={-5}>
+              <AspectRatio ratio={2.35 / 1}>
                 <iframe
                   src={`https://www.google.com/maps/embed?pb=${encodeURIComponent(
                     map
@@ -69,28 +80,30 @@ const Page = () => {
                 ></iframe>
               </AspectRatio>
 
-              <Text fontSize="sm" fontWeight={500}>
-                Celkem jsme navštívili{" "}
-                <Text as="span" fontWeight={800}>
-                  {trips.length}x
+              <CardFooter flexDirection="column">
+                <Text fontSize="sm" fontWeight={500}>
+                  Celkem jsme navštívili{" "}
+                  <Text as="span" fontWeight={800}>
+                    {trips.length}x
+                  </Text>
                 </Text>
-              </Text>
 
-              <Box mt={2}>
-                {trips.map(({ year }, i) => (
-                  <Badge
-                    key={year}
-                    ml={i > 0 ? 1 : 0}
-                    px={2}
-                    py={1}
-                    color="white"
-                    bgColor="secondary.600"
-                    borderRadius="md"
-                  >
-                    {year}
-                  </Badge>
-                ))}
-              </Box>
+                <Box mt={2}>
+                  {trips.map(({ year }, i) => (
+                    <Badge
+                      key={year}
+                      ml={i > 0 ? 1 : 0}
+                      px={2}
+                      py={1}
+                      color={yearColor}
+                      bgColor={yearBgColor}
+                      borderRadius="md"
+                    >
+                      {year}
+                    </Badge>
+                  ))}
+                </Box>
+              </CardFooter>
             </Card>
           );
         })}

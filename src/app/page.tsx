@@ -17,6 +17,7 @@ const STATS: StatProps[] = [
     icon: HiOutlineUsers,
     path: "/members",
     pathLabel: "Všichni členové",
+    color: "orange",
   },
   {
     title: "Zájezdy",
@@ -24,6 +25,7 @@ const STATS: StatProps[] = [
     icon: HiOutlineMap,
     path: "/trips",
     pathLabel: "Všechny zájezdy",
+    color: "purple",
   },
   {
     title: "Střediska",
@@ -31,6 +33,7 @@ const STATS: StatProps[] = [
     icon: HiOutlineMapPin,
     path: "/resorts",
     pathLabel: "Všechny střediska",
+    color: "pink",
   },
 ];
 

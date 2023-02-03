@@ -1,6 +1,7 @@
 export const NAV_LINKS = {
   "/": "Domů",
   "/members": "Členové",
+  "/trips": "Zájezdy",
   "/resorts": "Střediska",
   "/photo": "Foto",
   "/video": "Video",
