@@ -10,10 +10,20 @@ import {
   Show,
   useDisclosure,
   useColorModeValue,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  Divider,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 import ColorModeSwitcher from "./ColorModeSwitcher";
+import Logo from "./Logo";
 import { NAV_LINKS, NAV_LINK_KEYS, NavLinkKey } from "./utils";
 
 const NavLink = ({ link }: { link: NavLinkKey }) => {
@@ -49,6 +59,7 @@ const NavLink = ({ link }: { link: NavLinkKey }) => {
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const pathname = usePathname();
 
   return (
     <Box bg={useColorModeValue("white", "gray.900")} px={4} boxShadow="md">
@@ -59,70 +70,76 @@ const Navbar = () => {
         mx="auto"
       >
         {/* Logo */}
-        <Box mr={4}>
-          <NextLink href="/">
-            <Show above="xs">
-              <Image
-                src="/images/logo-navbar.png"
-                alt="We love Alps"
-                width={246}
-                height={28}
-                priority
-              />
-            </Show>
-            <Show below="xs">
-              <Image
-                src="/images/logo-icon.png"
-                alt="We love Alps"
-                width={48}
-                height={28}
-                priority
-              />
-            </Show>
-          </NextLink>
-        </Box>
+        <Logo />
 
         {/* Desktop */}
-        <Flex
-          display={{ base: "none", md: "flex" }}
-          h={16}
-          justify="center"
-          alignItems="center"
-        >
-          {NAV_LINK_KEYS.map((link) => (
-            <NavLink key={link} link={link} />
-          ))}
+        <Flex alignItems="center">
+          <Flex
+            display={{ base: "none", md: "flex" }}
+            h={16}
+            justify="center"
+            alignItems="center"
+          >
+            {NAV_LINK_KEYS.map((link) => (
+              <NavLink key={link} link={link} />
+            ))}
+          </Flex>
 
+          {/* Color mode switcher */}
           <ColorModeSwitcher />
-        </Flex>
 
-        {/* Mobile */}
-        <Flex
-          display={{ base: "flex", md: "none" }}
-          h={16}
-          justify="flex-end"
-          alignItems="center"
-        >
-          <IconButton
-            size="md"
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label="Otevřít"
-            display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
-          />
+          {/* Mobile */}
+          <Flex
+            display={{ base: "flex", md: "none" }}
+            h={16}
+            justify="flex-end"
+            alignItems="center"
+          >
+            <IconButton
+              size="md"
+              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+              aria-label="Otevřít"
+              display={{ md: "none" }}
+              onClick={isOpen ? onClose : onOpen}
+            />
+          </Flex>
         </Flex>
       </Flex>
 
       {/* Mobile nav */}
-      {isOpen ? (
-        <Box pb={4} display={{ md: "none" }}>
-          <Stack as="nav" spacing={4}>
-            {NAV_LINK_KEYS.map((link) => (
-              <NavLink key={link} link={link} />
+      <Modal
+        onClose={onClose}
+        size="full"
+        isOpen={isOpen}
+        motionPreset="slideInRight"
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Logo />
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {NAV_LINK_KEYS.map((link, i) => (
+              <Box key={link}>
+                {i > 0 && <Divider />}
+                <Button
+                  as={NextLink}
+                  href={link}
+                  width="100%"
+                  variant={pathname === link ? "solid" : "ghost"}
+                  colorScheme="gray"
+                  my={1}
+                  py={6}
+                  onClick={onClose}
+                >
+                  {NAV_LINKS[link]}
+                </Button>
+              </Box>
             ))}
-          </Stack>
-        </Box>
-      ) : null}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };

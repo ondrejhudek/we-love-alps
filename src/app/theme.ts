@@ -89,9 +89,9 @@ const theme = extendTheme({
       "h2, h3, h4, h5, h6": {
         color: mode("gray.700", "gray.300")(props),
       },
-      a: {
-        color: mode("primary.600", "primary.500")(props),
-      },
+      // a: {
+      //   color: mode("primary.600", "primary.500")(props),
+      // },
     }),
   },
   transition: {

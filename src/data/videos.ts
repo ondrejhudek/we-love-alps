@@ -6,8 +6,8 @@ const VIDEOS: Video = {
   7: "XZFP3U8kLAY",
   8: "twGFDV4YvxQ",
   9: "_HHgYaV00Ds",
-  10: "zIo_PU-8UYw",
-  11: "KJlZEukVEcw",
+  11: "zIo_PU-8UYw",
+  12: "KJlZEukVEcw",
 };
 
 export default VIDEOS;
