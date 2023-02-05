@@ -21,7 +21,13 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { IconType } from "react-icons";
-import { FaInstagram, FaFacebook } from "react-icons/fa";
+import {
+  FaHeart,
+  FaHeartBroken,
+  FaUserFriends,
+  FaInstagram,
+  FaFacebook,
+} from "react-icons/fa";
 
 import Header from "../components/Header";
 
@@ -71,6 +77,31 @@ const Stat = ({ list, term }: { list: string[]; term: string }) => (
   </Tooltip>
 );
 
+const PersonalInfo = ({
+  nickname,
+  icon,
+  iconColor,
+  tooltip,
+}: {
+  nickname: string;
+  icon: IconType;
+  iconColor: string;
+  tooltip: string;
+}) => {
+  const nicknameColor = useColorModeValue("gray.600", "gray.400");
+
+  return (
+    <Tooltip label={tooltip}>
+      <Flex align="center" justify="center" my={0.5}>
+        <Icon as={icon} color={iconColor} mr={2} />
+        <Text color={nicknameColor} fontSize="sm">
+          @{nickname}
+        </Text>
+      </Flex>
+    </Tooltip>
+  );
+};
+
 const SocialButton = ({
   name,
   icon,
@@ -114,6 +145,9 @@ const SocialButton = ({
 const Page = () => {
   const pathname = usePathname();
   const borderColor = useColorModeValue("gray.200", "gray.800");
+  const partnerColor = useColorModeValue("red.500", "red.400");
+  const exPartnerColor = useColorModeValue("red.800", "red.200");
+  const siblingColor = useColorModeValue("orange.500", "orange.400");
 
   return (
     <>
@@ -132,6 +166,9 @@ const Page = () => {
             nickname,
             facebook,
             instagram,
+            currentPartner,
+            exPartners,
+            siblings,
           }) => {
             const name = `${firstname} ${lastname}`;
             const trips = TRIPS.filter((trip) => trip.members.includes(id));
@@ -146,7 +183,7 @@ const Page = () => {
             );
 
             return (
-              <Card key={id} overflow="hidden">
+              <Card key={id} id={alias} overflow="hidden">
                 {/* Header */}
                 <CardHeader pt={8}>
                   <Box textAlign="center">
@@ -158,11 +195,17 @@ const Page = () => {
                     <Heading fontSize="lg" fontWeight={500}>
                       {name}
                     </Heading>
-                    <Text mt={1} fontSize="sm" color={"gray.500"}>
+                    <Text
+                      mt={1}
+                      color="gray.500"
+                      fontSize="sm"
+                      fontWeight={500}
+                    >
                       @{nickname || alias}
                     </Text>
                   </Box>
                 </CardHeader>
+
                 {/* Body */}
                 <CardBody pt={0}>
                   <Flex justify="space-evenly" py={2} wrap="wrap">
@@ -178,7 +221,48 @@ const Page = () => {
                       term={RESORT_CS[tripNames.length] || RESORT_CS[5]}
                     />
                   </Flex>
+
+                  {/* Current partner */}
+                  {currentPartner && (
+                    <PersonalInfo
+                      nickname={currentPartner}
+                      icon={FaHeart}
+                      iconColor={partnerColor}
+                      tooltip="Partner/ka"
+                    />
+                  )}
+
+                  {/* Ex partner */}
+                  {exPartners && exPartners.length > 0 && (
+                    <>
+                      {exPartners.map((exPartner) => (
+                        <PersonalInfo
+                          key={exPartner}
+                          nickname={exPartner}
+                          icon={FaHeartBroken}
+                          iconColor={exPartnerColor}
+                          tooltip="Ex-partner/ka"
+                        />
+                      ))}
+                    </>
+                  )}
+
+                  {/* Siblings */}
+                  {siblings && siblings.length > 0 && (
+                    <>
+                      {siblings.map((sibling) => (
+                        <PersonalInfo
+                          key={sibling}
+                          nickname={sibling}
+                          icon={FaUserFriends}
+                          iconColor={siblingColor}
+                          tooltip="Sourozenec"
+                        />
+                      ))}
+                    </>
+                  )}
                 </CardBody>
+
                 {/* Footer */}
                 <CardFooter
                   p={0}

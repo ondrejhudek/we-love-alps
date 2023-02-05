@@ -6,6 +6,9 @@ export interface Member {
   nickname?: string;
   facebook?: string;
   instagram?: string;
+  currentPartner?: string;
+  exPartners?: string[];
+  siblings?: string[];
 }
 
 const MEMBERS: Member[] = [
@@ -16,6 +19,7 @@ const MEMBERS: Member[] = [
     alias: "hudy",
     facebook: "ondrej.hudek",
     instagram: "ondrejhudek",
+    currentPartner: "terka",
   },
   {
     id: 1,
@@ -24,6 +28,7 @@ const MEMBERS: Member[] = [
     alias: "terka",
     facebook: "tereza.stejskalova.16",
     instagram: "stejste",
+    currentPartner: "hudy",
   },
   {
     id: 2,
@@ -32,6 +37,8 @@ const MEMBERS: Member[] = [
     alias: "jarin",
     facebook: "jardac1",
     instagram: "jardacerny_",
+    currentPartner: "dája",
+    siblings: ["éra"],
   },
   {
     id: 3,
@@ -41,6 +48,7 @@ const MEMBERS: Member[] = [
     nickname: "dája",
     facebook: "Danielka.Kovac",
     instagram: "danielka.kovacova",
+    currentPartner: "jarin",
   },
   {
     id: 4,
@@ -49,6 +57,8 @@ const MEMBERS: Member[] = [
     alias: "stuchla",
     facebook: "honza.stuchlik.5",
     instagram: "johnyst",
+    exPartners: ["janca"],
+    siblings: ["majkí"],
   },
   {
     id: 5,
@@ -58,6 +68,7 @@ const MEMBERS: Member[] = [
     nickname: "majkí",
     facebook: "stuchlapuchlamuchla",
     instagram: "stuchlapuchlamuchla",
+    siblings: ["stuchla"],
   },
   {
     id: 6,
@@ -67,6 +78,7 @@ const MEMBERS: Member[] = [
     nickname: "janča",
     facebook: "jana.pekarkova.7",
     instagram: "jani.sss",
+    exPartners: ["stuchla"],
   },
   {
     id: 7,
@@ -76,6 +88,9 @@ const MEMBERS: Member[] = [
     nickname: "éra",
     facebook: "erika.cerna.31",
     instagram: "erika_ce",
+    currentPartner: "pavel",
+    exPartners: ["kopy"],
+    siblings: ["jarin"],
   },
   {
     id: 8,
@@ -83,6 +98,7 @@ const MEMBERS: Member[] = [
     lastname: "Černý",
     alias: "pavel",
     facebook: "pcerny",
+    currentPartner: "era",
   },
   {
     id: 9,
@@ -90,6 +106,7 @@ const MEMBERS: Member[] = [
     lastname: "Koptík",
     alias: "kopy",
     facebook: "bia.kopy",
+    exPartners: ["era"],
   },
   {
     id: 10,
@@ -99,6 +116,8 @@ const MEMBERS: Member[] = [
     nickname: "léňa",
     facebook: "lenka.dvorakova.79",
     instagram: "my_lenkaa",
+    currentPartner: "milan",
+    exPartners: ["tomas"],
   },
   {
     id: 11,
@@ -107,6 +126,7 @@ const MEMBERS: Member[] = [
     alias: "milan",
     facebook: "milan.cernil",
     instagram: "milanec_",
+    currentPartner: "léňa",
   },
   {
     id: 12,
@@ -116,6 +136,7 @@ const MEMBERS: Member[] = [
     nickname: "tomáš",
     facebook: "tomas.malek.5",
     instagram: "tomalis",
+    exPartners: ["léňa"],
   },
   {
     id: 13,
@@ -124,6 +145,8 @@ const MEMBERS: Member[] = [
     alias: "lucka",
     facebook: "profile.php?id=1145558111",
     instagram: "meritl",
+    exPartners: ["mára", "jarda"],
+    siblings: ["junior1", "junior2"],
   },
   {
     id: 14,
@@ -132,6 +155,8 @@ const MEMBERS: Member[] = [
     alias: "mara",
     nickname: "mára",
     facebook: "marek.haase.3",
+    instagram: "mh.marekh",
+    exPartners: ["lucka"],
   },
   {
     id: 15,
@@ -140,6 +165,7 @@ const MEMBERS: Member[] = [
     alias: "jarda",
     facebook: "jerry.cotton.5",
     instagram: "cotton.jerry",
+    exPartners: ["lucka"],
   },
   {
     id: 16,
@@ -148,6 +174,7 @@ const MEMBERS: Member[] = [
     alias: "junior1",
     facebook: "martin.dostal.9237",
     instagram: "martindostalm",
+    siblings: ["lucka", "junior2"],
   },
   {
     id: 17,
@@ -156,6 +183,7 @@ const MEMBERS: Member[] = [
     alias: "junior2",
     facebook: "tomas.dostal.5682",
     instagram: "dostal_tomas",
+    siblings: ["lucka", "junior1"],
   },
   {
     id: 18,
@@ -163,6 +191,7 @@ const MEMBERS: Member[] = [
     lastname: "Zahradník",
     alias: "zahrada",
     facebook: "stepan.zahradnik.7",
+    currentPartner: "síma",
   },
   {
     id: 19,
@@ -171,6 +200,8 @@ const MEMBERS: Member[] = [
     alias: "sima",
     nickname: "síma",
     facebook: "simi.penickova",
+    instagram: "ssimipe",
+    currentPartner: "zahrada",
   },
   {
     id: 20,

@@ -1,16 +1,21 @@
 import NextLink from "next/link";
 import Image from "next/image";
-import { Box, Show } from "@chakra-ui/react";
+import { Box, Show, useColorModeValue } from "@chakra-ui/react";
 
-const LogoWithTitle = () => (
-  <Image
-    src="/images/logo-navbar.png"
-    alt="We love Alps"
-    width={246}
-    height={28}
-    priority
-  />
-);
+const LogoWithTitle = () => {
+  const pathName = useColorModeValue("logo-navbar", "logo-navbar-dark");
+
+  return (
+    <Image
+      src={`/images/${pathName}.png`}
+      alt="We love Alps"
+      width={246}
+      height={28}
+      priority
+    />
+  );
+};
+
 const LogoIcon = () => (
   <Image
     src="/images/logo-icon.png"
