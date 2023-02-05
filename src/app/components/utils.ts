@@ -10,3 +10,5 @@ export const NAV_LINKS = {
 export type NavLinkKey = keyof typeof NAV_LINKS;
 
 export const NAV_LINK_KEYS = Object.keys(NAV_LINKS) as NavLinkKey[];
+
+export const MONTHS = ["Leden", "Únor", "Březen", "Duben"];

@@ -20,6 +20,11 @@ import ColorModeSwitcher from "./ColorModeSwitcher";
 import Logo from "./Logo";
 import { NAV_LINKS, NAV_LINK_KEYS, NavLinkKey } from "./utils";
 
+const isActive = (pathname: string | null, link: string): boolean => {
+  if (!pathname) return false;
+  return "/" + pathname.split("/")[1] === link;
+};
+
 const NavLink = ({ link }: { link: NavLinkKey }) => {
   const pathname = usePathname();
   const color = useColorModeValue("gray.600", "gray.300");
@@ -36,11 +41,11 @@ const NavLink = ({ link }: { link: NavLinkKey }) => {
       mx={4}
       my={2}
       py={5}
-      color={pathname === link ? activeColor : color}
+      color={isActive(pathname, link) ? activeColor : color}
       fontWeight={500}
       borderBottomWidth={2}
       borderStyle="solid"
-      borderColor={pathname === link ? activeBorderColor : "transparent"}
+      borderColor={isActive(pathname, link) ? activeBorderColor : "transparent"}
       _hover={{
         color: hoverColor,
         borderColor: hoverBorderColor,
@@ -75,7 +80,7 @@ const MobileNavLink = ({
       mx={-5}
       py={3}
       px={6}
-      color={pathname === link ? activeColor : color}
+      color={isActive(pathname, link) ? activeColor : color}
       fontWeight={500}
       onClick={onClose}
       _hover={{
@@ -91,7 +96,9 @@ const MobileNavLink = ({
         height: "24px",
         borderLeftWidth: 3,
         borderStyle: "solid",
-        borderColor: pathname === link ? activeBorderColor : "transparent",
+        borderColor: isActive(pathname, link)
+          ? activeBorderColor
+          : "transparent",
       }}
     >
       {NAV_LINKS[link]}

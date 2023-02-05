@@ -21,11 +21,10 @@ import COUNTRIES from "../../data/countries";
 import MEMBERS from "../../data/members";
 import RESORTS from "../../data/resorts";
 import TRIPS, { Trip } from "../../data/trips";
+import { MONTHS } from "./utils";
 
 const DOT_SIZE = 64;
 const DOT_SIZE_PX = `${DOT_SIZE}px`;
-
-const MONTHS = ["Leden", "Únor", "Březen", "Duben"];
 
 const TooltipAvatar: typeof Avatar = (props: any) => (
   <Tooltip label={props.name}>

@@ -29,9 +29,9 @@ const Footer = () => (
         fontSize="sm"
         color={useColorModeValue("gray.700", "gray.300")}
       >
-        S láskou vytvořil{" "}
+        © 2023 S láskou vytvořil{" "}
         <Link
-          href="mailto:ondrej.hudek@gmail.com"
+          href="/members?alias=hudy"
           color="gray.500"
           fontWeight={600}
           ml="3px"

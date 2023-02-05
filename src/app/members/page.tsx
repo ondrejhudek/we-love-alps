@@ -1,6 +1,7 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import NextLink from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import {
   SimpleGrid,
   Box,
@@ -78,25 +79,42 @@ const Stat = ({ list, term }: { list: string[]; term: string }) => (
 );
 
 const PersonalInfo = ({
-  nickname,
+  alias,
   icon,
   iconColor,
   tooltip,
 }: {
-  nickname: string;
+  alias: string;
   icon: IconType;
   iconColor: string;
   tooltip: string;
 }) => {
   const nicknameColor = useColorModeValue("gray.600", "gray.400");
 
+  const member = MEMBERS.find((member) => member.alias === alias);
+
+  if (!member) return null;
+
+  const handleScroll = () => {
+    const el = document.getElementById(member.alias);
+    if (!!el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <Tooltip label={tooltip}>
       <Flex align="center" justify="center" my={0.5}>
-        <Icon as={icon} color={iconColor} mr={2} />
-        <Text color={nicknameColor} fontSize="sm">
-          @{nickname}
-        </Text>
+        <Icon as={icon} color={iconColor} mr={1.5} />
+        <Link
+          as={NextLink}
+          href={`/members?alias=${member.alias}`}
+          color={nicknameColor}
+          fontSize="sm"
+          onClick={handleScroll}
+        >
+          @{member.nickname || member.alias}
+        </Link>
       </Flex>
     </Tooltip>
   );
@@ -144,6 +162,7 @@ const SocialButton = ({
 
 const Page = () => {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const borderColor = useColorModeValue("gray.200", "gray.800");
   const partnerColor = useColorModeValue("red.500", "red.400");
   const exPartnerColor = useColorModeValue("red.800", "red.200");
@@ -183,7 +202,16 @@ const Page = () => {
             );
 
             return (
-              <Card key={id} id={alias} overflow="hidden">
+              <Card
+                key={id}
+                id={alias}
+                overflow="hidden"
+                boxShadow={
+                  searchParams.get("alias") === alias
+                    ? "outline"
+                    : "var(--card-shadow);"
+                }
+              >
                 {/* Header */}
                 <CardHeader pt={8}>
                   <Box textAlign="center">
@@ -225,7 +253,7 @@ const Page = () => {
                   {/* Current partner */}
                   {currentPartner && (
                     <PersonalInfo
-                      nickname={currentPartner}
+                      alias={currentPartner}
                       icon={FaHeart}
                       iconColor={partnerColor}
                       tooltip="Partner/ka"
@@ -238,7 +266,7 @@ const Page = () => {
                       {exPartners.map((exPartner) => (
                         <PersonalInfo
                           key={exPartner}
-                          nickname={exPartner}
+                          alias={exPartner}
                           icon={FaHeartBroken}
                           iconColor={exPartnerColor}
                           tooltip="Ex-partner/ka"
@@ -253,7 +281,7 @@ const Page = () => {
                       {siblings.map((sibling) => (
                         <PersonalInfo
                           key={sibling}
-                          nickname={sibling}
+                          alias={sibling}
                           icon={FaUserFriends}
                           iconColor={siblingColor}
                           tooltip="Sourozenec"

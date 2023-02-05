@@ -37,8 +37,8 @@ const MEMBERS: Member[] = [
     alias: "jarin",
     facebook: "jardac1",
     instagram: "jardacerny_",
-    currentPartner: "dája",
-    siblings: ["éra"],
+    currentPartner: "daja",
+    siblings: ["era"],
   },
   {
     id: 3,
@@ -58,7 +58,7 @@ const MEMBERS: Member[] = [
     facebook: "honza.stuchlik.5",
     instagram: "johnyst",
     exPartners: ["janca"],
-    siblings: ["majkí"],
+    siblings: ["majki"],
   },
   {
     id: 5,
@@ -126,7 +126,7 @@ const MEMBERS: Member[] = [
     alias: "milan",
     facebook: "milan.cernil",
     instagram: "milanec_",
-    currentPartner: "léňa",
+    currentPartner: "lena",
   },
   {
     id: 12,
@@ -136,7 +136,7 @@ const MEMBERS: Member[] = [
     nickname: "tomáš",
     facebook: "tomas.malek.5",
     instagram: "tomalis",
-    exPartners: ["léňa"],
+    exPartners: ["lena"],
   },
   {
     id: 13,
@@ -145,7 +145,7 @@ const MEMBERS: Member[] = [
     alias: "lucka",
     facebook: "profile.php?id=1145558111",
     instagram: "meritl",
-    exPartners: ["mára", "jarda"],
+    exPartners: ["mara", "jarda"],
     siblings: ["junior1", "junior2"],
   },
   {
@@ -191,7 +191,7 @@ const MEMBERS: Member[] = [
     lastname: "Zahradník",
     alias: "zahrada",
     facebook: "stepan.zahradnik.7",
-    currentPartner: "síma",
+    currentPartner: "sima",
   },
   {
     id: 19,
