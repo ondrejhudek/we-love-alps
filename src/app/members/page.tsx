@@ -124,7 +124,15 @@ const Page = () => {
         spacing={{ base: 3, sm: 4, lg: 5 }}
       >
         {MEMBERS.map(
-          ({ id, firstname, lastname, nickname, facebook, instagram }) => {
+          ({
+            id,
+            firstname,
+            lastname,
+            alias,
+            nickname,
+            facebook,
+            instagram,
+          }) => {
             const name = `${firstname} ${lastname}`;
             const trips = TRIPS.filter((trip) => trip.members.includes(id));
             const tripNames = trips.map(
@@ -143,7 +151,7 @@ const Page = () => {
                 <CardHeader pt={8}>
                   <Box textAlign="center">
                     <Avatar
-                      src={`/images/members/${nickname}.jpg`}
+                      src={`/images/members/${alias}.jpg`}
                       size="2xl"
                       mb={4}
                     />
@@ -151,7 +159,7 @@ const Page = () => {
                       {name}
                     </Heading>
                     <Text mt={1} fontSize="sm" color={"gray.500"}>
-                      @{nickname}
+                      @{nickname || alias}
                     </Text>
                   </Box>
                 </CardHeader>

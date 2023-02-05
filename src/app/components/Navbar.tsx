@@ -1,24 +1,18 @@
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import {
   Box,
   Flex,
   Link,
   IconButton,
-  Stack,
-  Show,
   useDisclosure,
   useColorModeValue,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Button,
   Divider,
+  Drawer,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
@@ -43,7 +37,7 @@ const NavLink = ({ link }: { link: NavLinkKey }) => {
       my={2}
       py={5}
       color={pathname === link ? activeColor : color}
-      fontWeight="medium"
+      fontWeight={500}
       borderBottomWidth={2}
       borderStyle="solid"
       borderColor={pathname === link ? activeBorderColor : "transparent"}
@@ -57,9 +51,83 @@ const NavLink = ({ link }: { link: NavLinkKey }) => {
   );
 };
 
+const MobileNavLink = ({
+  link,
+  onClose,
+}: {
+  link: NavLinkKey;
+  onClose: () => void;
+}) => {
+  const pathname = usePathname();
+  const color = useColorModeValue("gray.600", "gray.300");
+  const activeColor = useColorModeValue("gray.800", "gray.50");
+  const hoverColor = useColorModeValue("gray.900", "white");
+  const activeBorderColor = useColorModeValue("primary.600", "primary.300");
+  const hoverBorderColor = useColorModeValue("primary.500", "primary.400");
+
+  return (
+    <Link
+      role="group"
+      as={NextLink}
+      href={link}
+      position="relative"
+      display="block"
+      mx={-5}
+      py={3}
+      px={6}
+      color={pathname === link ? activeColor : color}
+      fontWeight={500}
+      onClick={onClose}
+      _hover={{
+        color: hoverColor,
+        _before: {
+          borderColor: hoverBorderColor,
+        },
+      }}
+      _before={{
+        content: '""',
+        position: "absolute",
+        left: 0,
+        height: "24px",
+        borderLeftWidth: 3,
+        borderStyle: "solid",
+        borderColor: pathname === link ? activeBorderColor : "transparent",
+      }}
+    >
+      {NAV_LINKS[link]}
+    </Link>
+  );
+};
+
+const MobileNavbar = ({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) => (
+  <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+    <DrawerOverlay backdropFilter="blur(5px)" />
+    <DrawerContent>
+      <DrawerCloseButton />
+      <DrawerHeader>
+        <Logo iconOnly />
+      </DrawerHeader>
+
+      <>
+        {NAV_LINK_KEYS.map((link, i) => (
+          <Box key={link} px={5}>
+            {i > 0 && <Divider />}
+            <MobileNavLink link={link} onClose={onClose} />
+          </Box>
+        ))}
+      </>
+    </DrawerContent>
+  </Drawer>
+);
+
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const pathname = usePathname();
 
   return (
     <Box bg={useColorModeValue("white", "gray.900")} px={4} boxShadow="md">
@@ -88,7 +156,7 @@ const Navbar = () => {
           {/* Color mode switcher */}
           <ColorModeSwitcher />
 
-          {/* Mobile */}
+          {/* Mobile hamburger icon button */}
           <Flex
             display={{ base: "flex", md: "none" }}
             h={16}
@@ -106,40 +174,8 @@ const Navbar = () => {
         </Flex>
       </Flex>
 
-      {/* Mobile nav */}
-      <Modal
-        onClose={onClose}
-        size="full"
-        isOpen={isOpen}
-        motionPreset="slideInRight"
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            <Logo />
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {NAV_LINK_KEYS.map((link, i) => (
-              <Box key={link}>
-                {i > 0 && <Divider />}
-                <Button
-                  as={NextLink}
-                  href={link}
-                  width="100%"
-                  variant={pathname === link ? "solid" : "ghost"}
-                  colorScheme="gray"
-                  my={1}
-                  py={6}
-                  onClick={onClose}
-                >
-                  {NAV_LINKS[link]}
-                </Button>
-              </Box>
-            ))}
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      {/* Mobile navbar */}
+      <MobileNavbar isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };

@@ -8,7 +8,15 @@ import {
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 
-const Breadcrump = ({ name }: { name: string }) => (
+const Breadcrump = ({
+  pathname,
+  name,
+  subName,
+}: {
+  pathname: string;
+  name: string;
+  subName?: string;
+}) => (
   <Breadcrumb
     spacing="8px"
     fontWeight="medium"
@@ -22,9 +30,21 @@ const Breadcrump = ({ name }: { name: string }) => (
       </BreadcrumbLink>
     </BreadcrumbItem>
 
-    <BreadcrumbItem isCurrentPage>
-      <BreadcrumbLink>{name}</BreadcrumbLink>
+    <BreadcrumbItem isCurrentPage={!subName}>
+      {subName ? (
+        <BreadcrumbLink as={Link} href={pathname}>
+          {name}
+        </BreadcrumbLink>
+      ) : (
+        <BreadcrumbLink>{name}</BreadcrumbLink>
+      )}
     </BreadcrumbItem>
+
+    {subName && (
+      <BreadcrumbItem isCurrentPage>
+        <BreadcrumbLink>{subName}</BreadcrumbLink>
+      </BreadcrumbItem>
+    )}
   </Breadcrumb>
 );
 
