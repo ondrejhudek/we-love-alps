@@ -77,7 +77,7 @@ const MobileNavLink = ({
       href={link}
       position="relative"
       display="block"
-      mx={-5}
+      mx={-4}
       py={4}
       px={6}
       color={isActive(pathname, link) ? activeColor : color}
@@ -123,7 +123,7 @@ const MobileNavbar = ({
 
       <>
         {NAV_LINK_KEYS.map((link, i) => (
-          <Box key={link} px={5}>
+          <Box key={link} px={4}>
             {i > 0 && <Divider />}
             <MobileNavLink link={link} onClose={onClose} />
           </Box>
