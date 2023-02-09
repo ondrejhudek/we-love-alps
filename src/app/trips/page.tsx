@@ -32,7 +32,6 @@ const TooltipAvatar: typeof Avatar = (props: any) => (
     <Avatar
       {...props}
       borderWidth={1}
-      borderColor={useColorModeValue("white", "gray.900")}
       color={useColorModeValue("white", "gray.900")}
       bg={useColorModeValue("gray.400", "gray.500")}
     />
@@ -42,7 +41,7 @@ const TooltipAvatar: typeof Avatar = (props: any) => (
 const Page = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const monthColor = useColorModeValue("gray.400", "gray.600");
+  const monthColor = useColorModeValue("gray.400", "gray.500");
   const resortColor = useColorModeValue("gray.600", "gray.400");
 
   const groupedTrips = groupBy<Trip>((trip) => trip.year.toString(), TRIPS);
@@ -50,7 +49,7 @@ const Page = () => {
     (a, b) => parseInt(b) - parseInt(a)
   );
 
-  const handleClick = (id: number) => {
+  const handleClick = (id: string) => {
     router.push(`/trips/${id}`);
   };
 
@@ -111,7 +110,8 @@ const Page = () => {
                         <Box ml={2}>
                           <Image
                             src={`/images/flags/${countryCode.toLowerCase()}.png`}
-                            alt={COUNTRIES[countryCode]}
+                            alt={countryCode}
+                            title={COUNTRIES[countryCode]}
                             width={20}
                             height={20}
                           />
@@ -149,11 +149,8 @@ const Page = () => {
                       >
                         {members.map((id) =>
                           MEMBERS.filter((member) => member.id === id).map(
-                            ({ id, firstname, lastname }) => (
-                              <TooltipAvatar
-                                key={id}
-                                name={`${firstname} ${lastname}`}
-                              />
+                            ({ id, name }) => (
+                              <TooltipAvatar key={id} name={name} />
                             )
                           )
                         )}

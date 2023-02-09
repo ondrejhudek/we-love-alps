@@ -31,7 +31,6 @@ const TooltipAvatar: typeof Avatar = (props: any) => (
     <Avatar
       {...props}
       borderWidth={1}
-      borderColor={useColorModeValue("white", "gray.900")}
       color={useColorModeValue("white", "gray.900")}
       bg={useColorModeValue("gray.400", "gray.500")}
     />
@@ -41,17 +40,17 @@ const TooltipAvatar: typeof Avatar = (props: any) => (
 const TimelineRow = ({
   trip: { id, title, year, month, resorts, countryCode, members, nonMembers },
   even,
-  handleClick,
+  onClick,
 }: {
   trip: Trip;
   even: boolean;
-  handleClick: (id: number) => void;
+  onClick: (id: string) => void;
 }) => (
   <Box key={id} py={6}>
     <Box
+      pos="relative"
       pl={{ base: 24, sm: 28, md: even ? 8 : 14 }}
       pr={{ base: 4, sm: 6, md: even ? 14 : 8 }}
-      pos="relative"
       left={{ base: "0%", md: even ? 0 : "50%" }}
       w={{ base: "100%", md: "50%" }}
       _after={{
@@ -77,19 +76,18 @@ const TimelineRow = ({
       }}
     >
       <Card
-        position="static"
+        position="relative"
         color="primary.900"
-        bgColor={useColorModeValue("white", "gray.900")}
         borderBottom={5}
         borderStyle="solid"
         borderColor="transparent"
-        overflow="auto"
+        transition="var(--chakra-transition-primary)"
         _before={{
           content: '" "',
           position: "absolute",
           top: "22px",
-          left: { base: "86px", sm: "102px", md: even ? "auto" : "46px" },
-          right: even ? "46px" : "auto",
+          left: { base: "-10px", md: even ? "auto" : "-10px" },
+          right: { md: even ? "-10px" : "auto" },
           h: 0,
           width: 0,
           zIndex: 1,
@@ -101,29 +99,33 @@ const TimelineRow = ({
           borderColor: {
             base: useColorModeValue(
               "transparent var(--chakra-colors-white) transparent transparent",
-              "transparent var(--chakra-colors-gray-900) transparent transparent"
+              "transparent var(--chakra-colors-gray-700) transparent transparent"
             ),
             md: useColorModeValue(
               even
                 ? "transparent transparent transparent var(--chakra-colors-white)"
                 : "transparent var(--chakra-colors-white) transparent transparent",
               even
-                ? "transparent transparent transparent var(--chakra-colors-gray-900)"
-                : "transparent var(--chakra-colors-gray-900) transparent transparent"
+                ? "transparent transparent transparent var(--chakra-colors-gray-700)"
+                : "transparent var(--chakra-colors-gray-700) transparent transparent"
             ),
           },
         }}
         _hover={{
           cursor: "pointer",
           borderColor: useColorModeValue("secondary.600", "secondary.500"),
+          transform: {
+            base: "translateX(-6px)",
+            md: `translateX(${even ? "6px" : "-6px"})`,
+          },
         }}
-        onClick={() => handleClick(id)}
+        onClick={() => onClick(id)}
       >
-        <CardBody py={6} px={8}>
+        <CardBody py={6} px={8} overflow="auto">
           {/* Month */}
           <Text
             fontSize="xs"
-            color={useColorModeValue("gray.400", "gray.600")}
+            color={useColorModeValue("gray.400", "gray.500")}
             textTransform="uppercase"
           >
             {MONTHS[month - 1]}
@@ -142,7 +144,8 @@ const TimelineRow = ({
             <Box ml={2}>
               <Image
                 src={`/images/flags/${countryCode.toLowerCase()}.png`}
-                alt={COUNTRIES[countryCode]}
+                alt={countryCode}
+                title={COUNTRIES[countryCode]}
                 width={20}
                 height={20}
               />
@@ -178,9 +181,7 @@ const TimelineRow = ({
           >
             {members.map((id) =>
               MEMBERS.filter((member) => member.id === id).map(
-                ({ id, firstname, lastname }) => (
-                  <TooltipAvatar key={id} name={`${firstname} ${lastname}`} />
-                )
+                ({ id, name }) => <TooltipAvatar key={id} name={name} />
               )
             )}
 
@@ -200,7 +201,7 @@ const TimelineRow = ({
 const Timeline = () => {
   const router = useRouter();
 
-  const handleClick = (id: number) => {
+  const handleClick = (id: string) => {
     router.push(`/trips/${id}`);
   };
 
@@ -221,11 +222,7 @@ const Timeline = () => {
       >
         {TRIPS.map((trip, i) => (
           <Box key={trip.id}>
-            <TimelineRow
-              trip={trip}
-              even={i % 2 === 0}
-              handleClick={handleClick}
-            />
+            <TimelineRow trip={trip} even={i % 2 === 0} onClick={handleClick} />
           </Box>
         ))}
       </Box>

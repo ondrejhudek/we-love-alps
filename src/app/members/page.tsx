@@ -1,7 +1,7 @@
 "use client";
 
 import NextLink from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import {
   SimpleGrid,
   Box,
@@ -79,28 +79,21 @@ const Stat = ({ list, term }: { list: string[]; term: string }) => (
 );
 
 const PersonalInfo = ({
-  alias,
+  id,
   icon,
   iconColor,
   tooltip,
 }: {
-  alias: string;
+  id: string;
   icon: IconType;
   iconColor: string;
   tooltip: string;
 }) => {
   const nicknameColor = useColorModeValue("gray.600", "gray.400");
 
-  const member = MEMBERS.find((member) => member.alias === alias);
+  const member = MEMBERS.find((member) => member.id === id);
 
   if (!member) return null;
-
-  const handleScroll = () => {
-    const el = document.getElementById(member.alias);
-    if (!!el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <Tooltip label={tooltip}>
@@ -108,12 +101,12 @@ const PersonalInfo = ({
         <Icon as={icon} color={iconColor} mr={1.5} />
         <Link
           as={NextLink}
-          href={`/members?alias=${member.alias}`}
+          href={`/members/${member.id}`}
           color={nicknameColor}
           fontSize="sm"
-          onClick={handleScroll}
+          onClick={(e) => e.stopPropagation()}
         >
-          @{member.nickname || member.alias}
+          @{member.nickname || member.id}
         </Link>
       </Flex>
     </Tooltip>
@@ -163,10 +156,15 @@ const SocialButton = ({
 const Page = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const router = useRouter();
   const borderColor = useColorModeValue("gray.200", "gray.800");
   const partnerColor = useColorModeValue("red.500", "red.400");
   const exPartnerColor = useColorModeValue("red.800", "red.200");
   const siblingColor = useColorModeValue("orange.500", "orange.400");
+
+  const handleClick = (id: string) => {
+    router.push(`/members/${id}`);
+  };
 
   return (
     <>
@@ -179,9 +177,7 @@ const Page = () => {
         {MEMBERS.map(
           ({
             id,
-            firstname,
-            lastname,
-            alias,
+            name,
             nickname,
             facebook,
             instagram,
@@ -189,7 +185,6 @@ const Page = () => {
             exPartners,
             siblings,
           }) => {
-            const name = `${firstname} ${lastname}`;
             const trips = TRIPS.filter((trip) => trip.members.includes(id));
             const tripNames = trips.map(
               ({ title, year }) => `${title} (${year})`
@@ -204,19 +199,24 @@ const Page = () => {
             return (
               <Card
                 key={id}
-                id={alias}
+                id={id}
                 overflow="hidden"
                 boxShadow={
-                  searchParams.get("alias") === alias
+                  searchParams.get("id") === id
                     ? "outline"
                     : "var(--card-shadow);"
                 }
+                onClick={() => handleClick(id)}
+                _hover={{
+                  cursor: "pointer",
+                  boxShadow: "outline",
+                }}
               >
                 {/* Header */}
                 <CardHeader pt={8}>
                   <Box textAlign="center">
                     <Avatar
-                      src={`/images/members/${alias}.jpg`}
+                      src={`/images/members/${id}.jpg`}
                       size="2xl"
                       mb={4}
                     />
@@ -229,7 +229,7 @@ const Page = () => {
                       fontSize="sm"
                       fontWeight={500}
                     >
-                      @{nickname || alias}
+                      @{nickname || id}
                     </Text>
                   </Box>
                 </CardHeader>
@@ -253,7 +253,7 @@ const Page = () => {
                   {/* Current partner */}
                   {currentPartner && (
                     <PersonalInfo
-                      alias={currentPartner}
+                      id={currentPartner}
                       icon={FaHeart}
                       iconColor={partnerColor}
                       tooltip="Partner/ka"
@@ -266,7 +266,7 @@ const Page = () => {
                       {exPartners.map((exPartner) => (
                         <PersonalInfo
                           key={exPartner}
-                          alias={exPartner}
+                          id={exPartner}
                           icon={FaHeartBroken}
                           iconColor={exPartnerColor}
                           tooltip="Ex-partner/ka"
@@ -281,7 +281,7 @@ const Page = () => {
                       {siblings.map((sibling) => (
                         <PersonalInfo
                           key={sibling}
-                          alias={sibling}
+                          id={sibling}
                           icon={FaUserFriends}
                           iconColor={siblingColor}
                           tooltip="Sourozenec"

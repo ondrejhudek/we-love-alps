@@ -64,6 +64,10 @@ const Modal = defineMultiStyleConfig({
   variants: { almostFull },
 });
 
+const transition = {
+  primary: "all 0.2s ease-in-out 0s",
+};
+
 const theme = extendTheme({
   breakpoints: {
     xs: "22em",
@@ -89,14 +93,9 @@ const theme = extendTheme({
       "h2, h3, h4, h5, h6": {
         color: mode("gray.700", "gray.300")(props),
       },
-      // a: {
-      //   color: mode("primary.600", "primary.500")(props),
-      // },
     }),
   },
-  transition: {
-    primary: "all 0.2s ease-in-out 0s",
-  },
+  transition,
 });
 
 export default theme;

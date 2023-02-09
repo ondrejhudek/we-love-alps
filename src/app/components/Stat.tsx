@@ -25,7 +25,7 @@ export interface StatProps {
 
 const MyStat = ({ title, value, icon, path, pathLabel, color }: StatProps) => (
   <Box>
-    <Card>
+    <Card bgColor={useColorModeValue(`${color}.500`, `${color}.800`)}>
       <CardBody>
         <Stat>
           <Flex align="center">
@@ -34,21 +34,30 @@ const MyStat = ({ title, value, icon, path, pathLabel, color }: StatProps) => (
               align="center"
               justify="center"
               boxSize={12}
-              bgColor={useColorModeValue(`${color}.200`, `${color}.700`)}
+              bgColor={useColorModeValue("whiteAlpha.600", "whiteAlpha.400")}
               rounded="lg"
               mr={4}
             >
               <Icon
                 as={icon}
                 boxSize={6}
-                color={useColorModeValue(`${color}.800`, `${color}.300`)}
+                color={useColorModeValue(`${color}.800`, `${color}.900`)}
               />
             </Flex>
             <Box>
               {/* Title */}
-              <StatLabel color="gray.500">{title}</StatLabel>
+              <StatLabel
+                color={useColorModeValue("whiteAlpha.600", "whiteAlpha.600")}
+              >
+                {title}
+              </StatLabel>
               {/* Value */}
-              <StatNumber lineHeight={6}>{value}</StatNumber>
+              <StatNumber
+                color={useColorModeValue("white", "whiteAlpha.800")}
+                lineHeight={6}
+              >
+                {value}
+              </StatNumber>
             </Box>
           </Flex>
         </Stat>
@@ -56,7 +65,7 @@ const MyStat = ({ title, value, icon, path, pathLabel, color }: StatProps) => (
       {/* Link */}
       <CardFooter
         py={4}
-        bgColor={useColorModeValue("gray.50", "gray.900")}
+        bgColor={useColorModeValue("whiteAlpha.600", "whiteAlpha.400")}
         fontSize="sm"
         fontWeight={500}
         borderBottomRadius="var(--card-radius)"
@@ -64,7 +73,7 @@ const MyStat = ({ title, value, icon, path, pathLabel, color }: StatProps) => (
         <Link
           as={NextLink}
           href={path}
-          color={useColorModeValue(`${color}.600`, `${color}.400`)}
+          color={useColorModeValue(`${color}.800`, `${color}.900`)}
           _hover={{ textDecoration: "underline" }}
         >
           {pathLabel}

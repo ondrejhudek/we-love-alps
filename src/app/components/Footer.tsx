@@ -30,12 +30,7 @@ const Footer = () => (
         color={useColorModeValue("gray.700", "gray.300")}
       >
         © 2023 S láskou vytvořil{" "}
-        <Link
-          href="/members?alias=hudy"
-          color="gray.500"
-          fontWeight={600}
-          ml="3px"
-        >
+        <Link href="/members/hudy" color="gray.500" fontWeight={600} ml="3px">
           @hudy
         </Link>
         . Skol <Icon as={FaHeart} color="red.500" ml={1} />.

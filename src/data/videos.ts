@@ -1,13 +1,13 @@
-export type Video = Record<number, string>;
+export type Video = Record<string, string>;
 
 const VIDEOS: Video = {
-  5: "eDBsxk9J7OQ",
-  6: "CGXVrdCztpE",
-  7: "XZFP3U8kLAY",
-  8: "twGFDV4YvxQ",
-  9: "_HHgYaV00Ds",
-  11: "zIo_PU-8UYw",
-  12: "KJlZEukVEcw",
+  "2016-zell-am-see": "eDBsxk9J7OQ",
+  "2017-ponte-di-legno": "CGXVrdCztpE",
+  "2018-solden": "XZFP3U8kLAY",
+  "2019-kronplatz": "twGFDV4YvxQ",
+  "2020-schladming": "_HHgYaV00Ds",
+  "2022-kitzbuhel": "zIo_PU-8UYw",
+  "2023-passo-del-tonale": "KJlZEukVEcw",
 };
 
 export default VIDEOS;

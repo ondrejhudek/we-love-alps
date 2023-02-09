@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import NextLink from "next/link";
 import {
   Heading,
   AspectRatio,
@@ -11,8 +12,11 @@ import {
   Card,
   CardHeader,
   CardFooter,
+  Link,
+  IconButton,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 import Header from "../components/Header";
 
@@ -34,41 +38,54 @@ const Page = () => {
       >
         {Object.keys(VIDEOS)
           .sort((a, b) => parseInt(b) - parseInt(a))
-          .map((tripId) => {
-            const tripIdAsNum = parseInt(tripId);
-            const trip = TRIPS.find((trip) => tripIdAsNum === trip.id);
+          .map((id) => {
+            const trip = TRIPS.find((trip) => id === trip.id);
 
             if (!trip) return null;
 
             return (
-              <Card key={tripId}>
+              <Card key={id}>
                 {/* Header */}
                 <CardHeader>
-                  <Flex align="center">
-                    {/* Year */}
-                    <Badge
-                      color="white"
-                      bgColor="secondary.600"
-                      fontSize="lg"
-                      display="flex"
-                      alignItems="center"
-                      px={2}
-                      borderRadius="md"
-                    >
-                      {trip.year}
-                    </Badge>
+                  <Flex align="center" justify="space-between">
+                    <Flex align="center">
+                      {/* Year */}
+                      <Badge
+                        color="white"
+                        bgColor="secondary.600"
+                        fontSize="lg"
+                        display="flex"
+                        alignItems="center"
+                        px={2}
+                        borderRadius="md"
+                      >
+                        {trip.year}
+                      </Badge>
 
-                    {/* Title */}
-                    <Heading as="h2" ml={2} fontSize="xl">
-                      {trip.title}
-                    </Heading>
+                      {/* Title */}
+                      <Heading as="h2" ml={2} fontSize="xl">
+                        {trip.title}
+                      </Heading>
+                    </Flex>
+
+                    {/* Open in a new window */}
+                    <IconButton
+                      as={Link}
+                      href={`https://www.youtube.com/watch?v=${VIDEOS[id]}`}
+                      target="_blank"
+                      size="sm"
+                      variant="ghost"
+                      icon={<FaExternalLinkAlt />}
+                      title="Open in a new tab"
+                      aria-label="Open in a new tab"
+                    />
                   </Flex>
                 </CardHeader>
 
                 {/* Youtube video */}
-                <AspectRatio key={tripId} ratio={16 / 9}>
+                <AspectRatio key={id} ratio={16 / 9}>
                   <iframe
-                    src={`https://www.youtube.com/embed/${VIDEOS[tripIdAsNum]}`}
+                    src={`https://www.youtube.com/embed/${VIDEOS[id]}`}
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
@@ -79,9 +96,14 @@ const Page = () => {
                 <CardFooter>
                   <Text color={footerColor} fontSize="xs">
                     Video od{" "}
-                    <Text as="span" color={footerColorAssign} fontWeight={500}>
+                    <Link
+                      as={NextLink}
+                      href="/members/stuchla"
+                      color={footerColorAssign}
+                      fontWeight={500}
+                    >
                       @stuchla
-                    </Text>
+                    </Link>
                   </Text>
                 </CardFooter>
               </Card>

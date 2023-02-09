@@ -13,9 +13,9 @@ import { FaArrowLeft } from "react-icons/fa";
 
 import Header from "../../components/Header";
 
-import TRIPS, { Trip as TripProps } from "../../../data/trips";
+import MEMBERS, { Member as MemberProps } from "@/data/members";
 
-const Trip = ({ data }: { data?: TripProps }) => {
+const Member = ({ data }: { data?: MemberProps }) => {
   if (!data)
     return (
       <>
@@ -38,16 +38,16 @@ const Trip = ({ data }: { data?: TripProps }) => {
       </>
     );
 
-  return <p>{data.title}</p>;
+  return <p>{data.name}</p>;
 };
 
 const Page = ({ params: { id } }: { params: { id: string[] } }) => {
-  const trip = TRIPS.find((trip) => trip.id === id[0]);
+  const member = MEMBERS.find((member) => member.id === id[0]);
 
   return (
     <>
-      <Header pathname="/trips" name={trip?.title} />
-      <Trip data={trip} />
+      <Header pathname="/members" name={member?.name} />
+      <Member data={member} />
     </>
   );
 };
