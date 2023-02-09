@@ -199,7 +199,6 @@ const Page = () => {
             return (
               <Card
                 key={id}
-                id={id}
                 overflow="hidden"
                 boxShadow={
                   searchParams.get("id") === id
