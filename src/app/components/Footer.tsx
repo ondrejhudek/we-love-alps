@@ -1,14 +1,46 @@
 import * as React from "react";
 import {
   Box,
+  Button,
   Flex,
   Text,
   Divider,
   Link,
   Icon,
+  Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaArrowUp } from "react-icons/fa";
+
+const BackToTop = () => {
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <Box mb={{ base: 8 }} textAlign="center">
+      <Tooltip label="Zpět nahoru" placement="right" aria-label="Zpět nahoru">
+        <Button
+          role="group"
+          variant="outline"
+          colorScheme="gray"
+          boxSize={12}
+          borderRadius="full"
+          aria-label="Zpět nahoru"
+          onClick={handleClick}
+        >
+          <Icon
+            as={FaArrowUp}
+            transition="var(--chakra-transition-primary)"
+            _groupHover={{
+              transform: "translateY(-2px)",
+            }}
+          />
+        </Button>
+      </Tooltip>
+    </Box>
+  );
+};
 
 const Footer = () => (
   <Box
@@ -36,6 +68,8 @@ const Footer = () => (
         . Skol <Icon as={FaHeart} color="red.500" ml={1} />.
       </Text>
     </Flex>
+
+    <BackToTop />
   </Box>
 );
 
