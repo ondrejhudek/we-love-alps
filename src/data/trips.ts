@@ -5,6 +5,10 @@ export interface Trip {
   countryCode: string;
   year: number;
   month: number;
+  accomodation?: {
+    name: string;
+    map?: string;
+  };
   members: string[];
   nonMembers?: number;
 }
@@ -27,6 +31,10 @@ const TRIPS: Trip[] = [
     countryCode: "IT",
     year: 2009,
     month: 2,
+    accomodation: {
+      name: "Residence Adamello Resort",
+      map: "2MEfqPWF4HdnXv4F9",
+    },
     members: ["hudy", "jarin", "stuchla"],
     nonMembers: 3,
   },
@@ -37,6 +45,7 @@ const TRIPS: Trip[] = [
     countryCode: "AT",
     year: 2011,
     month: 3,
+    accomodation: { name: "Haus Alpin", map: "MuRUSkJCndeTu1UM9" },
     members: ["hudy", "jarin"],
     nonMembers: 1,
   },
@@ -78,6 +87,10 @@ const TRIPS: Trip[] = [
     countryCode: "AT",
     year: 2016,
     month: 2,
+    accomodation: {
+      name: "Frühstückspension Landhaus Christa",
+      map: "ZXmB1T1U26gSn9Hg8",
+    },
     members: [
       "hudy",
       "terka",
@@ -116,6 +129,7 @@ const TRIPS: Trip[] = [
     countryCode: "AT",
     year: 2018,
     month: 1,
+    accomodation: { name: "Gasthof Bergheimat", map: "zyvj5QWXhCMsACP99" },
     members: [
       "hudy",
       "terka",
@@ -139,6 +153,7 @@ const TRIPS: Trip[] = [
     countryCode: "IT",
     year: 2019,
     month: 3,
+    accomodation: { name: "Hotel Starkl", map: "5Ls6mo4TNXVz56zw5" },
     members: [
       "hudy",
       "terka",
@@ -160,6 +175,10 @@ const TRIPS: Trip[] = [
     countryCode: "AT",
     year: 2020,
     month: 2,
+    accomodation: {
+      name: "Hotel Post",
+      map: "7t13NeYUzQDLS8Cs9",
+    },
     members: ["hudy", "terka", "jarin", "stuchla", "lena", "milan", "sally"],
     nonMembers: 3,
   },
@@ -180,6 +199,10 @@ const TRIPS: Trip[] = [
     countryCode: "AT",
     year: 2022,
     month: 2,
+    accomodation: {
+      name: "Lifthotel Aschaber",
+      map: "qVWEdhZZN2EYBvJ99",
+    },
     members: ["hudy", "terka", "jarin", "stuchla", "lena", "milan"],
   },
   {
@@ -189,6 +212,10 @@ const TRIPS: Trip[] = [
     countryCode: "IT",
     year: 2023,
     month: 1,
+    accomodation: {
+      name: "Hotel Orchidea",
+      map: "wQsZkCSbJLXjU1tg9",
+    },
     members: ["hudy", "terka", "jarin", "stuchla", "sally"],
     nonMembers: 3,
   },

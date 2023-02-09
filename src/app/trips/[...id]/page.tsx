@@ -1,44 +1,222 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  Button,
+  AspectRatio,
+  Avatar,
+  Box,
+  Card,
+  CardHeader,
+  CardBody,
+  Divider,
+  Flex,
+  Heading,
   Icon,
+  Img,
+  Tooltip,
+  Link,
+  List,
+  ListItem,
+  Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
-import Header from "../../components/Header";
+import { MONTHS } from "@/app/components/utils";
+import Alert from "@/app/components/Alert";
+import Header from "@/app/components/Header";
 
-import TRIPS, { Trip as TripProps } from "../../../data/trips";
+import COUNTRIES from "@/data/countries";
+import TRIPS, { Trip as TripProps } from "@/data/trips";
+import MEMBERS from "@/data/members";
+import RESORTS from "@/data/resorts";
+import VIDEOS from "@/data/videos";
 
 const Trip = ({ data }: { data?: TripProps }) => {
+  const router = useRouter();
+
+  const dividerColor = useColorModeValue("gray.300", "gray.800");
+  const resortBgColor = useColorModeValue("gray.100", "gray.800");
+
+  const handleMemberClick = (id: string) => {
+    router.push(`/members/${id}`);
+  };
+
+  const handleResortClick = () => {
+    router.push(`/resorts`);
+  };
+
   if (!data)
     return (
-      <>
-        <Alert status="error" rounded="md">
-          <AlertIcon />
-          <AlertTitle>Tento zájezd neexistuje.</AlertTitle>
-          <AlertDescription>Běž zpět a vyber jiný.</AlertDescription>
-        </Alert>
-
-        <Button
-          as={Link}
-          href="/trips"
-          variant="outline"
-          mt={4}
-          leftIcon={<Icon as={FaArrowLeft} fontSize="xs" />}
-          fontWeight={500}
-        >
-          Zpět na Zájezdy
-        </Button>
-      </>
+      <Alert
+        title="Tento zájezd neexistuje."
+        description="Běž zpět a vyber jiný."
+        button={{
+          path: "/trips",
+          label: "Zpět na Zájezdy",
+        }}
+      />
     );
 
-  return <p>{data.title}</p>;
+  const video = VIDEOS[data.id];
+
+  return (
+    <>
+      {/* Info */}
+      <Card>
+        <CardBody>
+          <List spacing={3}>
+            <ListItem fontWeight={500}>
+              <Text as="span" mr={2} color="gray.500" fontWeight={400}>
+                Kdy /
+              </Text>
+              {MONTHS[data.month]}, {data.year}
+            </ListItem>
+
+            <ListItem fontWeight={500} display="flex" alignItems="center">
+              <Text as="span" mr={2} color="gray.500" fontWeight={400}>
+                Kde /
+              </Text>
+              {data.title}, {COUNTRIES[data.countryCode]}
+              <Box ml={2}>
+                <Image
+                  src={`/images/flags/${data.countryCode.toLowerCase()}.png`}
+                  alt={data.countryCode}
+                  title={COUNTRIES[data.countryCode]}
+                  width={20}
+                  height={20}
+                />
+              </Box>
+            </ListItem>
+
+            {data.accomodation && (
+              <ListItem fontWeight={500}>
+                <Text as="span" mr={2} color="gray.500" fontWeight={400}>
+                  Ubytování /
+                </Text>
+                {data.accomodation.name}
+                {data.accomodation.map && (
+                  <Tooltip label="Otevřít ubýtování na Google Maps">
+                    <Link
+                      href={`https://goo.gl/maps/${data.accomodation.map}`}
+                      target="_blank"
+                    >
+                      <Icon
+                        as={FaExternalLinkAlt}
+                        boxSize={3}
+                        ml={2}
+                        color="primary.600"
+                      />
+                    </Link>
+                  </Tooltip>
+                )}
+              </ListItem>
+            )}
+          </List>
+        </CardBody>
+      </Card>
+
+      {/* Resorts */}
+      <Card mt={4}>
+        <CardHeader>
+          <Heading as="h2" fontSize="xl">
+            Navštívená střediska
+          </Heading>
+        </CardHeader>
+        <Divider borderColor={dividerColor} />
+        <CardBody>
+          <Flex wrap="wrap" m={-2}>
+            {data.resorts.map((resortId) => {
+              const resort = RESORTS.find((resort) => resort.id === resortId);
+              if (!resort) return;
+              const { id, name } = resort;
+
+              return (
+                <Tooltip key={id} label={name}>
+                  <Img
+                    src={`/images/resorts/${id}.png`}
+                    alt={name}
+                    m={2}
+                    width={28}
+                    height={28}
+                    rounded="full"
+                    objectFit="contain"
+                    borderWidth={1}
+                    borderStyle="solid"
+                    borderColor={resortBgColor}
+                    boxShadow="base"
+                    _hover={{
+                      cursor: "pointer",
+                      boxShadow: "outline",
+                    }}
+                    onClick={() => handleResortClick()}
+                  />
+                </Tooltip>
+              );
+            })}
+          </Flex>
+        </CardBody>
+      </Card>
+
+      {/* Members */}
+      <Card mt={4}>
+        <CardHeader>
+          <Heading as="h2" fontSize="xl">
+            Zúčastnili se
+          </Heading>
+        </CardHeader>
+        <Divider borderColor={dividerColor} />
+        <CardBody>
+          <Flex wrap="wrap" m={-2}>
+            {data.members.map((memberId) => {
+              const member = MEMBERS.find((member) => member.id === memberId);
+              if (!member) return;
+              const { id, name } = member;
+
+              return (
+                <Tooltip key={id} label={name}>
+                  <Avatar
+                    name={name}
+                    src={`/images/members/${id}.jpg`}
+                    size="2xl"
+                    m={2}
+                    boxShadow="md"
+                    _hover={{
+                      cursor: "pointer",
+                      boxShadow: "outline",
+                    }}
+                    onClick={() => handleMemberClick(id)}
+                  />
+                </Tooltip>
+              );
+            })}
+          </Flex>
+        </CardBody>
+      </Card>
+
+      {/* Video */}
+      {video && (
+        <Card mt={4}>
+          <CardHeader>
+            <Heading as="h2" fontSize="xl">
+              Video
+            </Heading>
+          </CardHeader>
+          <CardBody pt={0} px={0}>
+            <AspectRatio key={data.id} ratio={2}>
+              <iframe
+                src={`https://www.youtube.com/embed/${video}`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </AspectRatio>
+          </CardBody>
+        </Card>
+      )}
+    </>
+  );
 };
 
 const Page = ({ params: { id } }: { params: { id: string[] } }) => {
