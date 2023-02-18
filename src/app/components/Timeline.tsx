@@ -17,11 +17,12 @@ import {
 } from "@chakra-ui/react";
 import { FaSkiing } from "react-icons/fa";
 
-import COUNTRIES from "../../data/countries";
-import MEMBERS from "../../data/members";
-import RESORTS from "../../data/resorts";
-import TRIPS, { Trip } from "../../data/trips";
 import { MONTHS } from "./utils";
+
+import COUNTRIES from "@/data/countries";
+import MEMBERS from "@/data/members";
+import RESORTS from "@/data/resorts";
+import TRIPS, { TripProps } from "@/data/trips";
 
 const DOT_SIZE = 64;
 const DOT_SIZE_PX = `${DOT_SIZE}px`;
@@ -42,7 +43,7 @@ const TimelineRow = ({
   even,
   onClick,
 }: {
-  trip: Trip;
+  trip: TripProps;
   even: boolean;
   onClick: (id: string) => void;
 }) => (
