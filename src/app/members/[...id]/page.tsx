@@ -49,14 +49,15 @@ const PersonalInfo = ({
   label: string;
   color: string;
 }) => {
-  const nicknameColor = useColorModeValue("gray.700", "gray.300");
-
   const member = MEMBERS.find((member) => member.id === id);
-
   if (!member) return null;
 
   return (
-    <Flex align="center" fontSize="sm">
+    <Flex
+      justify={{ base: "center", sm: "flex-start" }}
+      align="center"
+      fontSize="sm"
+    >
       <Text color="gray.500">{label} /</Text>
       <Link
         as={NextLink}
