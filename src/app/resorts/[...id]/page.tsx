@@ -16,6 +16,7 @@ import {
   Heading,
   List,
   ListItem,
+  Show,
   Text,
   Tooltip,
   useColorModeValue,
@@ -108,12 +109,14 @@ const Resort = ({ data }: { data?: ResortProps }) => {
               </ListItem>
             </List>
 
-            <Img
-              src={`/images/resorts/${data.id}.png`}
-              alt={data.name}
-              width={24}
-              height={24}
-            />
+            <Show above="sm">
+              <Img
+                src={`/images/resorts/${data.id}.png`}
+                alt={data.name}
+                width={24}
+                height={24}
+              />
+            </Show>
           </Flex>
         </CardBody>
 
