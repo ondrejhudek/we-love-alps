@@ -1,4 +1,4 @@
-export interface Member {
+export interface MemberProps {
   id: string;
   name: string;
   nickname?: string;
@@ -9,7 +9,7 @@ export interface Member {
   siblings?: string[];
 }
 
-const MEMBERS: Member[] = [
+const MEMBERS: MemberProps[] = [
   {
     id: "hudy",
     name: "Ondřej Hudek",

@@ -25,6 +25,9 @@ import VIDEOS from "@/data/videos";
 
 const Page = () => {
   const pathname = usePathname();
+
+  const yearColor = useColorModeValue("white", "gray.900");
+  const yearBgColor = useColorModeValue("secondary.600", "secondary.400");
   const footerColor = useColorModeValue("gray.600", "gray.300");
   const footerColorAssign = useColorModeValue("gray.500", "gray.400");
 
@@ -51,8 +54,8 @@ const Page = () => {
                     <Flex align="center">
                       {/* Year */}
                       <Badge
-                        color="white"
-                        bgColor="secondary.600"
+                        color={yearColor}
+                        bgColor={yearBgColor}
                         fontSize="lg"
                         display="flex"
                         alignItems="center"

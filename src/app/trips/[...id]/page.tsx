@@ -1,5 +1,6 @@
 "use client";
 
+import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -30,7 +31,7 @@ import Header from "@/app/components/Header";
 import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
 import RESORTS from "@/data/resorts";
-import TRIPS, { Trip as TripProps } from "@/data/trips";
+import TRIPS, { TripProps } from "@/data/trips";
 import VIDEOS from "@/data/videos";
 
 const Trip = ({ data }: { data?: TripProps }) => {
@@ -121,7 +122,7 @@ const Trip = ({ data }: { data?: TripProps }) => {
       <Card mt={4}>
         <CardHeader>
           <Heading as="h2" fontSize="xl">
-            Navštívená střediska
+            Střediska
           </Heading>
         </CardHeader>
         <Divider borderColor={dividerColor} />

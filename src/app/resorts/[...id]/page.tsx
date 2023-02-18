@@ -102,7 +102,7 @@ const Resort = ({ data }: { data?: ResortProps }) => {
                     {year}
                   </Badge>
                 ))}
-                <Text as="span" ml={2} fontWeight={400}>
+                <Text as="span" ml={2} fontWeight={500}>
                   ({trips.length}x)
                 </Text>
               </ListItem>

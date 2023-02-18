@@ -31,26 +31,11 @@ import {
 } from "react-icons/fa";
 
 import Header from "@/app/components/Header";
+import { TRIP_CS, RESORT_CS } from "@/app/components/utils";
 
 import MEMBERS from "@/data/members";
 import TRIPS from "@/data/trips";
 import RESORTS from "@/data/resorts";
-
-const TRIP_CS: Record<number, string> = {
-  1: "zájezd",
-  2: "zájezdy",
-  3: "zájezdy",
-  4: "zájezdy",
-  5: "zájezdů",
-};
-
-const RESORT_CS: Record<number, string> = {
-  1: "středisko",
-  2: "střediska",
-  3: "střediska",
-  4: "střediska",
-  5: "středisek",
-};
 
 const Stat = ({ list, term }: { list: string[]; term: string }) => (
   <Tooltip
@@ -234,33 +219,33 @@ const Page = () => {
                 </CardHeader>
 
                 {/* Body */}
-                <CardBody pt={0}>
-                  <Flex justify="space-evenly" py={2} wrap="wrap">
-                    {/* Trips */}
-                    <Stat
+                {/* <CardBody pt={0}>
+                  <Flex justify="space-evenly" py={2} wrap="wrap"> */}
+                {/* Trips */}
+                {/* <Stat
                       list={tripNames}
                       term={TRIP_CS[tripNames.length] || TRIP_CS[5]}
-                    />
+                    /> */}
 
-                    {/* Resorts */}
-                    <Stat
+                {/* Resorts */}
+                {/* <Stat
                       list={resortNames}
                       term={RESORT_CS[tripNames.length] || RESORT_CS[5]}
-                    />
-                  </Flex>
+                    /> */}
+                {/* </Flex> */}
 
-                  {/* Current partner */}
-                  {currentPartner && (
+                {/* Current partner */}
+                {/* {currentPartner && (
                     <PersonalInfo
                       id={currentPartner}
                       icon={FaHeart}
                       iconColor={partnerColor}
                       tooltip="Partner/ka"
                     />
-                  )}
+                  )} */}
 
-                  {/* Ex partner */}
-                  {exPartners && exPartners.length > 0 && (
+                {/* Ex partner */}
+                {/* {exPartners && exPartners.length > 0 && (
                     <>
                       {exPartners.map((exPartner) => (
                         <PersonalInfo
@@ -272,10 +257,10 @@ const Page = () => {
                         />
                       ))}
                     </>
-                  )}
+                  )} */}
 
-                  {/* Siblings */}
-                  {siblings && siblings.length > 0 && (
+                {/* Siblings */}
+                {/* {siblings && siblings.length > 0 && (
                     <>
                       {siblings.map((sibling) => (
                         <PersonalInfo
@@ -287,8 +272,8 @@ const Page = () => {
                         />
                       ))}
                     </>
-                  )}
-                </CardBody>
+                  )} */}
+                {/* </CardBody> */}
 
                 {/* Footer */}
                 <CardFooter
@@ -314,7 +299,7 @@ const Page = () => {
                       <SocialButton
                         name="Instagram"
                         icon={FaInstagram}
-                        color="#E1306C"
+                        color="instagram.500"
                         link={`https://www.instagram.com/${instagram}`}
                       />
                     )}

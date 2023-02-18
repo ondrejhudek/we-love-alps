@@ -1,6 +1,6 @@
-export type Country = Record<string, string>;
+export type CountryProps = Record<string, string>;
 
-const COUNTRIES: Country = {
+const COUNTRIES: CountryProps = {
   AT: "Rakousko",
   IT: "Itálie",
   FT: "Francie",

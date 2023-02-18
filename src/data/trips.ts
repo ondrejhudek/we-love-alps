@@ -1,4 +1,4 @@
-export interface Trip {
+export interface TripProps {
   id: string;
   title: string;
   resorts: string[];
@@ -13,7 +13,7 @@ export interface Trip {
   nonMembers?: number;
 }
 
-const TRIPS: Trip[] = [
+const TRIPS: TripProps[] = [
   {
     id: "2008-lienz",
     title: "Lienz",

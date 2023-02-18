@@ -1,6 +1,6 @@
-export type Video = Record<string, string>;
+export type VideoProps = Record<string, string>;
 
-const VIDEOS: Video = {
+const VIDEOS: VideoProps = {
   "2016-zell-am-see": "eDBsxk9J7OQ",
   "2017-ponte-di-legno": "CGXVrdCztpE",
   "2018-solden": "XZFP3U8kLAY",

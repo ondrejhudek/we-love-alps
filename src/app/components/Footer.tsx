@@ -1,4 +1,5 @@
 import * as React from "react";
+import NextLink from "next/link";
 import {
   Box,
   Button,
@@ -62,10 +63,17 @@ const Footer = () => (
         color={useColorModeValue("gray.700", "gray.300")}
       >
         © 2023 S láskou vytvořil{" "}
-        <Link href="/members/hudy" color="gray.500" fontWeight={600} ml="3px">
+        <Link
+          as={NextLink}
+          href="/members/hudy"
+          color="gray.500"
+          fontWeight={600}
+          ml="3px"
+        >
           @hudy
         </Link>
-        . Skol <Icon as={FaHeart} color="red.500" ml={1} />.
+        . Skol
+        <Icon as={FaHeart} color="red.500" ml={1.5} />.
       </Text>
     </Flex>
 

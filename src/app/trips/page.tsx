@@ -25,7 +25,7 @@ import { MONTHS } from "@/app/components/utils";
 import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
 import RESORTS from "@/data/resorts";
-import TRIPS, { Trip } from "@/data/trips";
+import TRIPS, { TripProps } from "@/data/trips";
 
 const TooltipAvatar: typeof Avatar = (props: any) => (
   <Tooltip label={props.name}>
@@ -44,7 +44,10 @@ const Page = () => {
   const monthColor = useColorModeValue("gray.400", "gray.500");
   const resortColor = useColorModeValue("gray.600", "gray.400");
 
-  const groupedTrips = groupBy<Trip>((trip) => trip.year.toString(), TRIPS);
+  const groupedTrips = groupBy<TripProps>(
+    (trip) => trip.year.toString(),
+    TRIPS
+  );
   const groupedKeys = Object.keys(groupedTrips).sort(
     (a, b) => parseInt(b) - parseInt(a)
   );
