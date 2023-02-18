@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { FaArrowLeft } from "react-icons/fa";
 
-import Header from "../../components/Header";
+import Header from "@/app/components/Header";
 
 import MEMBERS, { Member as MemberProps } from "@/data/members";
 

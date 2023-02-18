@@ -1,24 +1,24 @@
 "use client";
 
 import NextLink from "next/link";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
-  SimpleGrid,
-  Box,
-  Flex,
   Avatar,
-  Heading,
-  Text,
-  Icon,
-  Link,
-  Tooltip,
+  Badge,
+  Box,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
+  CardHeader,
+  Flex,
+  Heading,
   HStack,
+  Icon,
+  Link,
   StackDivider,
-  Badge,
+  SimpleGrid,
+  Tooltip,
+  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { IconType } from "react-icons";
@@ -30,11 +30,11 @@ import {
   FaFacebook,
 } from "react-icons/fa";
 
-import Header from "../components/Header";
+import Header from "@/app/components/Header";
 
-import MEMBERS from "../../data/members";
-import TRIPS from "../../data/trips";
-import RESORTS from "../../data/resorts";
+import MEMBERS from "@/data/members";
+import TRIPS from "@/data/trips";
+import RESORTS from "@/data/resorts";
 
 const TRIP_CS: Record<number, string> = {
   1: "zájezd",

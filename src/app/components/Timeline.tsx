@@ -10,8 +10,8 @@ import {
   CardBody,
   Flex,
   Heading,
-  Text,
   Icon,
+  Text,
   Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";

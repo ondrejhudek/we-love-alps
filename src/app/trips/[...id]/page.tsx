@@ -28,9 +28,9 @@ import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
 
 import COUNTRIES from "@/data/countries";
-import TRIPS, { Trip as TripProps } from "@/data/trips";
 import MEMBERS from "@/data/members";
 import RESORTS from "@/data/resorts";
+import TRIPS, { Trip as TripProps } from "@/data/trips";
 import VIDEOS from "@/data/videos";
 
 const Trip = ({ data }: { data?: TripProps }) => {
@@ -43,8 +43,8 @@ const Trip = ({ data }: { data?: TripProps }) => {
     router.push(`/members/${id}`);
   };
 
-  const handleResortClick = () => {
-    router.push(`/resorts`);
+  const handleResortClick = (id: string) => {
+    router.push(`/resorts/${id}`);
   };
 
   if (!data)
@@ -150,7 +150,7 @@ const Trip = ({ data }: { data?: TripProps }) => {
                       cursor: "pointer",
                       boxShadow: "outline",
                     }}
-                    onClick={() => handleResortClick()}
+                    onClick={() => handleResortClick(id)}
                   />
                 </Tooltip>
               );
@@ -179,7 +179,7 @@ const Trip = ({ data }: { data?: TripProps }) => {
                   <Avatar
                     name={name}
                     src={`/images/members/${id}.jpg`}
-                    size="2xl"
+                    size="xl"
                     m={2}
                     boxShadow="md"
                     _hover={{
@@ -204,7 +204,7 @@ const Trip = ({ data }: { data?: TripProps }) => {
             </Heading>
           </CardHeader>
           <CardBody pt={0} px={0}>
-            <AspectRatio key={data.id} ratio={2}>
+            <AspectRatio key={data.id} ratio={2} maxH="500px">
               <iframe
                 src={`https://www.youtube.com/embed/${video}`}
                 title="YouTube video player"

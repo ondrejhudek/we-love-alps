@@ -1,15 +1,15 @@
 import NextLink from "next/link";
 import {
   Box,
-  Flex,
   Card,
   CardBody,
   CardFooter,
+  Flex,
+  Icon,
+  Link,
   Stat,
   StatLabel,
   StatNumber,
-  Icon,
-  Link,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { IconType } from "react-icons";

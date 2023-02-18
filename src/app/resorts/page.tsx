@@ -1,32 +1,37 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import {
+  AspectRatio,
+  Badge,
+  Box,
+  Card,
+  CardFooter,
+  CardHeader,
+  Flex,
   Heading,
   SimpleGrid,
   Text,
-  AspectRatio,
-  Box,
-  Flex,
-  Badge,
-  Card,
-  CardHeader,
-  CardFooter,
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import Header from "../components/Header";
+import Header from "@/app/components/Header";
 
-import COUNTRIES from "../../data/countries";
-import RESORTS from "../../data/resorts";
-import TRIPS from "../../data/trips";
+import COUNTRIES from "@/data/countries";
+import RESORTS from "@/data/resorts";
+import TRIPS from "@/data/trips";
 
 const Page = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const regionColor = useColorModeValue("gray.400", "gray.500");
   const yearColor = useColorModeValue("white", "gray.900");
   const yearBgColor = useColorModeValue("secondary.600", "secondary.400");
+
+  const handleClick = (id: string) => {
+    router.push(`/resorts/${id}`);
+  };
 
   return (
     <>
@@ -40,7 +45,14 @@ const Page = () => {
           const trips = TRIPS.filter((trip) => trip.resorts.includes(id));
 
           return (
-            <Card key={id}>
+            <Card
+              key={id}
+              _hover={{
+                cursor: "pointer",
+                boxShadow: "outline",
+              }}
+              onClick={() => handleClick(id)}
+            >
               <CardHeader>
                 <Flex align="center">
                   <Box mr={2}>

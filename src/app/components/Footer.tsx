@@ -2,11 +2,11 @@ import * as React from "react";
 import {
   Box,
   Button,
-  Flex,
-  Text,
   Divider,
-  Link,
+  Flex,
   Icon,
+  Link,
+  Text,
   Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";

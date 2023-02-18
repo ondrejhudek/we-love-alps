@@ -3,18 +3,18 @@
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import {
+  Avatar,
+  AvatarGroup,
+  Box,
+  Card,
+  CardBody,
+  Flex,
+  Icon,
   Heading,
   SimpleGrid,
   Text,
-  Box,
-  Flex,
-  Card,
-  CardBody,
-  Icon,
-  useColorModeValue,
-  Avatar,
-  AvatarGroup,
   Tooltip,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { FaSkiing } from "react-icons/fa";
 import groupBy from "ramda/src/groupBy";

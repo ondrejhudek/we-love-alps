@@ -1,4 +1,4 @@
-export interface Resort {
+export interface ResortProps {
   id: string;
   name: string;
   countryCode: string;
@@ -6,7 +6,7 @@ export interface Resort {
   map: string;
 }
 
-const RESORTS: Resort[] = [
+const RESORTS: ResortProps[] = [
   {
     id: "aprica",
     name: "Aprica",

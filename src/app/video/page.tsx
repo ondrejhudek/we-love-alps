@@ -3,25 +3,25 @@
 import { usePathname } from "next/navigation";
 import NextLink from "next/link";
 import {
-  Heading,
   AspectRatio,
   Badge,
-  Text,
-  Flex,
-  SimpleGrid,
   Card,
-  CardHeader,
   CardFooter,
+  CardHeader,
+  Flex,
+  Heading,
   Link,
   IconButton,
+  SimpleGrid,
+  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
-import Header from "../components/Header";
+import Header from "@/app/components/Header";
 
-import TRIPS from "../../data/trips";
-import VIDEOS from "../../data/videos";
+import TRIPS from "@/data/trips";
+import VIDEOS from "@/data/videos";
 
 const Page = () => {
   const pathname = usePathname();

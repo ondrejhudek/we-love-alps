@@ -4,9 +4,9 @@ import Link from "next/link";
 
 import {
   Alert,
+  AlertDescription,
   AlertIcon,
   AlertTitle,
-  AlertDescription,
   Button,
   Icon,
 } from "@chakra-ui/react";

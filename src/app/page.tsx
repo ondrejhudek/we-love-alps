@@ -6,9 +6,9 @@ import { HiOutlineUsers, HiOutlineMapPin, HiOutlineMap } from "react-icons/hi2";
 import Stat, { StatProps } from "./components/Stat";
 import Timeline from "./components/Timeline";
 
-import MEMBERS from "../data/members";
-import RESORTS from "../data/resorts";
-import TRIPS from "../data/trips";
+import MEMBERS from "@/data/members";
+import RESORTS from "@/data/resorts";
+import TRIPS from "@/data/trips";
 
 const STATS: StatProps[] = [
   {
