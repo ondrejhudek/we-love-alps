@@ -67,19 +67,25 @@ const PersonalInfo = ({
   );
 };
 
-const Interest = ({ children }: { children: React.ReactNode }) => (
-  <Badge
-    py={0.5}
-    px={1.5}
-    color="gray.700"
-    _hover={{
-      color: "gray.800",
-      bgColor: "gray.200",
-    }}
-  >
-    {children}
-  </Badge>
-);
+const Interest = ({ children }: { children: React.ReactNode }) => {
+  const color = useColorModeValue("gray.700", "gray.300");
+  const colorHover = useColorModeValue("gray.800", "gray.200");
+  const bgColorHover = useColorModeValue("gray.200", "gray.500");
+
+  return (
+    <Badge
+      py={0.5}
+      px={1.5}
+      color={color}
+      _hover={{
+        color: colorHover,
+        bgColor: bgColorHover,
+      }}
+    >
+      {children}
+    </Badge>
+  );
+};
 
 const SocialButton = ({
   network,
@@ -101,7 +107,7 @@ const SocialButton = ({
     rounded="full"
     aria-label={network}
     _hover={{
-      bgColor: `${network}.300`,
+      bgColor: `${network}.400`,
     }}
   />
 );
