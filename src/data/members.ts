@@ -7,6 +7,7 @@ export interface MemberProps {
   currentPartner?: string;
   exPartners?: string[];
   siblings?: string[];
+  interest: ("lyže" | "snowboard" | "skialpy")[];
 }
 
 const MEMBERS: MemberProps[] = [
@@ -16,6 +17,7 @@ const MEMBERS: MemberProps[] = [
     facebook: "ondrej.hudek",
     instagram: "ondrejhudek",
     currentPartner: "terka",
+    interest: ["lyže", "snowboard"],
   },
   {
     id: "terka",
@@ -23,6 +25,7 @@ const MEMBERS: MemberProps[] = [
     facebook: "tereza.stejskalova.16",
     instagram: "stejste",
     currentPartner: "hudy",
+    interest: ["lyže", "snowboard"],
   },
   {
     id: "jarin",
@@ -31,6 +34,7 @@ const MEMBERS: MemberProps[] = [
     instagram: "jardacerny_",
     currentPartner: "daja",
     siblings: ["era"],
+    interest: ["lyže"],
   },
   {
     id: "daja",
@@ -39,6 +43,7 @@ const MEMBERS: MemberProps[] = [
     facebook: "Danielka.Kovac",
     instagram: "danielka.kovacova",
     currentPartner: "jarin",
+    interest: ["lyže"],
   },
   {
     id: "stuchla",
@@ -47,6 +52,7 @@ const MEMBERS: MemberProps[] = [
     instagram: "johnyst",
     exPartners: ["janca"],
     siblings: ["majki"],
+    interest: ["lyže"],
   },
   {
     id: "majki",
@@ -55,6 +61,7 @@ const MEMBERS: MemberProps[] = [
     facebook: "stuchlapuchlamuchla",
     instagram: "stuchlapuchlamuchla",
     siblings: ["stuchla"],
+    interest: ["snowboard"],
   },
   {
     id: "janca",
@@ -63,6 +70,7 @@ const MEMBERS: MemberProps[] = [
     facebook: "jana.pekarkova.7",
     instagram: "jani.sss",
     exPartners: ["stuchla"],
+    interest: ["snowboard"],
   },
   {
     id: "era",
@@ -73,18 +81,21 @@ const MEMBERS: MemberProps[] = [
     currentPartner: "pavel",
     exPartners: ["kopy"],
     siblings: ["jarin"],
+    interest: ["lyže"],
   },
   {
     id: "pavel",
     name: "Pavel Černý",
     facebook: "pcerny",
     currentPartner: "era",
+    interest: ["lyže"],
   },
   {
     id: "kopy",
     name: "Jiří Koptík",
     facebook: "bia.kopy",
     exPartners: ["era"],
+    interest: ["lyže"],
   },
   {
     id: "lena",
@@ -94,6 +105,7 @@ const MEMBERS: MemberProps[] = [
     instagram: "my_lenkaa",
     currentPartner: "milan",
     exPartners: ["tomas"],
+    interest: ["lyže", "snowboard", "skialpy"],
   },
   {
     id: "milan",
@@ -101,6 +113,7 @@ const MEMBERS: MemberProps[] = [
     facebook: "milan.cernil",
     instagram: "milanec_",
     currentPartner: "lena",
+    interest: ["lyže", "skialpy"],
   },
   {
     id: "tomas",
@@ -109,6 +122,7 @@ const MEMBERS: MemberProps[] = [
     facebook: "tomas.malek.5",
     instagram: "tomalis",
     exPartners: ["lena"],
+    interest: ["lyže"],
   },
   {
     id: "lucka",
@@ -117,6 +131,7 @@ const MEMBERS: MemberProps[] = [
     instagram: "meritl",
     exPartners: ["mara", "jarda"],
     siblings: ["junior1", "junior2"],
+    interest: ["lyže", "snowboard"],
   },
   {
     id: "mara",
@@ -125,6 +140,7 @@ const MEMBERS: MemberProps[] = [
     facebook: "marek.haase.3",
     instagram: "mh.marekh",
     exPartners: ["lucka"],
+    interest: ["lyže"],
   },
   {
     id: "jarda",
@@ -132,6 +148,7 @@ const MEMBERS: MemberProps[] = [
     facebook: "jerry.cotton.5",
     instagram: "cotton.jerry",
     exPartners: ["lucka"],
+    interest: ["lyže"],
   },
   {
     id: "junior1",
@@ -139,6 +156,7 @@ const MEMBERS: MemberProps[] = [
     facebook: "martin.dostal.9237",
     instagram: "martindostalm",
     siblings: ["lucka", "junior2"],
+    interest: ["lyže"],
   },
   {
     id: "junior2",
@@ -146,12 +164,14 @@ const MEMBERS: MemberProps[] = [
     facebook: "tomas.dostal.5682",
     instagram: "dostal_tomas",
     siblings: ["lucka", "junior1"],
+    interest: ["lyže"],
   },
   {
     id: "zahrada",
     name: "Štěpán Zahradník",
     facebook: "stepan.zahradnik.7",
     currentPartner: "sima",
+    interest: ["lyže"],
   },
   {
     id: "sima",
@@ -160,12 +180,14 @@ const MEMBERS: MemberProps[] = [
     facebook: "simi.penickova",
     instagram: "ssimipe",
     currentPartner: "zahrada",
+    interest: ["lyže"],
   },
   {
     id: "sally",
     name: "Michal Salinger",
     facebook: "michal.salinger",
     instagram: "sally_from_kh",
+    interest: ["lyže", "snowboard"],
   },
 ];
 

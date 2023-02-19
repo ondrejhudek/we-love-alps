@@ -59,7 +59,7 @@ const Resort = ({ data }: { data?: ResortProps }) => {
   return (
     <>
       {/* Info */}
-      <Card>
+      <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
         <CardBody>
           <Flex justify="space-between">
             <List spacing={3}>

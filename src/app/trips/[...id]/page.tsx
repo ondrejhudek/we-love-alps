@@ -65,7 +65,7 @@ const Trip = ({ data }: { data?: TripProps }) => {
   return (
     <>
       {/* Info */}
-      <Card>
+      <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
         <CardBody>
           <List spacing={3}>
             <ListItem fontWeight={500}>

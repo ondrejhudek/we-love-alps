@@ -4,8 +4,8 @@ import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
+  Badge,
   Box,
-  Button,
   Card,
   CardBody,
   CardHeader,
@@ -24,13 +24,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { IconType } from "react-icons";
-import {
-  FaHeart,
-  FaHeartBroken,
-  FaUserFriends,
-  FaInstagram,
-  FaFacebook,
-} from "react-icons/fa";
+import { FaInstagram, FaFacebook } from "react-icons/fa";
 
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
@@ -73,6 +67,20 @@ const PersonalInfo = ({
   );
 };
 
+const Interest = ({ children }: { children: React.ReactNode }) => (
+  <Badge
+    py={0.5}
+    px={1.5}
+    color="gray.700"
+    _hover={{
+      color: "gray.800",
+      bgColor: "gray.200",
+    }}
+  >
+    {children}
+  </Badge>
+);
+
 const SocialButton = ({
   network,
   icon,
@@ -92,6 +100,9 @@ const SocialButton = ({
     color="white"
     rounded="full"
     aria-label={network}
+    _hover={{
+      bgColor: `${network}.300`,
+    }}
   />
 );
 
@@ -101,7 +112,7 @@ const Count = ({ number }: { number: number }) => (
     ml={2}
     rounded="full"
     color="white"
-    bgColor="primary.600"
+    bgColor="secondary.600"
     fontSize="xs"
     fontWeight={500}
   >
@@ -114,8 +125,6 @@ const Member = ({ data }: { data?: MemberProps }) => {
 
   const nicknameColor = useColorModeValue("gray.700", "gray.300");
   const tripBgColor = useColorModeValue("gray.50", "gray.800");
-  const exPartnerColor = useColorModeValue("red.800", "red.200");
-  const siblingColor = useColorModeValue("orange.500", "orange.400");
   const dividerColor = useColorModeValue("gray.300", "gray.800");
   const resortBgColor = useColorModeValue("gray.100", "gray.800");
 
@@ -160,7 +169,7 @@ const Member = ({ data }: { data?: MemberProps }) => {
   return (
     <>
       {/* Basic information */}
-      <Card>
+      <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
         <CardBody>
           <Flex
             direction={{ base: "column", md: "row" }}
@@ -172,7 +181,7 @@ const Member = ({ data }: { data?: MemberProps }) => {
             >
               <Img
                 src={`/images/members/${data.id}.jpg`}
-                mr={4}
+                mr={{ base: 0, sm: 6 }}
                 boxSize={36}
                 rounded="full"
                 alt={data.name}
@@ -234,9 +243,16 @@ const Member = ({ data }: { data?: MemberProps }) => {
                     </>
                   )}
                 </List>
+
+                <Flex gap={1} mt={5}>
+                  {data.interest.map((interest) => (
+                    <Interest key={interest}>{interest}</Interest>
+                  ))}
+                </Flex>
               </Box>
             </Flex>
 
+            {/* Social networks */}
             <Flex
               gap={2}
               justify={{ base: "center", sm: "flex-start" }}
