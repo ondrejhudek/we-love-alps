@@ -11,6 +11,7 @@ export interface TripProps {
   };
   members: string[];
   nonMembers?: number;
+  photos?: number;
 }
 
 const TRIPS: TripProps[] = [
@@ -218,6 +219,7 @@ const TRIPS: TripProps[] = [
     },
     members: ["hudy", "terka", "jarin", "stuchla", "sally"],
     nonMembers: 3,
+    photos: 15,
   },
 ];
 

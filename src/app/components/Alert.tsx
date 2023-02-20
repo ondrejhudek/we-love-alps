@@ -7,16 +7,19 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
+  AlertStatus,
   Button,
   Icon,
 } from "@chakra-ui/react";
 import { FaArrowLeft } from "react-icons/fa";
 
-const AlertError = ({
+const MyAlert = ({
+  status = "error",
   title,
   description,
   button: { path, label },
 }: {
+  status?: AlertStatus;
   title: string;
   description: string;
   button: {
@@ -25,7 +28,7 @@ const AlertError = ({
   };
 }) => (
   <>
-    <Alert status="error" rounded="md">
+    <Alert status={status} rounded="md">
       <AlertIcon />
       <AlertTitle>{title}</AlertTitle>
       <AlertDescription>{description}</AlertDescription>
@@ -44,4 +47,4 @@ const AlertError = ({
   </>
 );
 
-export default AlertError;
+export default MyAlert;
