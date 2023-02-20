@@ -5,9 +5,6 @@ import Image from "next/image";
 import {
   AspectRatio,
   Box,
-  Card,
-  CardBody,
-  CardFooter,
   Heading,
   SimpleGrid,
   Text,
@@ -15,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 
 import Header from "@/app/components/Header";
-import { getImagePath } from "@/app/components/utils";
+import { getImagePath, PHOTO_CS } from "@/app/components/utils";
 
 import PHOTOS from "@/data/photos";
 import TRIPS from "@/data/trips";
@@ -23,9 +20,7 @@ import TRIPS from "@/data/trips";
 const Page = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const yearColor = useColorModeValue("gray.600", "gray.300");
-  const countColor = useColorModeValue("gray.600", "gray.400");
-  const overlayBg = useColorModeValue("whiteAlpha.800", "blackAlpha.800");
+  const subtitleColor = useColorModeValue("gray.600", "gray.400");
 
   const handleClick = (id: string) => {
     router.push(`/photo/${id}`);
@@ -35,30 +30,32 @@ const Page = () => {
     <>
       <Header pathname={pathname} />
 
-      {/* <SimpleGrid
-        columns={{ base: 1, sm: 2, md: 4 }}
+      <SimpleGrid
+        columns={{ base: 1, xs: 2, sm: 3, md: 4 }}
         spacing={{ base: 3, sm: 4, lg: 5 }}
       >
         {Object.keys(PHOTOS).map((key) => {
           const trip = TRIPS.find(({ id }) => id === key);
-          if (!trip) return null;
+          if (!trip || PHOTOS[key].length === 0) return null;
 
           return (
-            <Card
+            <Box
               key={key}
+              role="group"
               _hover={{
                 cursor: "pointer",
-                boxShadow: "outline",
               }}
               onClick={() => handleClick(key)}
             >
-              <CardBody
-                display="block"
-                flex="none"
+              {/* Album thumbnail */}
+              <AspectRatio
                 position="relative"
-                height={48}
+                borderRadius="lg"
+                boxShadow="base"
                 overflow="hidden"
-                borderTopRadius="var(--card-radius)"
+                _groupHover={{
+                  boxShadow: "outline",
+                }}
               >
                 <Image
                   src={getImagePath(key, "0.jpg")}
@@ -67,105 +64,22 @@ const Page = () => {
                   sizes="300px"
                   style={{ objectFit: "cover" }}
                 />
-              </CardBody>
-              <CardFooter display="block" py={4}>
-                <Heading
-                  as="h2"
-                  display="flex"
-                  alignItems="baseline"
-                  fontSize="md"
-                >
-                  {trip.title}
-
-                  <Text color={yearColor} fontSize="sm" fontWeight={400} ml={1}>
-                    · {trip.year}
-                  </Text>
-                </Heading>
-                <Text color="gray.500" fontSize="xs">
-                  {PHOTOS[key].length} fotek
-                </Text>
-              </CardFooter>
-            </Card>
-          );
-        })}
-      </SimpleGrid> */}
-
-      <SimpleGrid
-        columns={{ base: 1, sm: 2, md: 4 }}
-        spacing={{ base: 3, sm: 4, lg: 5 }}
-      >
-        {Object.keys(PHOTOS).map((key) => {
-          const trip = TRIPS.find(({ id }) => id === key);
-          if (!trip) return null;
-
-          return (
-            <Box key={key}>
-              <AspectRatio
-                borderRadius={4}
-                boxShadow="base"
-                overflow="hidden"
-                _hover={{
-                  cursor: "pointer",
-                  boxShadow: "outline",
-                }}
-                onClick={() => handleClick(key)}
-              >
-                <Box position="relative">
-                  <Image
-                    src={getImagePath(key, "0.jpg")}
-                    alt={trip.title}
-                    fill
-                    sizes="300px"
-                    style={{ objectFit: "cover" }}
-                  />
-                </Box>
-
-                {/* <Box
-position="absolute"
-bottom={0}
-width="100%"
-py={2}
-px={3}
-bgColor={overlayBg}
->
-<Heading
-  as="h2"
-  display="flex"
-  alignItems="baseline"
-  fontSize="md"
->
-  {trip.title}
-
-  <Text
-    color={yearColor}
-    fontSize="sm"
-    fontWeight={400}
-    ml={1}
-  >
-    · {trip.year}
-  </Text>
-</Heading>
-<Text color={countColor} fontSize="xs">
-  {PHOTOS[key].length} fotek
-</Text>
-</Box> */}
               </AspectRatio>
 
-              <Box py={2}>
+              <Box py={3}>
+                {/* Title */}
                 <Heading
                   as="h2"
                   display="flex"
                   alignItems="baseline"
-                  fontSize="md"
+                  fontSize="lg"
                 >
                   {trip.title}
-
-                  <Text color={yearColor} fontSize="sm" fontWeight={400} ml={1}>
-                    · {trip.year}
-                  </Text>
                 </Heading>
-                <Text color={countColor} fontSize="xs">
-                  {PHOTOS[key].length} fotek
+                {/* Year & photo count */}
+                <Text color={subtitleColor} fontSize="xs">
+                  {trip.year}&nbsp;&nbsp;·&nbsp;&nbsp;{PHOTOS[key].length}{" "}
+                  {PHOTO_CS[PHOTOS[key].length] || PHOTO_CS[5]}
                 </Text>
               </Box>
             </Box>

@@ -29,5 +29,13 @@ export const RESORT_CS: Record<number, string> = {
   5: "středisek",
 };
 
+export const PHOTO_CS: Record<number, string> = {
+  1: "fotka",
+  2: "fotky",
+  3: "fotky",
+  4: "fotky",
+  5: "fotek",
+};
+
 export const getImagePath = (id: string, src: string) =>
   `/images/gallery/${id}/${src}`;

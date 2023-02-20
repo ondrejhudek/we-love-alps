@@ -52,7 +52,7 @@ const Photos = ({ data }: { data?: TripProps }) => {
 
   return (
     <Card>
-      <CardBody>
+      <CardBody p={3}>
         <Gallery
           images={photos}
           enableImageSelection={false}

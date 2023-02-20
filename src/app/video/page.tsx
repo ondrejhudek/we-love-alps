@@ -4,16 +4,14 @@ import { usePathname } from "next/navigation";
 import NextLink from "next/link";
 import {
   AspectRatio,
-  Badge,
-  Card,
-  CardFooter,
-  CardHeader,
+  Box,
   Flex,
   Heading,
   Link,
   IconButton,
   SimpleGrid,
   Text,
+  Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FaExternalLinkAlt } from "react-icons/fa";
@@ -25,11 +23,8 @@ import VIDEOS from "@/data/videos";
 
 const Page = () => {
   const pathname = usePathname();
-
-  const yearColor = useColorModeValue("white", "gray.900");
-  const yearBgColor = useColorModeValue("secondary.600", "secondary.400");
-  const footerColor = useColorModeValue("gray.600", "gray.300");
-  const footerColorAssign = useColorModeValue("gray.500", "gray.400");
+  const subtitleColor = useColorModeValue("gray.600", "gray.400");
+  const linkHoverBg = useColorModeValue("gray.200", "gray.700");
 
   return (
     <>
@@ -37,56 +32,23 @@ const Page = () => {
 
       <SimpleGrid
         columns={{ base: 1, sm: 2, md: 3 }}
-        spacing={{ base: 3, md: 6 }}
+        spacing={{ base: 3, sm: 4, md: 5, lg: 6 }}
       >
         {Object.keys(VIDEOS)
           .sort((a, b) => parseInt(b) - parseInt(a))
           .map((id) => {
             const trip = TRIPS.find((trip) => id === trip.id);
-
             if (!trip) return null;
 
             return (
-              <Card key={id}>
-                {/* Header */}
-                <CardHeader>
-                  <Flex align="center" justify="space-between">
-                    <Flex align="center">
-                      {/* Year */}
-                      <Badge
-                        color={yearColor}
-                        bgColor={yearBgColor}
-                        fontSize="lg"
-                        display="flex"
-                        alignItems="center"
-                        px={2}
-                        borderRadius="md"
-                      >
-                        {trip.year}
-                      </Badge>
-
-                      {/* Title */}
-                      <Heading as="h2" ml={2} fontSize="xl">
-                        {trip.title}
-                      </Heading>
-                    </Flex>
-
-                    {/* Open in a new window */}
-                    <IconButton
-                      as={Link}
-                      href={`https://www.youtube.com/watch?v=${VIDEOS[id]}`}
-                      target="_blank"
-                      size="sm"
-                      variant="ghost"
-                      icon={<FaExternalLinkAlt />}
-                      title="Open in a new tab"
-                      aria-label="Open in a new tab"
-                    />
-                  </Flex>
-                </CardHeader>
-
-                {/* Youtube video */}
-                <AspectRatio key={id} ratio={16 / 9}>
+              <Box key={id}>
+                {/* Video iframe */}
+                <AspectRatio
+                  ratio={16 / 9}
+                  borderRadius="lg"
+                  boxShadow="base"
+                  overflow="hidden"
+                >
                   <iframe
                     src={`https://www.youtube.com/embed/${VIDEOS[id]}`}
                     title="YouTube video player"
@@ -95,21 +57,47 @@ const Page = () => {
                   ></iframe>
                 </AspectRatio>
 
-                {/* Footer */}
-                <CardFooter>
-                  <Text color={footerColor} fontSize="xs">
-                    Video od{" "}
-                    <Link
-                      as={NextLink}
-                      href="/members/stuchla"
-                      color={footerColorAssign}
-                      fontWeight={500}
+                <Flex justify="space-between" py={3}>
+                  <Box>
+                    {/* Title */}
+                    <Heading
+                      as="h2"
+                      display="flex"
+                      alignItems="center"
+                      fontSize="lg"
                     >
-                      @stuchla
-                    </Link>
-                  </Text>
-                </CardFooter>
-              </Card>
+                      {trip.title}
+                    </Heading>
+                    {/* Year & Video by */}
+                    <Text color={subtitleColor} fontSize="xs">
+                      {trip.year}&nbsp;&nbsp;·&nbsp;&nbsp;Video od{" "}
+                      <Link
+                        as={NextLink}
+                        href="/members/stuchla"
+                        fontWeight={500}
+                      >
+                        @stuchla
+                      </Link>
+                    </Text>
+                  </Box>
+
+                  {/* Open in a new tab */}
+                  <Tooltip label="Open in a new tab">
+                    <IconButton
+                      as={Link}
+                      href={`https://www.youtube.com/watch?v=${VIDEOS[id]}`}
+                      target="_blank"
+                      size="sm"
+                      variant="ghost"
+                      icon={<FaExternalLinkAlt />}
+                      aria-label="Open in a new tab"
+                      _hover={{
+                        bgColor: linkHoverBg,
+                      }}
+                    />
+                  </Tooltip>
+                </Flex>
+              </Box>
             );
           })}
       </SimpleGrid>
