@@ -1,6 +1,6 @@
 "use client";
 
-import { Ubuntu } from "@next/font/google";
+import { Ubuntu } from "next/font/google";
 import { ChakraProvider, Box } from "@chakra-ui/react";
 
 import theme from "./theme";
