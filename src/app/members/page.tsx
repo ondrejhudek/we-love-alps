@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Avatar,
   Box,
@@ -66,7 +66,6 @@ const SocialButton = ({
 
 const Page = () => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const router = useRouter();
   const borderColor = useColorModeValue("gray.200", "gray.800");
 
@@ -86,9 +85,6 @@ const Page = () => {
           <Card
             key={id}
             overflow="hidden"
-            boxShadow={
-              searchParams.get("id") === id ? "outline" : "var(--card-shadow);"
-            }
             onClick={() => handleClick(id)}
             _hover={{
               cursor: "pointer",
