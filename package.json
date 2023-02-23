@@ -13,16 +13,16 @@
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@next/font": "13.1.6",
-    "@types/node": "18.14.0",
+    "@next/font": "13.2.0",
+    "@types/node": "18.14.1",
     "@types/ramda": "^0.28.23",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@vercel/analytics": "^0.1.10",
     "eslint": "8.34.0",
-    "eslint-config-next": "13.1.6",
-    "framer-motion": "^9.0.4",
-    "next": "13.1.6",
+    "eslint-config-next": "13.2.0",
+    "framer-motion": "^9.1.6",
+    "next": "13.2.0",
     "ramda": "^0.28.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -30,6 +30,6 @@
     "react-icons": "^4.7.1",
     "sharp": "^0.31.3",
     "typescript": "4.9.5",
-    "yet-another-react-lightbox": "^2.4.2"
+    "yet-another-react-lightbox": "^2.4.3"
   }
 }
