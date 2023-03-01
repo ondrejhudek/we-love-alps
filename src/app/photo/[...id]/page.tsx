@@ -1,24 +1,18 @@
-"use client";
-
-import * as React from "react";
-import { Card, CardBody } from "@chakra-ui/react";
-import { Gallery } from "react-grid-gallery";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
+// "use client";
 
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
-import { ThumbnailImage, LightboxImage } from "@/app/components/Image";
-import { getImagePath } from "@/app/components/utils";
+import Photoalbum from "@/app/components/Photoalbum";
+import { getImages } from "@/app/utils/cloudinary";
 
-import PHOTOS from "@/data/photos";
-import TRIPS, { TripProps } from "@/data/trips";
+import TRIPS from "@/data/trips";
 
-const Photos = ({ data }: { data?: TripProps }) => {
-  const [index, setIndex] = React.useState(-1);
-  const handleClick = (i: number) => setIndex(i);
+const Page = async ({ params: { id } }: { params: { id: string[] } }) => {
+  const tripId = id[0];
+  const trip = TRIPS.find((trip) => trip.id === tripId);
+  const images = await getImages(tripId);
 
-  if (!data)
+  if (!trip)
     return (
       <Alert
         title="Toto fotogalerie neexistuje."
@@ -30,54 +24,10 @@ const Photos = ({ data }: { data?: TripProps }) => {
       />
     );
 
-  const { id } = data;
-
-  if (!PHOTOS.hasOwnProperty(id))
-    return (
-      <Alert
-        status="warning"
-        title="Žádné fotografie v albu."
-        description="Běž zpět a vyber jiný."
-        button={{
-          path: "/photo",
-          label: "Zpět na Fotky",
-        }}
-      />
-    );
-
-  const photos = PHOTOS[id].map((photo) => ({
-    ...photo,
-    src: getImagePath(id, photo.src),
-  }));
-
-  return (
-    <Card>
-      <CardBody p={3}>
-        <Gallery
-          images={photos}
-          enableImageSelection={false}
-          thumbnailImageComponent={ThumbnailImage}
-          onClick={(i) => handleClick(i)}
-        />
-        <Lightbox
-          index={index}
-          slides={photos}
-          render={{ slide: LightboxImage }}
-          open={index >= 0}
-          close={() => setIndex(-1)}
-        />
-      </CardBody>
-    </Card>
-  );
-};
-
-const Page = ({ params: { id } }: { params: { id: string[] } }) => {
-  const trip = TRIPS.find((trip) => trip.id === id[0]);
-
   return (
     <>
-      <Header pathname="/photo" name={trip?.title} />
-      <Photos data={trip} />
+      <Header name={trip?.title} />
+      <Photoalbum images={images.resources} />
     </>
   );
 };

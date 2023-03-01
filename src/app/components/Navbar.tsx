@@ -16,9 +16,9 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
+import { NAV_LINKS, NAV_LINK_KEYS, NavLinkKey } from "@/app/utils";
 import ColorModeSwitcher from "./ColorModeSwitcher";
 import Logo from "./Logo";
-import { NAV_LINKS, NAV_LINK_KEYS, NavLinkKey } from "./utils";
 
 const isActive = (pathname: string | null, link: string): boolean => {
   if (!pathname) return false;

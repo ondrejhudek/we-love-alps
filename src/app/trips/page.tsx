@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
   Avatar,
@@ -20,7 +20,7 @@ import { FaSkiing } from "react-icons/fa";
 import groupBy from "ramda/src/groupBy";
 
 import Header from "@/app/components/Header";
-import { MONTHS } from "@/app/components/utils";
+import { MONTHS_CS } from "@/app/utils/locales";
 
 import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
@@ -39,7 +39,6 @@ const TooltipAvatar: typeof Avatar = (props: any) => (
 );
 
 const Page = () => {
-  const pathname = usePathname();
   const router = useRouter();
   const monthColor = useColorModeValue("gray.400", "gray.500");
   const resortColor = useColorModeValue("gray.600", "gray.400");
@@ -58,7 +57,7 @@ const Page = () => {
 
   return (
     <>
-      <Header pathname={pathname} />
+      <Header />
 
       {groupedKeys.map((year) => (
         <Box key={year}>
@@ -97,7 +96,7 @@ const Page = () => {
                         fontSize="xs"
                         textTransform="uppercase"
                       >
-                        {MONTHS[month - 1]}
+                        {MONTHS_CS[month - 1]}
                       </Text>
 
                       {/* Title */}

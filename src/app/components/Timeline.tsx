@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { FaSkiing } from "react-icons/fa";
 
-import { MONTHS } from "./utils";
+import { MONTHS_CS } from "@/app/utils/locales";
 
 import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
@@ -129,7 +129,7 @@ const TimelineRow = ({
             color={useColorModeValue("gray.400", "gray.500")}
             textTransform="uppercase"
           >
-            {MONTHS[month - 1]}
+            {MONTHS_CS[month - 1]}
           </Text>
 
           {/* Title */}

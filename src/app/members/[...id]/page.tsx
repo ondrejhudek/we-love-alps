@@ -375,7 +375,7 @@ const Page = ({ params: { id } }: { params: { id: string[] } }) => {
 
   return (
     <>
-      <Header pathname="/members" name={member?.name} />
+      <Header name={member?.name} />
       <Member data={member} />
     </>
   );

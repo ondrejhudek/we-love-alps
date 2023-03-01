@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   Avatar,
   Box,
@@ -65,7 +65,6 @@ const SocialButton = ({
 );
 
 const Page = () => {
-  const pathname = usePathname();
   const router = useRouter();
   const borderColor = useColorModeValue("gray.200", "gray.800");
 
@@ -75,7 +74,7 @@ const Page = () => {
 
   return (
     <>
-      <Header pathname={pathname} />
+      <Header />
 
       <SimpleGrid
         columns={{ base: 1, sm: 2, md: 3, lg: 4 }}

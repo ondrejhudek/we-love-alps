@@ -1,4 +1,3 @@
-import * as React from "react";
 import NextLink from "next/link";
 import {
   Box,
@@ -62,7 +61,7 @@ const Footer = () => (
         fontSize="sm"
         color={useColorModeValue("gray.700", "gray.300")}
       >
-        © 2023 S láskou vytvořil{" "}
+        © {new Date().getFullYear()} S láskou vytvořil{" "}
         <Link
           as={NextLink}
           href="/members/hudy"
