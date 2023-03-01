@@ -10,13 +10,11 @@ import Alert from "@/app/components/Alert";
 import { LightboxImage, NextJsImage } from "@/app/components/Image";
 import { ImageProps } from "@/app/utils/cloudinary";
 
-const breakpoints = [3840, 2400, 1080, 640, 384, 256, 128, 96, 64, 48];
+// const breakpoints = [3840, 2400, 1080, 640, 384, 256, 128, 96, 64, 48];
 
 const Album = ({ images }: { images: ImageProps[] }) => {
   const [index, setIndex] = useState(-1);
   const handleClick = (i: number) => setIndex(i);
-
-  console.log("images", images);
 
   if (!images.length)
     return (
