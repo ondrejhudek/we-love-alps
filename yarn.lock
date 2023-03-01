@@ -867,7 +867,7 @@
   dependencies:
     "@cloudinary/url-gen" "^1.7.0"
 
-"@cloudinary/url-gen@^1.7.0", "@cloudinary/url-gen@^1.8.6", "@cloudinary/url-gen@^1.8.7", "@cloudinary/url-gen@^1.9.1":
+"@cloudinary/url-gen@^1.7.0", "@cloudinary/url-gen@^1.8.6", "@cloudinary/url-gen@^1.8.7":
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/@cloudinary/url-gen/-/url-gen-1.9.1.tgz#edbf3eca106e64e1d58671da58e548fbccb1295a"
   integrity sha512-P1zgWug/dMieYoA/XxYQloPCLsvm2QWG5AZoMtMqwBFKPljSlLS7o4fFCO5coCt0nv3KKTiygRMSiwKSL/XuLA==
