@@ -1,0 +1,1 @@
+- [ ] Cloudinary API error handling (Rate limits can happen)

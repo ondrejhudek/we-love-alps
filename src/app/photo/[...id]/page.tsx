@@ -1,5 +1,3 @@
-// "use client";
-
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
 import Photoalbum from "@/app/components/Photoalbum";

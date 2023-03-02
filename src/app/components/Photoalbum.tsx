@@ -7,10 +7,8 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
 import Alert from "@/app/components/Alert";
-import { LightboxImage, NextJsImage } from "@/app/components/Image";
+import { AlbumThumbnailImage, LightboxImage } from "@/app/components/Image";
 import { ImageProps } from "@/app/utils/cloudinary";
-
-// const breakpoints = [3840, 2400, 1080, 640, 384, 256, 128, 96, 64, 48];
 
 const Album = ({ images }: { images: ImageProps[] }) => {
   const [index, setIndex] = useState(-1);
@@ -42,7 +40,7 @@ const Album = ({ images }: { images: ImageProps[] }) => {
           spacing={5}
           targetRowHeight={180}
           photos={photos}
-          renderPhoto={NextJsImage}
+          renderPhoto={AlbumThumbnailImage}
           onClick={({ index }) => handleClick(index)}
         />
 

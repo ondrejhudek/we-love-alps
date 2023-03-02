@@ -53,6 +53,8 @@ export const getFolders = async () => {
     headers: HEADERS,
   });
 
+  console.log("getFolders", res);
+
   return processResponse<FolderData>(res);
 };
 
@@ -66,6 +68,8 @@ export const getImages = async (folder: string, max_results?: number) => {
       max_results: max_results || 100,
     }),
   });
+
+  console.log("getImages", res);
 
   return processResponse<ImageData>(res);
 };

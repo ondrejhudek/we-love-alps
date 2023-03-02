@@ -1,9 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { CldImage } from "next-cloudinary";
 import {
-  AspectRatio,
   Box,
   Heading,
   SimpleGrid,
@@ -11,6 +9,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
+import { GalleryThumbnailImage } from "@/app/components/Image";
 import { GalleryFolderProps, ImageProps } from "@/app/utils/cloudinary";
 import { PHOTO_CS } from "@/app/utils/locales";
 
@@ -40,7 +39,7 @@ const GalleryFolder = ({
       onClick={() => onClick(trip.id)}
     >
       {/* Album thumbnail */}
-      <AspectRatio
+      <Box
         position="relative"
         borderRadius="lg"
         boxShadow="base"
@@ -49,14 +48,8 @@ const GalleryFolder = ({
           boxShadow: "outline",
         }}
       >
-        <CldImage
-          src={thumbnail.public_id}
-          alt={trip.title}
-          fill
-          sizes="300px"
-          style={{ objectFit: "cover" }}
-        />
-      </AspectRatio>
+        <GalleryThumbnailImage trip={trip} image={thumbnail} />
+      </Box>
 
       <Box py={3}>
         {/* Title */}
