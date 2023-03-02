@@ -1,21 +1,50 @@
 import Image, { StaticImageData } from "next/image";
-import { Box } from "@chakra-ui/react";
-import { ThumbnailImageProps } from "react-grid-gallery";
+import { CldImage } from "next-cloudinary";
 import { SlideImage, ContainerRect } from "yet-another-react-lightbox";
+import { Box } from "@chakra-ui/react";
+import type { RenderPhotoProps } from "react-photo-album";
 
-export const ThumbnailImage = (props: ThumbnailImageProps) => (
+import { ImageProps } from "@/app/utils/cloudinary";
+import { TripProps } from "@/data/trips";
+
+export const GalleryThumbnailImage = ({
+  trip,
+  image,
+}: {
+  trip: TripProps;
+  image: ImageProps;
+}) => (
+  <CldImage
+    src={image.public_id}
+    alt={trip.title}
+    width={640}
+    height={Math.ceil(640 / (image.width / image.height))}
+    crop="fill"
+    rawTransformations={["c_fill,w_320,ar_4:3"]}
+    priority
+    style={{ objectFit: "cover" }}
+  />
+);
+
+export const AlbumThumbnailImage: React.FC<
+  RenderPhotoProps<ImageProps & { src: string }>
+> = ({ photo, imageProps: { onClick }, wrapperStyle, layout }) => (
   <Box
+    key={photo.asset_id}
+    style={{ ...wrapperStyle }}
     _hover={{
       cursor: "pointer",
       opacity: "0.85",
     }}
   >
-    <Image
-      src={props.imageProps.src}
-      fill
-      alt={props.imageProps.alt}
-      sizes="180px"
-      style={{ objectFit: "cover" }}
+    <CldImage
+      src={photo.public_id}
+      alt={photo.public_id}
+      width={Math.ceil(layout.width)}
+      height={Math.ceil(layout.height)}
+      crop="scale"
+      priority
+      onClick={onClick}
     />
   </Box>
 );

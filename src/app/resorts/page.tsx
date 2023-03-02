@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
   AspectRatio,
@@ -23,7 +23,6 @@ import RESORTS from "@/data/resorts";
 import TRIPS from "@/data/trips";
 
 const Page = () => {
-  const pathname = usePathname();
   const router = useRouter();
   const regionColor = useColorModeValue("gray.400", "gray.500");
   const yearColor = useColorModeValue("white", "gray.900");
@@ -35,7 +34,7 @@ const Page = () => {
 
   return (
     <>
-      <Header pathname={pathname} />
+      <Header />
 
       <SimpleGrid
         columns={{ base: 1, sm: 2, md: 3 }}

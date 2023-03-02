@@ -1,0 +1,3 @@
+- [ ] Cloudinary API error handling (Rate limits can happen)
+- [x] Cloudinary correct thumbnails for gallery
+- [ ] Placeholder (loading state) for all images

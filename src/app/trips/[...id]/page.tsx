@@ -24,7 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
-import { MONTHS } from "@/app/components/utils";
+import { MONTHS_CS } from "@/app/utils/locales";
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
 
@@ -72,7 +72,7 @@ const Trip = ({ data }: { data?: TripProps }) => {
               <Text as="span" mr={2} color="gray.500" fontWeight={400}>
                 Kdy /
               </Text>
-              {MONTHS[data.month]}, {data.year}
+              {MONTHS_CS[data.month]}, {data.year}
             </ListItem>
 
             <ListItem fontWeight={500} display="flex" alignItems="center">
@@ -225,7 +225,7 @@ const Page = ({ params: { id } }: { params: { id: string[] } }) => {
 
   return (
     <>
-      <Header pathname="/trips" name={trip?.title} />
+      <Header name={trip?.title} />
       <Trip data={trip} />
     </>
   );

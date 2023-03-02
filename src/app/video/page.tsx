@@ -1,6 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import NextLink from "next/link";
 import {
   AspectRatio,
@@ -22,13 +21,12 @@ import TRIPS from "@/data/trips";
 import VIDEOS from "@/data/videos";
 
 const Page = () => {
-  const pathname = usePathname();
   const subtitleColor = useColorModeValue("gray.600", "gray.400");
   const linkHoverBg = useColorModeValue("gray.200", "gray.700");
 
   return (
     <>
-      <Header pathname={pathname} />
+      <Header />
 
       <SimpleGrid
         columns={{ base: 1, sm: 2, md: 3 }}
