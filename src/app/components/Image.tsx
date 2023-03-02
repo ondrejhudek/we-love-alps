@@ -1,7 +1,8 @@
+import { useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import { CldImage } from "next-cloudinary";
 import { SlideImage, ContainerRect } from "yet-another-react-lightbox";
-import { Box } from "@chakra-ui/react";
+import { Box, Skeleton } from "@chakra-ui/react";
 import type { RenderPhotoProps } from "react-photo-album";
 
 import { ImageProps } from "@/app/utils/cloudinary";
@@ -13,40 +14,54 @@ export const GalleryThumbnailImage = ({
 }: {
   trip: TripProps;
   image: ImageProps;
-}) => (
-  <CldImage
-    src={image.public_id}
-    alt={trip.title}
-    width={640}
-    height={480}
-    crop="fill"
-    priority
-    gravity="center"
-  />
-);
+}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <Skeleton isLoaded={isLoaded}>
+      <CldImage
+        src={image.public_id}
+        alt={trip.title}
+        width={640}
+        height={480}
+        crop="fill"
+        priority
+        gravity="center"
+        onLoadingComplete={() => setIsLoaded(true)}
+      />
+    </Skeleton>
+  );
+};
 
 export const AlbumThumbnailImage: React.FC<
   RenderPhotoProps<ImageProps & { src: string }>
-> = ({ photo, imageProps: { onClick }, wrapperStyle, layout }) => (
-  <Box
-    key={photo.asset_id}
-    style={{ ...wrapperStyle }}
-    _hover={{
-      cursor: "pointer",
-      opacity: "0.85",
-    }}
-  >
-    <CldImage
-      src={photo.public_id}
-      alt={photo.public_id}
-      width={Math.ceil(layout.width)}
-      height={Math.ceil(layout.height)}
-      crop="scale"
-      priority
-      onClick={onClick}
-    />
-  </Box>
-);
+> = ({ photo, imageProps: { onClick }, wrapperStyle, layout }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <Box
+      key={photo.asset_id}
+      style={{ ...wrapperStyle }}
+      _hover={{
+        cursor: "pointer",
+        opacity: "0.85",
+      }}
+    >
+      <Skeleton isLoaded={isLoaded}>
+        <CldImage
+          src={photo.public_id}
+          alt={photo.public_id}
+          width={Math.ceil(layout.width)}
+          height={Math.ceil(layout.height)}
+          crop="scale"
+          priority
+          onClick={onClick}
+          onLoadingComplete={() => setIsLoaded(true)}
+        />
+      </Skeleton>
+    </Box>
+  );
+};
 
 export const LightboxImage = (
   image: SlideImage,
