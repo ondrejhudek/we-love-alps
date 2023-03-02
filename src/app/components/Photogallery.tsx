@@ -11,19 +11,19 @@ import {
 
 import { GalleryThumbnailImage } from "@/app/components/Image";
 import { GalleryFolderProps, ImageProps } from "@/app/utils/cloudinary";
-import { PHOTO_CS } from "@/app/utils/locales";
+// import { PHOTO_CS } from "@/app/utils/locales";
 
 import TRIPS from "@/data/trips";
 
 const GalleryFolder = ({
   path,
   thumbnail,
-  total,
+  // total,
   onClick,
 }: {
   path: string;
-  thumbnail: ImageProps;
-  total: number;
+  thumbnail?: ImageProps;
+  // total: number;
   onClick: (id: string) => void;
 }) => {
   const subtitleColor = useColorModeValue("gray.600", "gray.400");
@@ -39,17 +39,19 @@ const GalleryFolder = ({
       onClick={() => onClick(trip.id)}
     >
       {/* Album thumbnail */}
-      <Box
-        position="relative"
-        borderRadius="lg"
-        boxShadow="base"
-        overflow="hidden"
-        _groupHover={{
-          boxShadow: "outline",
-        }}
-      >
-        <GalleryThumbnailImage trip={trip} image={thumbnail} />
-      </Box>
+      {thumbnail && (
+        <Box
+          position="relative"
+          borderRadius="lg"
+          boxShadow="base"
+          overflow="hidden"
+          _groupHover={{
+            boxShadow: "outline",
+          }}
+        >
+          <GalleryThumbnailImage trip={trip} image={thumbnail} />
+        </Box>
+      )}
 
       <Box py={3}>
         {/* Title */}
@@ -57,9 +59,12 @@ const GalleryFolder = ({
           {trip.title}
         </Heading>
         {/* Year & photo count */}
-        <Text color={subtitleColor} fontSize="xs">
+        {/* <Text color={subtitleColor} fontSize="xs">
           {trip.year}&nbsp;&nbsp;·&nbsp;&nbsp;{total}{" "}
           {PHOTO_CS[total] || PHOTO_CS[5]}
+        </Text> */}
+        <Text color={subtitleColor} fontSize="xs">
+          {trip.year}
         </Text>
       </Box>
     </Box>
@@ -79,12 +84,12 @@ const Gallery = ({ folders }: { folders: GalleryFolderProps[] }) => {
         columns={{ base: 1, xs: 2, sm: 3, md: 4 }}
         spacing={{ base: 3, sm: 4, lg: 5 }}
       >
-        {folders.map(({ path, total_count, resources }) => (
+        {folders.map(({ path, thumbnailImage }) => (
           <GalleryFolder
             key={path}
             path={path}
-            total={total_count}
-            thumbnail={resources[0]}
+            // total={total_count}
+            thumbnail={thumbnailImage}
             onClick={handleClick}
           />
         ))}

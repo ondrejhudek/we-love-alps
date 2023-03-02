@@ -18,7 +18,7 @@ export const GalleryThumbnailImage = ({
     src={image.public_id}
     alt={trip.title}
     width={640}
-    height={Math.ceil(640 / image.aspect_ratio)}
+    height={Math.ceil(640 / (image.width / image.height))}
     crop="fill"
     rawTransformations={["c_fill,w_320,ar_4:3"]}
     priority
@@ -26,15 +26,12 @@ export const GalleryThumbnailImage = ({
   />
 );
 
-export const AlbumThumbnailImage: React.FC<RenderPhotoProps<ImageProps>> = ({
-  photo,
-  imageProps: { onClick },
-  wrapperStyle,
-  layout,
-}) => (
+export const AlbumThumbnailImage: React.FC<
+  RenderPhotoProps<ImageProps & { src: string }>
+> = ({ photo, imageProps: { onClick }, wrapperStyle, layout }) => (
   <Box
     key={photo.asset_id}
-    style={wrapperStyle}
+    style={{ ...wrapperStyle }}
     _hover={{
       cursor: "pointer",
       opacity: "0.85",

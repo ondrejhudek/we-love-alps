@@ -2,12 +2,13 @@ const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 const API_KEY = process.env.CLOUDINARY_API_KEY;
 const API_SECRET = process.env.CLOUDINARY_API_SECRET;
 
-const getEndpoint = (path: string) =>
+const getPath = (path: string) =>
   `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${path}`;
 
 const ENDPOINTS = {
-  folders: getEndpoint("folders"),
-  images: getEndpoint("resources/search"),
+  folders: getPath("folders"),
+  thumbnails: getPath("resources/image/tags/gallery_thumbnail?max_results=100"),
+  images: getPath("resources/image/upload?prefix={{folder}}&max_results=500"),
 };
 
 const HEADERS = {
@@ -25,51 +26,72 @@ interface FolderData {
 
 export type ImageProps = {
   asset_id: string;
-  src: string;
   public_id: string;
   url: string;
   width: number;
   height: number;
-  aspect_ratio: number;
+  folder: string;
 };
 
 interface ImageData {
-  total_count: number;
+  // total_count: number; // TODO: Find out how to get it back
   resources: ImageProps[];
 }
 
-export type GalleryFolderProps = ImageData & { path: string };
+export interface GalleryFolderProps {
+  path: string;
+  thumbnailImage?: ImageProps;
+}
 
+/**
+ * Processes fetched response.
+ * If response is not OK, it throws an error.
+ * Otherwise returns response data.
+ * @param res Fetch response
+ * @returns Promise with response data.
+ */
 const processResponse = <T>(res: Response): Promise<T> => {
   if (!res.ok) {
+    console.error(`${res.status} - ${res.statusText}`);
     throw new Error("Failed to fetch data");
   }
 
   return res.json() as Promise<T>;
 };
 
+/**
+ * Retrives all folders.
+ * @returns Promise with a list of folders.
+ */
 export const getFolders = async () => {
   const res = await fetch(ENDPOINTS.folders, {
     headers: HEADERS,
   });
 
-  console.log("getFolders", res);
-
   return processResponse<FolderData>(res);
 };
 
-export const getImages = async (folder: string, max_results?: number) => {
-  const res = await fetch(ENDPOINTS.images, {
-    method: "POST",
+/**
+ * Retrives thumbnail image for each folder. Image has to have a `gallery_thumbnail` tag.
+ * @returns Promise with image resources
+ */
+export const getFolderThumbnails = async () => {
+  const res = await fetch(ENDPOINTS.thumbnails, {
     headers: HEADERS,
-    body: JSON.stringify({
-      expression: `resource_type:image AND folder=${folder}`,
-      sort_by: [{ public_id: "desc" }],
-      max_results: max_results || 100,
-    }),
   });
 
-  console.log("getImages", res);
+  return processResponse<ImageData>(res);
+};
+
+/**
+ * Retrives all images within a specified folder.
+ * @param folder Folder path
+ * @returns Promise with image resources
+ */
+export const getImages = async (folder: string) => {
+  const res = await fetch(ENDPOINTS.images.replace("{{folder}}", folder), {
+    headers: HEADERS,
+  });
 
   return processResponse<ImageData>(res);
 };
