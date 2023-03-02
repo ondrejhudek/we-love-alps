@@ -18,11 +18,10 @@ export const GalleryThumbnailImage = ({
     src={image.public_id}
     alt={trip.title}
     width={640}
-    height={Math.ceil(640 / (image.width / image.height))}
+    height={480}
     crop="fill"
-    rawTransformations={["c_fill,w_320,ar_4:3"]}
     priority
-    style={{ objectFit: "cover" }}
+    gravity="center"
   />
 );
 
