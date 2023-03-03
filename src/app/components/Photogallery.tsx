@@ -41,7 +41,6 @@ const GalleryFolder = ({
       {/* Album thumbnail */}
       {thumbnail && (
         <Box
-          position="relative"
           borderRadius="lg"
           boxShadow="base"
           overflow="hidden"

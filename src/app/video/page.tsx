@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import NextLink from "next/link";
 import {
   AspectRatio,
@@ -9,6 +10,7 @@ import {
   Link,
   IconButton,
   SimpleGrid,
+  Skeleton,
   Text,
   Tooltip,
   useColorModeValue,
@@ -19,6 +21,29 @@ import Header from "@/app/components/Header";
 
 import TRIPS from "@/data/trips";
 import VIDEOS from "@/data/videos";
+
+const Video = ({ id }: { id: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <Skeleton
+      isLoaded={isLoaded}
+      borderRadius="lg"
+      boxShadow="base"
+      overflow="hidden"
+    >
+      <AspectRatio ratio={16 / 9}>
+        <iframe
+          src={`https://www.youtube.com/embed/${id}`}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          onLoad={() => setIsLoaded(true)}
+        ></iframe>
+      </AspectRatio>
+    </Skeleton>
+  );
+};
 
 const Page = () => {
   const subtitleColor = useColorModeValue("gray.600", "gray.400");
@@ -41,19 +66,7 @@ const Page = () => {
             return (
               <Box key={id}>
                 {/* Video iframe */}
-                <AspectRatio
-                  ratio={16 / 9}
-                  borderRadius="lg"
-                  boxShadow="base"
-                  overflow="hidden"
-                >
-                  <iframe
-                    src={`https://www.youtube.com/embed/${VIDEOS[id]}`}
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  ></iframe>
-                </AspectRatio>
+                <Video id={VIDEOS[id]} />
 
                 <Flex justify="space-between" py={3}>
                   <Box>

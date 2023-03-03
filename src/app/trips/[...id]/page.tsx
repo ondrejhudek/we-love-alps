@@ -1,6 +1,6 @@
 "use client";
 
-import NextLink from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -19,6 +19,7 @@ import {
   Link,
   List,
   ListItem,
+  Skeleton,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -33,6 +34,24 @@ import MEMBERS from "@/data/members";
 import RESORTS from "@/data/resorts";
 import TRIPS, { TripProps } from "@/data/trips";
 import VIDEOS from "@/data/videos";
+
+const Video = ({ id }: { id: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <Skeleton isLoaded={isLoaded} borderRadius="none">
+      <AspectRatio key={id} ratio={2} maxH="500px">
+        <iframe
+          src={`https://www.youtube.com/embed/${id}`}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          onLoad={() => setIsLoaded(true)}
+        ></iframe>
+      </AspectRatio>
+    </Skeleton>
+  );
+};
 
 const Trip = ({ data }: { data?: TripProps }) => {
   const router = useRouter();
@@ -178,7 +197,6 @@ const Trip = ({ data }: { data?: TripProps }) => {
               return (
                 <Tooltip key={id} label={name}>
                   <Avatar
-                    name={name}
                     src={`/images/members/${id}.jpg`}
                     size="xl"
                     m={2}
@@ -205,14 +223,7 @@ const Trip = ({ data }: { data?: TripProps }) => {
             </Heading>
           </CardHeader>
           <CardBody pt={0} px={0}>
-            <AspectRatio key={data.id} ratio={2} maxH="500px">
-              <iframe
-                src={`https://www.youtube.com/embed/${video}`}
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
-            </AspectRatio>
+            <Video id={video} />
           </CardBody>
         </Card>
       )}

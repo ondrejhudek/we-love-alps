@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -12,6 +13,7 @@ import {
   Flex,
   Heading,
   SimpleGrid,
+  Skeleton,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -21,6 +23,24 @@ import Header from "@/app/components/Header";
 import COUNTRIES from "@/data/countries";
 import RESORTS from "@/data/resorts";
 import TRIPS from "@/data/trips";
+
+const Map = ({ id }: { id: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <Skeleton isLoaded={isLoaded} borderRadius="none">
+      <AspectRatio ratio={2.35 / 1}>
+        <iframe
+          src={`https://www.google.com/maps/embed?pb=${encodeURIComponent(id)}`}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          onLoad={() => setIsLoaded(true)}
+        ></iframe>
+      </AspectRatio>
+    </Skeleton>
+  );
+};
 
 const Page = () => {
   const router = useRouter();
@@ -80,16 +100,7 @@ const Page = () => {
               </CardHeader>
 
               {/* Map */}
-              <AspectRatio ratio={2.35 / 1}>
-                <iframe
-                  src={`https://www.google.com/maps/embed?pb=${encodeURIComponent(
-                    map
-                  )}`}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </AspectRatio>
+              <Map id={map} />
 
               <CardFooter flexDirection="column">
                 <Text fontSize="sm" fontWeight={500}>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -17,6 +18,7 @@ import {
   List,
   ListItem,
   Show,
+  Skeleton,
   Text,
   Tooltip,
   useColorModeValue,
@@ -29,6 +31,24 @@ import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
 import RESORTS, { ResortProps } from "@/data/resorts";
 import TRIPS from "@/data/trips";
+
+const Map = ({ id }: { id: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <Skeleton isLoaded={isLoaded} borderRadius="none">
+      <AspectRatio ratio={2.35 / 1} maxH="250px">
+        <iframe
+          src={`https://www.google.com/maps/embed?pb=${encodeURIComponent(id)}`}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          onLoad={() => setIsLoaded(true)}
+        ></iframe>
+      </AspectRatio>
+    </Skeleton>
+  );
+};
 
 const Resort = ({ data }: { data?: ResortProps }) => {
   const router = useRouter();
@@ -122,16 +142,7 @@ const Resort = ({ data }: { data?: ResortProps }) => {
 
         <CardBody pt={0} px={0}>
           {/* Map */}
-          <AspectRatio ratio={2.35 / 1} maxH="250px">
-            <iframe
-              src={`https://www.google.com/maps/embed?pb=${encodeURIComponent(
-                data.map
-              )}`}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </AspectRatio>
+          <Map id={data.map} />
         </CardBody>
       </Card>
 
