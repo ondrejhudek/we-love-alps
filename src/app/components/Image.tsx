@@ -2,10 +2,10 @@ import { useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import { CldImage } from "next-cloudinary";
 import { SlideImage, ContainerRect } from "yet-another-react-lightbox";
-import { Box, Skeleton } from "@chakra-ui/react";
+import { Avatar, AvatarProps, Box, Skeleton } from "@chakra-ui/react";
 import type { RenderPhotoProps } from "react-photo-album";
 
-import { ImageProps } from "@/app/utils/cloudinary";
+import { getBasePath, ImageProps } from "@/app/utils/cloudinary";
 import COUNTRIES from "@/data/countries";
 import { TripProps } from "@/data/trips";
 
@@ -30,6 +30,20 @@ export const FlagImage = ({
       quality={100}
     />
   </Box>
+);
+
+export const AvatarImage = ({
+  memberId,
+  ...rest
+}: {
+  memberId: string;
+} & AvatarProps) => (
+  <Avatar
+    src={`${getBasePath(
+      "image/upload"
+    )}/f_auto,q_100,h_150,w_150/v1/members/${memberId}`}
+    {...rest}
+  ></Avatar>
 );
 
 export const GalleryThumbnailImage = ({

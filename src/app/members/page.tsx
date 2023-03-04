@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import {
-  Avatar,
   Box,
   Card,
   CardBody,
@@ -21,6 +20,7 @@ import { IconType } from "react-icons";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 
 import Header from "@/app/components/Header";
+import { AvatarImage } from "@/app/components/Image";
 
 import MEMBERS from "@/data/members";
 
@@ -93,7 +93,7 @@ const Page = () => {
             {/* Header */}
             <CardBody py={10}>
               <Box textAlign="center">
-                <Avatar src={`/images/members/${id}.jpg`} size="2xl" mb={4} />
+                <AvatarImage memberId={id} name={name} size="2xl" mb={4} />
                 <Heading fontSize="xl" fontWeight={500}>
                   {name}
                 </Heading>

@@ -2,11 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import {
   AspectRatio,
-  Avatar,
-  Box,
   Card,
   CardHeader,
   CardBody,
@@ -28,7 +25,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { MONTHS_CS } from "@/app/utils/locales";
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
-import { FlagImage } from "@/app/components/Image";
+import { AvatarImage, FlagImage } from "@/app/components/Image";
 
 import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
@@ -100,7 +97,7 @@ const Trip = ({ data }: { data?: TripProps }) => {
                 Kde /
               </Text>
               {data.title}, {COUNTRIES[data.countryCode]}
-              <FlagImage countryCode={data.countryCode} />
+              <FlagImage countryCode={data.countryCode} ml={2} />
             </ListItem>
 
             {data.accomodation && (
@@ -189,8 +186,9 @@ const Trip = ({ data }: { data?: TripProps }) => {
 
               return (
                 <Tooltip key={id} label={name}>
-                  <Avatar
-                    src={`/images/members/${id}.jpg`}
+                  <AvatarImage
+                    memberId={id}
+                    name={name}
                     size="xl"
                     m={2}
                     boxShadow="md"

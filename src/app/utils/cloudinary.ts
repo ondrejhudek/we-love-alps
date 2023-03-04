@@ -2,13 +2,20 @@ const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 const API_KEY = process.env.CLOUDINARY_API_KEY;
 const API_SECRET = process.env.CLOUDINARY_API_SECRET;
 
-const getPath = (path: string) =>
-  `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${path}`;
+export const getBasePath = (path: string) =>
+  `https://res.cloudinary.com/${CLOUD_NAME}/${path}/`;
+
+const getApiPath = (path: string) =>
+  `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${path}/`;
 
 const ENDPOINTS = {
-  folders: getPath("folders"),
-  thumbnails: getPath("resources/image/tags/gallery_thumbnail?max_results=100"),
-  images: getPath("resources/image/upload?prefix={{folder}}&max_results=500"),
+  folders: getApiPath("folders"),
+  thumbnails: getApiPath(
+    "resources/image/tags/gallery_thumbnail?max_results=100"
+  ),
+  images: getApiPath(
+    "resources/image/upload?prefix={{folder}}&max_results=500"
+  ),
 };
 
 const HEADERS = {

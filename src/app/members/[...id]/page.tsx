@@ -27,7 +27,7 @@ import { FaInstagram, FaFacebook } from "react-icons/fa";
 
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
-import { FlagImage } from "@/app/components/Image";
+import { AvatarImage, FlagImage } from "@/app/components/Image";
 
 import MEMBERS, { MemberProps } from "@/data/members";
 import RESORTS, { ResortProps } from "@/data/resorts";
@@ -184,13 +184,9 @@ const Member = ({ data }: { data?: MemberProps }) => {
               direction={{ base: "column", sm: "row" }}
               align={{ base: "center", sm: "flex-start" }}
             >
-              <Img
-                src={`/images/members/${data.id}.jpg`}
-                mr={{ base: 0, sm: 6 }}
-                boxSize={36}
-                rounded="full"
-                alt={data.name}
-              />
+              <Box boxSize={36} mr={{ base: 0, sm: 6 }}>
+                <AvatarImage memberId={data.id} name={data.name} size="full" />
+              </Box>
 
               <Box
                 textAlign={{ base: "center", sm: "left" }}

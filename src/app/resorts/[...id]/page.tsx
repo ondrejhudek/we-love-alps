@@ -4,9 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   AspectRatio,
-  Avatar,
   Badge,
-  Box,
   Card,
   CardBody,
   CardHeader,
@@ -25,7 +23,7 @@ import {
 
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
-import { FlagImage } from "@/app/components/Image";
+import { AvatarImage, FlagImage } from "@/app/components/Image";
 
 import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
@@ -155,9 +153,9 @@ const Resort = ({ data }: { data?: ResortProps }) => {
 
               return (
                 <Tooltip key={id} label={name}>
-                  <Avatar
+                  <AvatarImage
+                    memberId={id}
                     name={name}
-                    src={`/images/members/${id}.jpg`}
                     size="xl"
                     m={2}
                     boxShadow="md"
