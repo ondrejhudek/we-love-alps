@@ -2,8 +2,15 @@ import { useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import { CldImage } from "next-cloudinary";
 import { SlideImage, ContainerRect } from "yet-another-react-lightbox";
-import { Avatar, AvatarProps, Box, Skeleton } from "@chakra-ui/react";
 import type { RenderPhotoProps } from "react-photo-album";
+import {
+  Avatar,
+  AvatarProps,
+  Box,
+  BoxProps,
+  Skeleton,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
 import { getBasePath, ImageProps } from "@/app/utils/cloudinary";
 import COUNTRIES from "@/data/countries";
@@ -45,6 +52,56 @@ export const AvatarImage = ({
     {...rest}
   ></Avatar>
 );
+
+export const ResortImage = ({
+  id,
+  name,
+  asAvatar,
+  ...boxRest
+}: {
+  id: string;
+  name: string;
+  asAvatar?: boolean;
+} & BoxProps) => {
+  const resortBgColor = useColorModeValue("gray.100", "gray.800");
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const AS_AVATAR_PROPS: BoxProps = {
+    m: 2,
+    boxSize: 28,
+    rounded: "full",
+    objectFit: "contain",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: resortBgColor,
+    boxShadow: "base",
+  };
+
+  const ON_CLICK_PROPS: BoxProps = {
+    _hover: { cursor: "pointer", boxShadow: "outline" },
+  };
+
+  return (
+    <Box
+      position="relative"
+      overflow="hidden"
+      {...(asAvatar && AS_AVATAR_PROPS)}
+      {...(boxRest.onClick && ON_CLICK_PROPS)}
+      {...boxRest}
+    >
+      <Skeleton isLoaded={isLoaded}>
+        <CldImage
+          src={`resorts/${id}`}
+          alt={name}
+          width={260}
+          height={260}
+          quality={100}
+          onLoadingComplete={() => setIsLoaded(true)}
+        />
+      </Skeleton>
+    </Box>
+  );
+};
 
 export const GalleryThumbnailImage = ({
   trip,

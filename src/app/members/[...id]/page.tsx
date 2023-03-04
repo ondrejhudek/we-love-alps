@@ -14,7 +14,6 @@ import {
   Heading,
   Icon,
   IconButton,
-  Img,
   Link,
   List,
   ListItem,
@@ -27,7 +26,7 @@ import { FaInstagram, FaFacebook } from "react-icons/fa";
 
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
-import { AvatarImage, FlagImage } from "@/app/components/Image";
+import { AvatarImage, FlagImage, ResortImage } from "@/app/components/Image";
 
 import MEMBERS, { MemberProps } from "@/data/members";
 import RESORTS, { ResortProps } from "@/data/resorts";
@@ -131,7 +130,6 @@ const Member = ({ data }: { data?: MemberProps }) => {
   const nicknameColor = useColorModeValue("gray.700", "gray.300");
   const tripBgColor = useColorModeValue("gray.50", "gray.800");
   const dividerColor = useColorModeValue("gray.300", "gray.800");
-  const resortBgColor = useColorModeValue("gray.100", "gray.800");
 
   if (!data)
     return (
@@ -331,22 +329,10 @@ const Member = ({ data }: { data?: MemberProps }) => {
           <Flex wrap="wrap" m={-2}>
             {resorts.map(({ id, name }) => (
               <Tooltip key={id} label={name}>
-                <Img
-                  src={`/images/resorts/${id}.png`}
-                  alt={name}
-                  m={2}
-                  width={28}
-                  height={28}
-                  rounded="full"
-                  objectFit="contain"
-                  borderWidth={1}
-                  borderStyle="solid"
-                  borderColor={resortBgColor}
-                  boxShadow="base"
-                  _hover={{
-                    cursor: "pointer",
-                    boxShadow: "outline",
-                  }}
+                <ResortImage
+                  id={id}
+                  name={name}
+                  asAvatar
                   onClick={() => handleResortClick(id)}
                 />
               </Tooltip>

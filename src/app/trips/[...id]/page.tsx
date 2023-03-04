@@ -11,7 +11,6 @@ import {
   Flex,
   Heading,
   Icon,
-  Img,
   Tooltip,
   Link,
   List,
@@ -25,7 +24,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { MONTHS_CS } from "@/app/utils/locales";
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
-import { AvatarImage, FlagImage } from "@/app/components/Image";
+import { AvatarImage, FlagImage, ResortImage } from "@/app/components/Image";
 
 import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
@@ -144,22 +143,10 @@ const Trip = ({ data }: { data?: TripProps }) => {
 
               return (
                 <Tooltip key={id} label={name}>
-                  <Img
-                    src={`/images/resorts/${id}.png`}
-                    alt={name}
-                    m={2}
-                    width={28}
-                    height={28}
-                    rounded="full"
-                    objectFit="contain"
-                    borderWidth={1}
-                    borderStyle="solid"
-                    borderColor={resortBgColor}
-                    boxShadow="base"
-                    _hover={{
-                      cursor: "pointer",
-                      boxShadow: "outline",
-                    }}
+                  <ResortImage
+                    id={id}
+                    name={name}
+                    asAvatar
                     onClick={() => handleResortClick(id)}
                   />
                 </Tooltip>

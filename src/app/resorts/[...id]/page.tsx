@@ -10,7 +10,6 @@ import {
   CardHeader,
   Divider,
   Flex,
-  Img,
   Heading,
   List,
   ListItem,
@@ -23,7 +22,7 @@ import {
 
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
-import { AvatarImage, FlagImage } from "@/app/components/Image";
+import { AvatarImage, FlagImage, ResortImage } from "@/app/components/Image";
 
 import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
@@ -120,12 +119,7 @@ const Resort = ({ data }: { data?: ResortProps }) => {
             </List>
 
             <Show above="sm">
-              <Img
-                src={`/images/resorts/${data.id}.png`}
-                alt={data.name}
-                width={24}
-                height={24}
-              />
+              <ResortImage id={data.id} name={data.name} boxSize={24} />
             </Show>
           </Flex>
         </CardBody>
