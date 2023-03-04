@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import { CldImage } from "next-cloudinary";
-import { SlideImage, Slide, ContainerRect } from "yet-another-react-lightbox";
+import { SlideImage, ContainerRect } from "yet-another-react-lightbox";
 import { Box, Skeleton } from "@chakra-ui/react";
 import type { RenderPhotoProps } from "react-photo-album";
 
