@@ -22,11 +22,12 @@ export const GalleryThumbnailImage = ({
       <CldImage
         src={image.public_id}
         alt={trip.title}
-        width={640}
-        height={480}
+        width={480}
+        height={360}
+        sizes="(max-width: 22em) 50vw, (max-width: 30em) 50vw, (max-width: 48em) 33vw, 25vw"
         crop="fill"
-        priority
         gravity="center"
+        priority
         onLoadingComplete={() => setIsLoaded(true)}
       />
     </Skeleton>
@@ -53,10 +54,11 @@ export const AlbumThumbnailImage: React.FC<
           alt={photo.public_id}
           width={Math.ceil(layout.width)}
           height={Math.ceil(layout.height)}
-          crop="scale"
+          crop="fill"
+          gravity="center"
           priority
-          onClick={onClick}
           onLoadingComplete={() => setIsLoaded(true)}
+          onClick={onClick}
         />
       </Skeleton>
     </Box>

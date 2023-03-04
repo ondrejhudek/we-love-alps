@@ -1,3 +1,7 @@
 - [ ] Cloudinary API error handling (Rate limits can happen)
 - [x] Cloudinary correct thumbnails for gallery
-- [ ] Placeholder (loading state) for all images
+- [x] Placeholder (loading state) for all images
+- [ ] Consolidate next/image (used for lightbox) and next-cloudinary (used for gallery and album images)
+- [ ] Move all the images to cloudinary (member avatars, resort logos, flags)
+- [ ] React Suspense
+- [ ] React Error handling (ErrorBoundary)
