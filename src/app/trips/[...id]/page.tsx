@@ -28,6 +28,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { MONTHS_CS } from "@/app/utils/locales";
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
+import { FlagImage } from "@/app/components/Image";
 
 import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
@@ -99,15 +100,7 @@ const Trip = ({ data }: { data?: TripProps }) => {
                 Kde /
               </Text>
               {data.title}, {COUNTRIES[data.countryCode]}
-              <Box ml={2}>
-                <Image
-                  src={`/images/flags/${data.countryCode.toLowerCase()}.png`}
-                  alt={data.countryCode}
-                  title={COUNTRIES[data.countryCode]}
-                  width={20}
-                  height={20}
-                />
-              </Box>
+              <FlagImage countryCode={data.countryCode} />
             </ListItem>
 
             {data.accomodation && (

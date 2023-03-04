@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import {
   Avatar,
   AvatarGroup,
@@ -20,9 +19,9 @@ import { FaSkiing } from "react-icons/fa";
 import groupBy from "ramda/src/groupBy";
 
 import Header from "@/app/components/Header";
+import { FlagImage } from "@/app/components/Image";
 import { MONTHS_CS } from "@/app/utils/locales";
 
-import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
 import RESORTS from "@/data/resorts";
 import TRIPS, { TripProps } from "@/data/trips";
@@ -109,15 +108,7 @@ const Page = () => {
                         textTransform="uppercase"
                       >
                         {title}
-                        <Box ml={2}>
-                          <Image
-                            src={`/images/flags/${countryCode.toLowerCase()}.png`}
-                            alt={countryCode}
-                            title={COUNTRIES[countryCode]}
-                            width={20}
-                            height={20}
-                          />
-                        </Box>
+                        <FlagImage countryCode={countryCode} ml={2} />
                       </Heading>
 
                       {/* Resorts */}

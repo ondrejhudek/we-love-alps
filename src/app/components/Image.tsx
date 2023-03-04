@@ -6,7 +6,31 @@ import { Box, Skeleton } from "@chakra-ui/react";
 import type { RenderPhotoProps } from "react-photo-album";
 
 import { ImageProps } from "@/app/utils/cloudinary";
+import COUNTRIES from "@/data/countries";
 import { TripProps } from "@/data/trips";
+
+export const FlagImage = ({
+  countryCode,
+  boxSize = 20,
+  ml,
+  mr,
+}: {
+  countryCode: string;
+  boxSize?: number;
+  ml?: number;
+  mr?: number;
+}) => (
+  <Box boxSize={`${boxSize}px`} ml={ml} mr={mr}>
+    <CldImage
+      src={`flags/${countryCode.toLowerCase()}`}
+      alt={countryCode}
+      title={COUNTRIES[countryCode]}
+      width={64}
+      height={64}
+      quality={100}
+    />
+  </Box>
+);
 
 export const GalleryThumbnailImage = ({
   trip,

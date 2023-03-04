@@ -2,7 +2,6 @@
 
 import NextLink from "next/link";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import {
   Badge,
   Box,
@@ -28,8 +27,8 @@ import { FaInstagram, FaFacebook } from "react-icons/fa";
 
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
+import { FlagImage } from "@/app/components/Image";
 
-import COUNTRIES from "@/data/countries";
 import MEMBERS, { MemberProps } from "@/data/members";
 import RESORTS, { ResortProps } from "@/data/resorts";
 import TRIPS from "@/data/trips";
@@ -307,14 +306,7 @@ const Member = ({ data }: { data?: MemberProps }) => {
                 onClick={() => handleTripClick(id)}
               >
                 <CardBody py={4} display="flex" alignItems="center">
-                  <Box mr={3}>
-                    <Image
-                      src={`/images/flags/${countryCode.toLowerCase()}.png`}
-                      alt={COUNTRIES[countryCode]}
-                      width={28}
-                      height={28}
-                    />
-                  </Box>
+                  <FlagImage countryCode={countryCode} boxSize={28} mr={3} />
                   <Box>
                     <Text color="gray.500" fontSize="sm" lineHeight="none">
                       {year}

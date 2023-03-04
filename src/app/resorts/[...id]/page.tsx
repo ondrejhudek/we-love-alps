@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import {
   AspectRatio,
   Avatar,
@@ -26,6 +25,7 @@ import {
 
 import Alert from "@/app/components/Alert";
 import Header from "@/app/components/Header";
+import { FlagImage } from "@/app/components/Image";
 
 import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
@@ -88,15 +88,7 @@ const Resort = ({ data }: { data?: ResortProps }) => {
                   Země /
                 </Text>
                 {COUNTRIES[data.countryCode]}
-                <Box ml={2}>
-                  <Image
-                    src={`/images/flags/${data.countryCode.toLowerCase()}.png`}
-                    alt={data.countryCode}
-                    title={COUNTRIES[data.countryCode]}
-                    width={20}
-                    height={20}
-                  />
-                </Box>
+                <FlagImage countryCode={data.countryCode} ml={2} />
               </ListItem>
 
               <ListItem fontWeight={500}>

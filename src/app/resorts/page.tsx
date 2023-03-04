@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import {
   AspectRatio,
   Badge,
@@ -19,8 +18,8 @@ import {
 } from "@chakra-ui/react";
 
 import Header from "@/app/components/Header";
+import { FlagImage } from "@/app/components/Image";
 
-import COUNTRIES from "@/data/countries";
 import RESORTS from "@/data/resorts";
 import TRIPS from "@/data/trips";
 
@@ -74,14 +73,7 @@ const Page = () => {
             >
               <CardHeader>
                 <Flex align="center">
-                  <Box mr={2}>
-                    <Image
-                      src={`/images/flags/${countryCode.toLowerCase()}.png`}
-                      alt={COUNTRIES[countryCode]}
-                      width={26}
-                      height={26}
-                    />
-                  </Box>
+                  <FlagImage countryCode={countryCode} boxSize={26} mr={2} />
                   <Box>
                     {/* Region */}
                     <Text
