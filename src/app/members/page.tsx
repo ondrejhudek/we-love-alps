@@ -93,7 +93,14 @@ const Page = () => {
             {/* Header */}
             <CardBody py={10}>
               <Box textAlign="center">
-                <AvatarImage memberId={id} name={name} size="2xl" mb={4} />
+                <AvatarImage
+                  id={id}
+                  name={name}
+                  boxSize={32}
+                  marginInlineStart="auto"
+                  marginInlineEnd="auto"
+                  mb={4}
+                />
                 <Heading fontSize="xl" fontWeight={500}>
                   {name}
                 </Heading>

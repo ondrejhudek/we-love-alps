@@ -2,6 +2,8 @@
 - [x] Cloudinary correct thumbnails for gallery
 - [x] Placeholder (loading state) for all images
 - [ ] Consolidate next/image (used for lightbox) and next-cloudinary (used for gallery and album images)
-- [ ] Move all the images to cloudinary (member avatars, resort logos, flags)
+- [x] Move all the images to cloudinary (member avatars, resort logos, flags)
+- [x] Create custom Avatar component
 - [ ] React Suspense
 - [ ] React Error handling (ErrorBoundary)
+- [x] Snb, ski, skialp center alignment

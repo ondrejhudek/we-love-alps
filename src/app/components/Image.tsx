@@ -1,18 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import { CldImage } from "next-cloudinary";
 import { SlideImage, ContainerRect } from "yet-another-react-lightbox";
 import type { RenderPhotoProps } from "react-photo-album";
-import {
-  Avatar,
-  AvatarProps,
-  Box,
-  BoxProps,
-  Skeleton,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, BoxProps, Skeleton, useColorModeValue } from "@chakra-ui/react";
 
-import { getBasePath, ImageProps } from "@/app/utils/cloudinary";
+import { ImageProps } from "@/app/utils/cloudinary";
 import COUNTRIES from "@/data/countries";
 import { TripProps } from "@/data/trips";
 
@@ -26,32 +19,55 @@ export const FlagImage = ({
   boxSize?: number;
   ml?: number;
   mr?: number;
-}) => (
-  <Box boxSize={`${boxSize}px`} ml={ml} mr={mr}>
-    <CldImage
-      src={`flags/${countryCode.toLowerCase()}`}
-      alt={countryCode}
-      title={COUNTRIES[countryCode]}
-      width={64}
-      height={64}
-      quality={100}
-    />
-  </Box>
-);
+}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <Box boxSize={`${boxSize}px`} ml={ml} mr={mr}>
+      <Skeleton isLoaded={isLoaded} borderRadius="full">
+        <CldImage
+          src={`flags/${countryCode.toLowerCase()}`}
+          alt={countryCode}
+          title={COUNTRIES[countryCode]}
+          width={64}
+          height={64}
+          quality={100}
+          onLoadingComplete={() => {
+            setIsLoaded(true);
+          }}
+        />
+      </Skeleton>
+    </Box>
+  );
+};
 
 export const AvatarImage = ({
-  memberId,
-  ...rest
+  id,
+  name,
+  ...boxRest
 }: {
-  memberId: string;
-} & AvatarProps) => (
-  <Avatar
-    src={`${getBasePath(
-      "image/upload"
-    )}/f_auto,q_100,h_150,w_150/v1/members/${memberId}`}
-    {...rest}
-  ></Avatar>
-);
+  id: string;
+  name: string;
+} & BoxProps) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <Box borderRadius="full" overflow="hidden" {...boxRest}>
+      <Skeleton isLoaded={isLoaded}>
+        <CldImage
+          src={`members/${id}`}
+          alt={name}
+          width={150}
+          height={150}
+          quality={100}
+          onLoadingComplete={() => {
+            setIsLoaded(true);
+          }}
+        />
+      </Skeleton>
+    </Box>
+  );
+};
 
 export const ResortImage = ({
   id,
@@ -96,7 +112,9 @@ export const ResortImage = ({
           width={260}
           height={260}
           quality={100}
-          onLoadingComplete={() => setIsLoaded(true)}
+          onLoadingComplete={() => {
+            setIsLoaded(true);
+          }}
         />
       </Skeleton>
     </Box>
@@ -123,7 +141,9 @@ export const GalleryThumbnailImage = ({
         crop="fill"
         gravity="center"
         priority
-        onLoadingComplete={() => setIsLoaded(true)}
+        onLoadingComplete={() => {
+          setIsLoaded(true);
+        }}
       />
     </Skeleton>
   );
@@ -152,7 +172,9 @@ export const AlbumThumbnailImage: React.FC<
           crop="fill"
           gravity="center"
           priority
-          onLoadingComplete={() => setIsLoaded(true)}
+          onLoadingComplete={() => {
+            setIsLoaded(true);
+          }}
           onClick={onClick}
         />
       </Skeleton>

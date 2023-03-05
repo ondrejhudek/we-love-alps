@@ -183,7 +183,7 @@ const Member = ({ data }: { data?: MemberProps }) => {
               align={{ base: "center", sm: "flex-start" }}
             >
               <Box boxSize={36} mr={{ base: 0, sm: 6 }}>
-                <AvatarImage memberId={data.id} name={data.name} size="full" />
+                <AvatarImage id={data.id} name={data.name} boxSize="full" />
               </Box>
 
               <Box
@@ -243,7 +243,11 @@ const Member = ({ data }: { data?: MemberProps }) => {
                   )}
                 </List>
 
-                <Flex gap={1} mt={5}>
+                <Flex
+                  gap={1}
+                  mt={5}
+                  justify={{ base: "center", sm: "flex-start" }}
+                >
                   {data.interest.map((interest) => (
                     <Interest key={interest}>{interest}</Interest>
                   ))}

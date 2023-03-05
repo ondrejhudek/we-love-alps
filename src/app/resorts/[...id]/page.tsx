@@ -148,9 +148,9 @@ const Resort = ({ data }: { data?: ResortProps }) => {
               return (
                 <Tooltip key={id} label={name}>
                   <AvatarImage
-                    memberId={id}
+                    id={id}
                     name={name}
-                    size="xl"
+                    boxSize={24}
                     m={2}
                     boxShadow="md"
                     _hover={{
