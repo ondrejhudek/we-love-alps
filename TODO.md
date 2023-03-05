@@ -7,3 +7,4 @@
 - [ ] React Suspense
 - [ ] React Error handling (ErrorBoundary)
 - [x] Snb, ski, skialp center alignment
+- [ ] https://nextjs.org/docs/going-to-production
