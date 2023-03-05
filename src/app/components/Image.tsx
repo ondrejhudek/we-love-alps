@@ -20,26 +20,51 @@ export const FlagImage = ({
   ml?: number;
   mr?: number;
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
   return (
     <Box boxSize={`${boxSize}px`} ml={ml} mr={mr}>
-      <Skeleton isLoaded={isLoaded} borderRadius="full">
-        <CldImage
-          src={`flags/${countryCode.toLowerCase()}`}
-          alt={countryCode}
-          title={COUNTRIES[countryCode]}
-          width={64}
-          height={64}
-          quality={100}
-          onLoadingComplete={() => {
-            setIsLoaded(true);
-          }}
-        />
-      </Skeleton>
+      <Image
+        src={`/images/flags/${countryCode.toLowerCase()}.png`}
+        alt={countryCode}
+        title={COUNTRIES[countryCode]}
+        width={64}
+        height={64}
+        quality={100}
+      />
     </Box>
   );
 };
+
+// export const FlagImage = ({
+//   countryCode,
+//   boxSize = 20,
+//   ml,
+//   mr,
+// }: {
+//   countryCode: string;
+//   boxSize?: number;
+//   ml?: number;
+//   mr?: number;
+// }) => {
+//   const [isLoaded, setIsLoaded] = useState(false);
+
+//   return (
+//     <Box boxSize={`${boxSize}px`} ml={ml} mr={mr}>
+//       <Skeleton isLoaded={isLoaded} borderRadius="full">
+//         <CldImage
+//           src={`flags/${countryCode.toLowerCase()}`}
+//           alt={countryCode}
+//           title={COUNTRIES[countryCode]}
+//           width={64}
+//           height={64}
+//           quality={100}
+//           onLoadingComplete={() => {
+//             setIsLoaded(true);
+//           }}
+//         />
+//       </Skeleton>
+//     </Box>
+//   );
+// };
 
 export const AvatarImage = ({
   id,
