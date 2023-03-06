@@ -1,14 +1,16 @@
 import { extendTheme } from "@chakra-ui/react";
 import { modalAnatomy as parts } from "@chakra-ui/anatomy";
-import { Styles, mode } from "@chakra-ui/theme-tools";
+import { mode } from "@chakra-ui/theme-tools";
 import {
   createMultiStyleConfigHelpers,
   defineStyle,
 } from "@chakra-ui/styled-system";
 import type { StyleFunctionProps } from "@chakra-ui/styled-system";
 
-const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(parts.keys);
+const {
+  definePartsStyle,
+  defineMultiStyleConfig,
+} = createMultiStyleConfigHelpers(parts.keys);
 
 const colors = {
   primary: {
@@ -87,7 +89,8 @@ const theme = extendTheme({
   fonts: {
     heading:
       'var(--font-ubuntu), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    body: 'var(--font-ubuntu), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    body:
+      'var(--font-ubuntu), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
   },
   colors,
   components: { Modal },
