@@ -12,7 +12,7 @@ const ubuntu = Ubuntu({
   subsets: ["latin"],
   weight: ["300", "400", "500", "700"],
   variable: "--font-ubuntu",
-  display: "auto",
+  display: "swap",
 });
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
