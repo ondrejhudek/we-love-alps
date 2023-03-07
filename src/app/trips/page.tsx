@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import {
   Avatar,
   AvatarGroup,
+  AvatarProps,
   Box,
   Card,
   CardBody,
@@ -26,7 +27,7 @@ import MEMBERS from "@/data/members";
 import RESORTS from "@/data/resorts";
 import TRIPS, { TripProps } from "@/data/trips";
 
-const TooltipAvatar: typeof Avatar = (props: any) => (
+const TooltipAvatar: typeof Avatar = (props: AvatarProps) => (
   <Tooltip label={props.name}>
     <Avatar
       {...props}

@@ -8,5 +8,6 @@
 - [ ] React Error handling (ErrorBoundary)
 - [x] Snb, ski, skialp center alignment
 - [ ] https://nextjs.org/docs/going-to-production
-- [ ] Fetch rounded image when used as rounded
-- [ ] Use `blurDataURL` for Next Images (https://github.com/vercel/next.js/blob/canary/examples/with-cloudinary/pages/index.tsx) - have to manually generate for example with `f_jpg,w_8,q_70`
+- [ ] Fetch rounded image when used as rounded (its squared on mobile when loading)
+- [x] Use `blurDataURL` for Next Images (https://github.com/vercel/next.js/blob/canary/examples/with-cloudinary/pages/index.tsx) - have to manually generate for example with `f_jpg,w_8,q_70`
+- [ ] Flag icon looks weird on mobile
