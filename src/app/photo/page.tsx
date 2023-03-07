@@ -1,10 +1,10 @@
 import Header from "@/app/components/Header";
 import Photogallery from "@/app/components/Photogallery";
 import {
-  GalleryFolderProps,
   getFolders,
   getFolderThumbnails,
-} from "@/app/utils/cloudinary";
+} from "@/app/utils/cloudinary/service";
+import { GalleryFolderProps } from "@/app/utils/cloudinary/types";
 
 const Page = async () => {
   const [folderData, folderThumbnails] = await Promise.all([
@@ -21,9 +21,7 @@ const Page = async () => {
     })
     .map(({ path }) => ({
       path,
-      thumbnailImage: folderThumbnails.resources.find(
-        ({ folder }) => folder === path
-      ),
+      thumbnailImage: folderThumbnails.find(({ folder }) => folder === path),
     }));
 
   return (

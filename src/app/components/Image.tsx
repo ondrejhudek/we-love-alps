@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import { CldImage } from "next-cloudinary";
 import { SlideImage, ContainerRect } from "yet-another-react-lightbox";
 import type { RenderPhotoProps } from "react-photo-album";
-import { Box, BoxProps, Skeleton, useColorModeValue } from "@chakra-ui/react";
+import { Box, BoxProps, useColorModeValue } from "@chakra-ui/react";
 
-import { ImageProps } from "@/app/utils/cloudinary";
+import { getBlurredUrl } from "@/app/utils/cloudinary/generateBlurPlaceholder";
+import { ImageProps } from "@/app/utils/cloudinary/types";
 import COUNTRIES from "@/data/countries";
 import { TripProps } from "@/data/trips";
 
@@ -20,10 +20,23 @@ export const FlagImage = ({
   ml?: number;
   mr?: number;
 }) => {
+  const publicId = `flags/${countryCode.toLowerCase()}`;
+  const urlBlurred = getBlurredUrl(
+    publicId,
+    "w_20,h_20,r_20,e_blur:1000,q_auto,f_webp"
+  );
+
   return (
-    <Box boxSize={`${boxSize}px`} ml={ml} mr={mr}>
-      <Image
-        src={`/images/flags/${countryCode.toLowerCase()}.png`}
+    <Box
+      boxSize={`${boxSize}px`}
+      ml={ml}
+      mr={mr}
+      bgImage={`url(${urlBlurred})`}
+      bgPosition="center"
+      bgSize="contain"
+    >
+      <CldImage
+        src={publicId}
         alt={countryCode}
         title={COUNTRIES[countryCode]}
         width={64}
@@ -34,38 +47,6 @@ export const FlagImage = ({
   );
 };
 
-// export const FlagImage = ({
-//   countryCode,
-//   boxSize = 20,
-//   ml,
-//   mr,
-// }: {
-//   countryCode: string;
-//   boxSize?: number;
-//   ml?: number;
-//   mr?: number;
-// }) => {
-//   const [isLoaded, setIsLoaded] = useState(false);
-
-//   return (
-//     <Box boxSize={`${boxSize}px`} ml={ml} mr={mr}>
-//       <Skeleton isLoaded={isLoaded} borderRadius="full">
-//         <CldImage
-//           src={`flags/${countryCode.toLowerCase()}`}
-//           alt={countryCode}
-//           title={COUNTRIES[countryCode]}
-//           width={64}
-//           height={64}
-//           quality={100}
-//           onLoadingComplete={() => {
-//             setIsLoaded(true);
-//           }}
-//         />
-//       </Skeleton>
-//     </Box>
-//   );
-// };
-
 export const AvatarImage = ({
   id,
   name,
@@ -74,22 +55,28 @@ export const AvatarImage = ({
   id: string;
   name: string;
 } & BoxProps) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const publicId = `members/${id}`;
+  const urlBlurred = getBlurredUrl(
+    publicId,
+    "w_100,h_100,e_blur:1000,q_auto,f_webp"
+  );
 
   return (
-    <Box borderRadius="full" overflow="hidden" {...boxRest}>
-      <Skeleton isLoaded={isLoaded}>
-        <CldImage
-          src={`members/${id}`}
-          alt={name}
-          width={150}
-          height={150}
-          quality={100}
-          onLoadingComplete={() => {
-            setIsLoaded(true);
-          }}
-        />
-      </Skeleton>
+    <Box
+      borderRadius="full"
+      overflow="hidden"
+      bgImage={`url(${urlBlurred})`}
+      bgPosition="center"
+      bgSize="contain"
+      {...boxRest}
+    >
+      <CldImage
+        src={publicId}
+        alt={name}
+        width={150}
+        height={150}
+        quality={100}
+      />
     </Box>
   );
 };
@@ -105,7 +92,11 @@ export const ResortImage = ({
   asAvatar?: boolean;
 } & BoxProps) => {
   const resortBgColor = useColorModeValue("gray.100", "gray.800");
-  const [isLoaded, setIsLoaded] = useState(false);
+  const publicId = `resorts/${id}`;
+  const urlBlurred = getBlurredUrl(
+    publicId,
+    "w_100,h_100,e_blur:1000,q_auto,f_webp"
+  );
 
   const AS_AVATAR_PROPS: BoxProps = {
     m: 2,
@@ -126,22 +117,20 @@ export const ResortImage = ({
     <Box
       position="relative"
       overflow="hidden"
+      bgImage={`url(${urlBlurred})`}
+      bgPosition="center"
+      bgSize="contain"
       {...(asAvatar && AS_AVATAR_PROPS)}
       {...(boxRest.onClick && ON_CLICK_PROPS)}
       {...boxRest}
     >
-      <Skeleton isLoaded={isLoaded}>
-        <CldImage
-          src={`resorts/${id}`}
-          alt={name}
-          width={260}
-          height={260}
-          quality={100}
-          onLoadingComplete={() => {
-            setIsLoaded(true);
-          }}
-        />
-      </Skeleton>
+      <CldImage
+        src={publicId}
+        alt={name}
+        width={260}
+        height={260}
+        quality={100}
+      />
     </Box>
   );
 };
@@ -152,60 +141,46 @@ export const GalleryThumbnailImage = ({
 }: {
   trip: TripProps;
   image: ImageProps;
-}) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  return (
-    <Skeleton isLoaded={isLoaded}>
-      <CldImage
-        src={image.public_id}
-        alt={trip.title}
-        width={480}
-        height={360}
-        sizes="(max-width: 22em) 50vw, (max-width: 30em) 50vw, (max-width: 48em) 33vw, 25vw"
-        crop="fill"
-        gravity="center"
-        priority
-        onLoadingComplete={() => {
-          setIsLoaded(true);
-        }}
-      />
-    </Skeleton>
-  );
-};
+}) => (
+  <CldImage
+    src={image.public_id}
+    alt={trip.title}
+    width={480}
+    height={360}
+    sizes="(max-width: 22em) 50vw, (max-width: 30em) 50vw, (max-width: 48em) 33vw, 25vw"
+    crop="fill"
+    gravity="center"
+    priority
+    placeholder="blur"
+    blurDataURL={image.blurDataUrl}
+  />
+);
 
 export const AlbumThumbnailImage: React.FC<
   RenderPhotoProps<ImageProps & { src: string }>
-> = ({ photo, imageProps: { onClick }, wrapperStyle, layout }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  return (
-    <Box
-      key={photo.asset_id}
-      style={{ ...wrapperStyle }}
-      _hover={{
-        cursor: "pointer",
-        opacity: "0.85",
-      }}
-    >
-      <Skeleton isLoaded={isLoaded}>
-        <CldImage
-          src={photo.public_id}
-          alt={photo.public_id}
-          width={Math.ceil(layout.width)}
-          height={Math.ceil(layout.height)}
-          crop="fill"
-          gravity="center"
-          priority
-          onLoadingComplete={() => {
-            setIsLoaded(true);
-          }}
-          onClick={onClick}
-        />
-      </Skeleton>
-    </Box>
-  );
-};
+> = ({ photo, imageProps: { onClick }, wrapperStyle, layout }) => (
+  <Box
+    key={photo.public_id}
+    style={{ ...wrapperStyle }}
+    _hover={{
+      cursor: "pointer",
+      opacity: "0.85",
+    }}
+  >
+    <CldImage
+      src={photo.public_id}
+      alt={photo.public_id}
+      width={Math.ceil(layout.width)}
+      height={Math.ceil(layout.height)}
+      crop="fill"
+      gravity="center"
+      priority
+      placeholder="blur"
+      blurDataURL={photo.blurDataUrl}
+      onClick={onClick}
+    />
+  </Box>
+);
 
 export const LightboxImage = (
   image: SlideImage,

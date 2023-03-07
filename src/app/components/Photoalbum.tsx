@@ -8,7 +8,7 @@ import "yet-another-react-lightbox/styles.css";
 
 import Alert from "@/app/components/Alert";
 import { AlbumThumbnailImage, LightboxImage } from "@/app/components/Image";
-import { ImageProps } from "@/app/utils/cloudinary";
+import { ImageProps } from "@/app/utils/cloudinary/types";
 
 const Album = ({ images }: { images: ImageProps[] }) => {
   const [index, setIndex] = useState(-1);

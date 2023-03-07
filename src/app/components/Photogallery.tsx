@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import { GalleryThumbnailImage } from "@/app/components/Image";
-import { GalleryFolderProps, ImageProps } from "@/app/utils/cloudinary";
+import { GalleryFolderProps, ImageProps } from "@/app/utils/cloudinary/types";
 // import { PHOTO_CS } from "@/app/utils/locales";
 
 import TRIPS from "@/data/trips";
@@ -27,7 +27,7 @@ const GalleryFolder = ({
   onClick: (id: string) => void;
 }) => {
   const subtitleColor = useColorModeValue("gray.600", "gray.400");
-  const trip = TRIPS.find(({ id }) => id === path);
+  const trip = TRIPS.find(({ id }) => `gallery/${id}` === path);
   if (!trip) return null;
 
   return (
@@ -71,6 +71,7 @@ const GalleryFolder = ({
 };
 
 const Gallery = ({ folders }: { folders: GalleryFolderProps[] }) => {
+  // console.log(folders);
   const router = useRouter();
 
   const handleClick = (id: string) => {
