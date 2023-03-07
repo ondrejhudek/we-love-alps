@@ -1,4 +1,3 @@
-import Header from "@/app/components/Header";
 import Photogallery from "@/app/components/Photogallery";
 import {
   getFolders,
@@ -24,12 +23,7 @@ const Page = async () => {
       thumbnailImage: folderThumbnails.find(({ folder }) => folder === path),
     }));
 
-  return (
-    <>
-      <Header />
-      <Photogallery folders={folders} />
-    </>
-  );
+  return <Photogallery folders={folders} />;
 };
 
 export default Page;
