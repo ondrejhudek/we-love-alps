@@ -161,9 +161,8 @@ export const AlbumThumbnailImage: React.FC<
 > = ({ photo, imageProps: { onClick }, wrapperStyle, layout }) => (
   <Box
     key={photo.public_id}
-    style={{ ...wrapperStyle }}
+    style={{ ...wrapperStyle, cursor: "zoom-in" }}
     _hover={{
-      cursor: "pointer",
       opacity: "0.85",
     }}
   >
