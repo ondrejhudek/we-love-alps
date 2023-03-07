@@ -21,7 +21,7 @@
     "cloudinary": "^1.35.0",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
-    "framer-motion": "^10.1.0",
+    "framer-motion": "^10.2.3",
     "next": "13.2.3",
     "next-cloudinary": "^4.0.0",
     "ramda": "^0.28.0",
