@@ -332,7 +332,7 @@ const Member = ({ data }: { data?: MemberProps }) => {
         <CardBody>
           <Flex wrap="wrap" m={-2}>
             {resorts.map(({ id, name }) => (
-              <Tooltip key={id} label={name}>
+              <Tooltip key={id} label={name} shouldWrapChildren>
                 <ResortImage
                   id={id}
                   name={name}

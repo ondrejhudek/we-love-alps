@@ -146,7 +146,7 @@ const Resort = ({ data }: { data?: ResortProps }) => {
               const { id, name } = member;
 
               return (
-                <Tooltip key={id} label={name}>
+                <Tooltip key={id} label={name} shouldWrapChildren>
                   <AvatarImage
                     id={id}
                     name={name}

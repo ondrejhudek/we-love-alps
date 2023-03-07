@@ -142,7 +142,7 @@ const Trip = ({ data }: { data?: TripProps }) => {
               const { id, name } = resort;
 
               return (
-                <Tooltip key={id} label={name}>
+                <Tooltip key={id} label={name} shouldWrapChildren>
                   <ResortImage
                     id={id}
                     name={name}
@@ -172,7 +172,7 @@ const Trip = ({ data }: { data?: TripProps }) => {
               const { id, name } = member;
 
               return (
-                <Tooltip key={id} label={name}>
+                <Tooltip key={id} label={name} shouldWrapChildren>
                   <AvatarImage
                     id={id}
                     name={name}
