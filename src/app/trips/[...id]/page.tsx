@@ -54,7 +54,6 @@ const Trip = ({ data }: { data?: TripProps }) => {
   const router = useRouter();
 
   const dividerColor = useColorModeValue("gray.300", "gray.800");
-  const resortBgColor = useColorModeValue("gray.100", "gray.800");
 
   const handleMemberClick = (id: string) => {
     router.push(`/members/${id}`);
@@ -214,7 +213,7 @@ const Page = ({ params: { id } }: { params: { id: string[] } }) => {
 
   return (
     <>
-      <Header name={trip?.title} />
+      <Header />
       <Trip data={trip} />
     </>
   );

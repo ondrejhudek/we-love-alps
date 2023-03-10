@@ -174,7 +174,7 @@ const Page = ({ params: { id } }: { params: { id: string[] } }) => {
 
   return (
     <>
-      <Header name={resort?.name} />
+      <Header />
       <Resort data={resort} />
     </>
   );

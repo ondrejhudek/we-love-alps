@@ -1,5 +1,4 @@
 import Alert from "@/app/components/Alert";
-import Header from "@/app/components/Header";
 import Photoalbum from "@/app/components/Photoalbum";
 import { getImages } from "@/app/utils/cloudinary/service";
 
@@ -22,12 +21,7 @@ const Page = async ({ params: { id } }: { params: { id: string[] } }) => {
       />
     );
 
-  return (
-    <>
-      <Header name={trip?.title} />
-      <Photoalbum images={images} />
-    </>
-  );
+  return <Photoalbum images={images} />;
 };
 
 export default Page;

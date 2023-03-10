@@ -9,6 +9,11 @@ export const NAV_LINKS = {
   "/video": NAV_LINKS_CS.video,
 };
 
+export type LINK = {
+  path: string;
+  label: string;
+};
+
 export type NavLinkKey = keyof typeof NAV_LINKS;
 
 export const NAV_LINK_KEYS = Object.keys(NAV_LINKS) as NavLinkKey[];

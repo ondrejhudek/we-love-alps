@@ -353,7 +353,7 @@ const Page = ({ params: { id } }: { params: { id: string[] } }) => {
 
   return (
     <>
-      <Header name={member?.name} />
+      <Header />
       <Member data={member} />
     </>
   );

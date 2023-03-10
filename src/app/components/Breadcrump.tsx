@@ -8,13 +8,9 @@ import {
 import { ChevronRightIcon } from "@chakra-ui/icons";
 
 const Breadcrump = ({
-  pathname,
-  name,
-  subName,
+  links,
 }: {
-  pathname: string;
-  name: string;
-  subName?: string;
+  links: { path: string; label: string }[];
 }) => (
   <Breadcrumb
     spacing="8px"
@@ -29,21 +25,11 @@ const Breadcrump = ({
       </BreadcrumbLink>
     </BreadcrumbItem>
 
-    <BreadcrumbItem isCurrentPage={!subName}>
-      {subName ? (
-        <BreadcrumbLink as={Link} href={pathname}>
-          {name}
-        </BreadcrumbLink>
-      ) : (
-        <BreadcrumbLink>{name}</BreadcrumbLink>
-      )}
-    </BreadcrumbItem>
-
-    {subName && (
-      <BreadcrumbItem isCurrentPage>
-        <BreadcrumbLink>{subName}</BreadcrumbLink>
+    {links.map(({ path, label }, i) => (
+      <BreadcrumbItem key={path} isCurrentPage={links.length === i + 1}>
+        <BreadcrumbLink href={path}>{label}</BreadcrumbLink>
       </BreadcrumbItem>
-    )}
+    ))}
   </Breadcrumb>
 );
 
