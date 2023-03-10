@@ -1,8 +1,8 @@
 import { v2 as cloudinary } from "cloudinary";
 
-import { CLOUD_NAME, API_KEY, API_SECRET } from "./";
+import { CLOUD_NAME, API_KEY, API_SECRET } from ".";
 import generateBlurPlaceholder from "./generateBlurPlaceholder";
-import { FolderData, ImageData, ImageProps } from "./types";
+import { FolderData, ImageData } from "./types";
 
 // Configure Cloudinary
 cloudinary.config({
@@ -17,13 +17,14 @@ cloudinary.config({
  * @param data Image data
  * @returns Processed Image data
  */
-const processImages = async (data: ImageData) =>
-  await Promise.all(
+const processImages = async (data: ImageData) => {
+  return await Promise.all(
     data.resources.map(async (resource) => ({
       ...resource,
       blurDataUrl: await generateBlurPlaceholder(resource),
     }))
   );
+};
 
 /**
  * Retrives all folders.

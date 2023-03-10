@@ -1,7 +1,7 @@
 "use client";
 
 import NextLink from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, notFound } from "next/navigation";
 import {
   Badge,
   Box,
@@ -24,8 +24,6 @@ import {
 import { IconType } from "react-icons";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 
-import Alert from "@/app/components/Alert";
-import Header from "@/app/components/Header";
 import { AvatarImage, FlagImage, ResortImage } from "@/app/components/Image";
 
 import MEMBERS, { MemberProps } from "@/data/members";
@@ -124,24 +122,12 @@ const Count = ({ number }: { number: number }) => (
   </Center>
 );
 
-const Member = ({ data }: { data?: MemberProps }) => {
+const Member = ({ data }: { data: MemberProps }) => {
   const router = useRouter();
 
   const nicknameColor = useColorModeValue("gray.700", "gray.300");
   const tripBgColor = useColorModeValue("gray.50", "gray.800");
   const dividerColor = useColorModeValue("gray.300", "gray.800");
-
-  if (!data)
-    return (
-      <Alert
-        title="Tento zájezd neexistuje."
-        description="Běž zpět a vyber jiný."
-        button={{
-          path: "/trips",
-          label: "Zpět na Zájezdy",
-        }}
-      />
-    );
 
   const trips = TRIPS.filter((trip) => trip.members.includes(data.id)).sort(
     (a, b) => b.year - a.year
@@ -348,15 +334,14 @@ const Member = ({ data }: { data?: MemberProps }) => {
   );
 };
 
-const Page = ({ params: { id } }: { params: { id: string[] } }) => {
-  const member = MEMBERS.find((member) => member.id === id[0]);
+const Page = ({ params: { id } }: { params: { id: string } }) => {
+  const member = MEMBERS.find((member) => member.id === id);
 
-  return (
-    <>
-      <Header />
-      <Member data={member} />
-    </>
-  );
+  if (!member) {
+    notFound();
+  }
+
+  return <Member data={member} />;
 };
 
 export default Page;

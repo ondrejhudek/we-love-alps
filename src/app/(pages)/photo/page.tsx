@@ -1,9 +1,6 @@
+import { getFolders, getFolderThumbnails } from "@/app/cloudinary/service";
+import { GalleryFolderProps } from "@/app/cloudinary/types";
 import Photogallery from "@/app/components/Photogallery";
-import {
-  getFolders,
-  getFolderThumbnails,
-} from "@/app/utils/cloudinary/service";
-import { GalleryFolderProps } from "@/app/utils/cloudinary/types";
 
 const Page = async () => {
   const [folderData, folderThumbnails] = await Promise.all([

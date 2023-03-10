@@ -7,10 +7,8 @@ import {
 } from "@chakra-ui/styled-system";
 import type { StyleFunctionProps } from "@chakra-ui/styled-system";
 
-const {
-  definePartsStyle,
-  defineMultiStyleConfig,
-} = createMultiStyleConfigHelpers(parts.keys);
+const { definePartsStyle, defineMultiStyleConfig } =
+  createMultiStyleConfigHelpers(parts.keys);
 
 const colors = {
   primary: {
@@ -89,8 +87,7 @@ const theme = extendTheme({
   fonts: {
     heading:
       'var(--font-ubuntu), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    body:
-      'var(--font-ubuntu), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    body: 'var(--font-ubuntu), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
   },
   colors,
   components: { Modal },
@@ -100,7 +97,7 @@ const theme = extendTheme({
         color: mode("gray.700", "whiteAlpha.900")(props),
       },
       body: {
-        backgroundColor: mode("gray.100", "gray.800")(props),
+        bgColor: mode("gray.100", "gray.800")(props),
       },
       h1: {
         color: mode("primary.700", "primary.500")(props),

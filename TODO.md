@@ -11,3 +11,4 @@
 - [ ] Fetch rounded image when used as rounded (its squared on mobile when loading)
 - [x] Use `blurDataURL` for Next Images (https://github.com/vercel/next.js/blob/canary/examples/with-cloudinary/pages/index.tsx) - have to manually generate for example with `f_jpg,w_8,q_70`
 - [ ] Flag icon looks weird on mobile
+- [ ] `head.js` is being used in route /. Please migrate to the Metadata API for an improved experience: https://beta.nextjs.org/docs/api-reference/metadata

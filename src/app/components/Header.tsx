@@ -3,37 +3,40 @@
 import { usePathname } from "next/navigation";
 import { Heading } from "@chakra-ui/react";
 
-import { NAV_LINKS, LINK, NavLinkKey } from "@/app/utils";
+import { NAV_LINKS, LINK } from "@/app/utils";
+import { NavLinkKey } from "@/app/utils/types";
 import Breadcrump from "./Breadcrump";
 
 import MEMBERS from "@/data/members";
 import RESORTS from "@/data/resorts";
 import TRIPS from "@/data/trips";
 
-const findMember = (pathname: string) => {
-  const member = MEMBERS.find((member) => member.id === pathname.substring(1));
-  return member?.name || "Not found";
+const NOT_FOUND = "Nenalezeno";
+
+const findMember = (segment: string) => {
+  const member = MEMBERS.find((member) => member.id === segment.substring(1));
+  return member?.name || NOT_FOUND;
 };
 
-const findResort = (pathname: string) => {
-  const resort = RESORTS.find((resort) => resort.id === pathname.substring(1));
-  return resort?.name || "Not found";
+const findResort = (segment: string) => {
+  const resort = RESORTS.find((resort) => resort.id === segment.substring(1));
+  return resort?.name || NOT_FOUND;
 };
 
-const findTrip = (pathname: string) => {
-  const trip = TRIPS.find((trip) => trip.id === pathname.substring(1));
-  return trip?.title || "Not found";
+const findTrip = (segment: string) => {
+  const trip = TRIPS.find((trip) => trip.id === segment.substring(1));
+  return trip?.title || NOT_FOUND;
 };
 
-const getLabel = (firstLevel: NavLinkKey, secondLevel: string) => {
-  switch (firstLevel) {
-    case "/members":
-      return findMember(secondLevel);
-    case "/resorts":
-      return findResort(secondLevel);
-    case "/trips":
-    case "/photo":
-      return findTrip(secondLevel);
+const getLabel = (firstLevelSegment: NavLinkKey, leafSegment: string) => {
+  switch (firstLevelSegment) {
+    case NavLinkKey.Members:
+      return findMember(leafSegment);
+    case NavLinkKey.Resorts:
+      return findResort(leafSegment);
+    case NavLinkKey.Trips:
+    case NavLinkKey.Photo:
+      return findTrip(leafSegment);
     default:
       return "";
   }
@@ -41,16 +44,14 @@ const getLabel = (firstLevel: NavLinkKey, secondLevel: string) => {
 
 const Header = () => {
   const pathname = usePathname();
-  const pathnameParts = pathname
+  const segments = pathname
     .split("/")
     .filter(String)
     .map((part) => `/${part}` as NavLinkKey);
-  const links: LINK[] = pathnameParts.map((path, i) => {
-    return {
-      path,
-      label: i === 0 ? NAV_LINKS[path] : getLabel(pathnameParts[0], path),
-    };
-  });
+  const links: LINK[] = segments.map((segment, i) => ({
+    path: segment,
+    label: i === 0 ? NAV_LINKS[segment] : getLabel(segments[0], segment),
+  }));
 
   return (
     <>

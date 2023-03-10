@@ -19,7 +19,6 @@ import {
 import { FaSkiing } from "react-icons/fa";
 import groupBy from "ramda/src/groupBy";
 
-import Header from "@/app/components/Header";
 import { FlagImage } from "@/app/components/Image";
 import { MONTHS_CS } from "@/app/utils/locales";
 
@@ -57,8 +56,6 @@ const Page = () => {
 
   return (
     <>
-      <Header />
-
       {groupedKeys.map((year) => (
         <Box key={year}>
           <Heading as="h2" fontSize="2xl" my={5}>

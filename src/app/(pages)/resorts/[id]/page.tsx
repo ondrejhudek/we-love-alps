@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, notFound } from "next/navigation";
 import {
   AspectRatio,
   Badge,
@@ -20,8 +20,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import Alert from "@/app/components/Alert";
-import Header from "@/app/components/Header";
 import { AvatarImage, FlagImage, ResortImage } from "@/app/components/Image";
 
 import COUNTRIES from "@/data/countries";
@@ -47,24 +45,12 @@ const Map = ({ id }: { id: string }) => {
   );
 };
 
-const Resort = ({ data }: { data?: ResortProps }) => {
+const Resort = ({ data }: { data: ResortProps }) => {
   const router = useRouter();
 
   const yearColor = useColorModeValue("white", "gray.900");
   const yearBgColor = useColorModeValue("secondary.600", "secondary.400");
   const dividerColor = useColorModeValue("gray.300", "gray.800");
-
-  if (!data)
-    return (
-      <Alert
-        title="Toto středisko neexistuje."
-        description="Běž zpět a vyber jiný."
-        button={{
-          path: "/resorts",
-          label: "Zpět na Střediska",
-        }}
-      />
-    );
 
   const trips = TRIPS.filter((trip) => trip.resorts.includes(data.id));
   const members = [...new Set(trips.flatMap((trip) => trip.members))];
@@ -169,15 +155,14 @@ const Resort = ({ data }: { data?: ResortProps }) => {
   );
 };
 
-const Page = ({ params: { id } }: { params: { id: string[] } }) => {
-  const resort = RESORTS.find((resort) => resort.id === id[0]);
+const Page = ({ params: { id } }: { params: { id: string } }) => {
+  const resort = RESORTS.find((resort) => resort.id === id);
 
-  return (
-    <>
-      <Header />
-      <Resort data={resort} />
-    </>
-  );
+  if (!resort) {
+    notFound();
+  }
+
+  return <Resort data={resort} />;
 };
 
 export default Page;

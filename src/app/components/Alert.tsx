@@ -17,12 +17,12 @@ const MyAlert = ({
   status = "error",
   title,
   description,
-  button: { path, label },
+  button,
 }: {
   status?: AlertStatus;
   title: string;
-  description: string;
-  button: {
+  description?: string;
+  button?: {
     path: string;
     label: string;
   };
@@ -31,19 +31,21 @@ const MyAlert = ({
     <Alert status={status} rounded="md">
       <AlertIcon />
       <AlertTitle>{title}</AlertTitle>
-      <AlertDescription>{description}</AlertDescription>
+      {description && <AlertDescription>{description}</AlertDescription>}
     </Alert>
 
-    <Button
-      as={Link}
-      href={path}
-      variant="outline"
-      mt={4}
-      leftIcon={<Icon as={FaArrowLeft} fontSize="xs" />}
-      fontWeight={500}
-    >
-      {label}
-    </Button>
+    {button && (
+      <Button
+        as={Link}
+        href={button.path}
+        variant="outline"
+        mt={4}
+        leftIcon={<Icon as={FaArrowLeft} fontSize="xs" />}
+        fontWeight={500}
+      >
+        {button.label}
+      </Button>
+    )}
   </>
 );
 

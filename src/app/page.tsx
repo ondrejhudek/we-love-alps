@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Divider, SimpleGrid } from "@chakra-ui/react";
+import { Divider, SimpleGrid } from "@chakra-ui/react";
 import { HiOutlineUsers, HiOutlineMapPin, HiOutlineMap } from "react-icons/hi2";
 
 import Stat, { StatProps } from "./components/Stat";
@@ -38,7 +38,7 @@ const STATS: StatProps[] = [
 ];
 
 const Page = () => (
-  <Box>
+  <>
     <SimpleGrid
       columns={{ base: 1, md: 3 }}
       spacing={{ base: 3, sm: 4, md: 6 }}
@@ -51,7 +51,7 @@ const Page = () => (
     <Divider my={{ base: 6, md: 10 }} />
 
     <Timeline />
-  </Box>
+  </>
 );
 
 export default Page;

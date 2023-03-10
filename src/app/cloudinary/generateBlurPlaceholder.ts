@@ -1,4 +1,4 @@
-import { IMAGE_BASE_PATH } from "./";
+import { IMAGE_BASE_PATH } from ".";
 import { ImageProps } from "./types";
 
 const cache = new Map<ImageProps, string>();

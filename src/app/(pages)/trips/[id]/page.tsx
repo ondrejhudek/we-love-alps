@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, notFound } from "next/navigation";
 import {
   AspectRatio,
   Card,
@@ -22,8 +22,6 @@ import {
 import { FaExternalLinkAlt } from "react-icons/fa";
 
 import { MONTHS_CS } from "@/app/utils/locales";
-import Alert from "@/app/components/Alert";
-import Header from "@/app/components/Header";
 import { AvatarImage, FlagImage, ResortImage } from "@/app/components/Image";
 
 import COUNTRIES from "@/data/countries";
@@ -50,7 +48,7 @@ const Video = ({ id }: { id: string }) => {
   );
 };
 
-const Trip = ({ data }: { data?: TripProps }) => {
+const Trip = ({ data }: { data: TripProps }) => {
   const router = useRouter();
 
   const dividerColor = useColorModeValue("gray.300", "gray.800");
@@ -62,18 +60,6 @@ const Trip = ({ data }: { data?: TripProps }) => {
   const handleResortClick = (id: string) => {
     router.push(`/resorts/${id}`);
   };
-
-  if (!data)
-    return (
-      <Alert
-        title="Tento zájezd neexistuje."
-        description="Běž zpět a vyber jiný."
-        button={{
-          path: "/trips",
-          label: "Zpět na Zájezdy",
-        }}
-      />
-    );
 
   const video = VIDEOS[data.id];
 
@@ -208,15 +194,14 @@ const Trip = ({ data }: { data?: TripProps }) => {
   );
 };
 
-const Page = ({ params: { id } }: { params: { id: string[] } }) => {
-  const trip = TRIPS.find((trip) => trip.id === id[0]);
+const Page = ({ params: { id } }: { params: { id: string } }) => {
+  const trip = TRIPS.find((trip) => trip.id === id);
 
-  return (
-    <>
-      <Header />
-      <Trip data={trip} />
-    </>
-  );
+  if (!trip) {
+    notFound();
+  }
+
+  return <Trip data={trip} />;
 };
 
 export default Page;

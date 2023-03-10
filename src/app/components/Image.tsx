@@ -4,8 +4,8 @@ import { SlideImage, ContainerRect } from "yet-another-react-lightbox";
 import type { RenderPhotoProps } from "react-photo-album";
 import { Box, BoxProps, useColorModeValue } from "@chakra-ui/react";
 
-import { getBlurredUrl } from "@/app/utils/cloudinary/generateBlurPlaceholder";
-import { ImageProps } from "@/app/utils/cloudinary/types";
+import { getBlurredUrl } from "@/app/cloudinary/generateBlurPlaceholder";
+import { ImageProps } from "@/app/cloudinary/types";
 import COUNTRIES from "@/data/countries";
 import { TripProps } from "@/data/trips";
 
