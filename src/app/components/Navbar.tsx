@@ -16,7 +16,8 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
-import { NAV_LINKS, NAV_LINK_KEYS, NavLinkKey } from "@/app/utils";
+import { NAV_LINKS, NAV_LINK_KEYS } from "@/app/utils";
+import { NavLinkKey } from "@/app/utils/types";
 import ColorModeSwitcher from "./ColorModeSwitcher";
 import Logo from "./Logo";
 
