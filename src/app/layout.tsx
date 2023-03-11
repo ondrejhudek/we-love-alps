@@ -9,6 +9,11 @@ import AnalyticsWrapper from "./components/Analytics";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
+// TODO: Migrate to API Metadata.
+// export const metadata = {
+//   title: 'My Title',
+// }
+
 const ubuntu = Ubuntu({
   subsets: ["latin"],
   weight: ["300", "400", "500", "700"],
