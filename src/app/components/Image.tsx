@@ -1,6 +1,11 @@
 import Image, { StaticImageData } from "next/image";
 import { CldImage } from "next-cloudinary";
 import { SlideImage, ContainerRect } from "yet-another-react-lightbox";
+import {
+  isImageFitCover,
+  isImageSlide,
+  useLightboxProps,
+} from "yet-another-react-lightbox/core";
 import type { RenderPhotoProps } from "react-photo-album";
 import { Box, BoxProps, useColorModeValue } from "@chakra-ui/react";
 
@@ -181,32 +186,39 @@ export const AlbumThumbnailImage: React.FC<
   </Box>
 );
 
-export const LightboxImage = (
-  image: SlideImage,
-  _: number,
-  rect: ContainerRect
-): React.ReactNode => {
-  if (!image.width || !image.height) return null;
+export const LightboxImage = ({
+  slide,
+  rect,
+}: {
+  slide: SlideImage;
+  rect: ContainerRect;
+}) => {
+  const { imageFit } = useLightboxProps().carousel;
+  const cover = isImageSlide(slide) && isImageFitCover(slide, imageFit);
 
-  const width = Math.round(
-    Math.min(rect.width, (rect.height / image.height) * image.width)
-  );
-  const height = Math.round(
-    Math.min(rect.height, (rect.width / image.width) * image.height)
-  );
+  if (!slide.width || !slide.height) return null;
+
+  const width = !cover
+    ? Math.round(
+        Math.min(rect.width, (rect.height / slide.height) * slide.width)
+      )
+    : rect.width;
+
+  const height = !cover
+    ? Math.round(
+        Math.min(rect.height, (rect.width / slide.width) * slide.height)
+      )
+    : rect.height;
 
   return (
     <Box position="relative" width={width} height={height}>
       <Image
-        src={image as StaticImageData}
+        src={slide as StaticImageData}
         alt="lightbox"
         fill
         loading="eager"
-        sizes={
-          typeof window !== "undefined"
-            ? `${Math.ceil((width / window.innerWidth) * 100)}vw`
-            : `${width}px`
-        }
+        style={{ objectFit: cover ? "cover" : "contain" }}
+        sizes={`${Math.ceil((width / window.innerWidth) * 100)}vw`}
       />
     </Box>
   );
