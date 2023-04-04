@@ -1,4 +1,4 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
 import { modalAnatomy as parts } from "@chakra-ui/anatomy";
 import { mode } from "@chakra-ui/theme-tools";
 import {
@@ -80,7 +80,13 @@ const transition = {
   primary: "all 0.2s ease-in-out 0s",
 };
 
+const config: ThemeConfig = {
+  initialColorMode: "system",
+  useSystemColorMode: true,
+};
+
 const theme = extendTheme({
+  config,
   breakpoints: {
     xs: "22em",
   },

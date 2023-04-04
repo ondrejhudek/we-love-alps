@@ -1,7 +1,7 @@
 "use client";
 
 import { Ubuntu } from "next/font/google";
-import { CacheProvider } from "@chakra-ui/next-js";
+// import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider, Box } from "@chakra-ui/react";
 
 import theme from "./theme";
@@ -25,20 +25,20 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en" className={`${ubuntu.variable}`}>
     <head />
     <body>
-      <CacheProvider>
-        <ChakraProvider theme={theme}>
-          <Navbar />
-          <Box
-            maxW="container.xl"
-            mx="auto"
-            my={{ base: 4, sm: 6, md: 8 }}
-            px={{ base: 4, sm: 5, md: 6, xl: 0 }}
-          >
-            {children}
-          </Box>
-          <Footer />
-        </ChakraProvider>
-      </CacheProvider>
+      {/* <CacheProvider> */}
+      <ChakraProvider theme={theme}>
+        <Navbar />
+        <Box
+          maxW="container.xl"
+          mx="auto"
+          my={{ base: 4, sm: 6, md: 8 }}
+          px={{ base: 4, sm: 5, md: 6, xl: 0 }}
+        >
+          {children}
+        </Box>
+        <Footer />
+      </ChakraProvider>
+      {/* </CacheProvider> */}
     </body>
     <AnalyticsWrapper />
   </html>
