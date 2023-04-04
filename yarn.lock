@@ -854,10 +854,10 @@
   resolved "https://registry.yarnpkg.com/@chakra-ui/visually-hidden/-/visually-hidden-2.0.15.tgz#60df64e0ab97d95fee4e6c61ccabd15fd5ace398"
   integrity sha512-WWULIiucYRBIewHKFA7BssQ2ABLHLVd9lrUo3N3SZgR0u4ZRDDVEUNOy+r+9ruDze8+36dGbN9wsN1IdELtdOw==
 
-"@cloudinary-util/url-loader@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-3.0.1.tgz#a05889b628813e11b4ae527b304c1758db9e63f6"
-  integrity sha512-lJ3e+J3hrI8Q24Thg1Gdj+538YxZMP9cUs5AzUvIjGDrBObrRCovJ2xFi5AVGZXLcVY6nSXi+iCbtd8bCg8FZA==
+"@cloudinary-util/url-loader@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-3.1.1.tgz#f572fbb7f3e1acf2fcd8f6ea53777b5c4c19b59b"
+  integrity sha512-jR81afElp8GZJQrMHR9jW7ondDPKEsVD8LTSmFDTRZhMoPuRdljQNup8Tz4qOog7OxM+JS0+Gkn3j/fSmgEB8Q==
   dependencies:
     "@cloudinary-util/util" "2.0.1"
     "@cloudinary/url-gen" "^1.8.7"
@@ -1238,10 +1238,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@18.0.31":
-  version "18.0.31"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.31.tgz#a69ef8dd7bfa849734d258c793a8fe343a338205"
-  integrity sha512-EEG67of7DsvRDU6BLLI0p+k1GojDLz9+lZsnCpCRTa/lOokvyPBvp8S5x+A24hME3yyQuIipcP70KJ6H7Qupww==
+"@types/react@18.0.33":
+  version "18.0.33"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.33.tgz#a1575160cb4376787c2f5fe0312302f824baa61e"
+  integrity sha512-sHxzVxeanvQyQ1lr8NSHaj0kDzcNiGpILEVt69g9S31/7PfMvNCKLKcsHw4lYKjs3cGNJjXSP4mYzX43QlnjNA==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2891,12 +2891,12 @@ netmask@^2.0.2:
   resolved "https://registry.yarnpkg.com/netmask/-/netmask-2.0.2.tgz#8b01a07644065d536383835823bc52004ebac5e7"
   integrity sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==
 
-next-cloudinary@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-4.1.1.tgz#755d6fe4bb411f1c5b5b0ca8e9cfa92cbbec9db5"
-  integrity sha512-6yxIWLK0n9af8X9QkrCTqSCYzd2p5tpJkxMbQPsQwx/LcndjRp4qXSeHSa0eZZYBi2DtJR90haukSBfaqfnofg==
+next-cloudinary@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-4.3.0.tgz#8c8b9cbdd99ddb47d54ec29c36b65cdc0f94d44b"
+  integrity sha512-nf2CzTUUoPZFGiIZ8zdbxlmnKfI8GJDcGin+uKvkC8RAVszdPIc26YhaOS6rz4oMc1EZg8R3BT7EMiLJC7bOzw==
   dependencies:
-    "@cloudinary-util/url-loader" "^3.0.1"
+    "@cloudinary-util/url-loader" "^3.1.1"
     "@cloudinary-util/util" "^2.0.1"
     "@cloudinary/url-gen" "^1.8.6"
 
@@ -3185,10 +3185,10 @@ queue-microtask@^1.2.2:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-ramda@^0.28.0:
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.28.0.tgz#acd785690100337e8b063cab3470019be427cc97"
-  integrity sha512-9QnLuG/kPVgWvMQ4aODhsBUFKOUmnbUnsSXACv+NCQZcHbeb+v8Lodp8OVxtRULN1/xOyYLLaL6npE6dMq5QTA==
+ramda@^0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.29.0.tgz#fbbb67a740a754c8a4cbb41e2a6e0eb8507f55fb"
+  integrity sha512-BBea6L67bYLtdbOqfp8f58fPMqEwx0doL+pAi8TZyp2YWz8R9G8z9x75CZI8W+ftqhFHCpEX2cRnUUXK130iKA==
 
 raw-body@^2.2.0:
   version "2.5.2"
@@ -3794,10 +3794,10 @@ yaml@^1.10.0:
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
-yet-another-react-lightbox@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/yet-another-react-lightbox/-/yet-another-react-lightbox-3.2.0.tgz#648aff88dc5da0c4014cabc9ba49f781959b5c1c"
-  integrity sha512-8QXPwcC3/xpWp7HWACvlfGUeos1XmWZAQ1a34CGjvZ4x5f+hmItxyGsgugtoxayyyAIlCgULTZJuqoeZK6ewUQ==
+yet-another-react-lightbox@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/yet-another-react-lightbox/-/yet-another-react-lightbox-3.3.0.tgz#5954a053c0f1779287cf64caa5204f0d5a091536"
+  integrity sha512-mZf8taBlnX3RqTetlvNx6LCHszPmvRapIO4IGN7067mA/9TLXu6yRWFjXLEgPbMUawZ70hP/Ql3Cf/vMw23B2A==
 
 yocto-queue@^0.1.0:
   version "0.1.0"
