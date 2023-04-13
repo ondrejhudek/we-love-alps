@@ -4,11 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   AspectRatio,
-  Badge,
   Box,
   Card,
   CardFooter,
-  CardHeader,
   Flex,
   Heading,
   SimpleGrid,
@@ -17,10 +15,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { FlagImage } from "@/app/components/Image";
+import { FlagImage, ResortImage } from "@/app/components/Image";
 
 import RESORTS from "@/data/resorts";
-import TRIPS from "@/data/trips";
 
 const Map = ({ id }: { id: string }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -43,8 +40,6 @@ const Map = ({ id }: { id: string }) => {
 const Page = () => {
   const router = useRouter();
   const regionColor = useColorModeValue("gray.400", "gray.500");
-  const yearColor = useColorModeValue("white", "gray.900");
-  const yearBgColor = useColorModeValue("secondary.600", "secondary.400");
 
   const handleClick = (id: string) => {
     router.push(`/resorts/${id}`);
@@ -55,19 +50,21 @@ const Page = () => {
       columns={{ base: 1, sm: 2, md: 3 }}
       spacing={{ base: 3, sm: 4, lg: 5 }}
     >
-      {RESORTS.map(({ id, name, region, countryCode, map }) => {
-        const trips = TRIPS.filter((trip) => trip.resorts.includes(id));
+      {RESORTS.map(({ id, name, region, countryCode, map }) => (
+        <Card
+          key={id}
+          overflow="hidden"
+          _hover={{
+            cursor: "pointer",
+            boxShadow: "outline",
+          }}
+          onClick={() => handleClick(id)}
+        >
+          {/* Map */}
+          <Map id={map} />
 
-        return (
-          <Card
-            key={id}
-            _hover={{
-              cursor: "pointer",
-              boxShadow: "outline",
-            }}
-            onClick={() => handleClick(id)}
-          >
-            <CardHeader>
+          <CardFooter>
+            <Flex justify="space-between" width="full">
               <Flex align="center">
                 <FlagImage countryCode={countryCode} boxSize={26} mr={2} />
                 <Box>
@@ -85,38 +82,12 @@ const Page = () => {
                   </Heading>
                 </Box>
               </Flex>
-            </CardHeader>
 
-            {/* Map */}
-            <Map id={map} />
-
-            <CardFooter flexDirection="column">
-              <Text fontSize="sm" fontWeight={500}>
-                Celkem jsme navštívili{" "}
-                <Text as="span" fontWeight={800}>
-                  {trips.length}x
-                </Text>
-              </Text>
-
-              <Box mt={2}>
-                {trips.map(({ year }, i) => (
-                  <Badge
-                    key={year}
-                    ml={i > 0 ? 1 : 0}
-                    px={2}
-                    py={1}
-                    color={yearColor}
-                    bgColor={yearBgColor}
-                    borderRadius="md"
-                  >
-                    {year}
-                  </Badge>
-                ))}
-              </Box>
-            </CardFooter>
-          </Card>
-        );
-      })}
+              <ResortImage id={id} name={name} boxSize={14} rounded="full" />
+            </Flex>
+          </CardFooter>
+        </Card>
+      ))}
     </SimpleGrid>
   );
 };

@@ -85,20 +85,8 @@ const Resort = ({ data }: { data: ResortProps }) => {
                 <Text as="span" mr={2} color="gray.500" fontWeight={400}>
                   Navštívili jsme /
                 </Text>
-                {trips.map(({ year }, i) => (
-                  <Badge
-                    key={year}
-                    ml={i > 0 ? 1 : 0}
-                    px={2}
-                    py={1}
-                    color={yearColor}
-                    bgColor={yearBgColor}
-                    borderRadius="md"
-                  >
-                    {year}
-                  </Badge>
-                ))}
-                <Text as="span" ml={2} fontWeight={500}>
+                {trips.map(({ year }) => year).join(", ")}
+                <Text as="span" ml={1} fontWeight={400}>
                   ({trips.length}x)
                 </Text>
               </ListItem>
