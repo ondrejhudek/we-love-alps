@@ -8,7 +8,7 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 const Body = ({ children }: { children: React.ReactNode }) => (
-  //   <CacheProvider>
+  // <CacheProvider>
   <ChakraProvider theme={theme}>
     <Navbar />
     <Box
@@ -21,7 +21,7 @@ const Body = ({ children }: { children: React.ReactNode }) => (
     </Box>
     <Footer />
   </ChakraProvider>
-  //   </CacheProvider>
+  // </CacheProvider>
 );
 
 export default Body;
