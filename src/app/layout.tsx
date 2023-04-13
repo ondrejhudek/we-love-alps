@@ -1,18 +1,8 @@
-"use client";
-
+import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
-// import { CacheProvider } from "@chakra-ui/next-js";
-import { ChakraProvider, Box } from "@chakra-ui/react";
-
-import theme from "./theme";
 import AnalyticsWrapper from "./components/Analytics";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
 
-// TODO: Migrate to API Metadata.
-// export const metadata = {
-//   title: 'My Title',
-// }
+import Body from "./components/Body";
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -21,24 +11,23 @@ const ubuntu = Ubuntu({
   display: "swap",
 });
 
+export const metadata: Metadata = {
+  title: "We love Alps | Since 2008",
+  themeColor: "#005f7e",
+  icons: {
+    icon: "/images/favicon.ico",
+  },
+  manifest: "/manifest.json",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en" className={`${ubuntu.variable}`}>
-    <head />
     <body>
-      {/* <CacheProvider> */}
-      <ChakraProvider theme={theme}>
-        <Navbar />
-        <Box
-          maxW="container.xl"
-          mx="auto"
-          my={{ base: 4, sm: 6, md: 8 }}
-          px={{ base: 4, sm: 5, md: 6, xl: 0 }}
-        >
-          {children}
-        </Box>
-        <Footer />
-      </ChakraProvider>
-      {/* </CacheProvider> */}
+      <Body>{children}</Body>
     </body>
     <AnalyticsWrapper />
   </html>
