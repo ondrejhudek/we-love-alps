@@ -43,8 +43,6 @@ const Trip = ({ data }: { data: TripContentProps }) => {
 
   const { id, title, countryCode, month, resorts, members, nonMembers } = data;
 
-  console.log({ resorts });
-
   const handleClick = (id: string) => {
     router.push(`/trips/${id}`);
   };

@@ -31,8 +31,6 @@ const Content = async () => {
     (a, b) => parseInt(b) - parseInt(a)
   );
 
-  console.log(JSON.stringify(groupedTrips));
-
   return (
     <>
       {groupedKeys.map((year) => (
