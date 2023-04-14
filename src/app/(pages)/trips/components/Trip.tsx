@@ -19,6 +19,7 @@ import { FaSkiing } from "react-icons/fa";
 import { FlagImage } from "@/app/components/Image";
 import { MONTHS_CS } from "@/app/utils/locales";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
+
 export interface TripContentProps
   extends Omit<TripProps, "members" | "resorts"> {
   members: MemberProps[];

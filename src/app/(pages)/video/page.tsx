@@ -1,29 +1,13 @@
-import mongoClient from "@/app/mongodb/client";
+import { getDocuments } from "@/app/mongodb";
 import { TripProps, VideoProps } from "@/app/utils/types";
 
-import Content, { VideoContentProps } from "./content";
+import Videos, { VideoContentProps } from "./components/Videos";
 
 const Page = async () => {
-  const client = await mongoClient;
-  const db = client.db("app");
-
-  const videosData = await db
-    .collection<VideoProps>("videos")
-    .find({}, { projection: { _id: 0 } })
-    .limit(100)
-    .toArray();
-  const tripsData = await db
-    .collection<TripProps>("trips")
-    .find(
-      {
-        id: {
-          $in: videosData.map(({ tripId }) => tripId),
-        },
-      },
-      { projection: { _id: 0 } }
-    )
-    .limit(100)
-    .toArray();
+  const [videosData, tripsData] = await Promise.all([
+    getDocuments<VideoProps>("videos"),
+    getDocuments<TripProps>("trips"),
+  ]);
 
   const data = videosData.reduce<VideoContentProps[]>((acc, video) => {
     const trip = tripsData.find(({ id }) => id === video.tripId);
@@ -31,7 +15,7 @@ const Page = async () => {
     return acc;
   }, []);
 
-  return <Content data={data} />;
+  return <Videos data={data} />;
 };
 
 export default Page;

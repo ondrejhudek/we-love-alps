@@ -4,7 +4,7 @@ export type CollectionName = "members" | "resorts" | "trips" | "videos";
 
 const DATABASE_NAME = "app";
 
-const SLEEP_TIME = 5000;
+const SLEEP_TIME = 2000;
 const sleep = () => new Promise((r) => setTimeout(r, SLEEP_TIME));
 
 const getDatabase = async () => {

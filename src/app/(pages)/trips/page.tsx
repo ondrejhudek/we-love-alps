@@ -46,4 +46,5 @@ const Page = async () => (
     <Content />
   </Suspense>
 );
+
 export default Page;
