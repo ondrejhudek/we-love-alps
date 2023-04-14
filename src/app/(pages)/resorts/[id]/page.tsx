@@ -21,8 +21,8 @@ import {
 } from "@chakra-ui/react";
 
 import { AvatarImage, FlagImage, ResortImage } from "@/app/components/Image";
+import { COUNTRIES } from "@/app/utils";
 
-import COUNTRIES from "@/data/countries";
 import MEMBERS from "@/data/members";
 import RESORTS, { ResortProps } from "@/data/resorts";
 import TRIPS from "@/data/trips";

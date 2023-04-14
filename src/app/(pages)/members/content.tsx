@@ -62,7 +62,7 @@ const SocialButton = ({
   </Flex>
 );
 
-const Members = ({ data }: { data: MemberProps[] }) => {
+const Content = ({ data }: { data: MemberProps[] }) => {
   const router = useRouter();
   const borderColor = useColorModeValue("gray.200", "gray.800");
 
@@ -141,4 +141,4 @@ const Members = ({ data }: { data: MemberProps[] }) => {
   );
 };
 
-export default Members;
+export default Content;

@@ -1,167 +1,32 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import {
-  Avatar,
-  AvatarGroup,
-  AvatarProps,
-  Box,
-  Card,
-  CardBody,
-  Flex,
-  Icon,
-  Heading,
-  SimpleGrid,
-  Text,
-  Tooltip,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { FaSkiing } from "react-icons/fa";
+import { Suspense } from "react";
 import groupBy from "ramda/src/groupBy";
 
-import { FlagImage } from "@/app/components/Image";
-import { MONTHS_CS } from "@/app/utils/locales";
+import { getDocuments } from "@/app/mongodb";
+import { TripProps } from "@/app/utils/types";
 
-import MEMBERS from "@/data/members";
-import RESORTS from "@/data/resorts";
-import TRIPS, { TripProps } from "@/data/trips";
+import Loading from "./components/Loading";
+import Year from "./components/Year";
 
-const TooltipAvatar: typeof Avatar = (props: AvatarProps) => (
-  <Tooltip label={props.name}>
-    <Avatar
-      {...props}
-      borderWidth={1}
-      color={useColorModeValue("white", "gray.900")}
-      bg={useColorModeValue("gray.400", "gray.500")}
-    />
-  </Tooltip>
-);
-
-const Page = () => {
-  const router = useRouter();
-  const monthColor = useColorModeValue("gray.400", "gray.500");
-  const resortColor = useColorModeValue("gray.600", "gray.400");
-
-  const groupedTrips = groupBy<TripProps>(
-    (trip) => trip.year.toString(),
-    TRIPS
-  );
+const Content = async () => {
+  const data = await getDocuments<TripProps>("trips");
+  const groupedTrips = groupBy<TripProps>((trip) => trip.year.toString(), data);
   const groupedKeys = Object.keys(groupedTrips).sort(
     (a, b) => parseInt(b) - parseInt(a)
   );
 
-  const handleClick = (id: string) => {
-    router.push(`/trips/${id}`);
-  };
-
   return (
     <>
       {groupedKeys.map((year) => (
-        <Box key={year}>
-          <Heading as="h2" fontSize="2xl" my={5}>
-            {year}
-          </Heading>
-
-          <SimpleGrid
-            columns={{ base: 1, md: 2 }}
-            spacing={{ base: 3, sm: 4, lg: 5 }}
-          >
-            {groupedTrips[year]
-              .sort((a, b) => b.month - a.month)
-              .map(
-                ({
-                  id,
-                  title,
-                  countryCode,
-                  month,
-                  resorts,
-                  members,
-                  nonMembers,
-                }) => (
-                  <Card
-                    key={id}
-                    onClick={() => handleClick(id)}
-                    _hover={{
-                      cursor: "pointer",
-                      boxShadow: "outline",
-                    }}
-                  >
-                    <CardBody overflow="auto">
-                      {/*  Month */}
-                      <Text
-                        color={monthColor}
-                        fontSize="xs"
-                        textTransform="uppercase"
-                      >
-                        {MONTHS_CS[month - 1]}
-                      </Text>
-
-                      {/* Title */}
-                      <Heading
-                        as="h3"
-                        size="md"
-                        display="flex"
-                        mb={2}
-                        alignItems="center"
-                        textTransform="uppercase"
-                      >
-                        {title}
-                        <FlagImage countryCode={countryCode} ml={2} />
-                      </Heading>
-
-                      {/* Resorts */}
-                      <Flex align="center">
-                        <Icon
-                          as={FaSkiing}
-                          color="secondary.600"
-                          fontSize="sm"
-                          mr={3}
-                        />
-
-                        <Text fontSize="sm" color={resortColor}>
-                          {resorts
-                            .map((id) =>
-                              RESORTS.filter((resort) => resort.id === id).map(
-                                (resort) => resort.name
-                              )
-                            )
-                            .join(", ")}
-                        </Text>
-                      </Flex>
-
-                      {/* Members */}
-                      <AvatarGroup
-                        size="sm"
-                        spacing={-1.5}
-                        mt={3}
-                        max={members.length}
-                        color="white"
-                        fontSize="sm"
-                      >
-                        {members.map((id) =>
-                          MEMBERS.filter((member) => member.id === id).map(
-                            ({ id, name }) => (
-                              <TooltipAvatar key={id} name={name} />
-                            )
-                          )
-                        )}
-
-                        {/* Non members */}
-                        {nonMembers &&
-                          nonMembers > 0 &&
-                          [...Array(nonMembers)].map((_, i) => (
-                            <Avatar key={`nonMember-${i}`} />
-                          ))}
-                      </AvatarGroup>
-                    </CardBody>
-                  </Card>
-                )
-              )}
-          </SimpleGrid>
-        </Box>
+        <Year key={year} year={year} trips={groupedTrips[year]} />
       ))}
     </>
   );
 };
 
+const Page = async () => (
+  <Suspense fallback={<Loading />}>
+    {/* @ts-expect-error Server Component */}
+    <Content />
+  </Suspense>
+);
 export default Page;

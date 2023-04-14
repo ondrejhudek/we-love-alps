@@ -1,20 +1,11 @@
-import mongoClient from "@/app/mongodb/client";
+import { getDocuments } from "@/app/mongodb";
 import { MemberProps } from "@/app/utils/types";
 
 import Content from "./content";
-
 const Page = async () => {
-  const client = await mongoClient;
-  const db = client.db("app");
+  const data = await getDocuments<MemberProps>("members");
 
-  const data = await db
-    .collection<MemberProps>("members")
-    .find()
-    .limit(100)
-    .toArray();
-  const parsedData = JSON.parse(JSON.stringify(data));
-
-  return <Content data={parsedData} />;
+  return <Content data={data} />;
 };
 
 export default Page;
