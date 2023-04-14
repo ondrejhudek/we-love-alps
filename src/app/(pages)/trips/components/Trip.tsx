@@ -18,10 +18,12 @@ import { FaSkiing } from "react-icons/fa";
 
 import { FlagImage } from "@/app/components/Image";
 import { MONTHS_CS } from "@/app/utils/locales";
-import { TripProps } from "@/app/utils/types";
-
-import MEMBERS from "@/data/members";
-import RESORTS from "@/data/resorts";
+import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
+export interface TripContentProps
+  extends Omit<TripProps, "members" | "resorts"> {
+  members: MemberProps[];
+  resorts: ResortProps[];
+}
 
 const TooltipAvatar: typeof Avatar = (props: AvatarProps) => (
   <Tooltip label={props.name}>
@@ -34,12 +36,14 @@ const TooltipAvatar: typeof Avatar = (props: AvatarProps) => (
   </Tooltip>
 );
 
-const Trip = ({ data }: { data: TripProps }) => {
+const Trip = ({ data }: { data: TripContentProps }) => {
   const router = useRouter();
   const monthColor = useColorModeValue("gray.400", "gray.500");
   const resortColor = useColorModeValue("gray.600", "gray.400");
 
   const { id, title, countryCode, month, resorts, members, nonMembers } = data;
+
+  console.log({ resorts });
 
   const handleClick = (id: string) => {
     router.push(`/trips/${id}`);
@@ -78,13 +82,7 @@ const Trip = ({ data }: { data: TripProps }) => {
           <Icon as={FaSkiing} color="secondary.600" fontSize="sm" mr={3} />
 
           <Text fontSize="sm" color={resortColor}>
-            {resorts
-              .map((id) =>
-                RESORTS.filter((resort) => resort.id === id).map(
-                  (resort) => resort.name
-                )
-              )
-              .join(", ")}
+            {resorts.map(({ name }) => name).join(", ")}
           </Text>
         </Flex>
 
@@ -97,11 +95,9 @@ const Trip = ({ data }: { data: TripProps }) => {
           color="white"
           fontSize="sm"
         >
-          {members.map((id) =>
-            MEMBERS.filter((member) => member.id === id).map(({ id, name }) => (
-              <TooltipAvatar key={id} name={name} />
-            ))
-          )}
+          {members.map(({ id, name }) => (
+            <TooltipAvatar key={id} name={name} />
+          ))}
 
           {/* Non members */}
           {nonMembers &&

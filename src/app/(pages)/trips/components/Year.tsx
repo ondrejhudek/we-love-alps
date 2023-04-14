@@ -2,11 +2,9 @@
 
 import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
 
-import { TripProps } from "@/app/utils/types";
+import Trip, { TripContentProps } from "./Trip";
 
-import Trip from "./Trip";
-
-const Year = ({ year, trips }: { year: string; trips: TripProps[] }) => (
+const Year = ({ year, trips }: { year: string; trips: TripContentProps[] }) => (
   <Box key={year}>
     <Heading as="h2" fontSize="2xl" my={5}>
       {year}

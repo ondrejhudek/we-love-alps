@@ -1,11 +1,12 @@
 "use client";
 
+import { Fragment } from "react";
 import { Skeleton, SimpleGrid } from "@chakra-ui/react";
 
 const Loading = () => (
   <>
-    {[...Array(3)].map(() => (
-      <>
+    {[...Array(3)].map((_, i) => (
+      <Fragment key={`trip-loading-${i}`}>
         <Skeleton width="28" height="30" my={5} />
 
         <SimpleGrid
@@ -14,7 +15,7 @@ const Loading = () => (
         >
           <Skeleton height="155" />
         </SimpleGrid>
-      </>
+      </Fragment>
     ))}
   </>
 );

@@ -2,17 +2,36 @@ import { Suspense } from "react";
 import groupBy from "ramda/src/groupBy";
 
 import { getDocuments } from "@/app/mongodb";
-import { TripProps } from "@/app/utils/types";
+import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
 import Loading from "./components/Loading";
 import Year from "./components/Year";
+import { TripContentProps } from "./components/Trip";
 
 const Content = async () => {
-  const data = await getDocuments<TripProps>("trips");
-  const groupedTrips = groupBy<TripProps>((trip) => trip.year.toString(), data);
+  const [tripsData, resortsData, membersData] = await Promise.all([
+    getDocuments<TripProps>("trips"),
+    getDocuments<ResortProps>("resorts"),
+    getDocuments<MemberProps>("members"),
+  ]);
+
+  const groupedTrips = groupBy<TripContentProps>(
+    (trip) => trip.year.toString(),
+    tripsData.map((trip) => ({
+      ...trip,
+      members: trip.members.flatMap((memberId) =>
+        membersData.filter(({ id }) => id === memberId)
+      ),
+      resorts: trip.resorts.flatMap((resortId) =>
+        resortsData.filter(({ id }) => id === resortId)
+      ),
+    }))
+  );
   const groupedKeys = Object.keys(groupedTrips).sort(
     (a, b) => parseInt(b) - parseInt(a)
   );
+
+  console.log(JSON.stringify(groupedTrips));
 
   return (
     <>
