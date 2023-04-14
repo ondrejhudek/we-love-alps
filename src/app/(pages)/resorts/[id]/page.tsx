@@ -48,8 +48,6 @@ const Map = ({ id }: { id: string }) => {
 const Resort = ({ data }: { data: ResortProps }) => {
   const router = useRouter();
 
-  const yearColor = useColorModeValue("white", "gray.900");
-  const yearBgColor = useColorModeValue("secondary.600", "secondary.400");
   const dividerColor = useColorModeValue("gray.300", "gray.800");
 
   const trips = TRIPS.filter((trip) => trip.resorts.includes(data.id));
