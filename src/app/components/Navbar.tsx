@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { usePathname } from "next/navigation";
+import { useSelectedLayoutSegments } from "next/navigation";
 import {
   Box,
   Divider,
@@ -21,13 +21,15 @@ import { NavLinkKey } from "@/app/utils/types";
 import ColorModeSwitcher from "./ColorModeSwitcher";
 import Logo from "./Logo";
 
-const isActive = (pathname: string | null, link: string): boolean => {
-  if (!pathname) return false;
-  return "/" + pathname.split("/")[1] === link;
+const isActiveLink = (link: NavLinkKey, segments: string[]) => {
+  const activeLink = `/${segments[1] || ""}`;
+  return link === activeLink;
 };
 
 const NavLink = ({ link }: { link: NavLinkKey }) => {
-  const pathname = usePathname();
+  const segments = useSelectedLayoutSegments();
+  const isActive = isActiveLink(link, segments);
+
   const color = useColorModeValue("gray.600", "gray.300");
   const activeColor = useColorModeValue("gray.800", "gray.50");
   const hoverColor = useColorModeValue("gray.900", "white");
@@ -42,11 +44,11 @@ const NavLink = ({ link }: { link: NavLinkKey }) => {
       mx={4}
       my={2}
       py={5}
-      color={isActive(pathname, link) ? activeColor : color}
+      color={isActive ? activeColor : color}
       fontWeight={500}
       borderBottomWidth={2}
       borderStyle="solid"
-      borderColor={isActive(pathname, link) ? activeBorderColor : "transparent"}
+      borderColor={isActive ? activeBorderColor : "transparent"}
       _hover={{
         color: hoverColor,
         borderColor: hoverBorderColor,
@@ -64,7 +66,9 @@ const MobileNavLink = ({
   link: NavLinkKey;
   onClose: () => void;
 }) => {
-  const pathname = usePathname();
+  const segments = useSelectedLayoutSegments();
+  const isActive = isActiveLink(link, segments);
+
   const color = useColorModeValue("gray.600", "gray.300");
   const activeColor = useColorModeValue("gray.800", "gray.50");
   const hoverColor = useColorModeValue("gray.900", "white");
@@ -81,7 +85,7 @@ const MobileNavLink = ({
       mx={-4}
       py={4}
       px={6}
-      color={isActive(pathname, link) ? activeColor : color}
+      color={isActive ? activeColor : color}
       fontWeight={500}
       onClick={onClose}
       _hover={{
@@ -97,9 +101,7 @@ const MobileNavLink = ({
         height: "24px",
         borderLeftWidth: 3,
         borderStyle: "solid",
-        borderColor: isActive(pathname, link)
-          ? activeBorderColor
-          : "transparent",
+        borderColor: isActive ? activeBorderColor : "transparent",
       }}
     >
       {NAV_LINKS[link]}
