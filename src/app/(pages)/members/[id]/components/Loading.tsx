@@ -8,11 +8,11 @@ const Loading = () => {
   return (
     <>
       <Box borderTopWidth={4} borderStyle="solid" borderColor={borderColor}>
-        <Skeleton height="136" />
+        <Skeleton height="184" />
       </Box>
 
+      <Skeleton height="175" mt={4} />
       <Skeleton height="217" mt={4} />
-      <Skeleton height="201" mt={4} />
     </>
   );
 };

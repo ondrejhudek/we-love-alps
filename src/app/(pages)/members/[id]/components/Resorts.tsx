@@ -6,7 +6,13 @@ import { Flex, SkeletonCircle, Tooltip } from "@chakra-ui/react";
 import { ResortImage } from "@/app/components/Image";
 import { ResortProps } from "@/app/utils/types";
 
-export const ResortsLoading = () => <SkeletonCircle size="28" />;
+export const ResortsLoading = () => (
+  <Flex wrap="wrap" m={-2}>
+    <SkeletonCircle size="28" m={2} />
+    <SkeletonCircle size="28" m={2} />
+    <SkeletonCircle size="28" m={2} />
+  </Flex>
+);
 
 const Resorts = ({ data }: { data: ResortProps[] }) => {
   const router = useRouter();

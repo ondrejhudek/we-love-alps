@@ -5,11 +5,13 @@ import {
   Avatar,
   AvatarGroup,
   AvatarProps,
+  Box,
   Card,
   CardBody,
   Flex,
   Icon,
   Heading,
+  SimpleGrid,
   Text,
   Tooltip,
   useColorModeValue,
@@ -20,8 +22,7 @@ import { FlagImage } from "@/app/components/Image";
 import { MONTHS_CS } from "@/app/utils/locales";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
-export interface TripContentProps
-  extends Omit<TripProps, "members" | "resorts"> {
+export interface TripViewProps extends Omit<TripProps, "members" | "resorts"> {
   members: MemberProps[];
   resorts: ResortProps[];
 }
@@ -37,7 +38,7 @@ const TooltipAvatar: typeof Avatar = (props: AvatarProps) => (
   </Tooltip>
 );
 
-const Trip = ({ data }: { data: TripContentProps }) => {
+const Trip = ({ data }: { data: TripViewProps }) => {
   const router = useRouter();
   const monthColor = useColorModeValue("gray.400", "gray.500");
   const resortColor = useColorModeValue("gray.600", "gray.400");
@@ -110,4 +111,23 @@ const Trip = ({ data }: { data: TripContentProps }) => {
   );
 };
 
-export default Trip;
+const View = ({ year, trips }: { year: string; trips: TripViewProps[] }) => (
+  <Box key={year}>
+    <Heading as="h2" fontSize="2xl" my={5}>
+      {year}
+    </Heading>
+
+    <SimpleGrid
+      columns={{ base: 1, md: 2 }}
+      spacing={{ base: 3, sm: 4, lg: 5 }}
+    >
+      {trips
+        .sort((a, b) => b.month - a.month)
+        .map((trip) => (
+          <Trip key={trip.id} data={trip} />
+        ))}
+    </SimpleGrid>
+  </Box>
+);
+
+export default View;

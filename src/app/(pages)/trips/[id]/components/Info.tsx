@@ -17,7 +17,7 @@ import { COUNTRIES } from "@/app/utils";
 import { MONTHS_CS } from "@/app/utils/locales";
 import { TripProps } from "@/app/utils/types";
 
-const InfoComponent = ({ data }: { data: TripProps }) => (
+const Info = ({ data }: { data: TripProps }) => (
   <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
     <CardBody>
       <List spacing={3}>
@@ -64,4 +64,4 @@ const InfoComponent = ({ data }: { data: TripProps }) => (
   </Card>
 );
 
-export default InfoComponent;
+export default Info;

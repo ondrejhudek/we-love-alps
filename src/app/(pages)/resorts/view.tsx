@@ -36,7 +36,7 @@ const Map = ({ id }: { id: string }) => {
   );
 };
 
-const Content = ({ data }: { data: ResortProps[] }) => {
+const View = ({ data }: { data: ResortProps[] }) => {
   const router = useRouter();
   const regionColor = useColorModeValue("gray.400", "gray.500");
 
@@ -91,4 +91,4 @@ const Content = ({ data }: { data: ResortProps[] }) => {
   );
 };
 
-export default Content;
+export default View;

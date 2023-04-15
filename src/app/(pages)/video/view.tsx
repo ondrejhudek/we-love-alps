@@ -19,7 +19,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 
 import { VideoProps } from "@/app/utils/types";
 
-export interface VideoContentProps extends VideoProps {
+export interface VideoViewProps extends VideoProps {
   title: string;
   year: number;
 }
@@ -99,7 +99,7 @@ const Video = ({
   );
 };
 
-const Videos = ({ data }: { data: VideoContentProps[] }) => (
+const View = ({ data }: { data: VideoViewProps[] }) => (
   <SimpleGrid
     columns={{ base: 1, sm: 2, md: 3 }}
     spacing={{ base: 3, sm: 4, md: 5, lg: 6 }}
@@ -110,4 +110,4 @@ const Videos = ({ data }: { data: VideoContentProps[] }) => (
   </SimpleGrid>
 );
 
-export default Videos;
+export default View;

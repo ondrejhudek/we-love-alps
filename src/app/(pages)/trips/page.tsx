@@ -5,8 +5,7 @@ import { getDocuments } from "@/app/mongodb";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
 import Loading from "./components/Loading";
-import Year from "./components/Year";
-import { TripContentProps } from "./components/Trip";
+import View, { TripViewProps } from "./view";
 
 const Content = async () => {
   const [tripsData, resortsData, membersData] = await Promise.all([
@@ -15,7 +14,7 @@ const Content = async () => {
     getDocuments<MemberProps>("members"),
   ]);
 
-  const groupedTrips = groupBy<TripContentProps>(
+  const groupedTrips = groupBy<TripViewProps>(
     (trip) => trip.year.toString(),
     tripsData.map((trip) => ({
       ...trip,
@@ -34,7 +33,7 @@ const Content = async () => {
   return (
     <>
       {groupedKeys.map((year) => (
-        <Year key={year} year={year} trips={groupedTrips[year]} />
+        <View key={year} year={year} trips={groupedTrips[year]} />
       ))}
     </>
   );

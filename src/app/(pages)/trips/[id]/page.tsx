@@ -1,39 +1,21 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
-import {
-  getDocumentsByField,
-  getDocumentById,
-  CollectionName,
-} from "@/app/mongodb";
+import Container from "@/app/components/Container";
+import DocumentsByField from "@/app/data/DocumentsByField";
+import { getDocumentById } from "@/app/mongodb";
 import {
   MemberProps,
   ResortProps,
   TripProps,
   VideoProps,
 } from "@/app/utils/types";
-import Container from "@/app/components/Container";
 
 import Info from "./components/Info";
 import Loading from "./components/Loading";
 import Members, { MembersLoading } from "./components/Members";
 import Resorts, { ResortsLoading } from "./components/Resorts";
-import Video, { VideoLoading } from "./components/Video";
-
-const Section = async <T extends object>({
-  collectionName,
-  field,
-  values,
-  clientComponent: ClientComponent,
-}: {
-  collectionName: CollectionName;
-  field: string;
-  values: string[];
-  clientComponent: React.FC<{ data: T[] }>;
-}) => {
-  const data = await getDocumentsByField<T>(collectionName, field, values);
-  return <ClientComponent data={data} />;
-};
+import Video from "./components/Video";
 
 const Content = async ({ id }: { id: string }) => {
   const data = await getDocumentById<TripProps>("trips", id);
@@ -51,11 +33,11 @@ const Content = async ({ id }: { id: string }) => {
       <Container title="Střediska">
         <Suspense fallback={<ResortsLoading />}>
           {/* @ts-expect-error Server Component */}
-          <Section<ResortProps>
+          <DocumentsByField<ResortProps>
             collectionName="resorts"
             field="id"
             values={data.resorts}
-            clientComponent={Resorts}
+            viewComponent={Resorts}
           />
         </Suspense>
       </Container>
@@ -64,11 +46,11 @@ const Content = async ({ id }: { id: string }) => {
       <Container title="Zúčastnili se">
         <Suspense fallback={<MembersLoading />}>
           {/* @ts-expect-error Server Component */}
-          <Section<MemberProps>
+          <DocumentsByField<MemberProps>
             collectionName="members"
             field="id"
             values={data.members}
-            clientComponent={Members}
+            viewComponent={Members}
           />
         </Suspense>
       </Container>
@@ -77,17 +59,13 @@ const Content = async ({ id }: { id: string }) => {
       {/* TODO: Add Photogallery */}
 
       {/* Video */}
-      <Container title="Video" bodyProps={{ pt: 0, px: 0 }}>
-        <Suspense fallback={<VideoLoading />}>
-          {/* @ts-expect-error Server Component */}
-          <Section<VideoProps>
-            collectionName="videos"
-            field="tripId"
-            values={[data.id]}
-            clientComponent={Video}
-          />
-        </Suspense>
-      </Container>
+      {/* @ts-expect-error Server Component */}
+      <DocumentsByField<VideoProps>
+        collectionName="videos"
+        field="tripId"
+        values={[data.id]}
+        viewComponent={Video}
+      />
     </>
   );
 };
@@ -98,4 +76,5 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => (
     <Content id={id} />
   </Suspense>
 );
+
 export default Page;

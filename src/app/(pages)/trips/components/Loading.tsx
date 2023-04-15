@@ -14,6 +14,7 @@ const Loading = () => (
           spacing={{ base: 3, sm: 4, lg: 5 }}
         >
           <Skeleton height="155" />
+          <Skeleton height="155" />
         </SimpleGrid>
       </Fragment>
     ))}

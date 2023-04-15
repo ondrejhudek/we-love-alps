@@ -1,11 +1,15 @@
-import { getDocuments } from "@/app/mongodb";
-import { MemberProps } from "@/app/utils/types";
+import { Suspense } from "react";
 
-import Content from "./content";
+import Data from "@/app/data/Documents";
 
-const Page = async () => {
-  const data = await getDocuments<MemberProps>("members");
-  return <Content data={data} />;
-};
+import Loading from "./components/Loading";
+import View from "./view";
+
+const Page = async () => (
+  <Suspense fallback={<Loading />}>
+    {/* @ts-expect-error Server Component */}
+    <Data collectionName="members" viewComponent={View} />
+  </Suspense>
+);
 
 export default Page;

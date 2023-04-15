@@ -1,11 +1,17 @@
-import { getDocuments } from "@/app/mongodb";
+import { Suspense } from "react";
+
 import { ResortProps } from "@/app/utils/types";
 
-import Content from "./content";
+import Data from "@/app/data/Documents";
 
-const Page = async () => {
-  const data = await getDocuments<ResortProps>("resorts");
-  return <Content data={data} />;
-};
+import Loading from "./components/Loading";
+import View from "./view";
+
+const Page = async () => (
+  <Suspense fallback={<Loading />}>
+    {/* @ts-expect-error Server Component */}
+    <Data<ResortProps> collectionName="resorts" viewComponent={View} />
+  </Suspense>
+);
 
 export default Page;
