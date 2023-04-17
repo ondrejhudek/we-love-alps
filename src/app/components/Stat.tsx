@@ -1,3 +1,5 @@
+"use client";
+
 import NextLink from "next/link";
 import {
   Box,
@@ -7,23 +9,64 @@ import {
   Flex,
   Icon,
   Link,
+  SimpleGrid,
+  Skeleton,
   Stat,
   StatLabel,
   StatNumber,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { IconType } from "react-icons";
+import { HiOutlineUsers, HiOutlineMapPin, HiOutlineMap } from "react-icons/hi2";
+
+import { CollectionName } from "@/app/mongodb";
 
 export interface StatProps {
+  slug: CollectionName;
   title: string;
-  value: number;
-  icon: IconType;
-  path: string;
   pathLabel: string;
   color: string;
 }
 
-const MyStat = ({ title, value, icon, path, pathLabel, color }: StatProps) => {
+const ICONS: Partial<Record<CollectionName, IconType>> = {
+  members: HiOutlineUsers,
+  trips: HiOutlineMap,
+  resorts: HiOutlineMapPin,
+};
+
+export const Stats = ({ children }: { children: React.ReactNode }) => (
+  <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, sm: 4, md: 6 }}>
+    {children}
+  </SimpleGrid>
+);
+
+export const StatLoading = ({ color }: { color: string }) => {
+  const startColor = useColorModeValue(
+    `var(--chakra-colors-${color}-200)`,
+    `var(--chakra-colors-${color}-300)`
+  );
+  const endColor = useColorModeValue(
+    `var(--chakra-colors-${color}-400)`,
+    `var(--chakra-colors-${color}-500)`
+  );
+
+  return (
+    <Skeleton
+      width={8}
+      height="6"
+      startColor={startColor}
+      endColor={endColor}
+    />
+  );
+};
+
+const MyStat = ({
+  slug,
+  title,
+  pathLabel,
+  color,
+  children,
+}: StatProps & { children: React.ReactNode }) => {
   const bgFrom = useColorModeValue(
     `var(--chakra-colors-${color}-500)`,
     `var(--chakra-colors-${color}-800)`
@@ -35,10 +78,7 @@ const MyStat = ({ title, value, icon, path, pathLabel, color }: StatProps) => {
 
   return (
     <Box>
-      <Card
-        // bgColor={useColorModeValue(`${color}.500`, `${color}.800`)}
-        bg={`linear-gradient(210deg, ${bgFrom} 0%, ${bgTo} 100%)`}
-      >
+      <Card bg={`linear-gradient(210deg, ${bgFrom} 0%, ${bgTo} 100%)`}>
         <CardBody>
           <Stat>
             <Flex align="center">
@@ -52,7 +92,7 @@ const MyStat = ({ title, value, icon, path, pathLabel, color }: StatProps) => {
                 mr={4}
               >
                 <Icon
-                  as={icon}
+                  as={ICONS[slug]}
                   boxSize={6}
                   color={useColorModeValue(`${color}.800`, `${color}.900`)}
                 />
@@ -69,7 +109,7 @@ const MyStat = ({ title, value, icon, path, pathLabel, color }: StatProps) => {
                   color={useColorModeValue("white", "whiteAlpha.800")}
                   lineHeight={6}
                 >
-                  {value}
+                  {children}
                 </StatNumber>
               </Box>
             </Flex>
@@ -85,7 +125,7 @@ const MyStat = ({ title, value, icon, path, pathLabel, color }: StatProps) => {
         >
           <Link
             as={NextLink}
-            href={path}
+            href={`/${slug}`}
             color={useColorModeValue(`${color}.800`, `${color}.900`)}
             _hover={{ textDecoration: "underline" }}
           >

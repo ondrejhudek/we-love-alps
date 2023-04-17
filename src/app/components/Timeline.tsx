@@ -7,6 +7,7 @@ import {
   Box,
   Card,
   CardBody,
+  Divider,
   Flex,
   Heading,
   Icon,
@@ -18,10 +19,7 @@ import { FaSkiing } from "react-icons/fa";
 
 import { FlagImage } from "@/app/components/Image";
 import { MONTHS_CS } from "@/app/utils/locales";
-
-import MEMBERS from "@/data/members";
-import RESORTS from "@/data/resorts";
-import TRIPS, { TripProps } from "@/data/trips";
+import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
 const DOT_SIZE = 64;
 const DOT_SIZE_PX = `${DOT_SIZE}px`;
@@ -38,11 +36,15 @@ const TooltipAvatar: typeof Avatar = (props: any) => (
 );
 
 const TimelineRow = ({
-  trip: { id, title, year, month, resorts, countryCode, members, nonMembers },
+  trip: { id, title, year, month, countryCode, nonMembers },
+  tripMembers,
+  tripResorts,
   even,
   onClick,
 }: {
   trip: TripProps;
+  tripMembers: MemberProps[];
+  tripResorts: ResortProps[];
   even: boolean;
   onClick: (id: string) => void;
 }) => (
@@ -152,13 +154,7 @@ const TimelineRow = ({
               fontSize="sm"
               color={useColorModeValue("gray.600", "gray.400")}
             >
-              {resorts
-                .map((id) =>
-                  RESORTS.filter((resort) => resort.id === id).map(
-                    (resort) => resort.name
-                  )
-                )
-                .join(", ")}
+              {tripResorts.map(({ name }) => name).join(", ")}
             </Text>
           </Flex>
 
@@ -167,15 +163,13 @@ const TimelineRow = ({
             size="sm"
             spacing={-1.5}
             mt={3}
-            max={members.length}
+            max={tripMembers.length}
             color="white"
             fontSize="sm"
           >
-            {members.map((id) =>
-              MEMBERS.filter((member) => member.id === id).map(
-                ({ id, name }) => <TooltipAvatar key={id} name={name} />
-              )
-            )}
+            {tripMembers.map(({ id, name }) => (
+              <TooltipAvatar key={id} name={name} />
+            ))}
 
             {/* Non members */}
             {nonMembers &&
@@ -190,7 +184,15 @@ const TimelineRow = ({
   </Box>
 );
 
-const Timeline = () => {
+const Timeline = ({
+  tripsData,
+  membersData,
+  resortsData,
+}: {
+  tripsData: TripProps[];
+  membersData: MemberProps[];
+  resortsData: ResortProps[];
+}) => {
   const router = useRouter();
 
   const handleClick = (id: string) => {
@@ -199,6 +201,8 @@ const Timeline = () => {
 
   return (
     <>
+      <Divider my={{ base: 6, md: 10 }} />
+
       <Box
         pos="relative"
         _after={{
@@ -212,11 +216,26 @@ const Timeline = () => {
           ml: "-1px",
         }}
       >
-        {TRIPS.map((trip, i) => (
-          <Box key={trip.id}>
-            <TimelineRow trip={trip} even={i % 2 === 0} onClick={handleClick} />
-          </Box>
-        ))}
+        {tripsData.map((trip, i) => {
+          const members = trip.members.flatMap((id) =>
+            membersData.filter((member) => member.id === id)
+          );
+          const resorts = trip.resorts.flatMap((id) =>
+            resortsData.filter((resort) => resort.id === id)
+          );
+
+          return (
+            <Box key={trip.id}>
+              <TimelineRow
+                trip={trip}
+                tripMembers={members}
+                tripResorts={resorts}
+                even={i % 2 === 0}
+                onClick={handleClick}
+              />
+            </Box>
+          );
+        })}
       </Box>
 
       <Heading

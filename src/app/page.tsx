@@ -1,55 +1,73 @@
-"use client";
+import { Suspense } from "react";
 
-import { Divider, SimpleGrid } from "@chakra-ui/react";
-import { HiOutlineUsers, HiOutlineMapPin, HiOutlineMap } from "react-icons/hi2";
+import { getDocumentsCount, getDocuments, CollectionName } from "@/app/mongodb";
+import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
-import Stat, { StatProps } from "./components/Stat";
-import Timeline from "./components/Timeline";
-
-import MEMBERS from "@/data/members";
-import RESORTS from "@/data/resorts";
-import TRIPS from "@/data/trips";
+import TimelineView from "./components/Timeline";
+import StatView, {
+  Stats as StatsView,
+  StatLoading,
+  StatProps,
+} from "./components/Stat";
 
 const STATS: StatProps[] = [
   {
+    slug: "members",
     title: "Členové",
-    value: MEMBERS.length,
-    icon: HiOutlineUsers,
-    path: "/members",
     pathLabel: "Všichni členové",
     color: "orange",
   },
   {
+    slug: "trips",
     title: "Zájezdy",
-    value: TRIPS.length,
-    icon: HiOutlineMap,
-    path: "/trips",
     pathLabel: "Všechny zájezdy",
     color: "purple",
   },
   {
+    slug: "resorts",
     title: "Střediska",
-    value: RESORTS.length,
-    icon: HiOutlineMapPin,
-    path: "/resorts",
     pathLabel: "Všechny střediska",
     color: "pink",
   },
 ];
 
+const Stat = async ({ slug }: { slug: CollectionName }) => {
+  const count = await getDocumentsCount(slug);
+  return <>{count}</>;
+};
+
+const Timeline = async () => {
+  const [tripsData, resortsData, membersData] = await Promise.all([
+    getDocuments<TripProps>("trips", { year: 1 }),
+    getDocuments<ResortProps>("resorts"),
+    getDocuments<MemberProps>("members"),
+  ]);
+
+  return (
+    <TimelineView
+      tripsData={tripsData}
+      membersData={membersData}
+      resortsData={resortsData}
+    />
+  );
+};
+
 const Page = () => (
   <>
-    <SimpleGrid
-      columns={{ base: 1, md: 3 }}
-      spacing={{ base: 3, sm: 4, md: 6 }}
-    >
+    {/* Stats */}
+    <StatsView>
       {STATS.map((stat) => (
-        <Stat key={stat.path} {...stat} />
+        <StatView key={stat.slug} {...stat}>
+          <Suspense fallback={<StatLoading color={stat.color} />}>
+            {/* @ts-expect-error Server Component */}
+            <Stat slug={stat.slug} />
+          </Suspense>
+        </StatView>
       ))}
-    </SimpleGrid>
+    </StatsView>
 
-    <Divider my={{ base: 6, md: 10 }} />
-
+    {/* Timeline */}
+    {/* @ts-expect-error Server Component */}
     <Timeline />
   </>
 );
