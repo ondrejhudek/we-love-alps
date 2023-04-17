@@ -12,7 +12,6 @@ import { Box, BoxProps, useColorModeValue } from "@chakra-ui/react";
 import { getBlurredUrl } from "@/app/cloudinary/generateBlurPlaceholder";
 import { ImageProps } from "@/app/cloudinary/types";
 import { COUNTRIES } from "@/app/utils";
-import { TripProps } from "@/data/trips";
 
 export const FlagImage = ({
   countryCode,
