@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
+import Header from "@/app/components/Header";
 import { VideoProps } from "@/app/utils/types";
 
 export interface VideoViewProps extends VideoProps {
@@ -100,14 +101,18 @@ const Video = ({
 };
 
 const View = ({ data }: { data: VideoViewProps[] }) => (
-  <SimpleGrid
-    columns={{ base: 1, sm: 2, md: 3 }}
-    spacing={{ base: 3, sm: 4, md: 5, lg: 6 }}
-  >
-    {data.map(({ tripId, youtubeId, title, year }) => (
-      <Video key={tripId} youtubeId={youtubeId} title={title} year={year} />
-    ))}
-  </SimpleGrid>
+  <>
+    <Header />
+
+    <SimpleGrid
+      columns={{ base: 1, sm: 2, md: 3 }}
+      spacing={{ base: 3, sm: 4, md: 5, lg: 6 }}
+    >
+      {data.map(({ tripId, youtubeId, title, year }) => (
+        <Video key={tripId} youtubeId={youtubeId} title={title} year={year} />
+      ))}
+    </SimpleGrid>
+  </>
 );
 
 export default View;

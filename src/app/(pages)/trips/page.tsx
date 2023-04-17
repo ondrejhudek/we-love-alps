@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import groupBy from "ramda/src/groupBy";
 
+import Header from "@/app/components/Header";
 import { getDocuments } from "@/app/mongodb";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
@@ -32,6 +33,8 @@ const Content = async () => {
 
   return (
     <>
+      <Header />
+
       {groupedKeys.map((year) => (
         <View key={year} year={year} trips={groupedTrips[year]} />
       ))}

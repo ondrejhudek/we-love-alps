@@ -19,6 +19,7 @@ import {
 import { IconType } from "react-icons";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 
+import Header from "@/app/components/Header";
 import { AvatarImage } from "@/app/components/Image";
 import { MemberProps } from "@/app/utils/types";
 
@@ -71,73 +72,77 @@ const View = ({ data }: { data: MemberProps[] }) => {
   };
 
   return (
-    <SimpleGrid
-      columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
-      spacing={{ base: 3, sm: 4, lg: 5 }}
-    >
-      {data.map(({ id, name, nickname, facebook, instagram }) => (
-        <Card
-          key={id}
-          overflow="hidden"
-          onClick={() => handleClick(id)}
-          _hover={{
-            cursor: "pointer",
-            boxShadow: "outline",
-          }}
-        >
-          {/* Header */}
-          <CardBody py={10}>
-            <Box textAlign="center">
-              <AvatarImage
-                id={id}
-                name={name}
-                boxSize={32}
-                marginInlineStart="auto"
-                marginInlineEnd="auto"
-                mb={4}
-              />
-              <Heading fontSize="xl" fontWeight={500}>
-                {name}
-              </Heading>
-              <Text mt={1} color="gray.500" fontSize="sm" fontWeight={500}>
-                @{nickname || id}
-              </Text>
-            </Box>
-          </CardBody>
+    <>
+      <Header />
 
-          {/* Footer */}
-          <CardFooter
-            p={0}
-            borderTopWidth={1}
-            borderStyle="solid"
-            borderColor={borderColor}
+      <SimpleGrid
+        columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
+        spacing={{ base: 3, sm: 4, lg: 5 }}
+      >
+        {data.map(({ id, name, nickname, facebook, instagram }) => (
+          <Card
+            key={id}
+            overflow="hidden"
+            onClick={() => handleClick(id)}
+            _hover={{
+              cursor: "pointer",
+              boxShadow: "outline",
+            }}
           >
-            <HStack
-              flex="1"
-              divider={<StackDivider borderColor={borderColor} />}
-              spacing={0}
+            {/* Header */}
+            <CardBody py={10}>
+              <Box textAlign="center">
+                <AvatarImage
+                  id={id}
+                  name={name}
+                  boxSize={32}
+                  marginInlineStart="auto"
+                  marginInlineEnd="auto"
+                  mb={4}
+                />
+                <Heading fontSize="xl" fontWeight={500}>
+                  {name}
+                </Heading>
+                <Text mt={1} color="gray.500" fontSize="sm" fontWeight={500}>
+                  @{nickname || id}
+                </Text>
+              </Box>
+            </CardBody>
+
+            {/* Footer */}
+            <CardFooter
+              p={0}
+              borderTopWidth={1}
+              borderStyle="solid"
+              borderColor={borderColor}
             >
-              {facebook && (
-                <SocialButton
-                  name="Facebook"
-                  icon={FaFacebook}
-                  color="facebook.500"
-                  link={`https://www.facebook.com/${facebook}`}
-                />
-              )}
-              {instagram && (
-                <SocialButton
-                  name="Instagram"
-                  icon={FaInstagram}
-                  color="instagram.500"
-                  link={`https://www.instagram.com/${instagram}`}
-                />
-              )}
-            </HStack>
-          </CardFooter>
-        </Card>
-      ))}
-    </SimpleGrid>
+              <HStack
+                flex="1"
+                divider={<StackDivider borderColor={borderColor} />}
+                spacing={0}
+              >
+                {facebook && (
+                  <SocialButton
+                    name="Facebook"
+                    icon={FaFacebook}
+                    color="facebook.500"
+                    link={`https://www.facebook.com/${facebook}`}
+                  />
+                )}
+                {instagram && (
+                  <SocialButton
+                    name="Instagram"
+                    icon={FaInstagram}
+                    color="instagram.500"
+                    link={`https://www.instagram.com/${instagram}`}
+                  />
+                )}
+              </HStack>
+            </CardFooter>
+          </Card>
+        ))}
+      </SimpleGrid>
+    </>
   );
 };
 

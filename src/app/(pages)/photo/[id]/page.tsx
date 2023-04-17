@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import Header from "@/app/components/Header";
 import { getImages } from "@/app/cloudinary/service";
 import Photoalbum from "@/app/components/Photoalbum";
 import { getDocumentById } from "@/app/mongodb";
@@ -15,7 +16,12 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
     notFound();
   }
 
-  return <Photoalbum images={images} />;
+  return (
+    <>
+      <Header label={data.title} />
+      <Photoalbum images={images} />
+    </>
+  );
 };
 
 export default Page;

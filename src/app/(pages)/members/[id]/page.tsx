@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
 import Container from "@/app/components/Container";
+import Header from "@/app/components/Header";
 import DocumentsByField from "@/app/data/DocumentsByField";
 import { getDocuments, getDocumentsByField } from "@/app/mongodb";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
@@ -31,6 +32,8 @@ const Content = async ({ id }: { id: string }) => {
 
   return (
     <>
+      <Header label={memberData.name} />
+
       {/* Info */}
       <Info data={memberData} membersData={membersData} />
 

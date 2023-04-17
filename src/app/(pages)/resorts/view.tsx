@@ -15,6 +15,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
+import Header from "@/app/components/Header";
 import { FlagImage, ResortImage } from "@/app/components/Image";
 import { ResortProps } from "@/app/utils/types";
 
@@ -45,49 +46,53 @@ const View = ({ data }: { data: ResortProps[] }) => {
   };
 
   return (
-    <SimpleGrid
-      columns={{ base: 1, sm: 2, md: 3 }}
-      spacing={{ base: 3, sm: 4, lg: 5 }}
-    >
-      {data.map(({ id, name, region, countryCode, map }) => (
-        <Card
-          key={id}
-          overflow="hidden"
-          _hover={{
-            cursor: "pointer",
-            boxShadow: "outline",
-          }}
-          onClick={() => handleClick(id)}
-        >
-          {/* Map */}
-          <Map id={map} />
+    <>
+      <Header />
 
-          <CardFooter>
-            <Flex justify="space-between" width="full">
-              <Flex align="center">
-                <FlagImage countryCode={countryCode} boxSize={26} mr={2} />
-                <Box>
-                  {/* Region */}
-                  <Text
-                    color={regionColor}
-                    fontSize="xs"
-                    textTransform="uppercase"
-                  >
-                    {region}
-                  </Text>
-                  {/* Name */}
-                  <Heading as="h2" mt={-0.5} fontSize="lg">
-                    {name}
-                  </Heading>
-                </Box>
+      <SimpleGrid
+        columns={{ base: 1, sm: 2, md: 3 }}
+        spacing={{ base: 3, sm: 4, lg: 5 }}
+      >
+        {data.map(({ id, name, region, countryCode, map }) => (
+          <Card
+            key={id}
+            overflow="hidden"
+            _hover={{
+              cursor: "pointer",
+              boxShadow: "outline",
+            }}
+            onClick={() => handleClick(id)}
+          >
+            {/* Map */}
+            <Map id={map} />
+
+            <CardFooter>
+              <Flex justify="space-between" width="full">
+                <Flex align="center">
+                  <FlagImage countryCode={countryCode} boxSize={26} mr={2} />
+                  <Box>
+                    {/* Region */}
+                    <Text
+                      color={regionColor}
+                      fontSize="xs"
+                      textTransform="uppercase"
+                    >
+                      {region}
+                    </Text>
+                    {/* Name */}
+                    <Heading as="h2" mt={-0.5} fontSize="lg">
+                      {name}
+                    </Heading>
+                  </Box>
+                </Flex>
+
+                <ResortImage id={id} name={name} boxSize={14} rounded="full" />
               </Flex>
-
-              <ResortImage id={id} name={name} boxSize={14} rounded="full" />
-            </Flex>
-          </CardFooter>
-        </Card>
-      ))}
-    </SimpleGrid>
+            </CardFooter>
+          </Card>
+        ))}
+      </SimpleGrid>
+    </>
   );
 };
 
