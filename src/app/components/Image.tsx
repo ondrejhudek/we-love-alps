@@ -141,15 +141,15 @@ export const ResortImage = ({
 };
 
 export const GalleryThumbnailImage = ({
-  trip,
+  alt,
   image,
 }: {
-  trip: TripProps;
+  alt: string;
   image: ImageProps;
 }) => (
   <CldImage
     src={image.public_id}
-    alt={trip.title}
+    alt={alt}
     width={480}
     height={360}
     sizes="(max-width: 22em) 50vw, (max-width: 30em) 50vw, (max-width: 48em) 33vw, 25vw"
