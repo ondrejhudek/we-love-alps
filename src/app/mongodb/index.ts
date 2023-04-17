@@ -7,8 +7,8 @@ interface Sort {
 
 const DATABASE_NAME = "app";
 
-const SLEEP_TIME = 2000;
-const sleep = () => new Promise((r) => setTimeout(r, SLEEP_TIME));
+// const SLEEP_TIME = 2000;
+// const sleep = () => new Promise((r) => setTimeout(r, SLEEP_TIME));
 
 const getDatabase = async () => {
   const client = await mongoClient;
@@ -54,7 +54,7 @@ export const getDocumentsByField = async <T extends object>(
 export const getDocumentsCount = async (
   collectionName: CollectionName
 ): Promise<number> => {
-  await sleep();
+  // await sleep();
   const db = await getDatabase();
   return await db.collection(collectionName).estimatedDocumentCount();
 };
