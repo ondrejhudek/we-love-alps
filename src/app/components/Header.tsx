@@ -20,8 +20,6 @@ const Header = ({ label }: { label?: string }) => {
     label: i === 0 ? NAV_LINKS[segment] : label || NOT_FOUND,
   }));
 
-  console.log({ pathname, segments, links });
-
   return (
     <>
       {/* Breadcrump */}
