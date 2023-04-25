@@ -11,24 +11,23 @@ import {
 
 import { GalleryThumbnailImage } from "@/app/components/Image";
 import { GalleryFolderProps, ImageProps } from "@/app/cloudinary/types";
+import { TripProps } from "@/app/utils/types";
 // import { PHOTO_CS } from "@/app/utils/locales";
-
-import TRIPS from "@/data/trips";
 
 const GalleryFolder = ({
   path,
   thumbnail,
   // total,
+  trip,
   onClick,
 }: {
   path: string;
   thumbnail?: ImageProps;
   // total: number;
+  trip: TripProps;
   onClick: (id: string) => void;
 }) => {
   const subtitleColor = useColorModeValue("gray.600", "gray.400");
-  const trip = TRIPS.find(({ id }) => `gallery/${id}` === path);
-  if (!trip) return null;
 
   return (
     <Box
@@ -48,7 +47,7 @@ const GalleryFolder = ({
             boxShadow: "outline",
           }}
         >
-          <GalleryThumbnailImage trip={trip} image={thumbnail} />
+          <GalleryThumbnailImage alt={trip.title} image={thumbnail} />
         </Box>
       )}
 
@@ -70,8 +69,13 @@ const GalleryFolder = ({
   );
 };
 
-const Gallery = ({ folders }: { folders: GalleryFolderProps[] }) => {
-  // console.log(folders);
+const Gallery = ({
+  folders,
+  tripsData,
+}: {
+  folders: GalleryFolderProps[];
+  tripsData: TripProps[];
+}) => {
   const router = useRouter();
 
   const handleClick = (id: string) => {
@@ -84,15 +88,21 @@ const Gallery = ({ folders }: { folders: GalleryFolderProps[] }) => {
         columns={{ base: 1, xs: 2, sm: 3, md: 4 }}
         spacing={{ base: 3, sm: 4, lg: 5 }}
       >
-        {folders.map(({ path, thumbnailImage }) => (
-          <GalleryFolder
-            key={path}
-            path={path}
-            // total={total_count}
-            thumbnail={thumbnailImage}
-            onClick={handleClick}
-          />
-        ))}
+        {folders.map(({ path, thumbnailImage }) => {
+          const trip = tripsData.find(({ id }) => `gallery/${id}` === path);
+          if (!trip) return null;
+
+          return (
+            <GalleryFolder
+              key={path}
+              path={path}
+              trip={trip}
+              // total={total_count}
+              thumbnail={thumbnailImage}
+              onClick={handleClick}
+            />
+          );
+        })}
       </SimpleGrid>
     </>
   );

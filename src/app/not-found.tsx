@@ -8,11 +8,6 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-/**
- * Note: not-found.js currently only renders when triggered by the notFound function, we're working on support for catching unmatched routes.
- * https://beta.nextjs.org/docs/api-reference/file-conventions/not-found
- * TODO: Finish when it's done NextJS.
- */
 const NotFound = () => (
   <Alert
     status="error"

@@ -1,207 +1,80 @@
-"use client";
+import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
-import { useState } from "react";
-import { useRouter, notFound } from "next/navigation";
+import Container from "@/app/components/Container";
+import Header from "@/app/components/Header";
+import DocumentsByField from "@/app/data/DocumentsByField";
+import { getDocumentById } from "@/app/mongodb";
 import {
-  AspectRatio,
-  Card,
-  CardHeader,
-  CardBody,
-  Divider,
-  Flex,
-  Heading,
-  Icon,
-  Tooltip,
-  Link,
-  List,
-  ListItem,
-  Skeleton,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { FaExternalLinkAlt } from "react-icons/fa";
+  MemberProps,
+  ResortProps,
+  TripProps,
+  VideoProps,
+} from "@/app/utils/types";
 
-import { MONTHS_CS } from "@/app/utils/locales";
-import { AvatarImage, FlagImage, ResortImage } from "@/app/components/Image";
+import Info from "./components/Info";
+import Members, { MembersLoading } from "./components/Members";
+import Resorts, { ResortsLoading } from "./components/Resorts";
+import Video from "./components/Video";
 
-import COUNTRIES from "@/data/countries";
-import MEMBERS from "@/data/members";
-import RESORTS from "@/data/resorts";
-import TRIPS, { TripProps } from "@/data/trips";
-import VIDEOS from "@/data/videos";
+const Content = async ({ id }: { id: string }) => {
+  const data = await getDocumentById<TripProps>("trips", id);
 
-const Video = ({ id }: { id: string }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  return (
-    <Skeleton isLoaded={isLoaded} borderRadius="none">
-      <AspectRatio key={id} ratio={2} maxH="500px">
-        <iframe
-          src={`https://www.youtube.com/embed/${id}`}
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-          onLoad={() => setIsLoaded(true)}
-        ></iframe>
-      </AspectRatio>
-    </Skeleton>
-  );
-};
-
-const Trip = ({ data }: { data: TripProps }) => {
-  const router = useRouter();
-
-  const dividerColor = useColorModeValue("gray.300", "gray.800");
-
-  const handleMemberClick = (id: string) => {
-    router.push(`/members/${id}`);
-  };
-
-  const handleResortClick = (id: string) => {
-    router.push(`/resorts/${id}`);
-  };
-
-  const video = VIDEOS[data.id];
+  if (!data) {
+    notFound();
+  }
 
   return (
     <>
+      <Header label={data.title} />
+
       {/* Info */}
-      <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
-        <CardBody>
-          <List spacing={3}>
-            <ListItem fontWeight={500}>
-              <Text as="span" mr={2} color="gray.500" fontWeight={400}>
-                Kdy /
-              </Text>
-              {MONTHS_CS[data.month]}, {data.year}
-            </ListItem>
-
-            <ListItem fontWeight={500} display="flex" alignItems="center">
-              <Text as="span" mr={2} color="gray.500" fontWeight={400}>
-                Kde /
-              </Text>
-              {data.title}, {COUNTRIES[data.countryCode]}
-              <FlagImage countryCode={data.countryCode} ml={2} />
-            </ListItem>
-
-            {data.accomodation && (
-              <ListItem fontWeight={500}>
-                <Text as="span" mr={2} color="gray.500" fontWeight={400}>
-                  Ubytování /
-                </Text>
-                {data.accomodation.name}
-                {data.accomodation.map && (
-                  <Tooltip label="Otevřít ubýtování na Google Maps">
-                    <Link
-                      href={`https://goo.gl/maps/${data.accomodation.map}`}
-                      target="_blank"
-                    >
-                      <Icon
-                        as={FaExternalLinkAlt}
-                        boxSize={3}
-                        ml={2}
-                        color="primary.600"
-                      />
-                    </Link>
-                  </Tooltip>
-                )}
-              </ListItem>
-            )}
-          </List>
-        </CardBody>
-      </Card>
+      <Info data={data} />
 
       {/* Resorts */}
-      <Card mt={4}>
-        <CardHeader>
-          <Heading as="h2" fontSize="xl">
-            Střediska
-          </Heading>
-        </CardHeader>
-        <Divider borderColor={dividerColor} />
-        <CardBody>
-          <Flex wrap="wrap" m={-2}>
-            {data.resorts.map((resortId) => {
-              const resort = RESORTS.find((resort) => resort.id === resortId);
-              if (!resort) return;
-              const { id, name } = resort;
-
-              return (
-                <Tooltip key={id} label={name} shouldWrapChildren>
-                  <ResortImage
-                    id={id}
-                    name={name}
-                    asAvatar
-                    onClick={() => handleResortClick(id)}
-                  />
-                </Tooltip>
-              );
-            })}
-          </Flex>
-        </CardBody>
-      </Card>
+      <Container title="Střediska">
+        <Suspense fallback={<ResortsLoading />}>
+          {/* @ts-expect-error Server Component */}
+          <DocumentsByField<ResortProps>
+            collectionName="resorts"
+            field="id"
+            values={data.resorts}
+            viewComponent={Resorts}
+          />
+        </Suspense>
+      </Container>
 
       {/* Members */}
-      <Card mt={4}>
-        <CardHeader>
-          <Heading as="h2" fontSize="xl">
-            Zúčastnili se
-          </Heading>
-        </CardHeader>
-        <Divider borderColor={dividerColor} />
-        <CardBody>
-          <Flex wrap="wrap" m={-2}>
-            {data.members.map((memberId) => {
-              const member = MEMBERS.find((member) => member.id === memberId);
-              if (!member) return;
-              const { id, name } = member;
+      <Container title="Zúčastnili se">
+        <Suspense fallback={<MembersLoading />}>
+          {/* @ts-expect-error Server Component */}
+          <DocumentsByField<MemberProps>
+            collectionName="members"
+            field="id"
+            values={data.members}
+            viewComponent={Members}
+          />
+        </Suspense>
+      </Container>
 
-              return (
-                <Tooltip key={id} label={name} shouldWrapChildren>
-                  <AvatarImage
-                    id={id}
-                    name={name}
-                    boxSize={24}
-                    m={2}
-                    boxShadow="md"
-                    _hover={{
-                      cursor: "pointer",
-                      boxShadow: "outline",
-                    }}
-                    onClick={() => handleMemberClick(id)}
-                  />
-                </Tooltip>
-              );
-            })}
-          </Flex>
-        </CardBody>
-      </Card>
+      {/* Photo */}
+      {/* TODO: Add Photogallery */}
 
       {/* Video */}
-      {video && (
-        <Card mt={4}>
-          <CardHeader>
-            <Heading as="h2" fontSize="xl">
-              Video
-            </Heading>
-          </CardHeader>
-          <CardBody pt={0} px={0}>
-            <Video id={video} />
-          </CardBody>
-        </Card>
-      )}
+      {/* @ts-expect-error Server Component */}
+      <DocumentsByField<VideoProps>
+        collectionName="videos"
+        field="tripId"
+        values={[data.id]}
+        viewComponent={Video}
+      />
     </>
   );
 };
 
-const Page = ({ params: { id } }: { params: { id: string } }) => {
-  const trip = TRIPS.find((trip) => trip.id === id);
-
-  if (!trip) {
-    notFound();
-  }
-
-  return <Trip data={trip} />;
-};
+const Page = async ({ params: { id } }: { params: { id: string } }) => (
+  // @ts-expect-error Server Component
+  <Content id={id} />
+);
 
 export default Page;

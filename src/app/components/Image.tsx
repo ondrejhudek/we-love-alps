@@ -11,8 +11,7 @@ import { Box, BoxProps, useColorModeValue } from "@chakra-ui/react";
 
 import { getBlurredUrl } from "@/app/cloudinary/generateBlurPlaceholder";
 import { ImageProps } from "@/app/cloudinary/types";
-import COUNTRIES from "@/data/countries";
-import { TripProps } from "@/data/trips";
+import { COUNTRIES } from "@/app/utils";
 
 export const FlagImage = ({
   countryCode,
@@ -141,15 +140,15 @@ export const ResortImage = ({
 };
 
 export const GalleryThumbnailImage = ({
-  trip,
+  alt,
   image,
 }: {
-  trip: TripProps;
+  alt: string;
   image: ImageProps;
 }) => (
   <CldImage
     src={image.public_id}
-    alt={trip.title}
+    alt={alt}
     width={480}
     height={360}
     sizes="(max-width: 22em) 50vw, (max-width: 30em) 50vw, (max-width: 48em) 33vw, 25vw"

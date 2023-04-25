@@ -1,5 +1,5 @@
 import { NAV_LINKS_CS } from "./locales";
-import { NavLinkKey } from "./types";
+import { NavLinkKey, CountryProps } from "./types";
 
 export const NAV_LINKS: Record<NavLinkKey, string> = {
   [NavLinkKey.Home]: NAV_LINKS_CS.home,
@@ -16,3 +16,9 @@ export type LINK = {
 };
 
 export const NAV_LINK_KEYS = Object.keys(NAV_LINKS) as NavLinkKey[];
+
+export const COUNTRIES: CountryProps = {
+  AT: "Rakousko",
+  IT: "Itálie",
+  FT: "Francie",
+};
