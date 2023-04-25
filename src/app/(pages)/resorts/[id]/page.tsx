@@ -8,7 +8,6 @@ import { getDocumentsByField, getDocumentById } from "@/app/mongodb";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
 import Info from "./components/Info";
-import Loading from "./components/Loading";
 import Members, { MembersLoading } from "./components/Members";
 
 const Content = async ({ id }: { id: string }) => {
@@ -47,10 +46,8 @@ const Content = async ({ id }: { id: string }) => {
 };
 
 const Page = async ({ params: { id } }: { params: { id: string } }) => (
-  <Suspense fallback={<Loading />}>
-    {/* @ts-expect-error Server Component */}
-    <Content id={id} />
-  </Suspense>
+  //  @ts-expect-error Server Component
+  <Content id={id} />
 );
 
 export default Page;

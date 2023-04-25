@@ -1,11 +1,9 @@
-import { Suspense } from "react";
 import groupBy from "ramda/src/groupBy";
 
 import Header from "@/app/components/Header";
 import { getDocuments } from "@/app/mongodb";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
-import Loading from "./components/Loading";
 import View, { TripViewProps } from "./view";
 
 const Content = async () => {
@@ -43,10 +41,8 @@ const Content = async () => {
 };
 
 const Page = async () => (
-  <Suspense fallback={<Loading />}>
-    {/* @ts-expect-error Server Component */}
-    <Content />
-  </Suspense>
+  // @ts-expect-error Server Component
+  <Content />
 );
 
 export default Page;
