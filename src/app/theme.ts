@@ -103,7 +103,7 @@ const theme = extendTheme({
         color: mode("gray.700", "whiteAlpha.900")(props),
       },
       body: {
-        bgColor: mode("gray.100", "gray.800")(props),
+        bgColor: mode("gray.100", "secondary.900")(props),
       },
       h1: {
         color: mode("primary.700", "primary.500")(props),

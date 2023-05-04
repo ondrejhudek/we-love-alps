@@ -35,7 +35,7 @@ const ICONS: Partial<Record<CollectionName, IconType>> = {
 };
 
 export const Stats = ({ children }: { children: React.ReactNode }) => (
-  <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, sm: 4, md: 6 }}>
+  <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 2, sm: 3, md: 4 }}>
     {children}
   </SimpleGrid>
 );
@@ -68,17 +68,20 @@ const MyStat = ({
   children,
 }: StatProps & { children: React.ReactNode }) => {
   const bgFrom = useColorModeValue(
-    `var(--chakra-colors-${color}-500)`,
-    `var(--chakra-colors-${color}-800)`
+    `var(--chakra-colors-${color}-600)`,
+    `var(--chakra-colors-${color}-500)`
   );
   const bgTo = useColorModeValue(
-    `var(--chakra-colors-${color}-600)`,
-    `var(--chakra-colors-${color}-900)`
+    `var(--chakra-colors-${color}-700)`,
+    `var(--chakra-colors-${color}-600)`
   );
 
   return (
     <Box>
-      <Card bg={`linear-gradient(210deg, ${bgFrom} 0%, ${bgTo} 100%)`}>
+      <Card
+        bg={`linear-gradient(210deg, ${bgFrom} 0%, ${bgTo} 100%)`}
+        borderRadius={22}
+      >
         <CardBody>
           <Stat>
             <Flex align="center">
@@ -121,7 +124,7 @@ const MyStat = ({
           bgColor={useColorModeValue("whiteAlpha.600", "whiteAlpha.400")}
           fontSize="sm"
           fontWeight={500}
-          borderBottomRadius="var(--card-radius)"
+          borderBottomRadius={22}
         >
           <Link
             as={NextLink}

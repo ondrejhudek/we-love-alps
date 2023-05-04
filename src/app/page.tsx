@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { getDocumentsCount, getDocuments, CollectionName } from "@/app/mongodb";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
+import Hero from "./components/Hero";
 import TimelineView from "./components/Timeline";
 import StatView, {
   Stats as StatsView,
@@ -54,6 +55,8 @@ const Timeline = async () => {
 
 const Page = () => (
   <>
+    <Hero />
+
     {/* Stats */}
     <StatsView>
       {STATS.map((stat) => (
