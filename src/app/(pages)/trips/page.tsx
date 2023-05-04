@@ -13,6 +13,20 @@ const Content = async () => {
     getDocuments<MemberProps>("members"),
   ]);
 
+  const sql = `INSERT INTO trips (id, title, countryCode, year, month, resorts, members, nonMembers) VALUES ${tripsData
+    .map((item) => {
+      return `('${item.id}', '${item.title}', '${item.countryCode}', ${
+        item.year
+      }, ${item.month}, ARRAY ${JSON.stringify(item.resorts).replaceAll(
+        '"',
+        "'"
+      )}, ARRAY ${JSON.stringify(item.members).replaceAll('"', "'")}, ${
+        item.nonMembers || 0
+      })`;
+    })
+    .join(",")};`;
+  console.log(sql);
+
   const groupedTrips = groupBy<TripViewProps>(
     (trip) => trip.year.toString(),
     tripsData.map((trip) => ({
