@@ -7,7 +7,7 @@ import Container from "@/app/components/Container";
 import { VideoProps } from "@/app/utils/types";
 
 const Video = ({ data }: { data: VideoProps[] }) => {
-  const id = data[0].youtubeId;
+  const id = data[0].youtube_id;
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
