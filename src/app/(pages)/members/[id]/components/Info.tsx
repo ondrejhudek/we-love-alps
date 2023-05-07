@@ -139,10 +139,10 @@ const Info = ({
 
               <List spacing={1}>
                 {/* Current partner */}
-                {data.currentPartner && (
+                {data.current_partner && (
                   <ListItem>
                     <PersonalInfo
-                      id={data.currentPartner}
+                      id={data.current_partner}
                       label="Partner/ka"
                       color={nicknameColor}
                       membersData={membersData}
@@ -151,9 +151,9 @@ const Info = ({
                 )}
 
                 {/* Ex partner */}
-                {data.exPartners && data.exPartners.length > 0 && (
+                {data.ex_partners && data.ex_partners.length > 0 && (
                   <>
-                    {data.exPartners.map((exPartner) => (
+                    {data.ex_partners.map((exPartner) => (
                       <ListItem key={exPartner}>
                         <PersonalInfo
                           id={exPartner}
