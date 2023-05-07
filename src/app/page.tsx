@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { getDocumentsCount, getDocuments, CollectionName } from "@/app/mongodb";
+import { TableName, getRows, getCount } from "@/app/utils/database";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
 import TimelineView from "./components/Timeline";
@@ -31,16 +31,16 @@ const STATS: StatProps[] = [
   },
 ];
 
-const Stat = async ({ slug }: { slug: CollectionName }) => {
-  const count = await getDocumentsCount(slug);
+const Stat = async ({ slug }: { slug: TableName }) => {
+  const count = await getCount(slug);
   return <>{count}</>;
 };
 
 const Timeline = async () => {
   const [tripsData, resortsData, membersData] = await Promise.all([
-    getDocuments<TripProps>("trips", { year: 1 }),
-    getDocuments<ResortProps>("resorts"),
-    getDocuments<MemberProps>("members"),
+    getRows<TripProps>("trips"),
+    getRows<ResortProps>("resorts"),
+    getRows<MemberProps>("members"),
   ]);
 
   return (

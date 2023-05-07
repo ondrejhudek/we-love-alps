@@ -1,31 +1,17 @@
 import groupBy from "ramda/src/groupBy";
 
 import Header from "@/app/components/Header";
-import { getDocuments } from "@/app/mongodb";
+import { getRows } from "@/app/utils/database";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
 import View, { TripViewProps } from "./view";
 
 const Content = async () => {
   const [tripsData, resortsData, membersData] = await Promise.all([
-    getDocuments<TripProps>("trips"),
-    getDocuments<ResortProps>("resorts"),
-    getDocuments<MemberProps>("members"),
+    getRows<TripProps>("trips"),
+    getRows<ResortProps>("resorts"),
+    getRows<MemberProps>("members"),
   ]);
-
-  const sql = `INSERT INTO trips (id, title, countryCode, year, month, resorts, members, nonMembers) VALUES ${tripsData
-    .map((item) => {
-      return `('${item.id}', '${item.title}', '${item.countryCode}', ${
-        item.year
-      }, ${item.month}, ARRAY ${JSON.stringify(item.resorts).replaceAll(
-        '"',
-        "'"
-      )}, ARRAY ${JSON.stringify(item.members).replaceAll('"', "'")}, ${
-        item.nonMembers || 0
-      })`;
-    })
-    .join(",")};`;
-  console.log(sql);
 
   const groupedTrips = groupBy<TripViewProps>(
     (trip) => trip.year.toString(),

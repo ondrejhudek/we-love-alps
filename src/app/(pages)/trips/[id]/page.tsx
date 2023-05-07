@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
 import DocumentsByField from "@/app/data/DocumentsByField";
-import { getDocumentById } from "@/app/mongodb";
+import { getRowById } from "@/app/utils/database";
 import {
   MemberProps,
   ResortProps,
@@ -18,7 +18,7 @@ import Resorts, { ResortsLoading } from "./components/Resorts";
 import Video from "./components/Video";
 
 const Content = async ({ id }: { id: string }) => {
-  const data = await getDocumentById<TripProps>("trips", id);
+  const data = await getRowById<TripProps>("trips", id);
 
   if (!data) {
     notFound();

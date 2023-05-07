@@ -20,8 +20,8 @@ export interface MemberProps {
   nickname?: string;
   facebook?: string;
   instagram?: string;
-  currentPartner?: string;
-  exPartners?: string[];
+  current_partner?: string;
+  ex_partners?: string[];
   siblings?: string[];
   interest: ("lyže" | "snowboard" | "skialpy")[];
 }
@@ -29,7 +29,7 @@ export interface MemberProps {
 export interface ResortProps {
   id: string;
   name: string;
-  countryCode: string;
+  country_code: string;
   region: string;
   map: string;
 }
@@ -38,19 +38,18 @@ export interface TripProps {
   id: string;
   title: string;
   resorts: string[];
-  countryCode: string;
+  country_code: string;
   year: number;
   month: number;
-  accomodation?: {
-    name: string;
-    map?: string;
-  };
+  accomodation_name?: string;
+  accomodation_map?: string;
   members: string[];
-  nonMembers?: number;
+  non_members?: number;
   photos?: number;
 }
 
 export interface VideoProps {
-  tripId: string;
-  youtubeId: string;
+  id: string;
+  trip_id: string;
+  youtube_id: string;
 }

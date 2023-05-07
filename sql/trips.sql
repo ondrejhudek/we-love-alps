@@ -1,22 +1,24 @@
 -- CREATE TABLE trips (
 --     id VARCHAR PRIMARY KEY,
 --     title VARCHAR NOT NULL,
---     countryCode VARCHAR NOT NULL,
+--     country_code VARCHAR NOT NULL,
 --     year INT NOT NULL,
 --     month INT NOT NULL,
+--     accomodation_name VARCHAR,
+--     accomodation_map VARCHAR,
 --     resorts VARCHAR [] NOT NULL,
 --     members VARCHAR [] NOT NULL,
---     nonMembers INT
+--     non_members INT;
 -- )
 INSERT INTO trips (
         id,
         title,
-        countryCode,
+        country_code,
         year,
         month,
         resorts,
         members,
-        nonMembers
+        non_members
     )
 VALUES (
         '2013-aprica',

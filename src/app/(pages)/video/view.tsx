@@ -108,8 +108,8 @@ const View = ({ data }: { data: VideoViewProps[] }) => (
       columns={{ base: 1, sm: 2, md: 3 }}
       spacing={{ base: 3, sm: 4, md: 5, lg: 6 }}
     >
-      {data.map(({ tripId, youtubeId, title, year }) => (
-        <Video key={tripId} youtubeId={youtubeId} title={title} year={year} />
+      {data.map(({ id, youtube_id, title, year }) => (
+        <Video key={id} youtubeId={youtube_id} title={title} year={year} />
       ))}
     </SimpleGrid>
   </>

@@ -19,16 +19,16 @@ import {
 import { IconType } from "react-icons";
 import { HiOutlineUsers, HiOutlineMapPin, HiOutlineMap } from "react-icons/hi2";
 
-import { CollectionName } from "@/app/mongodb";
+import { TableName } from "@/app/utils/database";
 
 export interface StatProps {
-  slug: CollectionName;
+  slug: TableName;
   title: string;
   pathLabel: string;
   color: string;
 }
 
-const ICONS: Partial<Record<CollectionName, IconType>> = {
+const ICONS: Partial<Record<TableName, IconType>> = {
   members: HiOutlineUsers,
   trips: HiOutlineMap,
   resorts: HiOutlineMapPin,

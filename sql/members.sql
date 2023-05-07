@@ -3,7 +3,7 @@
 --     name VARCHAR NOT NULL,
 --     facebook VARCHAR,
 --     instagram VARCHAR,
---     exPartners VARCHAR [],
+--     ex_partners VARCHAR [],
 --     siblings VARCHAR [],
 --     interest VARCHAR []
 -- )
@@ -12,7 +12,7 @@ INSERT INTO members (
         name,
         facebook,
         instagram,
-        exPartners,
+        ex_partners,
         siblings,
         interest
     )

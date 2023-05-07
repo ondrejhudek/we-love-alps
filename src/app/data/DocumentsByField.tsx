@@ -15,6 +15,7 @@ const DocumentsByField = async <T extends object>({
   viewComponent: React.FC<{ data: T[] }>;
   withError: boolean;
 }) => {
+  // TODO: Migrate to PostgreSQL
   const data = await getDocumentsByField<T>(collectionName, field, values);
 
   if (!data || !data.length)

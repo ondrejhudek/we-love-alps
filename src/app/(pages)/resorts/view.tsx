@@ -53,7 +53,7 @@ const View = ({ data }: { data: ResortProps[] }) => {
         columns={{ base: 1, sm: 2, md: 3 }}
         spacing={{ base: 3, sm: 4, lg: 5 }}
       >
-        {data.map(({ id, name, region, countryCode, map }) => (
+        {data.map(({ id, name, region, country_code, map }) => (
           <Card
             key={id}
             overflow="hidden"
@@ -69,7 +69,7 @@ const View = ({ data }: { data: ResortProps[] }) => {
             <CardFooter>
               <Flex justify="space-between" width="full">
                 <Flex align="center">
-                  <FlagImage countryCode={countryCode} boxSize={26} mr={2} />
+                  <FlagImage countryCode={country_code} boxSize={26} mr={2} />
                   <Box>
                     {/* Region */}
                     <Text

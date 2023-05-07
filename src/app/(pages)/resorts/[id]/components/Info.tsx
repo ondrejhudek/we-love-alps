@@ -50,8 +50,8 @@ const Info = ({
             <Text as="span" mr={2} color="gray.500" fontWeight={400}>
               Země /
             </Text>
-            {COUNTRIES[resortData.countryCode]}
-            <FlagImage countryCode={resortData.countryCode} ml={2} />
+            {COUNTRIES[resortData.country_code]}
+            <FlagImage countryCode={resortData.country_code} ml={2} />
           </ListItem>
 
           <ListItem fontWeight={500}>

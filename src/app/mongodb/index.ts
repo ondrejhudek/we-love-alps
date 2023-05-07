@@ -15,21 +15,22 @@ const getDatabase = async () => {
   return client.db(DATABASE_NAME);
 };
 
-export const getDocuments = async <T extends object>(
-  collectionName: CollectionName,
-  sort?: Sort,
-  limit = 100
-): Promise<T[]> => {
-  // await sleep();
-  const db = await getDatabase();
-  return await db
-    .collection(collectionName)
-    .find({})
-    .sort(sort || {})
-    .project<T>({ _id: 0 })
-    .limit(limit)
-    .toArray();
-};
+// export const getDocuments = async <T extends object>(
+//   collectionName: CollectionName,
+//   sort?: Sort,
+//   limit = 100
+// ): Promise<T[]> => {
+//   // await sleep();
+//   const db = await getDatabase();
+//   return await db
+//     .collection(collectionName)
+//     .find({})
+//     .sort(sort || {})
+//     .project<T>({ _id: 0 })
+//     .limit(limit)
+//     .toArray();
+// };
+// --- MIGRATED ---
 
 export const getDocumentsByField = async <T extends object>(
   collectionName: CollectionName,
@@ -51,21 +52,22 @@ export const getDocumentsByField = async <T extends object>(
     .toArray();
 };
 
-export const getDocumentsCount = async (
-  collectionName: CollectionName
-): Promise<number> => {
-  // await sleep();
-  const db = await getDatabase();
-  return await db.collection(collectionName).estimatedDocumentCount();
-};
+// export const getDocumentsCount = async (
+//   collectionName: CollectionName
+// ): Promise<number> => {
+//   // await sleep();
+//   const db = await getDatabase();
+//   return await db.collection(collectionName).estimatedDocumentCount();
+// };
 
-export const getDocumentById = async <T extends { id: string }>(
-  collectionName: CollectionName,
-  id: string
-): Promise<T | null> => {
-  // await sleep();
-  const db = await getDatabase();
-  return await db
-    .collection(collectionName)
-    .findOne<T>({ id }, { projection: { _id: 0 } });
-};
+// export const getDocumentById = async <T extends { id: string }>(
+//   collectionName: CollectionName,
+//   id: string
+// ): Promise<T | null> => {
+//   // await sleep();
+//   const db = await getDatabase();
+//   return await db
+//     .collection(collectionName)
+//     .findOne<T>({ id }, { projection: { _id: 0 } });
+// };
+// --- MIGRATED ---

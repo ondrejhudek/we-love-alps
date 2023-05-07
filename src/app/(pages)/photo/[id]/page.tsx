@@ -3,12 +3,12 @@ import { notFound } from "next/navigation";
 import Header from "@/app/components/Header";
 import { getImages } from "@/app/cloudinary/service";
 import Photoalbum from "@/app/components/Photoalbum";
-import { getDocumentById } from "@/app/mongodb";
+import { getRowById } from "@/app/utils/database";
 import { TripProps } from "@/app/utils/types";
 
 const Page = async ({ params: { id } }: { params: { id: string } }) => {
   const [data, images] = await Promise.all([
-    getDocumentById<TripProps>("trips", id),
+    getRowById<TripProps>("trips", id),
     getImages(id),
   ]);
 

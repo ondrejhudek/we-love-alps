@@ -32,20 +32,20 @@ const Info = ({ data }: { data: TripProps }) => (
           <Text as="span" mr={2} color="gray.500" fontWeight={400}>
             Kde /
           </Text>
-          {data.title}, {COUNTRIES[data.countryCode]}
-          <FlagImage countryCode={data.countryCode} ml={2} />
+          {data.title}, {COUNTRIES[data.country_code]}
+          <FlagImage countryCode={data.country_code} ml={2} />
         </ListItem>
 
-        {data.accomodation && (
+        {data.accomodation_name && (
           <ListItem fontWeight={500}>
             <Text as="span" mr={2} color="gray.500" fontWeight={400}>
               Ubytování /
             </Text>
-            {data.accomodation.name}
-            {data.accomodation.map && (
+            {data.accomodation_name}
+            {data.accomodation_map && (
               <Tooltip label="Otevřít ubýtování na Google Maps">
                 <Link
-                  href={`https://goo.gl/maps/${data.accomodation.map}`}
+                  href={`https://goo.gl/maps/${data.accomodation_map}`}
                   target="_blank"
                 >
                   <Icon

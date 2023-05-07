@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
 import DocumentsByField from "@/app/data/DocumentsByField";
-import { getDocumentsByField, getDocumentById } from "@/app/mongodb";
+import { getRows, getRowById, getRowsByField } from "@/app/utils/database";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
 import Info from "./components/Info";
@@ -12,8 +12,8 @@ import Members, { MembersLoading } from "./components/Members";
 
 const Content = async ({ id }: { id: string }) => {
   const [resortData, tripsData] = await Promise.all([
-    getDocumentById<ResortProps>("resorts", id),
-    getDocumentsByField<TripProps>("trips", "resorts", [id]),
+    getRowById<ResortProps>("resorts", id),
+    getRowsByField<TripProps>("resorts", id),
   ]);
 
   if (!resortData || !tripsData) {
