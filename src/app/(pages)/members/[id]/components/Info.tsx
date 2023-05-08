@@ -23,17 +23,17 @@ import { AvatarImage } from "@/app/components/Image";
 import { MemberProps } from "@/app/utils/types";
 
 const PersonalInfo = ({
-  id,
+  alias,
   label,
   color,
   membersData,
 }: {
-  id: string;
+  alias: string;
   label: string;
   color: string;
   membersData: MemberProps[];
 }) => {
-  const member = membersData.find((member) => member.id === id);
+  const member = membersData.find((member) => member.alias === alias);
   if (!member) return null;
 
   return (
@@ -51,7 +51,7 @@ const PersonalInfo = ({
         fontWeight={600}
         onClick={(e) => e.stopPropagation()}
       >
-        @{member.nickname || member.id}
+        @{alias}
       </Link>
     </Flex>
   );
@@ -120,7 +120,7 @@ const Info = ({
             align={{ base: "center", sm: "flex-start" }}
           >
             <Box boxSize={36} mr={{ base: 0, sm: 6 }}>
-              <AvatarImage id={data.id} name={data.name} boxSize="full" />
+              <AvatarImage id={data.alias} name={data.name} boxSize="full" />
             </Box>
 
             <Box
@@ -134,7 +134,7 @@ const Info = ({
                 fontSize="2xl"
                 fontWeight={600}
               >
-                @{data.nickname || data.id}
+                @{data.alias}
               </Heading>
 
               <List spacing={1}>
@@ -142,7 +142,7 @@ const Info = ({
                 {data.current_partner && (
                   <ListItem>
                     <PersonalInfo
-                      id={data.current_partner}
+                      alias={data.current_partner}
                       label="Partner/ka"
                       color={nicknameColor}
                       membersData={membersData}
@@ -156,7 +156,7 @@ const Info = ({
                     {data.ex_partners.map((exPartner) => (
                       <ListItem key={exPartner}>
                         <PersonalInfo
-                          id={exPartner}
+                          alias={exPartner}
                           label="Ex-partner/ka"
                           color={nicknameColor}
                           membersData={membersData}
@@ -172,7 +172,7 @@ const Info = ({
                     {data.siblings.map((sibling) => (
                       <ListItem key={sibling}>
                         <PersonalInfo
-                          id={sibling}
+                          alias={sibling}
                           label="Sourozenec"
                           color={nicknameColor}
                           membersData={membersData}

@@ -1,14 +1,15 @@
 -- CREATE TABLE members (
---     id VARCHAR PRIMARY KEY,
---     name VARCHAR NOT NULL,
---     facebook VARCHAR,
---     instagram VARCHAR,
---     ex_partners VARCHAR [],
---     siblings VARCHAR [],
---     interest VARCHAR []
--- )
+--     id SERIAL PRIMARY KEY,
+--     alias TEXT NOT NULL UNIQUE,
+--     name TEXT NOT NULL,
+--     facebook TEXT,
+--     instagram TEXT,
+--     ex_partners TEXT [],
+--     siblings TEXT [],
+--     interest TEXT []
+-- );
 INSERT INTO members (
-        id,
+        alias,
         name,
         facebook,
         instagram,
@@ -17,191 +18,191 @@ INSERT INTO members (
         interest
     )
 VALUES (
-        'stuchla',
-        'Jan Stuchlík',
-        'honza.stuchlik.5',
-        'johnyst',
-        ARRAY ['janca'],
-        ARRAY ['majki'],
-        ARRAY ['lyže']
-    ),
-    (
-        'tomas',
-        'Tomáš Málek',
-        'tomas.malek.5',
-        'tomalis',
-        ARRAY ['lena'],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže']
-    ),
-    (
-        'era',
-        'Erika Černá',
-        'erika.cerna.31',
-        'erika_ce',
-        ARRAY ['kopy'],
-        ARRAY ['jarin'],
-        ARRAY ['lyže']
-    ),
-    (
-        'sally',
-        'Michal Salinger',
-        'michal.salinger',
-        'sally_from_kh',
-        ARRAY []::VARCHAR [],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže','snowboard']
-    ),
-    (
-        'daja',
-        'Daniela Kováčová',
-        'Danielka.Kovac',
-        'danielka.kovacova',
-        ARRAY []::VARCHAR [],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže']
-    ),
-    (
-        'junior2',
-        'Tomáš Dostál',
-        'tomas.dostal.5682',
-        'dostal_tomas',
-        ARRAY []::VARCHAR [],
-        ARRAY ['lucka','junior1'],
-        ARRAY ['lyže']
-    ),
-    (
-        'milan',
-        'Milan Černil',
-        'milan.cernil',
-        'milanec_',
-        ARRAY []::VARCHAR [],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže','skialpy']
-    ),
-    (
         'hudy',
         'Ondřej Hudek',
         'ondrej.hudek',
         'ondrejhudek',
-        ARRAY []::VARCHAR [],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže','snowboard']
-    ),
-    (
-        'pavel',
-        'Pavel Černý',
-        'pcerny',
-        '',
-        ARRAY []::VARCHAR [],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže']
-    ),
-    (
-        'jarin',
-        'Jaroslav Černý',
-        'jardac1',
-        'jardacerny_',
-        ARRAY []::VARCHAR [],
-        ARRAY ['era'],
-        ARRAY ['lyže']
-    ),
-    (
-        'lucka',
-        'Lucie Dostálová',
-        'profile.php?id=1145558111',
-        'meritl',
-        ARRAY ['mara','jarda'],
-        ARRAY ['junior1','junior2'],
-        ARRAY ['lyže','snowboard']
-    ),
-    (
-        'mara',
-        'Marek Hasse',
-        'marek.haase.3',
-        'mh.marekh',
-        ARRAY ['lucka'],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže']
-    ),
-    (
-        'jarda',
-        'Jaroslav Syba',
-        'jerry.cotton.5',
-        'cotton.jerry',
-        ARRAY ['lucka'],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže']
+        '{ }',
+        '{ }',
+        '{"lyže", "snowboard"}'
     ),
     (
         'terka',
         'Tereza Hudková',
         'tereza.stejskalova.16',
         'stejste',
-        ARRAY []::VARCHAR [],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže','snowboard']
+        '{ }',
+        '{ }',
+        '{"lyže", "snowboard"}'
+    ),
+    (
+        'jarin',
+        'Jaroslav Černý',
+        'jardac1',
+        'jardacerny_',
+        '{ }',
+        '{"era"}',
+        '{"lyže"}'
+    ),
+    (
+        'daja',
+        'Daniela Kováčová',
+        'Danielka.Kovac',
+        'danielka.kovacova',
+        '{ }',
+        '{ }',
+        '{"lyže"}'
+    ),
+    (
+        'stuchla',
+        'Jan Stuchlík',
+        'honza.stuchlik.5',
+        'johnyst',
+        '{"janca"}',
+        '{"majki"}',
+        '{"lyže"}'
     ),
     (
         'majki',
         'Markéta Stuchlíková',
         'stuchlapuchlamuchla',
         'stuchlapuchlamuchla',
-        ARRAY []::VARCHAR [],
-        ARRAY ['stuchla'],
-        ARRAY ['snowboard']
+        '{ }',
+        '{"stuchla"}',
+        '{"snowboard"}'
     ),
     (
         'janca',
         'Jana Pekárková',
         'jana.pekarkova.7',
         'jani.sss',
-        ARRAY ['stuchla'],
-        ARRAY []::VARCHAR [],
-        ARRAY ['snowboard']
+        '{"stuchla"}',
+        '{ }',
+        '{"snowboard"}'
     ),
     (
-        'junior1',
-        'Martin Dostál',
-        'martin.dostal.9237',
-        'martindostalm',
-        ARRAY []::VARCHAR [],
-        ARRAY ['lucka','junior2'],
-        ARRAY ['lyže']
+        'era',
+        'Erika Černá',
+        'erika.cerna.31',
+        'erika_ce',
+        '{"kopy"}',
+        '{"jarin"}',
+        '{"lyže"}'
     ),
     (
-        'sima',
-        'Simona Zahradníková',
-        'simi.penickova',
-        'ssimipe',
-        ARRAY []::VARCHAR [],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže']
-    ),
-    (
-        'zahrada',
-        'Štěpán Zahradník',
-        'stepan.zahradnik.7',
-        '',
-        ARRAY []::VARCHAR [],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže']
+        'pavel',
+        'Pavel Černý',
+        'pcerny',
+        NULL,
+        '{ }',
+        '{ }',
+        '{"lyže"}'
     ),
     (
         'kopy',
         'Jiří Koptík',
         'bia.kopy',
-        '',
-        ARRAY ['era'],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže']
+        NULL,
+        '{"era"}',
+        '{ }',
+        '{"lyže"}'
     ),
     (
         'lena',
         'Lenka Černilová',
         'lenka.dvorakova.79',
         'my_lenkaa',
-        ARRAY ['tomas'],
-        ARRAY []::VARCHAR [],
-        ARRAY ['lyže','snowboard','skialpy']
+        '{"tomas"}',
+        '{ }',
+        '{"lyže", "snowboard", "skialpy"}'
+    ),
+    (
+        'milan',
+        'Milan Černil',
+        'milan.cernil',
+        'milanec_',
+        '{ }',
+        '{ }',
+        '{"lyže", "skialpy"}'
+    ),
+    (
+        'tomas',
+        'Tomáš Málek',
+        'tomas.malek.5',
+        'tomalis',
+        '{"lena"}',
+        '{ }',
+        '{"lyže"}'
+    ),
+    (
+        'lucka',
+        'Lucie Dostálová',
+        'profile.php ? id = 1145558111',
+        'meritl',
+        '{"mara", "jarda"}',
+        '{"junior1", "junior2"}',
+        '{"lyže", "snowboard"}'
+    ),
+    (
+        'mara',
+        'Marek Hasse',
+        'marek.haase.3',
+        'mh.marekh',
+        '{"lucka"}',
+        '{ }',
+        '{"lyže"}'
+    ),
+    (
+        'jarda',
+        'Jaroslav Syba',
+        'jerry.cotton.5',
+        'cotton.jerry',
+        '{"lucka"}',
+        '{ }',
+        '{"lyže"}'
+    ),
+    (
+        'junior1',
+        'Martin Dostál',
+        'martin.dostal.9237',
+        'martindostalm',
+        '{ }',
+        '{"lucka", "junior2"}',
+        '{"lyže"}'
+    ),
+    (
+        'junior2',
+        'Tomáš Dostál',
+        'tomas.dostal.5682',
+        'dostal_tomas',
+        '{ }',
+        '{"lucka","junior1"}',
+        '{"lyže"}'
+    ),
+    (
+        'zahrada',
+        'Štěpán Zahradník',
+        'stepan.zahradnik.7',
+        NULL,
+        '{ }',
+        '{ }',
+        '{"lyže"}'
+    ),
+    (
+        'sima',
+        'Simona Zahradníková',
+        'simi.penickova',
+        'ssimipe',
+        '{ }',
+        '{ }',
+        '{"lyže"}'
+    ),
+    (
+        'sally',
+        'Michal Salinger',
+        'michal.salinger',
+        'sally_from_kh',
+        '{ }',
+        '{ }',
+        '{"lyže","snowboard"}'
     );

@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 
 import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
-import DocumentsByField from "@/app/data/DocumentsByField";
-import { getRows, getRowById, getRowsByField } from "@/app/utils/database";
+import DocumentsByValues from "@/app/data/DocumentsByValues";
+import { getRowByValue, getRowsByValueInColumn } from "@/app/utils/kysely";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
 import Info from "./components/Info";
@@ -12,9 +12,11 @@ import Members, { MembersLoading } from "./components/Members";
 
 const Content = async ({ id }: { id: string }) => {
   const [resortData, tripsData] = await Promise.all([
-    getRowById<ResortProps>("resorts", id),
-    getRowsByField<TripProps>("resorts", id),
+    getRowByValue<ResortProps>("resorts", "id", id),
+    getRowsByValueInColumn<TripProps>("trips", "resorts", id),
   ]);
+
+  console.log(tripsData.length);
 
   if (!resortData || !tripsData) {
     notFound();
@@ -33,9 +35,9 @@ const Content = async ({ id }: { id: string }) => {
       <Container title="Navšívili">
         <Suspense fallback={<MembersLoading />}>
           {/* @ts-expect-error Server Component */}
-          <DocumentsByField<MemberProps>
-            collectionName="members"
-            field="id"
+          <DocumentsByValues<MemberProps>
+            tableName="members"
+            column="alias"
             values={members}
             viewComponent={Members}
           />

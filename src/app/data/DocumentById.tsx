@@ -1,6 +1,5 @@
-import { TableName, getRowById } from "@/app/utils/database";
-
 import Alert from "@/app/components/Alert";
+import { TableName, getRowByValue } from "@/app/utils/kysely";
 
 const Document = async <T extends { id: string }>({
   tableName,
@@ -11,7 +10,7 @@ const Document = async <T extends { id: string }>({
   id: string;
   viewComponent: React.FC<{ data: T }>;
 }) => {
-  const data = await getRowById<T>(tableName, id);
+  const data = await getRowByValue<T>(tableName, "id", id);
 
   if (!data)
     return (

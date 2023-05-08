@@ -67,8 +67,8 @@ const View = ({ data }: { data: MemberProps[] }) => {
   const router = useRouter();
   const borderColor = useColorModeValue("gray.200", "gray.800");
 
-  const handleClick = (id: string) => {
-    router.push(`/members/${id}`);
+  const handleClick = (alias: string) => {
+    router.push(`/members/${alias}`);
   };
 
   return (
@@ -79,11 +79,11 @@ const View = ({ data }: { data: MemberProps[] }) => {
         columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
         spacing={{ base: 3, sm: 4, lg: 5 }}
       >
-        {data.map(({ id, name, nickname, facebook, instagram }) => (
+        {data.map(({ alias, name, facebook, instagram }) => (
           <Card
-            key={id}
+            key={alias}
             overflow="hidden"
-            onClick={() => handleClick(id)}
+            onClick={() => handleClick(alias)}
             _hover={{
               cursor: "pointer",
               boxShadow: "outline",
@@ -93,7 +93,7 @@ const View = ({ data }: { data: MemberProps[] }) => {
             <CardBody py={10}>
               <Box textAlign="center">
                 <AvatarImage
-                  id={id}
+                  id={alias}
                   name={name}
                   boxSize={32}
                   marginInlineStart="auto"
@@ -104,7 +104,7 @@ const View = ({ data }: { data: MemberProps[] }) => {
                   {name}
                 </Heading>
                 <Text mt={1} color="gray.500" fontSize="sm" fontWeight={500}>
-                  @{nickname || id}
+                  @{alias}
                 </Text>
               </Box>
             </CardBody>

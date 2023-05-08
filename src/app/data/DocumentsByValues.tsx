@@ -1,22 +1,20 @@
-import { getDocumentsByField, CollectionName } from "@/app/mongodb";
-
 import Alert from "@/app/components/Alert";
+import { TableName, AnyTableColumn, getRowsByValues } from "@/app/utils/kysely";
 
-const DocumentsByField = async <T extends object>({
-  collectionName,
-  field,
+const DocumentsByValues = async <T extends object>({
+  tableName,
+  column,
   values,
   viewComponent: View,
   withError = false,
 }: {
-  collectionName: CollectionName;
-  field: string;
+  tableName: TableName;
+  column: AnyTableColumn;
   values: string[];
   viewComponent: React.FC<{ data: T[] }>;
   withError: boolean;
 }) => {
-  // TODO: Migrate to PostgreSQL
-  const data = await getDocumentsByField<T>(collectionName, field, values);
+  const data = await getRowsByValues<T>(tableName, column, values);
 
   if (!data || !data.length)
     return withError ? (
@@ -29,4 +27,4 @@ const DocumentsByField = async <T extends object>({
   return <View data={data} />;
 };
 
-export default DocumentsByField;
+export default DocumentsByValues;

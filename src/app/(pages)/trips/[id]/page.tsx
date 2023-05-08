@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 
 import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
-import DocumentsByField from "@/app/data/DocumentsByField";
-import { getRowById } from "@/app/utils/database";
+import DocumentsByValues from "@/app/data/DocumentsByValues";
+import { getRowByValue } from "@/app/utils/kysely";
 import {
   MemberProps,
   ResortProps,
@@ -18,7 +18,7 @@ import Resorts, { ResortsLoading } from "./components/Resorts";
 import Video from "./components/Video";
 
 const Content = async ({ id }: { id: string }) => {
-  const data = await getRowById<TripProps>("trips", id);
+  const data = await getRowByValue<TripProps>("trips", "id", id);
 
   if (!data) {
     notFound();
@@ -35,9 +35,9 @@ const Content = async ({ id }: { id: string }) => {
       <Container title="Střediska">
         <Suspense fallback={<ResortsLoading />}>
           {/* @ts-expect-error Server Component */}
-          <DocumentsByField<ResortProps>
-            collectionName="resorts"
-            field="id"
+          <DocumentsByValues<ResortProps>
+            tableName="resorts"
+            column="id"
             values={data.resorts}
             viewComponent={Resorts}
           />
@@ -48,9 +48,9 @@ const Content = async ({ id }: { id: string }) => {
       <Container title="Zúčastnili se">
         <Suspense fallback={<MembersLoading />}>
           {/* @ts-expect-error Server Component */}
-          <DocumentsByField<MemberProps>
-            collectionName="members"
-            field="id"
+          <DocumentsByValues<MemberProps>
+            tableName="members"
+            column="alias"
             values={data.members}
             viewComponent={Members}
           />
@@ -62,9 +62,9 @@ const Content = async ({ id }: { id: string }) => {
 
       {/* Video */}
       {/* @ts-expect-error Server Component */}
-      <DocumentsByField<VideoProps>
-        collectionName="videos"
-        field="tripId"
+      <DocumentsByValues<VideoProps>
+        tableName="videos"
+        column="trip_id"
         values={[data.id]}
         viewComponent={Video}
       />

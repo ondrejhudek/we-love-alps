@@ -1,3 +1,5 @@
+import { Generated } from "kysely";
+
 export enum NavLinkKey {
   Home = "/",
   Members = "/members",
@@ -15,9 +17,9 @@ export type LINK = {
 export type CountryProps = Record<string, string>;
 
 export interface MemberProps {
-  id: string;
+  id: Generated<number>;
+  alias: string;
   name: string;
-  nickname?: string;
   facebook?: string;
   instagram?: string;
   current_partner?: string;
@@ -37,19 +39,18 @@ export interface ResortProps {
 export interface TripProps {
   id: string;
   title: string;
-  resorts: string[];
   country_code: string;
   year: number;
   month: number;
   accomodation_name?: string;
   accomodation_map?: string;
+  resorts: string[];
   members: string[];
   non_members?: number;
-  photos?: number;
 }
 
 export interface VideoProps {
-  id: string;
+  id: Generated<number>;
   trip_id: string;
   youtube_id: string;
 }

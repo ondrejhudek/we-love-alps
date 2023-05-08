@@ -1,7 +1,7 @@
 import groupBy from "ramda/src/groupBy";
 
 import Header from "@/app/components/Header";
-import { getRows } from "@/app/utils/database";
+import { getRows } from "@/app/utils/kysely";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
 import View, { TripViewProps } from "./view";
@@ -17,8 +17,8 @@ const Content = async () => {
     (trip) => trip.year.toString(),
     tripsData.map((trip) => ({
       ...trip,
-      members: trip.members.flatMap((memberId) =>
-        membersData.filter(({ id }) => id === memberId)
+      members: trip.members.flatMap((memberAlias) =>
+        membersData.filter(({ alias }) => alias === memberAlias)
       ),
       resorts: trip.resorts.flatMap((resortId) =>
         resortsData.filter(({ id }) => id === resortId)

@@ -3,9 +3,9 @@ import { notFound } from "next/navigation";
 
 import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
-import DocumentsByField from "@/app/data/DocumentsByField";
+import DocumentsByValues from "@/app/data/DocumentsByValues";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
-import { getRows } from "@/app/utils/database";
+import { getRows, getRowsByValueInColumn } from "@/app/utils/kysely";
 
 import Info from "./components/Info";
 import Resorts, { ResortsLoading } from "./components/Resorts";
@@ -14,20 +14,23 @@ import Trips from "./components/Trips";
 const Content = async ({ id }: { id: string }) => {
   const [membersData, tripsData] = await Promise.all([
     getRows<MemberProps>("members"),
-    getRows<TripProps>("trips"), // TODO: Migrate to `getRowsByField`
+    getRowsByValueInColumn<TripProps>("trips", "members", id),
   ]);
+
+  console.log({ tripsData: tripsData });
+  console.log({ tripsDataLength: tripsData.length });
 
   if (!membersData || !tripsData) {
     notFound();
   }
 
-  const memberData = membersData.find((member) => member.id === id);
+  const memberData = membersData.find((member) => member.alias === id);
 
   if (!memberData) {
     notFound();
   }
 
-  const resortIds = tripsData.flatMap(({ resorts }) => resorts);
+  const resortIds = [...new Set(tripsData.flatMap(({ resorts }) => resorts))];
 
   return (
     <>
@@ -45,9 +48,9 @@ const Content = async ({ id }: { id: string }) => {
       <Container title="Střediska" count={resortIds.length}>
         <Suspense fallback={<ResortsLoading />}>
           {/* @ts-expect-error Server Component */}
-          <DocumentsByField<ResortProps>
-            collectionName="resorts"
-            field="id"
+          <DocumentsByValues<ResortProps>
+            tableName="resorts"
+            column="id"
             values={resortIds}
             viewComponent={Resorts}
           />

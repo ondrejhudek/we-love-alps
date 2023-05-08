@@ -1,112 +1,108 @@
 import { sql } from "@vercel/postgres";
 
-// import { MemberProps, ResortProps, TripProps, VideoProps } from "./types";
-
-// export type TableProps = MemberProps | ResortProps | TripProps | VideoProps;
 export type TableName = "members" | "resorts" | "trips" | "videos";
+export type TableNameByField =
+  | "membersByIds"
+  | "resortsByIds"
+  | "tripsByMember"
+  | "tripsByResort"
+  | "videosByTrip";
 
-const getMembers = async <T extends object>(field?: string, value?: string) => {
-  //   const whereQuery = field && value ? ` WHERE '${value}' = ANY(${field})` : ``;
-  const { rows, rowCount } = await sql<T>`SELECT * FROM members;`;
-  return { rows, rowCount };
+const SQL_ROWS_MEMBERS = <T extends object>() => sql<T>`SELECT * FROM members;`;
+const SQL_ROWS_RESORTS = <T extends object>() => sql<T>`SELECT * FROM resorts;`;
+const SQL_ROWS_TRIPS = <T extends object>() => sql<T>`SELECT * FROM trips;`;
+const SQL_ROWS_VIDEOS = <T extends object>() => sql<T>`SELECT * FROM videos;`;
+
+const SQL_ROWS = {
+  members: SQL_ROWS_MEMBERS,
+  resorts: SQL_ROWS_RESORTS,
+  trips: SQL_ROWS_TRIPS,
+  videos: SQL_ROWS_VIDEOS,
 };
 
-const getMember = async <T extends object>(id: string) => {
-  const { rows } = await sql<T>`SELECT * FROM members WHERE id = ${id};`;
-  return rows[0];
+const SQL_ROWS_MEMBERS_BY_IDS = <T extends object>(values: string[]) => {
+  console.log(
+    "SQL_ROWS_MEMBERS_BY_IDS //",
+    `SELECT * FROM members_test WHERE ${values
+      .map((value) => `(alias = ${value})`)
+      .join(" OR ")};`
+  );
+  // return sql<T>`SELECT * FROM members_test WHERE alias = ANY (ARRAY[${values
+  //   .map((value) => `'${value}'`)
+  //   .join(",")}]);`;
+  // return sql<T>`SELECT * FROM members_test WHERE alias = ANY('{${values
+  //   .map((value) => `"${value}"`)
+  //   .join(",")}}');`;
+  return sql<T>`SELECT * FROM members_test WHERE ${values
+    .map((value) => `(alias = '${value}')`)
+    .join(" OR ")};`;
+};
+const SQL_ROWS_RESORTS_BY_IDS = <T extends object>(values: string[]) => {
+  console.log(
+    "SQL_ROWS_RESORTS_BY_IDS //",
+    `SELECT * FROM resorts WHERE id = ANY(ARRAY[${values.join(",")}]);`
+  );
+  return sql<T>`SELECT * FROM resorts WHERE id = ANY(ARRAY[${values.join(
+    ","
+  )}]);`;
+};
+const SQL_ROWS_TRIPS_BY_MEMBER = <T extends object>(values: string[]) =>
+  sql<T>`SELECT * FROM trips WHERE ${values.join(",")} = ANY(ARRAY[members]);`;
+const SQL_ROWS_TRIPS_BY_RESORT = <T extends object>(values: string[]) =>
+  sql<T>`SELECT * FROM trips WHERE ${values.join(",")} = ANY(ARRAY[resorts]);`;
+const SQL_ROWS_VIDEOS_BY_TRIP = <T extends object>(values: string[]) =>
+  sql<T>`SELECT * FROM videos WHERE trip_id = ${values[0]};`;
+
+const SQL_ROWS_BY_FIELD = {
+  membersByIds: SQL_ROWS_MEMBERS_BY_IDS,
+  resortsByIds: SQL_ROWS_RESORTS_BY_IDS,
+  tripsByMember: SQL_ROWS_TRIPS_BY_MEMBER,
+  tripsByResort: SQL_ROWS_TRIPS_BY_RESORT,
+  videosByTrip: SQL_ROWS_VIDEOS_BY_TRIP,
 };
 
-const getResorts = async <T extends object>(field?: string, value?: string) => {
-  //   const whereQuery = field && value ? ` WHERE '${value}' = ANY(${field})` : ``;
-  const { rows, rowCount } = await sql<T>`SELECT * FROM resorts;`;
-  return { rows, rowCount };
+const SQL_ROW_MEMBER = <T extends object>(id: string) =>
+  sql<T>`SELECT * FROM members WHERE id = ${id};`;
+const SQL_ROW_RESORT = <T extends object>(id: string) =>
+  sql<T>`SELECT * FROM resorts WHERE id = ${id};`;
+const SQL_ROW_TRIP = <T extends object>(id: string) =>
+  sql<T>`SELECT * FROM trips WHERE id = ${id};`;
+const SQL_ROW_VIDEO = <T extends object>(id: string) =>
+  sql<T>`SELECT * FROM videos WHERE id = ${id};`;
+
+const SQL_ROW = {
+  members: SQL_ROW_MEMBER,
+  resorts: SQL_ROW_RESORT,
+  trips: SQL_ROW_TRIP,
+  videos: SQL_ROW_VIDEO,
 };
 
-const getResort = async <T extends object>(id: string) => {
-  const { rows } = await sql<T>`SELECT * FROM resorts WHERE id = ${id};`;
-  // console.log("getResort", { rows });
-  return rows[0];
-};
-
-const getTrips = async <T extends object>(field?: string, value?: string) => {
-  //   const whereQuery = field && value ? ` WHERE '${value}' = ANY(${field})` : ``;
-  const { rows, rowCount } =
-    await sql<T>`SELECT * FROM trips ORDER BY year ASC;`;
-  return { rows, rowCount };
-};
-
-const getTrip = async <T extends object>(id: string) => {
-  const { rows } = await sql<T>`SELECT * FROM trips WHERE id = ${id};`;
-  return rows[0];
-};
-
-const getVideos = async <T extends object>(field?: string, value?: string) => {
-  //   const whereQuery = field && value ? ` WHERE '${value}' = ANY(${field})` : ``;
-  const { rows, rowCount } = await sql<T>`SELECT * FROM videos;`;
-  return { rows, rowCount };
-};
-
-const getVideo = async <T extends object>(id: string) => {
-  const { rows } = await sql<T>`SELECT * FROM videos WHERE id = ${id};`;
-  return rows[0];
-};
-
-const TABLE_ROWS = {
-  members: getMembers,
-  resorts: getResorts,
-  trips: getTrips,
-  videos: getVideos,
-};
-
-const TABLE_ROW = {
-  members: getMember,
-  resorts: getResort,
-  trips: getTrip,
-  videos: getVideo,
+export const getRows = async <T extends object>(tableName: TableName) => {
+  const { rows } = await SQL_ROWS[tableName]<T>();
+  return rows;
 };
 
 export const getRowsByField = async <T extends object>(
-  field: string,
-  value: string
+  tableNameByField: TableNameByField,
+  values: string[]
 ) => {
-  const { rows } =
-    await sql<T>`SELECT * FROM trips WHERE ${value} = ANY(${field});`;
-  console.log("getRowsByField //", { rows });
-  return rows;
-};
-
-export const getRowsByField2 = async <T extends object>(
-  tableName: TableName,
-  field: string,
-  value: string
-) => {
-  const { rows } =
-    await sql<T>`SELECT * FROM ${tableName} WHERE 'solden' = ALL(resorts);`;
-  console.log("getRowsByField //", { rows });
-  return rows;
-};
-
-// TODO: add sort and limit
-export const getRows = async <T extends object>(
-  tableName: TableName,
-  field?: string,
-  value?: string
-) => {
-  const { rows } = await TABLE_ROWS[tableName]<T>(field, value);
-  // console.log("getRows //", { tableName, size: rows.length });
-  return rows;
+  try {
+    const { rows } = await SQL_ROWS_BY_FIELD[tableNameByField]<T>(values);
+    return rows;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const getRowById = async <T extends object>(
   tableName: TableName,
   id: string
 ) => {
-  const rows = await TABLE_ROW[tableName]<T>(id);
-  return rows;
+  const { rows } = await SQL_ROW[tableName]<T>(id);
+  return rows[0];
 };
 
 export const getCount = async (tableName: TableName) => {
-  const { rowCount } = await TABLE_ROWS[tableName]();
-  // console.log("getRows //", { tableName, size: rows.length });
+  const { rowCount } = await SQL_ROWS[tableName]();
   return rowCount;
 };
