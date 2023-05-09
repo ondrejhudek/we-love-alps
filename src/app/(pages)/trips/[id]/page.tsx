@@ -5,20 +5,15 @@ import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
 import DocumentsByValues from "@/app/data/DocumentsByValues";
 import { getRowByValue } from "@/app/utils/database";
-import {
-  MemberProps,
-  ResortProps,
-  TripProps,
-  VideoProps,
-} from "@/app/utils/types";
+import { Member, Resort, Trip, Video } from "@/app/utils/types";
 
 import Info from "./components/Info";
 import Members, { MembersLoading } from "./components/Members";
 import Resorts, { ResortsLoading } from "./components/Resorts";
-import Video from "./components/Video";
+import VideoComponent from "./components/Video";
 
 const Content = async ({ id }: { id: string }) => {
-  const data = await getRowByValue<TripProps>("trips", "id", id);
+  const data = await getRowByValue<Trip>("trip", "id", id);
 
   if (!data) {
     notFound();
@@ -35,8 +30,8 @@ const Content = async ({ id }: { id: string }) => {
       <Container title="Střediska">
         <Suspense fallback={<ResortsLoading />}>
           {/* @ts-expect-error Server Component */}
-          <DocumentsByValues<ResortProps>
-            tableName="resorts"
+          <DocumentsByValues<Resort>
+            tableName="resort"
             column="id"
             values={data.resorts}
             viewComponent={Resorts}
@@ -48,8 +43,8 @@ const Content = async ({ id }: { id: string }) => {
       <Container title="Zúčastnili se">
         <Suspense fallback={<MembersLoading />}>
           {/* @ts-expect-error Server Component */}
-          <DocumentsByValues<MemberProps>
-            tableName="members"
+          <DocumentsByValues<Member>
+            tableName="member"
             column="alias"
             values={data.members}
             viewComponent={Members}
@@ -62,11 +57,11 @@ const Content = async ({ id }: { id: string }) => {
 
       {/* Video */}
       {/* @ts-expect-error Server Component */}
-      <DocumentsByValues<VideoProps>
-        tableName="videos"
+      <DocumentsByValues<Video>
+        tableName="video"
         column="trip_id"
         values={[data.id]}
-        viewComponent={Video}
+        viewComponent={VideoComponent}
       />
     </>
   );

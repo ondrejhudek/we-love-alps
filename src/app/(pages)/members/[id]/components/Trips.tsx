@@ -11,9 +11,9 @@ import {
 } from "@chakra-ui/react";
 
 import { FlagImage } from "@/app/components/Image";
-import { TripProps } from "@/app/utils/types";
+import { Trip } from "@/app/utils/types";
 
-const Trips = ({ data }: { data: TripProps[] }) => {
+const Trips = ({ data }: { data: Trip[] }) => {
   const router = useRouter();
 
   const tripBgColor = useColorModeValue("gray.50", "gray.800");

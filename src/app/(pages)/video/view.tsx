@@ -18,9 +18,9 @@ import {
 import { FaExternalLinkAlt } from "react-icons/fa";
 
 import Header from "@/app/components/Header";
-import { VideoProps } from "@/app/utils/types";
+import { Video } from "@/app/utils/types";
 
-export interface VideoViewProps extends VideoProps {
+export interface VideoViewProps extends Video {
   title: string;
   year: number;
 }
@@ -48,7 +48,7 @@ const VideoFrame = ({ id }: { id: string }) => {
   );
 };
 
-const Video = ({
+const VideoComponent = ({
   youtubeId,
   title,
   year,
@@ -109,7 +109,7 @@ const View = ({ data }: { data: VideoViewProps[] }) => (
       spacing={{ base: 3, sm: 4, md: 5, lg: 6 }}
     >
       {data.map(({ id, youtube_id, title, year }) => (
-        <Video
+        <VideoComponent
           key={id.__select__}
           youtubeId={youtube_id}
           title={title}

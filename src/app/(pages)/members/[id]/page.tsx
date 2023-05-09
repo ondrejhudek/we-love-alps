@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
 import DocumentsByValues from "@/app/data/DocumentsByValues";
-import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
+import { Member, Resort, Trip } from "@/app/utils/types";
 import { getRows, getRowsByValueInColumn } from "@/app/utils/database";
 
 import Info from "./components/Info";
@@ -13,8 +13,8 @@ import Trips from "./components/Trips";
 
 const Content = async ({ id }: { id: string }) => {
   const [membersData, tripsData] = await Promise.all([
-    getRows<MemberProps>("members"),
-    getRowsByValueInColumn<TripProps>("trips", "members", id),
+    getRows<Member>("member"),
+    getRowsByValueInColumn<Trip>("trip", "members", id),
   ]);
 
   console.log({ tripsData: tripsData });
@@ -48,8 +48,8 @@ const Content = async ({ id }: { id: string }) => {
       <Container title="Střediska" count={resortIds.length}>
         <Suspense fallback={<ResortsLoading />}>
           {/* @ts-expect-error Server Component */}
-          <DocumentsByValues<ResortProps>
-            tableName="resorts"
+          <DocumentsByValues<Resort>
+            tableName="resort"
             column="id"
             values={resortIds}
             viewComponent={Resorts}

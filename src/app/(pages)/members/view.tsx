@@ -21,7 +21,7 @@ import { FaInstagram, FaFacebook } from "react-icons/fa";
 
 import Header from "@/app/components/Header";
 import { AvatarImage } from "@/app/components/Image";
-import { MemberProps } from "@/app/utils/types";
+import { Member } from "@/app/utils/types";
 
 const SocialButton = ({
   name,
@@ -63,7 +63,7 @@ const SocialButton = ({
   </Flex>
 );
 
-const View = ({ data }: { data: MemberProps[] }) => {
+const View = ({ data }: { data: Member[] }) => {
   const router = useRouter();
   const borderColor = useColorModeValue("gray.200", "gray.800");
 

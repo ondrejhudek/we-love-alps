@@ -19,7 +19,7 @@ import { FaSkiing } from "react-icons/fa";
 
 import { FlagImage } from "@/app/components/Image";
 import { MONTHS_CS } from "@/app/utils/locales";
-import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
+import { Member, Resort, Trip } from "@/app/utils/types";
 
 const DOT_SIZE = 64;
 const DOT_SIZE_PX = `${DOT_SIZE}px`;
@@ -42,9 +42,9 @@ const TimelineRow = ({
   even,
   onClick,
 }: {
-  trip: TripProps;
-  tripMembers: MemberProps[];
-  tripResorts: ResortProps[];
+  trip: Trip;
+  tripMembers: Member[];
+  tripResorts: Resort[];
   even: boolean;
   onClick: (id: string) => void;
 }) => (
@@ -189,9 +189,9 @@ const Timeline = ({
   membersData,
   resortsData,
 }: {
-  tripsData: TripProps[];
-  membersData: MemberProps[];
-  resortsData: ResortProps[];
+  tripsData: Trip[];
+  membersData: Member[];
+  resortsData: Resort[];
 }) => {
   const router = useRouter();
 

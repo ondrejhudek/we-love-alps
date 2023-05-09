@@ -17,7 +17,7 @@ import {
 
 import Header from "@/app/components/Header";
 import { FlagImage, ResortImage } from "@/app/components/Image";
-import { ResortProps } from "@/app/utils/types";
+import { Resort } from "@/app/utils/types";
 
 const Map = ({ id }: { id: string }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -37,7 +37,7 @@ const Map = ({ id }: { id: string }) => {
   );
 };
 
-const View = ({ data }: { data: ResortProps[] }) => {
+const View = ({ data }: { data: Resort[] }) => {
   const router = useRouter();
   const regionColor = useColorModeValue("gray.400", "gray.500");
 

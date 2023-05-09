@@ -4,11 +4,11 @@ import { useRouter } from "next/navigation";
 import { Flex, SkeletonCircle, Tooltip } from "@chakra-ui/react";
 
 import { ResortImage } from "@/app/components/Image";
-import { ResortProps } from "@/app/utils/types";
+import { Resort } from "@/app/utils/types";
 
 export const ResortsLoading = () => <SkeletonCircle size="28" />;
 
-const Resorts = ({ data }: { data: ResortProps[] }) => {
+const Resorts = ({ data }: { data: Resort[] }) => {
   const router = useRouter();
 
   const handleClick = (id: string) => {

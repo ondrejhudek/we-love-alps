@@ -19,19 +19,19 @@ import {
 import { IconType } from "react-icons";
 import { HiOutlineUsers, HiOutlineMapPin, HiOutlineMap } from "react-icons/hi2";
 
-import { TableName } from "@/app/utils/database";
+import { Table } from "@/app/utils/types";
 
 export interface StatProps {
-  slug: TableName;
+  slug: Table;
   title: string;
   pathLabel: string;
   color: string;
 }
 
-const ICONS: Partial<Record<TableName, IconType>> = {
-  members: HiOutlineUsers,
-  trips: HiOutlineMap,
-  resorts: HiOutlineMapPin,
+const ICONS: Partial<Record<Table, IconType>> = {
+  member: HiOutlineUsers,
+  trip: HiOutlineMap,
+  resort: HiOutlineMapPin,
 };
 
 export const Stats = ({ children }: { children: React.ReactNode }) => (

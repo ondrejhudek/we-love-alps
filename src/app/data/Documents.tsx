@@ -1,11 +1,12 @@
 import Alert from "@/app/components/Alert";
-import { TableName, getRows } from "@/app/utils/database";
+import { getRows } from "@/app/utils/database";
+import { Table } from "@/app/utils/types";
 
 const Documents = async <T extends object>({
   tableName,
   viewComponent: View,
 }: {
-  tableName: TableName;
+  tableName: Table;
   viewComponent: React.FC<{ data: T[] }>;
 }) => {
   const data = await getRows<T>(tableName);

@@ -1,11 +1,11 @@
 import Data from "@/app/data/Documents";
-import { ResortProps } from "@/app/utils/types";
+import { Resort } from "@/app/utils/types";
 
 import View from "./view";
 
 const Page = async () => (
   // @ts-expect-error Server Component
-  <Data<ResortProps> tableName="resorts" viewComponent={View} />
+  <Data<Resort> tableName="resort" viewComponent={View} />
 );
 
 export default Page;

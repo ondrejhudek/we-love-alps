@@ -20,7 +20,7 @@ import { IconType } from "react-icons";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 
 import { AvatarImage } from "@/app/components/Image";
-import { MemberProps } from "@/app/utils/types";
+import { Member } from "@/app/utils/types";
 
 const PersonalInfo = ({
   alias,
@@ -31,7 +31,7 @@ const PersonalInfo = ({
   alias: string;
   label: string;
   color: string;
-  membersData: MemberProps[];
+  membersData: Member[];
 }) => {
   const member = membersData.find((member) => member.alias === alias);
   if (!member) return null;
@@ -106,8 +106,8 @@ const Info = ({
   data,
   membersData,
 }: {
-  data: MemberProps;
-  membersData: MemberProps[];
+  data: Member;
+  membersData: Member[];
 }) => {
   const nicknameColor = useColorModeValue("gray.700", "gray.300");
 

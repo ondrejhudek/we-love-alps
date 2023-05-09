@@ -1,16 +1,16 @@
--- CREATE TABLE trips (
---     id VARCHAR PRIMARY KEY,
---     title VARCHAR NOT NULL,
---     country_code VARCHAR NOT NULL,
---     year INT NOT NULL,
---     month INT NOT NULL,
---     accomodation_name VARCHAR,
---     accomodation_map VARCHAR,
---     resorts VARCHAR [] NOT NULL,
---     members VARCHAR [] NOT NULL,
---     non_members INT;
--- )
-INSERT INTO trips (
+CREATE TABLE trip (
+    id VARCHAR PRIMARY KEY,
+    title VARCHAR NOT NULL,
+    country_code VARCHAR NOT NULL,
+    year INT NOT NULL,
+    month INT NOT NULL,
+    accomodation_name VARCHAR,
+    accomodation_map VARCHAR,
+    resorts VARCHAR [] NOT NULL,
+    members VARCHAR [] NOT NULL,
+    non_members INT;
+)
+INSERT INTO trip (
         id,
         title,
         country_code,

@@ -2,15 +2,15 @@ import groupBy from "ramda/src/groupBy";
 
 import Header from "@/app/components/Header";
 import { getRows } from "@/app/utils/database";
-import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
+import { Member, Resort, Trip } from "@/app/utils/types";
 
 import View, { TripViewProps } from "./view";
 
 const Content = async () => {
   const [tripsData, resortsData, membersData] = await Promise.all([
-    getRows<TripProps>("trips"),
-    getRows<ResortProps>("resorts"),
-    getRows<MemberProps>("members"),
+    getRows<Trip>("trip"),
+    getRows<Resort>("resort"),
+    getRows<Member>("member"),
   ]);
 
   const groupedTrips = groupBy<TripViewProps>(

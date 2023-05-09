@@ -1,12 +1,12 @@
 import { getRows } from "@/app/utils/database";
-import { TripProps, VideoProps } from "@/app/utils/types";
+import { Trip, Video } from "@/app/utils/types";
 
 import View, { VideoViewProps } from "./view";
 
 const Page = async () => {
   const [videosData, tripsData] = await Promise.all([
-    getRows<VideoProps>("videos"),
-    getRows<TripProps>("trips"),
+    getRows<Video>("video"),
+    getRows<Trip>("trip"),
   ]);
 
   const data = videosData.reduce<VideoViewProps[]>((acc, video) => {

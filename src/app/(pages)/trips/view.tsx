@@ -20,11 +20,11 @@ import { FaSkiing } from "react-icons/fa";
 
 import { FlagImage } from "@/app/components/Image";
 import { MONTHS_CS } from "@/app/utils/locales";
-import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
+import { Member, Resort, Trip } from "@/app/utils/types";
 
-export interface TripViewProps extends Omit<TripProps, "members" | "resorts"> {
-  members: MemberProps[];
-  resorts: ResortProps[];
+export interface TripViewProps extends Omit<Trip, "members" | "resorts"> {
+  members: Member[];
+  resorts: Resort[];
 }
 
 const TooltipAvatar: typeof Avatar = (props: AvatarProps) => (

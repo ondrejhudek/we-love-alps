@@ -5,15 +5,15 @@ import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
 import DocumentsByValues from "@/app/data/DocumentsByValues";
 import { getRowByValue, getRowsByValueInColumn } from "@/app/utils/database";
-import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
+import { Member, Resort, Trip } from "@/app/utils/types";
 
 import Info from "./components/Info";
 import Members, { MembersLoading } from "./components/Members";
 
 const Content = async ({ id }: { id: string }) => {
   const [resortData, tripsData] = await Promise.all([
-    getRowByValue<ResortProps>("resorts", "id", id),
-    getRowsByValueInColumn<TripProps>("trips", "resorts", id),
+    getRowByValue<Resort>("resort", "id", id),
+    getRowsByValueInColumn<Trip>("trip", "resorts", id),
   ]);
 
   console.log(tripsData.length);
@@ -35,8 +35,8 @@ const Content = async ({ id }: { id: string }) => {
       <Container title="Navšívili">
         <Suspense fallback={<MembersLoading />}>
           {/* @ts-expect-error Server Component */}
-          <DocumentsByValues<MemberProps>
-            tableName="members"
+          <DocumentsByValues<Member>
+            tableName="member"
             column="alias"
             values={members}
             viewComponent={Members}

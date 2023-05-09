@@ -3,13 +3,13 @@ import { GalleryFolderProps } from "@/app/cloudinary/types";
 import Header from "@/app/components/Header";
 import Photogallery from "@/app/components/Photogallery";
 import { getRows } from "@/app/utils/database";
-import { TripProps } from "@/app/utils/types";
+import { Trip } from "@/app/utils/types";
 
 const Page = async () => {
   const [folderData, folderThumbnails, tripsData] = await Promise.all([
     getFolders(),
     getFolderThumbnails(),
-    getRows<TripProps>("trips"),
+    getRows<Trip>("trip"),
   ]);
 
   const folders: GalleryFolderProps[] = folderData.folders

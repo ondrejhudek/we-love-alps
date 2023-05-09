@@ -1,4 +1,4 @@
-import { Generated } from "kysely";
+import { DB, Member, Resort, Trip, Video } from "@/generated/types";
 
 export enum NavLinkKey {
   Home = "/",
@@ -16,41 +16,12 @@ export type LINK = {
 
 export type CountryProps = Record<string, string>;
 
-export interface MemberProps {
-  id: Generated<number>;
-  alias: string;
-  name: string;
-  facebook?: string;
-  instagram?: string;
-  current_partner?: string;
-  ex_partners?: string[];
-  siblings?: string[];
-  interest: ("lyže" | "snowboard" | "skialpy")[];
-}
+export type { DB, Member, Resort, Trip, Video };
 
-export interface ResortProps {
-  id: string;
-  name: string;
-  country_code: string;
-  region: string;
-  map: string;
-}
+export type Table = keyof DB;
 
-export interface TripProps {
-  id: string;
-  title: string;
-  country_code: string;
-  year: number;
-  month: number;
-  accomodation_name?: string;
-  accomodation_map?: string;
-  resorts: string[];
-  members: string[];
-  non_members?: number;
-}
-
-export interface VideoProps {
-  id: Generated<number>;
-  trip_id: string;
-  youtube_id: string;
-}
+export type AnyTableColumn =
+  | keyof Member
+  | keyof Resort
+  | keyof Trip
+  | keyof Video;

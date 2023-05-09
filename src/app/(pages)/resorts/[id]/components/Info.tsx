@@ -15,7 +15,7 @@ import {
 
 import { FlagImage, ResortImage } from "@/app/components/Image";
 import { COUNTRIES } from "@/app/utils";
-import { ResortProps, TripProps } from "@/app/utils/types";
+import { Resort, Trip } from "@/app/utils/types";
 
 const Map = ({ id }: { id: string }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -39,8 +39,8 @@ const Info = ({
   resortData,
   tripsData,
 }: {
-  resortData: ResortProps;
-  tripsData: TripProps[];
+  resortData: Resort;
+  tripsData: Trip[];
 }) => (
   <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
     <CardBody>

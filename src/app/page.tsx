@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
-import { TableName, getRows, getCount } from "@/app/utils/database";
-import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
+import { getRows, getCount } from "@/app/utils/database";
+import { Table, Member, Resort, Trip } from "@/app/utils/types";
 
 import TimelineView from "./components/Timeline";
 import StatView, {
@@ -12,35 +12,35 @@ import StatView, {
 
 const STATS: StatProps[] = [
   {
-    slug: "members",
+    slug: "member",
     title: "Členové",
     pathLabel: "Všichni členové",
     color: "orange",
   },
   {
-    slug: "trips",
+    slug: "trip",
     title: "Zájezdy",
     pathLabel: "Všechny zájezdy",
     color: "purple",
   },
   {
-    slug: "resorts",
+    slug: "resort",
     title: "Střediska",
     pathLabel: "Všechny střediska",
     color: "pink",
   },
 ];
 
-const Stat = async ({ slug }: { slug: TableName }) => {
+const Stat = async ({ slug }: { slug: Table }) => {
   const count = await getCount(slug);
   return <>{count}</>;
 };
 
 const Timeline = async () => {
   const [tripsData, resortsData, membersData] = await Promise.all([
-    getRows<TripProps>("trips"),
-    getRows<ResortProps>("resorts"),
-    getRows<MemberProps>("members"),
+    getRows<Trip>("trip"),
+    getRows<Resort>("resort"),
+    getRows<Member>("member"),
   ]);
 
   return (
