@@ -1,5 +1,5 @@
 import Alert from "@/app/components/Alert";
-import { TableName, getRows } from "@/app/utils/kysely";
+import { TableName, getRows } from "@/app/utils/database";
 
 const Documents = async <T extends object>({
   tableName,

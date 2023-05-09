@@ -19,7 +19,7 @@ import {
 import { IconType } from "react-icons";
 import { HiOutlineUsers, HiOutlineMapPin, HiOutlineMap } from "react-icons/hi2";
 
-import { TableName } from "@/app/utils/kysely";
+import { TableName } from "@/app/utils/database";
 
 export interface StatProps {
   slug: TableName;

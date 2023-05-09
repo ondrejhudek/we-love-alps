@@ -1,7 +1,7 @@
 import groupBy from "ramda/src/groupBy";
 
 import Header from "@/app/components/Header";
-import { getRows } from "@/app/utils/kysely";
+import { getRows } from "@/app/utils/database";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
 import View, { TripViewProps } from "./view";

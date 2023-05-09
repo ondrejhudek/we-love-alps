@@ -1,4 +1,4 @@
-import { getRows } from "@/app/utils/kysely";
+import { getRows } from "@/app/utils/database";
 import { TripProps, VideoProps } from "@/app/utils/types";
 
 import View, { VideoViewProps } from "./view";

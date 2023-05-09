@@ -5,7 +5,7 @@ import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
 import DocumentsByValues from "@/app/data/DocumentsByValues";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
-import { getRows, getRowsByValueInColumn } from "@/app/utils/kysely";
+import { getRows, getRowsByValueInColumn } from "@/app/utils/database";
 
 import Info from "./components/Info";
 import Resorts, { ResortsLoading } from "./components/Resorts";

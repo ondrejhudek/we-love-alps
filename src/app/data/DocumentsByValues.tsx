@@ -1,5 +1,9 @@
 import Alert from "@/app/components/Alert";
-import { TableName, AnyTableColumn, getRowsByValues } from "@/app/utils/kysely";
+import {
+  TableName,
+  AnyTableColumn,
+  getRowsByValues,
+} from "@/app/utils/database";
 
 const DocumentsByValues = async <T extends object>({
   tableName,

@@ -2,7 +2,7 @@ import { getFolders, getFolderThumbnails } from "@/app/cloudinary/service";
 import { GalleryFolderProps } from "@/app/cloudinary/types";
 import Header from "@/app/components/Header";
 import Photogallery from "@/app/components/Photogallery";
-import { getRows } from "@/app/utils/kysely";
+import { getRows } from "@/app/utils/database";
 import { TripProps } from "@/app/utils/types";
 
 const Page = async () => {

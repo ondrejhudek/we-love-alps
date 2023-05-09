@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
 import DocumentsByValues from "@/app/data/DocumentsByValues";
-import { getRowByValue, getRowsByValueInColumn } from "@/app/utils/kysely";
+import { getRowByValue, getRowsByValueInColumn } from "@/app/utils/database";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
 import Info from "./components/Info";

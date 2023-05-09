@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { TableName, getRows, getCount } from "@/app/utils/kysely";
+import { TableName, getRows, getCount } from "@/app/utils/database";
 import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
 
 import TimelineView from "./components/Timeline";

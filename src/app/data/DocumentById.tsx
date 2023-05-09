@@ -1,5 +1,5 @@
 import Alert from "@/app/components/Alert";
-import { TableName, getRowByValue } from "@/app/utils/kysely";
+import { TableName, getRowByValue } from "@/app/utils/database";
 
 const Document = async <T extends { id: string }>({
   tableName,
