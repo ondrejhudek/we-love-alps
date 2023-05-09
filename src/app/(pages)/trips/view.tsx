@@ -96,8 +96,8 @@ const Trip = ({ data }: { data: TripViewProps }) => {
           color="white"
           fontSize="sm"
         >
-          {members.map(({ id, name }) => (
-            <TooltipAvatar key={id} name={name} />
+          {members.map(({ alias, name }) => (
+            <TooltipAvatar key={alias} name={name} />
           ))}
 
           {/* Non members */}
