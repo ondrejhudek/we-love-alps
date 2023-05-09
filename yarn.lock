@@ -1318,7 +1318,7 @@
   dependencies:
     "@vercel/postgres" "0.2.1"
 
-"@vercel/postgres@0.2.1", "@vercel/postgres@^0.2.1":
+"@vercel/postgres@0.2.1":
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@vercel/postgres/-/postgres-0.2.1.tgz#254e994300ad94e8ee0c870e237d15f11ba50f3e"
   integrity sha512-SucRAtiYGxtdx6eKuBB+hcIQgXGS8Njg/u0Mxq9gOx7LhYHZbQrdgeig3+eheRnJScY1FbAGUucjB1ibvcNwWg==
