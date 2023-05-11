@@ -38,7 +38,16 @@ const Stat = async ({ slug }: { slug: Table }) => {
 
 const Timeline = async () => {
   const [tripsData, resortsData, membersData] = await Promise.all([
-    getRows<Trip>("trip"),
+    getRows<Trip>("trip", [
+      {
+        column: "year",
+        direction: "asc",
+      },
+      {
+        column: "month",
+        direction: "asc",
+      },
+    ]),
     getRows<Resort>("resort"),
     getRows<Member>("member"),
   ]);

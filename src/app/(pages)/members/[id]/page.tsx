@@ -14,17 +14,17 @@ import Trips from "./components/Trips";
 const Content = async ({ id }: { id: string }) => {
   const [membersData, tripsData] = await Promise.all([
     getRows<Member>("member"),
-    getRowsByValueInColumn<Trip>("trip", "members", id),
+    getRowsByValueInColumn<Trip>("trip", "members", id, [
+      { column: "year", direction: "desc" },
+      { column: "month", direction: "desc" },
+    ]),
   ]);
-
-  console.log({ tripsData: tripsData });
-  console.log({ tripsDataLength: tripsData.length });
 
   if (!membersData || !tripsData) {
     notFound();
   }
 
-  const memberData = membersData.find((member) => member.alias === id);
+  const memberData = membersData.find((member) => member.id === id);
 
   if (!memberData) {
     notFound();
@@ -52,6 +52,7 @@ const Content = async ({ id }: { id: string }) => {
             tableName="resort"
             column="id"
             values={resortIds}
+            orderBy={[{ column: "name" }]}
             viewComponent={Resorts}
           />
         </Suspense>

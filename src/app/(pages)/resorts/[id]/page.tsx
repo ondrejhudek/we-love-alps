@@ -16,8 +16,6 @@ const Content = async ({ id }: { id: string }) => {
     getRowsByValueInColumn<Trip>("trip", "resorts", id),
   ]);
 
-  console.log(tripsData.length);
-
   if (!resortData || !tripsData) {
     notFound();
   }
@@ -37,7 +35,7 @@ const Content = async ({ id }: { id: string }) => {
           {/* @ts-expect-error Server Component */}
           <DocumentsByValues<Member>
             tableName="member"
-            column="alias"
+            column="id"
             values={members}
             viewComponent={Members}
           />

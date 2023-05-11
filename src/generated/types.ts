@@ -4,18 +4,15 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
   : ColumnType<T, T | undefined, T>;
 
-export type InterestEnum = "lyže" | "skialpy" | "snowboard";
-
 export interface Member {
-  id: Generated<number>;
-  alias: string;
+  id: string;
   name: string;
   facebook: string | null;
   instagram: string | null;
   current_partner: string | null;
   ex_partners: string[] | null;
   siblings: string[] | null;
-  interest: InterestEnum[];
+  interest: string[];
 }
 
 export interface Resort {
@@ -32,11 +29,11 @@ export interface Trip {
   country_code: string;
   year: number;
   month: number;
+  accomodation_name: string | null;
+  accomodation_map: string | null;
   resorts: string[];
   members: string[];
   non_members: number | null;
-  accomodation_name: string | null;
-  accomodation_map: string | null;
 }
 
 export interface Video {

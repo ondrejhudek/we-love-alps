@@ -1,17 +1,19 @@
-CREATE TYPE interest_enum AS ENUM('lyže', 'skialpy', 'snowboard');
+-- CREATE TYPE interest_enum AS ENUM('lyže', 'skialpy', 'snowboard');
+DROP TABLE member;
 CREATE TABLE member (
-    id SERIAL PRIMARY KEY,
-    alias TEXT NOT NULL UNIQUE,
+    -- id SERIAL PRIMARY KEY,
+    -- alias TEXT NOT NULL UNIQUE,
+    id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     facebook TEXT,
     instagram TEXT,
     current_partner TEXT,
     ex_partners TEXT [],
     siblings TEXT [],
-    interest interest_enum [] NOT NULL
+    interest TEXT [] NOT NULL
 );
 INSERT INTO member (
-        alias,
+        id,
         name,
         facebook,
         instagram,
@@ -25,10 +27,10 @@ VALUES (
         'Ondřej Hudek',
         'ondrej.hudek',
         'ondrejhudek',
-        'stejste',
+        'terka',
         '{ }',
         '{ }',
-        '{"lyže", "snowboard"}'
+        ARRAY ['lyže', 'snowboard']
     ),
     (
         'terka',
@@ -38,7 +40,7 @@ VALUES (
         'hudy',
         '{ }',
         '{ }',
-        '{"lyže", "snowboard"}'
+        ARRAY ['lyže', 'snowboard']
     ),
     (
         'jarin',
@@ -48,7 +50,7 @@ VALUES (
         'daja',
         '{ }',
         '{"era"}',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'daja',
@@ -58,7 +60,7 @@ VALUES (
         'jarin',
         '{ }',
         '{ }',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'stuchla',
@@ -68,7 +70,7 @@ VALUES (
         NULL,
         '{"janca"}',
         '{"majki"}',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'majki',
@@ -78,7 +80,7 @@ VALUES (
         NULL,
         '{ }',
         '{"stuchla"}',
-        '{"snowboard"}'
+        ARRAY ['snowboard']
     ),
     (
         'janca',
@@ -88,7 +90,7 @@ VALUES (
         NULL,
         '{"stuchla"}',
         '{ }',
-        '{"snowboard"}'
+        ARRAY ['snowboard']
     ),
     (
         'era',
@@ -98,7 +100,7 @@ VALUES (
         'pavel',
         '{"kopy"}',
         '{"jarin"}',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'pavel',
@@ -108,7 +110,7 @@ VALUES (
         'era',
         '{ }',
         '{ }',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'kopy',
@@ -118,7 +120,7 @@ VALUES (
         NULL,
         '{"era"}',
         '{ }',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'lena',
@@ -128,7 +130,7 @@ VALUES (
         'milan',
         '{"tomas"}',
         '{ }',
-        '{"lyže", "snowboard", "skialpy"}'
+        ARRAY ['lyže', 'snowboard','skialpy']
     ),
     (
         'milan',
@@ -138,7 +140,7 @@ VALUES (
         'lena',
         '{ }',
         '{ }',
-        '{"lyže", "skialpy"}'
+        ARRAY ['lyže','skialpy']
     ),
     (
         'tomas',
@@ -148,17 +150,17 @@ VALUES (
         NULL,
         '{"lena"}',
         '{ }',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'lucka',
         'Lucie Dostálová',
-        'profile.php ? id = 1145558111',
+        'profile.php?id=1145558111',
         'meritl',
         NULL,
         '{"mara", "jarda"}',
         '{"junior1", "junior2"}',
-        '{"lyže", "snowboard"}'
+        ARRAY ['lyže', 'snowboard']
     ),
     (
         'mara',
@@ -168,7 +170,7 @@ VALUES (
         NULL,
         '{"lucka"}',
         '{ }',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'jarda',
@@ -178,7 +180,7 @@ VALUES (
         NULL,
         '{"lucka"}',
         '{ }',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'junior1',
@@ -188,7 +190,7 @@ VALUES (
         NULL,
         '{ }',
         '{"lucka", "junior2"}',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'junior2',
@@ -198,7 +200,7 @@ VALUES (
         NULL,
         '{ }',
         '{"lucka","junior1"}',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'zahrada',
@@ -208,7 +210,7 @@ VALUES (
         'sima',
         '{ }',
         '{ }',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'sima',
@@ -218,7 +220,7 @@ VALUES (
         'zahrada',
         '{ }',
         '{ }',
-        '{"lyže"}'
+        ARRAY ['lyže']
     ),
     (
         'sally',
@@ -228,5 +230,5 @@ VALUES (
         NULL,
         '{ }',
         '{ }',
-        '{"lyže","snowboard"}'
+        ARRAY ['lyže', 'snowboard']
     );

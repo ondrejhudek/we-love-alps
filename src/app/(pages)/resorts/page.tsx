@@ -5,7 +5,11 @@ import View from "./view";
 
 const Page = async () => (
   // @ts-expect-error Server Component
-  <Data<Resort> tableName="resort" viewComponent={View} />
+  <Data<Resort>
+    tableName="resort"
+    orderBy={[{ column: "name" }]}
+    viewComponent={View}
+  />
 );
 
 export default Page;

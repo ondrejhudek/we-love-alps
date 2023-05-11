@@ -18,7 +18,7 @@ const Content = async () => {
     tripsData.map((trip) => ({
       ...trip,
       members: trip.members.flatMap((memberAlias) =>
-        membersData.filter(({ alias }) => alias === memberAlias)
+        membersData.filter(({ id }) => id === memberAlias)
       ),
       resorts: trip.resorts.flatMap((resortId) =>
         resortsData.filter(({ id }) => id === resortId)

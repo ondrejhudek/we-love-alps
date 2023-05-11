@@ -1,21 +1,23 @@
 import Alert from "@/app/components/Alert";
 import { getRowsByValues } from "@/app/utils/database";
-import { Table, AnyTableColumn } from "@/app/utils/types";
+import { Table, AnyColumn, OrderBy } from "@/app/utils/types";
 
 const DocumentsByValues = async <T extends object>({
   tableName,
   column,
   values,
+  orderBy,
   viewComponent: View,
   withError = false,
 }: {
   tableName: Table;
-  column: AnyTableColumn;
+  column: AnyColumn;
   values: string[];
+  orderBy?: OrderBy[];
   viewComponent: React.FC<{ data: T[] }>;
   withError: boolean;
 }) => {
-  const data = await getRowsByValues<T>(tableName, column, values);
+  const data = await getRowsByValues<T>(tableName, column, values, orderBy);
 
   if (!data || !data.length)
     return withError ? (

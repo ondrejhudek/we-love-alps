@@ -1,8 +1,9 @@
+DROP TABLE video;
 CREATE TABLE video (
     id SERIAL PRIMARY KEY,
-    trip_id VARCHAR NOT NULL,
-    youtube_id VARCHAR NOT NULL
-)
+    trip_id TEXT NOT NULL,
+    youtube_id TEXT NOT NULL
+);
 INSERT INTO video (trip_id, youtube_id)
 VALUES ('2016-zell-am-see', 'eDBsxk9J7OQ'),
     ('2017-ponte-di-legno', 'CGXVrdCztpE'),

@@ -34,6 +34,7 @@ const Content = async ({ id }: { id: string }) => {
             tableName="resort"
             column="id"
             values={data.resorts}
+            orderBy={[{ column: "name" }]}
             viewComponent={Resorts}
           />
         </Suspense>
@@ -45,7 +46,7 @@ const Content = async ({ id }: { id: string }) => {
           {/* @ts-expect-error Server Component */}
           <DocumentsByValues<Member>
             tableName="member"
-            column="alias"
+            column="id"
             values={data.members}
             viewComponent={Members}
           />

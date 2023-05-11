@@ -5,7 +5,7 @@ import View, { VideoViewProps } from "./view";
 
 const Page = async () => {
   const [videosData, tripsData] = await Promise.all([
-    getRows<Video>("video"),
+    getRows<Video>("video", [{ column: "id", direction: "desc" }]),
     getRows<Trip>("trip"),
   ]);
 

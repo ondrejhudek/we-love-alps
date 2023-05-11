@@ -167,8 +167,8 @@ const TimelineRow = ({
             color="white"
             fontSize="sm"
           >
-            {tripMembers.map(({ alias, name }) => (
-              <TooltipAvatar key={alias} name={name} />
+            {tripMembers.map(({ id, name }) => (
+              <TooltipAvatar key={id} name={name} />
             ))}
 
             {/* Non members */}
@@ -217,8 +217,8 @@ const Timeline = ({
         }}
       >
         {tripsData.map((trip, i) => {
-          const members = trip.members.flatMap((alias) =>
-            membersData.filter((member) => member.alias === alias)
+          const members = trip.members.flatMap((id) =>
+            membersData.filter((member) => member.id === id)
           );
           const resorts = trip.resorts.flatMap((id) =>
             resortsData.filter((resort) => resort.id === id)

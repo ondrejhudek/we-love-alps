@@ -1,3 +1,4 @@
+import { AnyColumn as _AnyColumn } from "kysely";
 import { DB, Member, Resort, Trip, Video } from "@/generated/types";
 
 export enum NavLinkKey {
@@ -20,8 +21,9 @@ export type { DB, Member, Resort, Trip, Video };
 
 export type Table = keyof DB;
 
-export type AnyTableColumn =
-  | keyof Member
-  | keyof Resort
-  | keyof Trip
-  | keyof Video;
+export type AnyColumn = _AnyColumn<DB, Table>;
+
+export interface OrderBy {
+  column: AnyColumn;
+  direction?: "asc" | "desc";
+}

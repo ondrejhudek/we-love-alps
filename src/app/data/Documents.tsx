@@ -1,15 +1,17 @@
 import Alert from "@/app/components/Alert";
 import { getRows } from "@/app/utils/database";
-import { Table } from "@/app/utils/types";
+import { Table, OrderBy } from "@/app/utils/types";
 
 const Documents = async <T extends object>({
   tableName,
+  orderBy,
   viewComponent: View,
 }: {
   tableName: Table;
+  orderBy?: OrderBy[];
   viewComponent: React.FC<{ data: T[] }>;
 }) => {
-  const data = await getRows<T>(tableName);
+  const data = await getRows<T>(tableName, orderBy);
 
   if (!data || !data.length)
     return (

@@ -17,16 +17,16 @@ export const MembersLoading = () => (
 const Members = ({ data }: { data: Member[] }) => {
   const router = useRouter();
 
-  const handleClick = (alias: string) => {
-    router.push(`/members/${alias}`);
+  const handleClick = (id: string) => {
+    router.push(`/members/${id}`);
   };
 
   return (
     <Flex wrap="wrap" m={-2}>
-      {data.map(({ alias, name }) => (
-        <Tooltip key={alias} label={name} shouldWrapChildren>
+      {data.map(({ id, name }) => (
+        <Tooltip key={id} label={name} shouldWrapChildren>
           <AvatarImage
-            id={alias}
+            id={id}
             name={name}
             boxSize={24}
             m={2}
@@ -35,7 +35,7 @@ const Members = ({ data }: { data: Member[] }) => {
               cursor: "pointer",
               boxShadow: "outline",
             }}
-            onClick={() => handleClick(alias)}
+            onClick={() => handleClick(id)}
           />
         </Tooltip>
       ))}
