@@ -11,7 +11,7 @@ const addOrderBy = (
   query: SelectQueryBuilder<DB, keyof DB, AllSelection<DB, keyof DB>>,
   orderBy?: OrderBy[]
 ) => {
-  if (!orderBy || !orderBy.length) return query;
+  if (!orderBy?.length) return query;
   orderBy.forEach(({ column, direction }) => {
     query = query.orderBy(column, direction);
   });

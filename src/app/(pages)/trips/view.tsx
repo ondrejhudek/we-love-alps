@@ -38,7 +38,7 @@ const TooltipAvatar: typeof Avatar = (props: AvatarProps) => (
   </Tooltip>
 );
 
-const Trip = ({ data }: { data: TripViewProps }) => {
+const TripView = ({ data }: { data: TripViewProps }) => {
   const router = useRouter();
   const monthColor = useColorModeValue("gray.400", "gray.500");
   const resortColor = useColorModeValue("gray.600", "gray.400");
@@ -125,7 +125,7 @@ const View = ({ year, trips }: { year: string; trips: TripViewProps[] }) => (
       {trips
         .sort((a, b) => b.month - a.month)
         .map((trip) => (
-          <Trip key={trip.id} data={trip} />
+          <TripView key={trip.id} data={trip} />
         ))}
     </SimpleGrid>
   </Box>

@@ -19,7 +19,7 @@ const DocumentsByValues = async <T extends object>({
 }) => {
   const data = await getRowsByValues<T>(tableName, column, values, orderBy);
 
-  if (!data || !data.length)
+  if (!data?.length)
     return withError ? (
       <Alert
         title="Něco se pokazilo!"

@@ -3,13 +3,12 @@ import { notFound } from "next/navigation";
 
 import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
+import Info from "@/app/components/InfoMember";
+import Resorts, { ResortsLoading } from "@/app/components/Resorts";
+import Trips from "@/app/components/Trips";
 import DocumentsByValues from "@/app/data/DocumentsByValues";
 import { Member, Resort, Trip } from "@/app/utils/types";
 import { getRows, getRowsByValueInColumn } from "@/app/utils/database";
-
-import Info from "./components/Info";
-import Resorts, { ResortsLoading } from "./components/Resorts";
-import Trips from "./components/Trips";
 
 const Content = async ({ id }: { id: string }) => {
   const [membersData, tripsData] = await Promise.all([

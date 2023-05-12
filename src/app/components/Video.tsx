@@ -6,7 +6,7 @@ import { AspectRatio, Skeleton } from "@chakra-ui/react";
 import Container from "@/app/components/Container";
 import { Video } from "@/app/utils/types";
 
-const Video = ({ data }: { data: Video[] }) => {
+const VideoComponent = ({ data }: { data: Video[] }) => {
   const id = data[0].youtube_id;
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -27,4 +27,4 @@ const Video = ({ data }: { data: Video[] }) => {
   );
 };
 
-export default Video;
+export default VideoComponent;

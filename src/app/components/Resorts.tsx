@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Flex, SkeletonCircle, Tooltip } from "@chakra-ui/react";
 
 import { ResortImage } from "@/app/components/Image";
-import { Resort } from "@/generated/types";
+import { Resort } from "@/app/utils/types";
 
 export const ResortsLoading = () => (
   <Flex wrap="wrap" m={-2}>
