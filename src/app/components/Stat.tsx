@@ -125,7 +125,7 @@ const MyStat = ({
         >
           <Link
             as={NextLink}
-            href={`/${slug}`}
+            href={`/${slug}s`}
             color={useColorModeValue(`${color}.800`, `${color}.900`)}
             _hover={{ textDecoration: "underline" }}
           >
