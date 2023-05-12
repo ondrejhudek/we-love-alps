@@ -1,3 +1,6 @@
+import { AnyColumn as _AnyColumn } from "kysely";
+import { DB, Member, Resort, Trip, Video } from "@/generated/types";
+
 export enum NavLinkKey {
   Home = "/",
   Members = "/members",
@@ -14,43 +17,13 @@ export type LINK = {
 
 export type CountryProps = Record<string, string>;
 
-export interface MemberProps {
-  id: string;
-  name: string;
-  nickname?: string;
-  facebook?: string;
-  instagram?: string;
-  currentPartner?: string;
-  exPartners?: string[];
-  siblings?: string[];
-  interest: ("lyže" | "snowboard" | "skialpy")[];
-}
+export type { DB, Member, Resort, Trip, Video };
 
-export interface ResortProps {
-  id: string;
-  name: string;
-  countryCode: string;
-  region: string;
-  map: string;
-}
+export type Table = keyof DB;
 
-export interface TripProps {
-  id: string;
-  title: string;
-  resorts: string[];
-  countryCode: string;
-  year: number;
-  month: number;
-  accomodation?: {
-    name: string;
-    map?: string;
-  };
-  members: string[];
-  nonMembers?: number;
-  photos?: number;
-}
+export type AnyColumn = _AnyColumn<DB, Table>;
 
-export interface VideoProps {
-  tripId: string;
-  youtubeId: string;
+export interface OrderBy {
+  column: AnyColumn;
+  direction?: "asc" | "desc";
 }

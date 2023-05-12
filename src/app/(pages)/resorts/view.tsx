@@ -17,9 +17,9 @@ import {
 
 import Header from "@/app/components/Header";
 import { FlagImage, ResortImage } from "@/app/components/Image";
-import { ResortProps } from "@/app/utils/types";
+import { Resort } from "@/app/utils/types";
 
-const Map = ({ id }: { id: string }) => {
+const MapComponent = ({ id }: { id: string }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -37,7 +37,7 @@ const Map = ({ id }: { id: string }) => {
   );
 };
 
-const View = ({ data }: { data: ResortProps[] }) => {
+const View = ({ data }: { data: Resort[] }) => {
   const router = useRouter();
   const regionColor = useColorModeValue("gray.400", "gray.500");
 
@@ -53,7 +53,7 @@ const View = ({ data }: { data: ResortProps[] }) => {
         columns={{ base: 1, sm: 2, md: 3 }}
         spacing={{ base: 3, sm: 4, lg: 5 }}
       >
-        {data.map(({ id, name, region, countryCode, map }) => (
+        {data.map(({ id, name, region, country_code, map }) => (
           <Card
             key={id}
             overflow="hidden"
@@ -64,12 +64,12 @@ const View = ({ data }: { data: ResortProps[] }) => {
             onClick={() => handleClick(id)}
           >
             {/* Map */}
-            <Map id={map} />
+            <MapComponent id={map} />
 
             <CardFooter>
               <Flex justify="space-between" width="full">
                 <Flex align="center">
-                  <FlagImage countryCode={countryCode} boxSize={26} mr={2} />
+                  <FlagImage countryCode={country_code} boxSize={26} mr={2} />
                   <Box>
                     {/* Region */}
                     <Text

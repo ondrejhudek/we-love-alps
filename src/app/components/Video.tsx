@@ -4,10 +4,10 @@ import { useState } from "react";
 import { AspectRatio, Skeleton } from "@chakra-ui/react";
 
 import Container from "@/app/components/Container";
-import { VideoProps } from "@/app/utils/types";
+import { Video } from "@/app/utils/types";
 
-const Video = ({ data }: { data: VideoProps[] }) => {
-  const id = data[0].youtubeId;
+const VideoComponent = ({ data }: { data: Video[] }) => {
+  const id = data[0].youtube_id;
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -27,4 +27,4 @@ const Video = ({ data }: { data: VideoProps[] }) => {
   );
 };
 
-export default Video;
+export default VideoComponent;

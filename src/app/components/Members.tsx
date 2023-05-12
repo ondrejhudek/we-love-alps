@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Flex, SkeletonCircle, Tooltip } from "@chakra-ui/react";
 
 import { AvatarImage } from "@/app/components/Image";
-import { MemberProps } from "@/app/utils/types";
+import { Member } from "@/app/utils/types";
 
 export const MembersLoading = () => (
   <Flex wrap="wrap" m={-2}>
@@ -14,7 +14,7 @@ export const MembersLoading = () => (
   </Flex>
 );
 
-const Members = ({ data }: { data: MemberProps[] }) => {
+const Members = ({ data }: { data: Member[] }) => {
   const router = useRouter();
 
   const handleClick = (id: string) => {

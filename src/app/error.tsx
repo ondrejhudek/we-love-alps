@@ -13,7 +13,13 @@ import {
 
 import { FaSync } from "react-icons/fa";
 
-const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
+const ErrorComponent = ({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) => {
   useEffect(() => {
     // TODO: Log it to Vercel.
     console.error(error);
@@ -51,4 +57,4 @@ const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
   );
 };
 
-export default Error;
+export default ErrorComponent;

@@ -1,16 +1,16 @@
-import { getDocuments } from "@/app/mongodb";
-import { TripProps, VideoProps } from "@/app/utils/types";
+import { getRows } from "@/app/utils/database";
+import { Trip, Video } from "@/app/utils/types";
 
 import View, { VideoViewProps } from "./view";
 
 const Page = async () => {
   const [videosData, tripsData] = await Promise.all([
-    getDocuments<VideoProps>("videos"),
-    getDocuments<TripProps>("trips"),
+    getRows<Video>("video", [{ column: "id", direction: "desc" }]),
+    getRows<Trip>("trip"),
   ]);
 
   const data = videosData.reduce<VideoViewProps[]>((acc, video) => {
-    const trip = tripsData.find(({ id }) => id === video.tripId);
+    const trip = tripsData.find(({ id }) => id === video.trip_id);
     if (trip) acc.push({ ...video, title: trip.title, year: trip.year });
     return acc;
   }, []);
