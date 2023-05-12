@@ -13,7 +13,7 @@ const Documents = async <T extends object>({
 }) => {
   const data = await getRows<T>(tableName, orderBy);
 
-  if (!data || !data.length)
+  if (!data?.length)
     return (
       <Alert
         title="Něco se pokazilo!"
