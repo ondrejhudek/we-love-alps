@@ -1,8 +1,8 @@
 # <img src="public/images/logo-icon.png" width="32" /> We love Alps | Since 2008
 
 [![Build](https://github.com/ondrejhudek/we-love-alps/actions/workflows/build.yml/badge.svg)](https://github.com/ondrejhudek/we-love-alps/actions/workflows/build.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ondrejhudek_we-love-alps&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ondrejhudek_we-love-alps)
 ![Vercel](https://vercelbadge.vercel.app/api/ondrejhudek/we-love-alps)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ondrejhudek_we-love-alps&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ondrejhudek_we-love-alps)
 
 ## Built with
 
