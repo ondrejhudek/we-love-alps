@@ -1,4 +1,4 @@
-# <img src="public/images/logo-icon.png" width="32" /> We love Alps | Since 2008
+# <img src="public/images/logo-icon.png" width="34" /> We love Alps | Since 2008
 
 [![Build](https://github.com/ondrejhudek/we-love-alps/actions/workflows/build.yml/badge.svg)](https://github.com/ondrejhudek/we-love-alps/actions/workflows/build.yml)
 ![Vercel](https://vercelbadge.vercel.app/api/ondrejhudek/we-love-alps)
