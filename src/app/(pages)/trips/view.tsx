@@ -122,7 +122,7 @@ const View = ({ year, trips }: { year: string; trips: TripViewProps[] }) => (
       columns={{ base: 1, md: 2 }}
       spacing={{ base: 3, sm: 4, lg: 5 }}
     >
-      {trips
+      {[...trips]
         .sort((a, b) => b.month - a.month)
         .map((trip) => (
           <TripView key={trip.id} data={trip} />

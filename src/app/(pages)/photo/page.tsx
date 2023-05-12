@@ -12,7 +12,7 @@ const Page = async () => {
     getRows<Trip>("trip"),
   ]);
 
-  const folders: GalleryFolderProps[] = folderData.folders
+  const folders: GalleryFolderProps[] = [...folderData.folders]
     // Sort folder desc by name
     .sort((a, b) => {
       if (a.name < b.name) return 1;
