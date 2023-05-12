@@ -19,7 +19,7 @@ import Header from "@/app/components/Header";
 import { FlagImage, ResortImage } from "@/app/components/Image";
 import { Resort } from "@/app/utils/types";
 
-const Map = ({ id }: { id: string }) => {
+const MapComponent = ({ id }: { id: string }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -64,7 +64,7 @@ const View = ({ data }: { data: Resort[] }) => {
             onClick={() => handleClick(id)}
           >
             {/* Map */}
-            <Map id={map} />
+            <MapComponent id={map} />
 
             <CardFooter>
               <Flex justify="space-between" width="full">

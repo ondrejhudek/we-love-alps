@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import Alert from "@/app/components/Alert";
 
-const Error = ({ error }: { error: Error }) => {
+const ErrorComponent = ({ error }: { error: Error }) => {
   useEffect(() => {
     // TODO: Log it to Vercel.
     console.error(error);
@@ -21,4 +21,4 @@ const Error = ({ error }: { error: Error }) => {
   );
 };
 
-export default Error;
+export default ErrorComponent;

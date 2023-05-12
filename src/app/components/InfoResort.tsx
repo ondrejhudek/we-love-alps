@@ -17,7 +17,7 @@ import { FlagImage, ResortImage } from "@/app/components/Image";
 import { COUNTRIES } from "@/app/utils";
 import { Resort, Trip } from "@/app/utils/types";
 
-const Map = ({ id }: { id: string }) => {
+const MapComponent = ({ id }: { id: string }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -80,7 +80,7 @@ const Info = ({
 
     <CardBody pt={0} px={0}>
       {/* Map */}
-      <Map id={resortData.map} />
+      <MapComponent id={resortData.map} />
     </CardBody>
   </Card>
 );
