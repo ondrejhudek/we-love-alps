@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
-import { getDocumentsCount, getDocuments, CollectionName } from "@/app/mongodb";
-import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
+import { getRows, getCount } from "@/app/utils/database";
+import { Table, Member, Resort, Trip } from "@/app/utils/types";
 
 import Hero from "./components/Hero";
 import TimelineView from "./components/Timeline";
@@ -13,35 +13,44 @@ import StatView, {
 
 const STATS: StatProps[] = [
   {
-    slug: "members",
+    slug: "member",
     title: "Členové",
     pathLabel: "Všichni členové",
     color: "orange",
   },
   {
-    slug: "trips",
+    slug: "trip",
     title: "Zájezdy",
     pathLabel: "Všechny zájezdy",
     color: "purple",
   },
   {
-    slug: "resorts",
+    slug: "resort",
     title: "Střediska",
     pathLabel: "Všechny střediska",
     color: "pink",
   },
 ];
 
-const Stat = async ({ slug }: { slug: CollectionName }) => {
-  const count = await getDocumentsCount(slug);
+const Stat = async ({ slug }: { slug: Table }) => {
+  const count = await getCount(slug);
   return <>{count}</>;
 };
 
 const Timeline = async () => {
   const [tripsData, resortsData, membersData] = await Promise.all([
-    getDocuments<TripProps>("trips", { year: 1 }),
-    getDocuments<ResortProps>("resorts"),
-    getDocuments<MemberProps>("members"),
+    getRows<Trip>("trip", [
+      {
+        column: "year",
+        direction: "asc",
+      },
+      {
+        column: "month",
+        direction: "asc",
+      },
+    ]),
+    getRows<Resort>("resort"),
+    getRows<Member>("member"),
   ]);
 
   return (

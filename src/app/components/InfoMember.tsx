@@ -20,7 +20,7 @@ import { IconType } from "react-icons";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 
 import { AvatarImage } from "@/app/components/Image";
-import { MemberProps } from "@/app/utils/types";
+import { Member } from "@/app/utils/types";
 
 const PersonalInfo = ({
   id,
@@ -31,7 +31,7 @@ const PersonalInfo = ({
   id: string;
   label: string;
   color: string;
-  membersData: MemberProps[];
+  membersData: Member[];
 }) => {
   const member = membersData.find((member) => member.id === id);
   if (!member) return null;
@@ -51,7 +51,7 @@ const PersonalInfo = ({
         fontWeight={600}
         onClick={(e) => e.stopPropagation()}
       >
-        @{member.nickname || member.id}
+        @{id}
       </Link>
     </Flex>
   );
@@ -106,8 +106,8 @@ const Info = ({
   data,
   membersData,
 }: {
-  data: MemberProps;
-  membersData: MemberProps[];
+  data: Member;
+  membersData: Member[];
 }) => {
   const nicknameColor = useColorModeValue("gray.700", "gray.300");
 
@@ -134,15 +134,15 @@ const Info = ({
                 fontSize="2xl"
                 fontWeight={600}
               >
-                @{data.nickname || data.id}
+                @{data.id}
               </Heading>
 
               <List spacing={1}>
                 {/* Current partner */}
-                {data.currentPartner && (
+                {data.current_partner && (
                   <ListItem>
                     <PersonalInfo
-                      id={data.currentPartner}
+                      id={data.current_partner}
                       label="Partner/ka"
                       color={nicknameColor}
                       membersData={membersData}
@@ -151,9 +151,9 @@ const Info = ({
                 )}
 
                 {/* Ex partner */}
-                {data.exPartners && data.exPartners.length > 0 && (
+                {data.ex_partners && data.ex_partners.length > 0 && (
                   <>
-                    {data.exPartners.map((exPartner) => (
+                    {data.ex_partners.map((exPartner) => (
                       <ListItem key={exPartner}>
                         <PersonalInfo
                           id={exPartner}

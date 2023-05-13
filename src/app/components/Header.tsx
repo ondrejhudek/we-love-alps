@@ -17,7 +17,7 @@ const Header = ({ label }: { label?: string }) => {
     .map((part) => `/${part}` as NavLinkKey);
   const links: LINK[] = segments.map((segment, i) => ({
     path: segment,
-    label: i === 0 ? NAV_LINKS[segment] : label || NOT_FOUND,
+    label: i === 0 ? NAV_LINKS[segment] : label ?? NOT_FOUND,
   }));
 
   return (

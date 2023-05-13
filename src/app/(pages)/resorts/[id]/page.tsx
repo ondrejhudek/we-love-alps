@@ -3,17 +3,16 @@ import { notFound } from "next/navigation";
 
 import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
-import DocumentsByField from "@/app/data/DocumentsByField";
-import { getDocumentsByField, getDocumentById } from "@/app/mongodb";
-import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
-
-import Info from "./components/Info";
-import Members, { MembersLoading } from "./components/Members";
+import Info from "@/app/components/InfoResort";
+import Members, { MembersLoading } from "@/app/components/Members";
+import DocumentsByValues from "@/app/data/DocumentsByValues";
+import { getRowByValue, getRowsByValueInColumn } from "@/app/utils/database";
+import { Member, Resort, Trip } from "@/app/utils/types";
 
 const Content = async ({ id }: { id: string }) => {
   const [resortData, tripsData] = await Promise.all([
-    getDocumentById<ResortProps>("resorts", id),
-    getDocumentsByField<TripProps>("trips", "resorts", [id]),
+    getRowByValue<Resort>("resort", "id", id),
+    getRowsByValueInColumn<Trip>("trip", "resorts", id),
   ]);
 
   if (!resortData || !tripsData) {
@@ -33,9 +32,9 @@ const Content = async ({ id }: { id: string }) => {
       <Container title="Navšívili">
         <Suspense fallback={<MembersLoading />}>
           {/* @ts-expect-error Server Component */}
-          <DocumentsByField<MemberProps>
-            collectionName="members"
-            field="id"
+          <DocumentsByValues<Member>
+            tableName="member"
+            column="id"
             values={members}
             viewComponent={Members}
           />

@@ -19,19 +19,19 @@ import {
 import { IconType } from "react-icons";
 import { HiOutlineUsers, HiOutlineMapPin, HiOutlineMap } from "react-icons/hi2";
 
-import { CollectionName } from "@/app/mongodb";
+import { Table } from "@/app/utils/types";
 
 export interface StatProps {
-  slug: CollectionName;
+  slug: Table;
   title: string;
   pathLabel: string;
   color: string;
 }
 
-const ICONS: Partial<Record<CollectionName, IconType>> = {
-  members: HiOutlineUsers,
-  trips: HiOutlineMap,
-  resorts: HiOutlineMapPin,
+const ICONS: Partial<Record<Table, IconType>> = {
+  member: HiOutlineUsers,
+  trip: HiOutlineMap,
+  resort: HiOutlineMapPin,
 };
 
 export const Stats = ({ children }: { children: React.ReactNode }) => (
@@ -128,7 +128,7 @@ const MyStat = ({
         >
           <Link
             as={NextLink}
-            href={`/${slug}`}
+            href={`/${slug}s`}
             color={useColorModeValue(`${color}.800`, `${color}.900`)}
             _hover={{ textDecoration: "underline" }}
           >

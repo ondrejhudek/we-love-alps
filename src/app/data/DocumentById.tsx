@@ -1,17 +1,17 @@
-import { getDocumentById, CollectionName } from "@/app/mongodb";
-
 import Alert from "@/app/components/Alert";
+import { getRowByValue } from "@/app/utils/database";
+import { Table } from "@/app/utils/types";
 
 const Document = async <T extends { id: string }>({
-  collectionName,
+  tableName,
   id,
   viewComponent: View,
 }: {
-  collectionName: CollectionName;
+  tableName: Table;
   id: string;
   viewComponent: React.FC<{ data: T }>;
 }) => {
-  const data = await getDocumentById<T>(collectionName, id);
+  const data = await getRowByValue<T>(tableName, "id", id);
 
   if (!data)
     return (

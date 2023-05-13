@@ -19,7 +19,7 @@ import { FaSkiing } from "react-icons/fa";
 
 import { FlagImage } from "@/app/components/Image";
 import { MONTHS_CS } from "@/app/utils/locales";
-import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
+import { Member, Resort, Trip } from "@/app/utils/types";
 
 const DOT_SIZE = 64;
 const DOT_SIZE_PX = `${DOT_SIZE}px`;
@@ -36,15 +36,15 @@ const TooltipAvatar: typeof Avatar = (props: any) => (
 );
 
 const TimelineRow = ({
-  trip: { id, title, year, month, countryCode, nonMembers },
+  trip: { id, title, year, month, country_code, non_members },
   tripMembers,
   tripResorts,
   even,
   onClick,
 }: {
-  trip: TripProps;
-  tripMembers: MemberProps[];
-  tripResorts: ResortProps[];
+  trip: Trip;
+  tripMembers: Member[];
+  tripResorts: Resort[];
   even: boolean;
   onClick: (id: string) => void;
 }) => (
@@ -143,7 +143,7 @@ const TimelineRow = ({
             textTransform="uppercase"
           >
             {title}
-            <FlagImage countryCode={countryCode} ml={2} />
+            <FlagImage countryCode={country_code} ml={2} />
           </Heading>
 
           {/* Resorts */}
@@ -172,9 +172,9 @@ const TimelineRow = ({
             ))}
 
             {/* Non members */}
-            {nonMembers &&
-              nonMembers > 0 &&
-              [...Array(nonMembers)].map((_, i) => (
+            {non_members &&
+              non_members > 0 &&
+              [...Array(non_members)].map((_, i) => (
                 <Avatar key={`nonMember-${i}`} />
               ))}
           </AvatarGroup>
@@ -189,9 +189,9 @@ const Timeline = ({
   membersData,
   resortsData,
 }: {
-  tripsData: TripProps[];
-  membersData: MemberProps[];
-  resortsData: ResortProps[];
+  tripsData: Trip[];
+  membersData: Member[];
+  resortsData: Resort[];
 }) => {
   const router = useRouter();
 

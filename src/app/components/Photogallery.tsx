@@ -11,7 +11,7 @@ import {
 
 import { GalleryThumbnailImage } from "@/app/components/Image";
 import { GalleryFolderProps, ImageProps } from "@/app/cloudinary/types";
-import { TripProps } from "@/app/utils/types";
+import { Trip } from "@/app/utils/types";
 // import { PHOTO_CS } from "@/app/utils/locales";
 
 const GalleryFolder = ({
@@ -24,7 +24,7 @@ const GalleryFolder = ({
   path: string;
   thumbnail?: ImageProps;
   // total: number;
-  trip: TripProps;
+  trip: Trip;
   onClick: (id: string) => void;
 }) => {
   const subtitleColor = useColorModeValue("gray.600", "gray.400");
@@ -74,7 +74,7 @@ const Gallery = ({
   tripsData,
 }: {
   folders: GalleryFolderProps[];
-  tripsData: TripProps[];
+  tripsData: Trip[];
 }) => {
   const router = useRouter();
 

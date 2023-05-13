@@ -1,17 +1,19 @@
-import { getDocuments, CollectionName } from "@/app/mongodb";
-
 import Alert from "@/app/components/Alert";
+import { getRows } from "@/app/utils/database";
+import { Table, OrderBy } from "@/app/utils/types";
 
 const Documents = async <T extends object>({
-  collectionName,
+  tableName,
+  orderBy,
   viewComponent: View,
 }: {
-  collectionName: CollectionName;
+  tableName: Table;
+  orderBy?: OrderBy[];
   viewComponent: React.FC<{ data: T[] }>;
 }) => {
-  const data = await getDocuments<T>(collectionName);
+  const data = await getRows<T>(tableName, orderBy);
 
-  if (!data || !data.length)
+  if (!data?.length)
     return (
       <Alert
         title="Něco se pokazilo!"

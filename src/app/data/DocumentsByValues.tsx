@@ -1,23 +1,25 @@
-import { getDocumentsByField, CollectionName } from "@/app/mongodb";
-
 import Alert from "@/app/components/Alert";
+import { getRowsByValues } from "@/app/utils/database";
+import { Table, AnyColumn, OrderBy } from "@/app/utils/types";
 
-const DocumentsByField = async <T extends object>({
-  collectionName,
-  field,
+const DocumentsByValues = async <T extends object>({
+  tableName,
+  column,
   values,
+  orderBy,
   viewComponent: View,
   withError = false,
 }: {
-  collectionName: CollectionName;
-  field: string;
+  tableName: Table;
+  column: AnyColumn;
   values: string[];
+  orderBy?: OrderBy[];
   viewComponent: React.FC<{ data: T[] }>;
   withError: boolean;
 }) => {
-  const data = await getDocumentsByField<T>(collectionName, field, values);
+  const data = await getRowsByValues<T>(tableName, column, values, orderBy);
 
-  if (!data || !data.length)
+  if (!data?.length)
     return withError ? (
       <Alert
         title="Něco se pokazilo!"
@@ -28,4 +30,4 @@ const DocumentsByField = async <T extends object>({
   return <View data={data} />;
 };
 
-export default DocumentsByField;
+export default DocumentsByValues;

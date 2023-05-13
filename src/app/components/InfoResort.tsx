@@ -15,9 +15,9 @@ import {
 
 import { FlagImage, ResortImage } from "@/app/components/Image";
 import { COUNTRIES } from "@/app/utils";
-import { ResortProps, TripProps } from "@/app/utils/types";
+import { Resort, Trip } from "@/app/utils/types";
 
-const Map = ({ id }: { id: string }) => {
+const MapComponent = ({ id }: { id: string }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -39,8 +39,8 @@ const Info = ({
   resortData,
   tripsData,
 }: {
-  resortData: ResortProps;
-  tripsData: TripProps[];
+  resortData: Resort;
+  tripsData: Trip[];
 }) => (
   <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
     <CardBody>
@@ -50,8 +50,8 @@ const Info = ({
             <Text as="span" mr={2} color="gray.500" fontWeight={400}>
               Země /
             </Text>
-            {COUNTRIES[resortData.countryCode]}
-            <FlagImage countryCode={resortData.countryCode} ml={2} />
+            {COUNTRIES[resortData.country_code]}
+            <FlagImage countryCode={resortData.country_code} ml={2} />
           </ListItem>
 
           <ListItem fontWeight={500}>
@@ -80,7 +80,7 @@ const Info = ({
 
     <CardBody pt={0} px={0}>
       {/* Map */}
-      <Map id={resortData.map} />
+      <MapComponent id={resortData.map} />
     </CardBody>
   </Card>
 );

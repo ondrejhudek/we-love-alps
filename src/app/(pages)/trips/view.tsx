@@ -20,11 +20,11 @@ import { FaSkiing } from "react-icons/fa";
 
 import { FlagImage } from "@/app/components/Image";
 import { MONTHS_CS } from "@/app/utils/locales";
-import { MemberProps, ResortProps, TripProps } from "@/app/utils/types";
+import { Member, Resort, Trip } from "@/app/utils/types";
 
-export interface TripViewProps extends Omit<TripProps, "members" | "resorts"> {
-  members: MemberProps[];
-  resorts: ResortProps[];
+export interface TripViewProps extends Omit<Trip, "members" | "resorts"> {
+  members: Member[];
+  resorts: Resort[];
 }
 
 const TooltipAvatar: typeof Avatar = (props: AvatarProps) => (
@@ -38,12 +38,13 @@ const TooltipAvatar: typeof Avatar = (props: AvatarProps) => (
   </Tooltip>
 );
 
-const Trip = ({ data }: { data: TripViewProps }) => {
+const TripView = ({ data }: { data: TripViewProps }) => {
   const router = useRouter();
   const monthColor = useColorModeValue("gray.400", "gray.500");
   const resortColor = useColorModeValue("gray.600", "gray.400");
 
-  const { id, title, countryCode, month, resorts, members, nonMembers } = data;
+  const { id, title, country_code, month, resorts, members, non_members } =
+    data;
 
   const handleClick = (id: string) => {
     router.push(`/trips/${id}`);
@@ -74,7 +75,7 @@ const Trip = ({ data }: { data: TripViewProps }) => {
           textTransform="uppercase"
         >
           {title}
-          <FlagImage countryCode={countryCode} ml={2} />
+          <FlagImage countryCode={country_code} ml={2} />
         </Heading>
 
         {/* Resorts */}
@@ -100,9 +101,9 @@ const Trip = ({ data }: { data: TripViewProps }) => {
           ))}
 
           {/* Non members */}
-          {nonMembers &&
-            nonMembers > 0 &&
-            [...Array(nonMembers)].map((_, i) => (
+          {non_members &&
+            non_members > 0 &&
+            [...Array(non_members)].map((_, i) => (
               <Avatar key={`nonMember-${i}`} />
             ))}
         </AvatarGroup>
@@ -121,10 +122,10 @@ const View = ({ year, trips }: { year: string; trips: TripViewProps[] }) => (
       columns={{ base: 1, md: 2 }}
       spacing={{ base: 3, sm: 4, lg: 5 }}
     >
-      {trips
+      {[...trips]
         .sort((a, b) => b.month - a.month)
         .map((trip) => (
-          <Trip key={trip.id} data={trip} />
+          <TripView key={trip.id} data={trip} />
         ))}
     </SimpleGrid>
   </Box>

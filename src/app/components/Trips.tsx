@@ -11,9 +11,9 @@ import {
 } from "@chakra-ui/react";
 
 import { FlagImage } from "@/app/components/Image";
-import { TripProps } from "@/app/utils/types";
+import { Trip } from "@/app/utils/types";
 
-const Trips = ({ data }: { data: TripProps[] }) => {
+const Trips = ({ data }: { data: Trip[] }) => {
   const router = useRouter();
 
   const tripBgColor = useColorModeValue("gray.50", "gray.800");
@@ -24,7 +24,7 @@ const Trips = ({ data }: { data: TripProps[] }) => {
 
   return (
     <Flex wrap="wrap" m={-2}>
-      {data.map(({ id, title, year, countryCode }) => (
+      {data.map(({ id, title, year, country_code }) => (
         <Card
           key={id}
           m={2}
@@ -37,7 +37,7 @@ const Trips = ({ data }: { data: TripProps[] }) => {
           onClick={() => handleClick(id)}
         >
           <CardBody py={4} display="flex" alignItems="center">
-            <FlagImage countryCode={countryCode} boxSize={28} mr={3} />
+            <FlagImage countryCode={country_code} boxSize={28} mr={3} />
             <Box>
               <Text color="gray.500" fontSize="sm" lineHeight="none">
                 {year}
