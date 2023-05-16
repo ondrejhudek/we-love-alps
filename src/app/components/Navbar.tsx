@@ -145,13 +145,13 @@ const Navbar = () => {
   const navbarBgColor = useColorModeValue("secondary.700", "secondary.600");
 
   return (
-    <Box py={3}>
+    <Box py={4}>
       <Flex
         align="center"
         justify="space-between"
         maxW="container.xl"
         mx="auto"
-        px={2}
+        px={{ base: 4, sm: 5, md: 6, xl: 0 }}
       >
         <Logo />
 

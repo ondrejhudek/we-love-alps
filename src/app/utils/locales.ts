@@ -1,13 +1,34 @@
+import { CountryProps } from "./types";
+
 export const NAV_LINKS_CS = {
   home: "Domů",
-  members: "Členové",
-  trips: "Zájezdy",
-  resorts: "Střediska",
+  member: "Členové",
+  trip: "Zájezdy",
+  resort: "Střediska",
   photo: "Foto",
   video: "Video",
 };
 
-export const MONTHS_CS = ["Leden", "Únor", "Březen", "Duben"];
+export const COUNTRIES: CountryProps = {
+  AT: "Rakousko",
+  IT: "Itálie",
+  FR: "Francie",
+};
+
+export const MONTHS_CS = [
+  "Leden",
+  "Únor",
+  "Březen",
+  "Duben",
+  "Květen",
+  "Červen",
+  "Červenec",
+  "Srpen",
+  "Září",
+  "Říjen",
+  "Listopad",
+  "Prosinec",
+];
 
 export const TRIP_CS: Record<number, string> = {
   1: "zájezd",

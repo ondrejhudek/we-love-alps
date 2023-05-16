@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 import { FlagImage, ResortImage } from "@/app/components/Image";
-import { COUNTRIES } from "@/app/utils";
+import { COUNTRIES } from "@/app/utils/locales";
 import { Resort, Trip } from "@/app/utils/types";
 
 const MapComponent = ({ id }: { id: string }) => {

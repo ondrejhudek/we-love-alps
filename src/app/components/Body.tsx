@@ -19,7 +19,7 @@ const Body = ({ children }: { children: React.ReactNode }) => (
     >
       {children}
     </Box>
-    {/* <Footer /> */}
+    <Footer />
   </ChakraProvider>
   // </CacheProvider>
 );

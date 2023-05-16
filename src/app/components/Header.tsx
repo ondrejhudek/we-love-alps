@@ -3,8 +3,8 @@
 import { usePathname } from "next/navigation";
 import { Heading } from "@chakra-ui/react";
 
-import { NAV_LINKS, LINK } from "@/app/utils";
-import { NavLinkKey } from "@/app/utils/types";
+import { NAV_LINKS } from "@/app/utils";
+import { Link, NavLinkKey } from "@/app/utils/types";
 import Breadcrump from "./Breadcrump";
 
 const NOT_FOUND = "Nenalezeno";
@@ -15,7 +15,7 @@ const Header = ({ label }: { label?: string }) => {
     .split("/")
     .filter(String)
     .map((part) => `/${part}` as NavLinkKey);
-  const links: LINK[] = segments.map((segment, i) => ({
+  const links: Link[] = segments.map((segment, i) => ({
     path: segment,
     label: i === 0 ? NAV_LINKS[segment] : label ?? NOT_FOUND,
   }));

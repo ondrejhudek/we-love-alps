@@ -13,8 +13,7 @@ import {
 import { FaExternalLinkAlt } from "react-icons/fa";
 
 import { FlagImage } from "@/app/components/Image";
-import { COUNTRIES } from "@/app/utils";
-import { MONTHS_CS } from "@/app/utils/locales";
+import { COUNTRIES, MONTHS_CS } from "@/app/utils/locales";
 import { Trip } from "@/app/utils/types";
 
 const Info = ({ data }: { data: Trip }) => (
@@ -25,7 +24,7 @@ const Info = ({ data }: { data: Trip }) => (
           <Text as="span" mr={2} color="gray.500" fontWeight={400}>
             Kdy /
           </Text>
-          {MONTHS_CS[data.month]}, {data.year}
+          {MONTHS_CS[data.month - 1]}, {data.year}
         </ListItem>
 
         <ListItem fontWeight={500} display="flex" alignItems="center">

@@ -21,17 +21,17 @@ const ALERTS: Partial<
     { title: string; description: string; buttonLabel: string }
   >
 > = {
-  [NavLinkKey.Members]: {
+  [NavLinkKey.Member]: {
     title: "Tento člen neexistuje!",
     description: "Běž zpět a vyber jiného.",
     buttonLabel: "Zpět na Členy",
   },
-  [NavLinkKey.Trips]: {
+  [NavLinkKey.Trip]: {
     title: "Tento zájezd neexistuje!",
     description: "Běž zpět a vyber jiný.",
     buttonLabel: "Zpět na Zájezdy",
   },
-  [NavLinkKey.Resorts]: {
+  [NavLinkKey.Resort]: {
     title: "Tento resort neexistuje!",
     description: "Běž zpět a vyber jiný.",
     buttonLabel: "Zpět na Resorty",
