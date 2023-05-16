@@ -16,7 +16,7 @@ const points = {
         description: "A northside park that is home to the Lincoln Park Zoo",
       },
       geometry: {
-        coordinates: [12.554729, 55.70651],
+        coordinates: [13.554729, 47.70651],
         type: "Point",
       },
       place_name: "Schladming, Styria, Austria",
@@ -51,7 +51,7 @@ const AllResortsMap = () => {
     });
 
     // Create default markers
-    points.features.map((feature) =>
+    points.features.forEach((feature) =>
       new mapboxgl.Marker()
         // .setPopup(popup)
         .setLngLat(feature.geometry.coordinates as [number, number])
