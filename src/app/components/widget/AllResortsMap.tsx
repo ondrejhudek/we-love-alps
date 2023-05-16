@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { AspectRatio, Box, Heading } from "@chakra-ui/react";
+import { AspectRatio } from "@chakra-ui/react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-mapboxgl.accessToken =
-  "pk.eyJ1Ijoib25kcmVqaHVkZWsiLCJhIjoiY2xobnFqcjZvMWloZjNsb3hncjg4MXFlZiJ9.u1bqCWGHqRdmY3JObjfKIg";
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN ?? "";
 
 const points = {
   features: [
@@ -38,10 +37,10 @@ const points = {
   type: "FeatureCollection",
 };
 
-const Mapbox = () => {
+const AllResortsMap = () => {
   const mapContainer = useRef(null);
 
-  const popup = new mapboxgl.Popup().setText("Description");
+  // const popup = new mapboxgl.Popup().setText("Description");
 
   useEffect(() => {
     const map = new mapboxgl.Map({
@@ -54,7 +53,7 @@ const Mapbox = () => {
     // Create default markers
     points.features.map((feature) =>
       new mapboxgl.Marker()
-        .setPopup(popup)
+        // .setPopup(popup)
         .setLngLat(feature.geometry.coordinates as [number, number])
         .addTo(map)
     );
@@ -72,22 +71,5 @@ const Mapbox = () => {
     </AspectRatio>
   );
 };
-
-const AllResortsMap = () => (
-  <>
-    <Heading size="md" mb={4}>
-      Navštívená střediska
-    </Heading>
-
-    <Box
-      borderWidth={8}
-      borderColor="gray.200"
-      borderRadius={16}
-      overflow="hidden"
-    >
-      <Mapbox />
-    </Box>
-  </>
-);
 
 export default AllResortsMap;

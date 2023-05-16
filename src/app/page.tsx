@@ -2,21 +2,16 @@ import { Suspense } from "react";
 import { getRows, getCount } from "@/app/utils/database";
 import { Member, Trip, Resort, TableWithPhoto } from "@/app/utils/types";
 
-import AllResortsMap from "@/app/components/widget/AllResortsMap";
-import MostMembersView, {
-  MostMembersLoading,
-  MostMembersWrapper,
-} from "@/app/components/widget/MostMembers";
-import MostCountriesView, {
-  MostCountriesLoading,
-  MostCountriesWrapper,
-} from "@/app/components/widget/MostCountries";
+import AllResortsMapView from "@/app/components/widget/AllResortsMap";
+import MostMembersView from "@/app/components/widget/MostMembers";
+import MostCountriesView from "@/app/components/widget/MostCountries";
+import { WidgetLoading, WidgetWrapper } from "@/app/components/widget/Widget";
 import CalendarView, {
   CalendarLoading,
   CalendarWrapper,
 } from "@/app/components/Calendar";
 import Dashboard from "@/app/components/Dashboard";
-import StatView, { StatLoading } from "@/app/components/Stats";
+import StatView, { StatLoading } from "@/app/components/Stat";
 
 const STATS: Record<TableWithPhoto, { title: string; color: string }> = {
   member: {
@@ -72,12 +67,12 @@ const MostMembersAsync = async () => {
 };
 
 const MostMembers = () => (
-  <MostMembersWrapper>
-    <Suspense fallback={<MostMembersLoading />}>
+  <WidgetWrapper heading="Nejčastěji jezdí">
+    <Suspense fallback={<WidgetLoading />}>
       {/* @ts-expect-error Server Component */}
       <MostMembersAsync />
     </Suspense>
-  </MostMembersWrapper>
+  </WidgetWrapper>
 );
 
 /**
@@ -89,12 +84,21 @@ const MostCountriesAsync = async () => {
 };
 
 const MostCountries = () => (
-  <MostCountriesWrapper>
-    <Suspense fallback={<MostCountriesLoading />}>
+  <WidgetWrapper heading="Navštívené země">
+    <Suspense fallback={<WidgetLoading />}>
       {/* @ts-expect-error Server Component */}
       <MostCountriesAsync />
     </Suspense>
-  </MostCountriesWrapper>
+  </WidgetWrapper>
+);
+
+/**
+ * Map with all visited resorts.
+ */
+const AllResortsMap = () => (
+  <WidgetWrapper heading="Navštívená střediska">
+    <AllResortsMapView />
+  </WidgetWrapper>
 );
 
 /**

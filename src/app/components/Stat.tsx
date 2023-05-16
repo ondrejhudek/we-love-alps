@@ -30,6 +30,7 @@ export interface StatProps {
   slug: TableWithPhoto;
   title: string;
   color: string;
+  count: number;
 }
 
 const ICONS: Partial<Record<TableWithPhoto, IconType>> = {
@@ -41,21 +42,10 @@ const ICONS: Partial<Record<TableWithPhoto, IconType>> = {
 };
 
 export const StatLoading = ({ color }: { color: string }) => {
-  const bgFrom = useColorModeValue(
-    `var(--chakra-colors-${color}-100)`,
-    `var(--chakra-colors-${color}-600)`
-  );
-  const bgTo = useColorModeValue(
-    `var(--chakra-colors-${color}-200)`,
-    `var(--chakra-colors-${color}-700)`
-  );
+  const bgColor = useColorModeValue(`${color}.400`, `${color}.500`);
 
   return (
-    <Card
-      height="135px"
-      bg={`linear-gradient(210deg, ${bgFrom} 0%, ${bgTo} 100%)`}
-      borderRadius={22}
-    >
+    <Card height="135px" bgColor={bgColor} borderRadius={22}>
       <CardBody p={6} position="relative">
         <Skeleton width={32} height={5} />
         <Flex mt={5} align="center">
@@ -67,12 +57,7 @@ export const StatLoading = ({ color }: { color: string }) => {
   );
 };
 
-export const MyStat = ({
-  slug,
-  title,
-  color,
-  count,
-}: StatProps & { count: number }) => {
+export const MyStat = ({ slug, title, color, count }: StatProps) => {
   const router = useRouter();
 
   const bgFrom = useColorModeValue(

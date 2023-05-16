@@ -7,7 +7,7 @@ import { DB, Table, OrderBy, AnyColumn } from "./types";
 const db = createKysely<DB>();
 const { countAll } = db.fn;
 
-const sleep = (ms = 3000) => new Promise((resolve) => setTimeout(resolve, ms));
+// const sleep = (ms = 3000) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const addOrderBy = (
   query: SelectQueryBuilder<DB, keyof DB, AllSelection<DB, keyof DB>>,
@@ -44,7 +44,6 @@ export const getRows = async <T extends object>(
   limit?: number,
   offset?: number
 ) => {
-  await sleep(2000);
   let query = db.selectFrom(table).selectAll();
   query = addOrderBy(query, orderBy);
   query = addLimit(query, limit);
@@ -102,7 +101,6 @@ export const getRowByValue = async <T extends object>(
 };
 
 export const getCount = async (table: Table) => {
-  await sleep();
   const { count } = await db
     .selectFrom(table)
     .select(countAll<number>().as("count"))

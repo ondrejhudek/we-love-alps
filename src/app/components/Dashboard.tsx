@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
+import { Box, Grid, SimpleGrid } from "@chakra-ui/react";
 
 const Dashboard = ({
   statMembers,
@@ -23,8 +23,8 @@ const Dashboard = ({
   widgetAllResortsMap: React.ReactNode;
   calendar: React.ReactNode;
 }) => (
-  <Flex gap={6}>
-    <Box flex={1}>
+  <Grid templateColumns="1fr minmax(auto, 360px)" templateRows="auto" gap={6}>
+    <Box>
       <SimpleGrid
         columns={{ base: 1, md: 3 }}
         spacing={{ base: 2, sm: 3, md: 3 }}
@@ -56,18 +56,8 @@ const Dashboard = ({
     </Box>
 
     {/* Calendar */}
-    <Box
-      width="360px"
-      maxHeight="1050px"
-      overflowY="auto"
-      py={5}
-      px={7}
-      bg="gray.200"
-      borderRadius={16}
-    >
-      {calendar}
-    </Box>
-  </Flex>
+    <Box>{calendar}</Box>
+  </Grid>
 );
 
 export default Dashboard;

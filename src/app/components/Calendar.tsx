@@ -13,6 +13,7 @@ import {
   SkeletonCircle,
   Text,
   Tooltip,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { FaRegCalendar } from "react-icons/fa";
 import groupBy from "ramda/src/groupBy";
@@ -21,7 +22,7 @@ import { FlagImage } from "@/app/components/Image";
 import { MONTHS_CS } from "@/app/utils/locales";
 import { Member, Resort, Trip } from "@/app/utils/types";
 
-const CALENDAR_EVENTS = 6;
+const CALENDAR_EVENTS = 5;
 
 export interface TripViewProps extends Omit<Trip, "members" | "resorts"> {
   members: Member[];
@@ -50,15 +51,26 @@ export const CalendarLoading = () => (
   </SimpleGrid>
 );
 
-export const CalendarWrapper = ({ children }: PropsWithChildren) => (
-  <>
-    <Heading mt={2} mb={6} size="md">
-      Kalendář
-    </Heading>
+export const CalendarWrapper = ({ children }: PropsWithChildren) => {
+  const bgColor = useColorModeValue("gray.200", "gray.700");
 
-    <Box>{children}</Box>
-  </>
-);
+  return (
+    <Box
+      maxHeight={{ base: "1058px" }}
+      overflowY="auto"
+      py={5}
+      px={7}
+      bgColor={bgColor}
+      borderRadius={16}
+    >
+      <Heading mt={2} mb={8} size="md">
+        Kalendář
+      </Heading>
+
+      <Box>{children}</Box>
+    </Box>
+  );
+};
 
 const Year = ({
   year,
@@ -68,68 +80,75 @@ const Year = ({
   year: string;
   trips: TripViewProps[];
   onClick: (id: string) => void;
-}) => (
-  <>
-    <Heading size="sm" fontWeight={500} color="gray.500">
-      {year}
-    </Heading>
+}) => {
+  const yearColor = useColorModeValue("gray.500", "gray.400");
+  const resortsColor = useColorModeValue("gray.500", "gray.400");
+  const calendarIconColor = useColorModeValue("gray.600", "gray.400");
+  const calendarIconNumber = useColorModeValue("gray.800", "gray.200");
+  const hoverBgColor = useColorModeValue("gray.300", "gray.600");
 
-    {trips.map(({ id, month, title, resorts, country_code }) => (
-      <Tooltip
-        key={id}
-        label={`${MONTHS_CS[month - 1]}, ${year}`}
-        placement="top"
-        offset={[0, -6]}
-      >
-        <Box
-          my={3}
-          mx={-4}
-          p={4}
-          borderRadius={12}
-          _hover={{
-            cursor: "pointer",
-            bgColor: "gray.300",
-          }}
-          onClick={() => onClick(id)}
+  return (
+    <>
+      <Heading size="sm" fontWeight={500} color={yearColor}>
+        {year}
+      </Heading>
+
+      {trips.map(({ id, month, title, resorts, country_code }) => (
+        <Tooltip
+          key={id}
+          label={`${MONTHS_CS[month - 1]}, ${year}`}
+          placement="top"
+          offset={[0, -6]}
         >
-          <Flex alignItems="center">
-            <Box width={10}>
-              <Box position="relative">
-                <Icon
-                  as={FaRegCalendar}
-                  position="absolute"
-                  top="-7px"
-                  boxSize={8}
-                  color="gray.600"
-                />
-                <Text ml={3} fontWeight={500} color="gray.800">
-                  {month}
-                </Text>
+          <Box
+            mx={-4}
+            p={4}
+            borderRadius={12}
+            _hover={{
+              cursor: "pointer",
+              bgColor: hoverBgColor,
+            }}
+            onClick={() => onClick(id)}
+          >
+            <Flex alignItems="center">
+              <Box width={10}>
+                <Box position="relative">
+                  <Icon
+                    as={FaRegCalendar}
+                    position="absolute"
+                    top="-7px"
+                    boxSize={8}
+                    color={calendarIconColor}
+                  />
+                  <Text ml={3} fontWeight={500} color={calendarIconNumber}>
+                    {month}
+                  </Text>
+                </Box>
               </Box>
-            </Box>
 
-            <Flex flex={1} justify="space-between" alignItems="center">
-              <Box ml={3}>
-                <Text
-                  fontSize="sm"
-                  color="gray.500"
-                  noOfLines={1}
-                  title={resorts.map(({ name }) => name).join(", ")}
-                >
-                  {resorts.map(({ name }) => name).join(", ")}
-                </Text>
-                <Text fontWeight={600}>{title}</Text>
-              </Box>
-              <Box ml={1}>
-                <FlagImage countryCode={country_code} boxSize={24} />
-              </Box>
+              <Flex flex={1} justify="space-between" alignItems="center">
+                <Box ml={3}>
+                  <Text
+                    fontSize="sm"
+                    color={resortsColor}
+                    noOfLines={1}
+                    title={resorts.map(({ name }) => name).join(", ")}
+                  >
+                    {resorts.map(({ name }) => name).join(", ")}
+                  </Text>
+                  <Text fontWeight={600}>{title}</Text>
+                </Box>
+                <Box ml={2}>
+                  <FlagImage countryCode={country_code} boxSize={24} />
+                </Box>
+              </Flex>
             </Flex>
-          </Flex>
-        </Box>
-      </Tooltip>
-    ))}
-  </>
-);
+          </Box>
+        </Tooltip>
+      ))}
+    </>
+  );
+};
 
 const Calendar = ({
   trips,
@@ -143,6 +162,9 @@ const Calendar = ({
   const router = useRouter();
 
   const [limit, setLimit] = useState(CALENDAR_EVENTS);
+
+  const buttonBgColor = useColorModeValue("gray.300", "gray.600");
+  const buttonHoverBgColor = useColorModeValue("gray.100", "gray.800");
 
   const groupedTrips = groupBy<TripViewProps>(
     (trip) => trip.year.toString(),
@@ -161,7 +183,7 @@ const Calendar = ({
   );
 
   const handleClick = (id: string) => {
-    router.push(`/trips/${id}`);
+    router.push(`/trip/${id}`);
   };
 
   const handleLoadNext = () => {
@@ -188,9 +210,9 @@ const Calendar = ({
             py={5}
             px={6}
             borderRadius="full"
-            bgColor="gray.300"
+            bgColor={buttonBgColor}
             _hover={{
-              bgColor: "gray.100",
+              bgColor: buttonHoverBgColor,
             }}
             onClick={handleLoadNext}
           >
