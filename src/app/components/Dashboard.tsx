@@ -31,7 +31,7 @@ const Dashboard = ({
       xl: "1fr minmax(auto, 360px)",
     }}
     templateRows="auto"
-    gap={{ base: 10, md: 4, lg: 5, xl: 6 }}
+    gap={{ base: 6, sm: 10, md: 4, lg: 5, xl: 6 }}
   >
     <Box>
       <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 2, sm: 3 }}>
@@ -52,8 +52,8 @@ const Dashboard = ({
       <SimpleGrid
         columns={{ base: 1, lg: 2 }}
         spacing={3}
-        spacingY={{ base: 12, lg: 0 }}
-        my={12}
+        spacingY={{ base: 8, md: 12, lg: 0 }}
+        my={{ base: 8, sm: 10, md: 12 }}
       >
         {/* Most frequent members */}
         {widgetMostMembers}
@@ -63,7 +63,7 @@ const Dashboard = ({
       </SimpleGrid>
 
       {/* All resorts map */}
-      <Box mt={12}>{widgetAllResortsMap}</Box>
+      <Box mt={{ base: 8, sm: 10, md: 12 }}>{widgetAllResortsMap}</Box>
     </Box>
 
     {/* Calendar */}
