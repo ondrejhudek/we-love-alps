@@ -45,7 +45,7 @@ const PersonalInfo = ({
       <Text color="gray.500">{label} /</Text>
       <Link
         as={NextLink}
-        href={`/members/${member.id}`}
+        href={`/member/${member.id}`}
         ml={1.5}
         color={color}
         fontWeight={600}

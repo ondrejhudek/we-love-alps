@@ -18,7 +18,7 @@ const Resorts = ({ data }: { data: Resort[] }) => {
   const router = useRouter();
 
   const handleClick = (id: string) => {
-    router.push(`/resorts/${id}`);
+    router.push(`/resort/${id}`);
   };
 
   return (

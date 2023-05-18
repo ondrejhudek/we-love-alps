@@ -19,7 +19,7 @@ const Trips = ({ data }: { data: Trip[] }) => {
   const tripBgColor = useColorModeValue("gray.50", "gray.800");
 
   const handleClick = (id: string) => {
-    router.push(`/trips/${id}`);
+    router.push(`/trip/${id}`);
   };
 
   return (

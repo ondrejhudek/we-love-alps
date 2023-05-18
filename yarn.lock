@@ -364,18 +364,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/icons@npm:^2.0.19":
-  version: 2.0.19
-  resolution: "@chakra-ui/icons@npm:2.0.19"
-  dependencies:
-    "@chakra-ui/icon": 3.0.16
-  peerDependencies:
-    "@chakra-ui/system": ">=2.0.0"
-    react: ">=18"
-  checksum: 343a55d853c0b7c566ea5831dabfdfa4d5e6e88069ba3966189fab6d62671ba732fb3cab42b97c61db8d4488b279b8f6555fa096ae4cad2b96c33cc1fc13dc27
-  languageName: node
-  linkType: hard
-
 "@chakra-ui/image@npm:2.0.16":
   version: 2.0.16
   resolution: "@chakra-ui/image@npm:2.0.16"
@@ -1840,10 +1828,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.2.0":
-  version: 20.2.0
-  resolution: "@types/node@npm:20.2.0"
-  checksum: 9b937367448a07482af14e3518125ae531bff99e16d51e0945f4f93dbd7051d8a270811bdeb57f0b52c629fb0c9c401a238a7352dfbc87e26495b6f0f59cbdb6
+"@types/node@npm:20.2.1":
+  version: 20.2.1
+  resolution: "@types/node@npm:20.2.1"
+  checksum: ed774afa6e9b4ad7868ed0182a8ca40ad0dd54815a70d3051b23fa850f3bca6bea4d0cb55e1fc769666786ac2cc4c1b37aeade313cb4c4634133f18ebcded496
   languageName: node
   linkType: hard
 
@@ -4777,9 +4765,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-cloudinary@npm:^4.10.0":
-  version: 4.10.0
-  resolution: "next-cloudinary@npm:4.10.0"
+"next-cloudinary@npm:^4.10.1":
+  version: 4.10.1
+  resolution: "next-cloudinary@npm:4.10.1"
   dependencies:
     "@cloudinary-util/url-loader": ^3.5.1
     "@cloudinary-util/util": ^2.0.1
@@ -4787,7 +4775,7 @@ __metadata:
   peerDependencies:
     next: ^12 || ^13
     react: ^17 || ^18
-  checksum: 98a3ab0afb41e09f6365227bdce1ba0ed248976ea2626642d15ef6bfd4fe30c6366449d0657d05d3e9dd9c4bff8a310b0ca5fdd9fd2124af4dc95b1dea40e7e0
+  checksum: 221295a299ecdf554d1c5b04fd4e0a0ca34ea9c62e77adf16c97ffe0d64cc61ef97f59d22029f415e0f5009a6e441b5e9c48bdc4605999b7159a4b88cf977089
   languageName: node
   linkType: hard
 
@@ -6509,13 +6497,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "we-love-alps@workspace:."
   dependencies:
-    "@chakra-ui/icons": ^2.0.19
     "@chakra-ui/next-js": ^2.1.3
     "@chakra-ui/react": ^2.6.1
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
     "@types/mapbox-gl": ^2.7.11
-    "@types/node": 20.2.0
+    "@types/node": 20.2.1
     "@types/ramda": ^0.29.1
     "@types/react": 18.2.6
     "@types/react-dom": 18.2.4
@@ -6529,7 +6516,7 @@ __metadata:
     kysely-codegen: ^0.10.0
     mapbox-gl: ^2.14.1
     next: 13.4.2
-    next-cloudinary: ^4.10.0
+    next-cloudinary: ^4.10.1
     pg: ^8.11.0
     ramda: ^0.29.0
     react: 18.2.0

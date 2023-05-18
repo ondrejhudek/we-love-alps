@@ -47,7 +47,7 @@ const TripView = ({ data }: { data: TripViewProps }) => {
     data;
 
   const handleClick = (id: string) => {
-    router.push(`/trips/${id}`);
+    router.push(`/trip/${id}`);
   };
 
   return (

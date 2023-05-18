@@ -10,7 +10,7 @@ import {
   ListItem,
   Text,
 } from "@chakra-ui/react";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { HiArrowTopRightOnSquare } from "react-icons/hi2";
 
 import { FlagImage } from "@/app/components/Image";
 import { COUNTRIES, MONTHS_CS } from "@/app/utils/locales";
@@ -48,8 +48,8 @@ const Info = ({ data }: { data: Trip }) => (
                   target="_blank"
                 >
                   <Icon
-                    as={FaExternalLinkAlt}
-                    boxSize={3}
+                    as={HiArrowTopRightOnSquare}
+                    boxSize={3.5}
                     ml={2}
                     color="primary.600"
                   />

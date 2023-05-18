@@ -18,7 +18,7 @@ const Members = ({ data }: { data: Member[] }) => {
   const router = useRouter();
 
   const handleClick = (id: string) => {
-    router.push(`/members/${id}`);
+    router.push(`/member/${id}`);
   };
 
   return (

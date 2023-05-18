@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import Image from "next/image";
-import { Box, Show, useColorModeValue } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 
 const LogoWithTitle = () => {
   const pathName = useColorModeValue("logo-navbar", "logo-navbar-white");
@@ -32,13 +32,13 @@ const Logo = ({ iconOnly }: { iconOnly?: boolean }) => {
   return (
     <Box mr={4}>
       <NextLink href="/">
-        <Show above="xs">
+        <Box display={{ base: "none", xs: "block" }}>
           <LogoWithTitle />
-        </Show>
+        </Box>
 
-        <Show below="xs">
+        <Box display={{ base: "block", xs: "none" }}>
           <LogoIcon />
-        </Show>
+        </Box>
       </NextLink>
     </Box>
   );

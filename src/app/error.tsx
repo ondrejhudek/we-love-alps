@@ -11,7 +11,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 
-import { FaSync } from "react-icons/fa";
+import { HiArrowPath } from "react-icons/hi2";
 
 const ErrorComponent = ({
   error,
@@ -48,7 +48,7 @@ const ErrorComponent = ({
         variant="outline"
         colorScheme="red"
         mt={5}
-        leftIcon={<Icon as={FaSync} fontSize="xs" />}
+        leftIcon={<Icon as={HiArrowPath} fontSize="xs" />}
         onClick={() => reset()}
       >
         Zkusit znovu

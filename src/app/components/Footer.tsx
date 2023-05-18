@@ -64,7 +64,7 @@ const Footer = () => (
         © {new Date().getFullYear()} S láskou vytvořil{" "}
         <Link
           as={NextLink}
-          href="/members/hudy"
+          href="/member/hudy"
           color="gray.500"
           fontWeight={600}
           ml="3px"

@@ -15,7 +15,7 @@ import {
   Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FaRegCalendar } from "react-icons/fa";
+import { HiCalendar } from "react-icons/hi2";
 import groupBy from "ramda/src/groupBy";
 
 import { FlagImage } from "@/app/components/Image";
@@ -111,19 +111,22 @@ const Year = ({
             onClick={() => onClick(id)}
           >
             <Flex alignItems="center">
-              <Box width={10}>
-                <Box position="relative">
-                  <Icon
-                    as={FaRegCalendar}
-                    position="absolute"
-                    top="-7px"
-                    boxSize={8}
-                    color={calendarIconColor}
-                  />
-                  <Text ml={3} fontWeight={500} color={calendarIconNumber}>
-                    {month}
-                  </Text>
-                </Box>
+              <Box mt={2} width={10} position="relative">
+                <Icon
+                  as={HiCalendar}
+                  position="absolute"
+                  top="-14px"
+                  boxSize={10}
+                  color={calendarIconColor}
+                />
+                <Text
+                  ml="16px"
+                  fontSize="sm"
+                  fontWeight={500}
+                  color={calendarIconNumber}
+                >
+                  {month}
+                </Text>
               </Box>
 
               <Flex flex={1} justify="space-between" alignItems="center">

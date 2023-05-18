@@ -196,7 +196,7 @@ const Timeline = ({
   const router = useRouter();
 
   const handleClick = (id: string) => {
-    router.push(`/trips/${id}`);
+    router.push(`/trip/${id}`);
   };
 
   return (

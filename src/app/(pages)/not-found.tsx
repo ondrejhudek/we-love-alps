@@ -11,7 +11,7 @@ import {
   Button,
   Icon,
 } from "@chakra-ui/react";
-import { FaArrowLeft } from "react-icons/fa";
+import { HiArrowLeft } from "react-icons/hi2";
 
 import { NavLinkKey } from "@/app/utils/types";
 
@@ -71,7 +71,7 @@ const NotFound = () => {
             replace
             variant="outline"
             colorScheme="red"
-            leftIcon={<Icon as={FaArrowLeft} fontSize="xs" />}
+            leftIcon={<Icon as={HiArrowLeft} fontSize="xs" />}
             fontWeight={500}
           >
             {alert.buttonLabel}
