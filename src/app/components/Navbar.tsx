@@ -2,17 +2,16 @@ import NextLink from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
 import {
   Box,
-  Divider,
-  Drawer,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
+  Center,
   Flex,
   Hide,
   IconButton,
   Link,
-  Show,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalOverlay,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -71,36 +70,25 @@ const MobileNavLink = ({
   const color = useColorModeValue("gray.600", "gray.300");
   const activeColor = useColorModeValue("gray.800", "gray.50");
   const hoverColor = useColorModeValue("gray.900", "white");
-  const activeBorderColor = useColorModeValue("primary.600", "primary.300");
-  const hoverBorderColor = useColorModeValue("primary.500", "primary.400");
+  const hoverBgColor = useColorModeValue("gray.300", "gray.800");
 
   return (
     <Link
-      role="group"
       as={NextLink}
       href={link}
-      position="relative"
       display="block"
-      mx={4}
-      py={4}
-      px={6}
+      my={1}
+      py={6}
+      px={16}
       color={isActive ? activeColor : color}
+      fontSize="lg"
       fontWeight={500}
+      textAlign="center"
+      borderRadius="full"
       onClick={onClose}
       _hover={{
         color: hoverColor,
-        _before: {
-          borderColor: hoverBorderColor,
-        },
-      }}
-      _before={{
-        content: '""',
-        position: "absolute",
-        left: 0,
-        height: "24px",
-        borderLeftWidth: 3,
-        borderStyle: "solid",
-        borderColor: isActive ? activeBorderColor : "transparent",
+        bgColor: hoverBgColor,
       }}
     >
       {NAV_LINKS[link]}
@@ -115,24 +103,21 @@ const MobileNavbar = ({
   isOpen: boolean;
   onClose: () => void;
 }) => (
-  <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-    <DrawerOverlay backdropFilter="blur(5px)" />
-    <DrawerContent>
-      <DrawerCloseButton />
-      <DrawerHeader>
-        <Logo iconOnly />
-      </DrawerHeader>
-
-      <>
-        {NAV_LINK_KEYS.map((link, i) => (
-          <Box key={link} px={4}>
-            {i > 0 && <Divider />}
-            <MobileNavLink link={link} onClose={onClose} />
+  <Modal isOpen={isOpen} size="full" onClose={onClose}>
+    <ModalOverlay />
+    <ModalContent>
+      <ModalCloseButton size="lg" boxSize={16} borderRadius="full" />
+      <ModalBody p={0}>
+        <Center height="100vh">
+          <Box>
+            {NAV_LINK_KEYS.map((link) => (
+              <MobileNavLink key={link} link={link} onClose={onClose} />
+            ))}
           </Box>
-        ))}
-      </>
-    </DrawerContent>
-  </Drawer>
+        </Center>
+      </ModalBody>
+    </ModalContent>
+  </Modal>
 );
 
 const Navbar = () => {
