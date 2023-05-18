@@ -139,7 +139,7 @@ const Navbar = () => {
 
         <Flex alignItems="center">
           {/* Desktop */}
-          <Hide below="lg" ssr>
+          <Hide below="lg">
             <Flex
               justify="center"
               alignItems="center"
@@ -156,7 +156,7 @@ const Navbar = () => {
           <ColorModeSwitcher />
 
           {/* Mobile hamburger icon button */}
-          <Hide above="lg" ssr>
+          <Hide above="lg">
             <Box ml={2} bgColor={bgColor} borderRadius="full">
               <Box
                 p={6}
