@@ -10,7 +10,7 @@ import {
   Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FaHeart, FaArrowUp } from "react-icons/fa";
+import { HiHeart, HiArrowUp } from "react-icons/hi2";
 
 const BackToTop = () => {
   const handleClick = () => {
@@ -25,12 +25,13 @@ const BackToTop = () => {
           variant="outline"
           colorScheme="gray"
           boxSize={12}
+          fontSize="xl"
           borderRadius="full"
           aria-label="Zpět nahoru"
           onClick={handleClick}
         >
           <Icon
-            as={FaArrowUp}
+            as={HiArrowUp}
             transition="var(--chakra-transition-primary)"
             _groupHover={{
               transform: "translateY(-2px)",
@@ -72,7 +73,7 @@ const Footer = () => (
           @hudy
         </Link>
         . Skol
-        <Icon as={FaHeart} color="red.500" ml={1.5} />.
+        <Icon as={HiHeart} color="red.500" ml={1.5} />.
       </Text>
     </Flex>
 
