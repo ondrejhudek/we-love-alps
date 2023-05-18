@@ -1,25 +1,6 @@
 import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
-import { modalAnatomy as parts } from "@chakra-ui/anatomy";
 import { mode } from "@chakra-ui/theme-tools";
-import {
-  createMultiStyleConfigHelpers,
-  defineStyle,
-} from "@chakra-ui/styled-system";
 import type { StyleFunctionProps } from "@chakra-ui/styled-system";
-
-const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(parts.keys);
-
-// const almostFull = definePartsStyle({
-//   dialog: defineStyle({
-//     minH: "90dvh",
-//     w: "90vw",
-//     borderRadius: "md",
-//   }),
-//   dialogContainer: defineStyle({
-//     alignItems: "center",
-//   }),
-// });
 
 const colors = {
   primary: {
@@ -72,10 +53,6 @@ const colors = {
   },
 };
 
-// const Modal = defineMultiStyleConfig({
-//   variants: { almostFull },
-// });
-
 const transition = {
   primary: "all 0.2s ease-in-out 0s",
 };
@@ -97,7 +74,6 @@ const theme = extendTheme({
     body: 'var(--font-ubuntu), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
   },
   colors,
-  // components: { Modal },
   styles: {
     global: (props: StyleFunctionProps) => ({
       "html, body": {
