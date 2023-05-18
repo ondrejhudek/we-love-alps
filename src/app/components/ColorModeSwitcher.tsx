@@ -13,7 +13,7 @@ const ColorModeSwitcher = () => {
     <Box ml={2} bgColor={bgColor} borderRadius="full">
       <Box
         p={6}
-        color="white"
+        color="gray.100"
         borderRadius="full"
         transition="background-position 0.1s ease"
         bgGradient={`linear(to-t, ${hoverBgColor} 50%, transparent 50%)`}
@@ -23,6 +23,7 @@ const ColorModeSwitcher = () => {
         aria-label={`Přepnout na ${text} mód`}
         _hover={{
           textDecoration: "none",
+          color: "white",
           bgPosition: "0 100%",
         }}
         onClick={toggleColorMode}

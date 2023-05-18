@@ -5,7 +5,6 @@ import {
   Center,
   Flex,
   Hide,
-  IconButton,
   Link,
   Modal,
   ModalBody,
@@ -29,7 +28,7 @@ const isActiveLink = (link: NavLinkKey, segments: string[]) => {
 
 const NavLink = ({ link }: { link: NavLinkKey }) => {
   const segments = useSelectedLayoutSegments();
-  // const isActive = isActiveLink(link, segments);
+  const isActive = isActiveLink(link, segments);
 
   const hoverBgColor = useColorModeValue("secondary.600", "secondary.700");
 
@@ -41,7 +40,7 @@ const NavLink = ({ link }: { link: NavLinkKey }) => {
       py={5}
       px={7}
       fontWeight={500}
-      color="white"
+      color={isActive ? "white" : "gray.100"}
       borderRadius="full"
       transition="background-position 0.1s ease"
       bgGradient={`linear(to-t, ${hoverBgColor} 50%, transparent 50%)`}
@@ -49,6 +48,7 @@ const NavLink = ({ link }: { link: NavLinkKey }) => {
       bgPosition="0 0"
       _hover={{
         textDecoration: "none",
+        color: "white",
         bgPosition: "0 100%",
       }}
     >
@@ -68,7 +68,7 @@ const MobileNavLink = ({
   const isActive = isActiveLink(link, segments);
 
   const color = useColorModeValue("gray.600", "gray.300");
-  const activeColor = useColorModeValue("gray.800", "gray.50");
+  const activeColor = useColorModeValue("gray.800", "gray.100");
   const hoverColor = useColorModeValue("gray.900", "white");
   const hoverBgColor = useColorModeValue("gray.300", "gray.800");
 
@@ -137,9 +137,9 @@ const Navbar = () => {
         {/* Logo */}
         <Logo />
 
-        {/* Desktop */}
         <Flex alignItems="center">
-          <Hide below="lg">
+          {/* Desktop */}
+          <Hide below="lg" ssr>
             <Flex
               justify="center"
               alignItems="center"
@@ -156,34 +156,30 @@ const Navbar = () => {
           <ColorModeSwitcher />
 
           {/* Mobile hamburger icon button */}
-          <Hide above="lg">
+          <Hide above="lg" ssr>
             <Box ml={2} bgColor={bgColor} borderRadius="full">
-              <IconButton
-                width="auto"
-                minWidth="auto"
-                height="auto"
-                icon={
-                  isOpen ? (
-                    <CloseIcon display="block" />
-                  ) : (
-                    <HamburgerIcon display="block" />
-                  )
-                }
-                aria-label="Otevřít"
+              <Box
                 p={6}
                 color="white"
-                lineHeight={1}
                 borderRadius="full"
                 transition="background-position 0.1s ease"
                 bgGradient={`linear(to-t, ${hoverBgColor} 50%, transparent 50%)`}
                 bgSize="100% 200%"
                 bgPosition="0 0"
+                cursor="pointer"
+                aria-label="Otevřít"
                 _hover={{
                   textDecoration: "none",
                   bgPosition: "0 100%",
                 }}
                 onClick={isOpen ? onClose : onOpen}
-              />
+              >
+                {isOpen ? (
+                  <CloseIcon display="block" />
+                ) : (
+                  <HamburgerIcon display="block" />
+                )}
+              </Box>
             </Box>
           </Hide>
         </Flex>
