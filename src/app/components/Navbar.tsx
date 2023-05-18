@@ -9,8 +9,10 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
+  Hide,
   IconButton,
   Link,
+  Show,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -28,13 +30,7 @@ const isActiveLink = (link: NavLinkKey, segments: string[]) => {
 
 const NavLink = ({ link }: { link: NavLinkKey }) => {
   const segments = useSelectedLayoutSegments();
-  const isActive = isActiveLink(link, segments);
-
-  const color = useColorModeValue("gray.600", "gray.300");
-  const activeColor = useColorModeValue("gray.800", "gray.50");
-  const hoverColor = useColorModeValue("gray.900", "white");
-  const activeBorderColor = useColorModeValue("primary.600", "primary.300");
-  const hoverBorderColor = useColorModeValue("primary.500", "primary.400");
+  // const isActive = isActiveLink(link, segments);
 
   const hoverBgColor = useColorModeValue("secondary.600", "secondary.700");
 
@@ -142,87 +138,75 @@ const MobileNavbar = ({
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const navbarBgColor = useColorModeValue("secondary.700", "secondary.600");
+  const bgColor = useColorModeValue("secondary.700", "secondary.600");
+  const hoverBgColor = useColorModeValue("secondary.600", "secondary.700");
 
   return (
-    <Box py={4}>
+    <Box my={4} mx={{ base: 4, sm: 5, md: 6, xl: 0 }}>
       <Flex
         align="center"
         justify="space-between"
         maxW="container.xl"
         mx="auto"
-        px={{ base: 4, sm: 5, md: 6, xl: 0 }}
       >
+        {/* Logo */}
         <Logo />
 
+        {/* Desktop */}
         <Flex alignItems="center">
-          <Flex
-            display={{ base: "none", md: "flex" }}
-            // h={16}
-            justify="center"
-            alignItems="center"
-            // px={1}
-            bgColor={navbarBgColor}
-            // bgColor="white"
-            borderRadius="full"
-          >
-            {NAV_LINK_KEYS.map((link) => (
-              <NavLink key={link} link={link} />
-            ))}
-          </Flex>
+          <Hide below="lg">
+            <Flex
+              justify="center"
+              alignItems="center"
+              bgColor={bgColor}
+              borderRadius="full"
+            >
+              {NAV_LINK_KEYS.map((link) => (
+                <NavLink key={link} link={link} />
+              ))}
+            </Flex>
+          </Hide>
 
+          {/* Color mode switcher */}
           <ColorModeSwitcher />
+
+          {/* Mobile hamburger icon button */}
+          <Hide above="lg">
+            <Box ml={2} bgColor={bgColor} borderRadius="full">
+              <IconButton
+                width="auto"
+                minWidth="auto"
+                height="auto"
+                icon={
+                  isOpen ? (
+                    <CloseIcon display="block" />
+                  ) : (
+                    <HamburgerIcon display="block" />
+                  )
+                }
+                aria-label="Otevřít"
+                p={6}
+                color="white"
+                lineHeight={1}
+                borderRadius="full"
+                transition="background-position 0.1s ease"
+                bgGradient={`linear(to-t, ${hoverBgColor} 50%, transparent 50%)`}
+                bgSize="100% 200%"
+                bgPosition="0 0"
+                _hover={{
+                  textDecoration: "none",
+                  bgPosition: "0 100%",
+                }}
+                onClick={isOpen ? onClose : onOpen}
+              />
+            </Box>
+          </Hide>
         </Flex>
       </Flex>
+
+      {/* Mobile navbar */}
+      <MobileNavbar isOpen={isOpen} onClose={onClose} />
     </Box>
-
-    // <Box bg={useColorModeValue("white", "gray.900")} px={4} boxShadow="md">
-    //   <Flex
-    //     align="center"
-    //     justify="space-between"
-    //     maxW="container.xl"
-    //     mx="auto"
-    //   >
-    //     {/* Logo */}
-    //     <Logo />
-
-    //     {/* Desktop */}
-    //     <Flex alignItems="center">
-    //       <Flex
-    //         display={{ base: "none", md: "flex" }}
-    //         h={16}
-    //         justify="center"
-    //         alignItems="center"
-    //       >
-    //         {NAV_LINK_KEYS.map((link) => (
-    //           <NavLink key={link} link={link} />
-    //         ))}
-    //       </Flex>
-
-    //       {/* Color mode switcher */}
-    //       <ColorModeSwitcher />
-
-    //       {/* Mobile hamburger icon button */}
-    //       <Flex
-    //         display={{ base: "flex", md: "none" }}
-    //         h={16}
-    //         justify="flex-end"
-    //         alignItems="center"
-    //       >
-    //         <IconButton
-    //           size="md"
-    //           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-    //           aria-label="Otevřít"
-    //           display={{ md: "none" }}
-    //           onClick={isOpen ? onClose : onOpen}
-    //         />
-    //       </Flex>
-    //     </Flex>
-    //   </Flex>
-
-    //   {/* Mobile navbar */}
-    //   <MobileNavbar isOpen={isOpen} onClose={onClose} />
-    // </Box>
   );
 };
 export default Navbar;
