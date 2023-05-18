@@ -56,7 +56,7 @@ export const CalendarWrapper = ({ children }: PropsWithChildren) => {
 
   return (
     <Box
-      maxHeight={{ base: "1058px" }}
+      maxHeight={{ base: "auto", lg: "1058px" }}
       overflowY="auto"
       py={5}
       px={7}

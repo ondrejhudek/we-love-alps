@@ -23,19 +23,25 @@ const Dashboard = ({
   widgetAllResortsMap: React.ReactNode;
   calendar: React.ReactNode;
 }) => (
-  <Grid templateColumns="1fr minmax(auto, 360px)" templateRows="auto" gap={6}>
+  <Grid
+    templateColumns={{
+      base: "1fr",
+      md: "1fr minmax(auto, 300px)",
+      lg2: "1fr minmax(auto, 340px)",
+      xl: "1fr minmax(auto, 360px)",
+    }}
+    templateRows="auto"
+    gap={{ base: 10, md: 4, lg: 5, xl: 6 }}
+  >
     <Box>
-      <SimpleGrid
-        columns={{ base: 1, md: 3 }}
-        spacing={{ base: 2, sm: 3, md: 3 }}
-      >
+      <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 2, sm: 3 }}>
         {statMembers}
         {statTrip}
         {statResort}
       </SimpleGrid>
 
       <SimpleGrid
-        columns={{ base: 1, md: 2 }}
+        columns={{ base: 1, lg: 2 }}
         spacing={{ base: 2, sm: 3, md: 3 }}
         mt={{ base: 2, sm: 3, md: 3 }}
       >
@@ -43,7 +49,12 @@ const Dashboard = ({
         {statVideo}
       </SimpleGrid>
 
-      <SimpleGrid columns={2} spacing={3} my={12}>
+      <SimpleGrid
+        columns={{ base: 1, lg: 2 }}
+        spacing={3}
+        spacingY={{ base: 12, lg: 0 }}
+        my={12}
+      >
         {/* Most frequent members */}
         {widgetMostMembers}
 

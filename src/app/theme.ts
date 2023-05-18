@@ -10,6 +10,17 @@ import type { StyleFunctionProps } from "@chakra-ui/styled-system";
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(parts.keys);
 
+// const almostFull = definePartsStyle({
+//   dialog: defineStyle({
+//     minH: "90dvh",
+//     w: "90vw",
+//     borderRadius: "md",
+//   }),
+//   dialogContainer: defineStyle({
+//     alignItems: "center",
+//   }),
+// });
+
 const colors = {
   primary: {
     50: "#dbfbff",
@@ -61,20 +72,9 @@ const colors = {
   },
 };
 
-const almostFull = definePartsStyle({
-  dialog: defineStyle({
-    minH: "90dvh",
-    w: "90vw",
-    borderRadius: "md",
-  }),
-  dialogContainer: defineStyle({
-    alignItems: "center",
-  }),
-});
-
-const Modal = defineMultiStyleConfig({
-  variants: { almostFull },
-});
+// const Modal = defineMultiStyleConfig({
+//   variants: { almostFull },
+// });
 
 const transition = {
   primary: "all 0.2s ease-in-out 0s",
@@ -89,6 +89,7 @@ const theme = extendTheme({
   config,
   breakpoints: {
     xs: "22em",
+    lg2: "68em",
   },
   fonts: {
     heading:
@@ -96,7 +97,7 @@ const theme = extendTheme({
     body: 'var(--font-ubuntu), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
   },
   colors,
-  components: { Modal },
+  // components: { Modal },
   styles: {
     global: (props: StyleFunctionProps) => ({
       "html, body": {
