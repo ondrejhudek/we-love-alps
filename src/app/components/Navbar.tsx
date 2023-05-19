@@ -52,7 +52,7 @@ const CircleButton = ({
       <Flex
         justify="center"
         align="center"
-        boxSize={16}
+        boxSize={{ base: 14, sm: 16 }}
         color="gray.100"
         fontSize="xl"
         borderRadius="full"
