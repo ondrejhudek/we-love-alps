@@ -11,7 +11,7 @@ import {
   Button,
   Icon,
 } from "@chakra-ui/react";
-import { FaArrowLeft } from "react-icons/fa";
+import { HiArrowLeft } from "react-icons/hi2";
 
 import { NavLinkKey } from "@/app/utils/types";
 
@@ -21,17 +21,17 @@ const ALERTS: Partial<
     { title: string; description: string; buttonLabel: string }
   >
 > = {
-  [NavLinkKey.Members]: {
+  [NavLinkKey.Member]: {
     title: "Tento člen neexistuje!",
     description: "Běž zpět a vyber jiného.",
     buttonLabel: "Zpět na Členy",
   },
-  [NavLinkKey.Trips]: {
+  [NavLinkKey.Trip]: {
     title: "Tento zájezd neexistuje!",
     description: "Běž zpět a vyber jiný.",
     buttonLabel: "Zpět na Zájezdy",
   },
-  [NavLinkKey.Resorts]: {
+  [NavLinkKey.Resort]: {
     title: "Tento resort neexistuje!",
     description: "Běž zpět a vyber jiný.",
     buttonLabel: "Zpět na Resorty",
@@ -71,7 +71,7 @@ const NotFound = () => {
             replace
             variant="outline"
             colorScheme="red"
-            leftIcon={<Icon as={FaArrowLeft} fontSize="xs" />}
+            leftIcon={<Icon as={HiArrowLeft} fontSize="xs" />}
             fontWeight={500}
           >
             {alert.buttonLabel}

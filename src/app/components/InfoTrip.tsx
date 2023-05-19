@@ -10,22 +10,26 @@ import {
   ListItem,
   Text,
 } from "@chakra-ui/react";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { HiArrowTopRightOnSquare } from "react-icons/hi2";
 
 import { FlagImage } from "@/app/components/Image";
-import { COUNTRIES } from "@/app/utils";
-import { MONTHS_CS } from "@/app/utils/locales";
+import { COUNTRIES, MONTHS_CS } from "@/app/utils/locales";
 import { Trip } from "@/app/utils/types";
 
 const Info = ({ data }: { data: Trip }) => (
-  <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
+  <Card
+    borderTopWidth={4}
+    borderStyle="solid"
+    borderColor="secondary.600"
+    borderRadius={16}
+  >
     <CardBody>
       <List spacing={3}>
         <ListItem fontWeight={500}>
           <Text as="span" mr={2} color="gray.500" fontWeight={400}>
             Kdy /
           </Text>
-          {MONTHS_CS[data.month]}, {data.year}
+          {MONTHS_CS[data.month - 1]}, {data.year}
         </ListItem>
 
         <ListItem fontWeight={500} display="flex" alignItems="center">
@@ -49,8 +53,8 @@ const Info = ({ data }: { data: Trip }) => (
                   target="_blank"
                 >
                   <Icon
-                    as={FaExternalLinkAlt}
-                    boxSize={3}
+                    as={HiArrowTopRightOnSquare}
+                    boxSize={3.5}
                     ml={2}
                     color="primary.600"
                   />

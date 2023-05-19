@@ -3,21 +3,21 @@ import { DB, Member, Resort, Trip, Video } from "@/generated/types";
 
 export enum NavLinkKey {
   Home = "/",
-  Members = "/members",
-  Trips = "/trips",
-  Resorts = "/resorts",
+  Member = "/member",
+  Trip = "/trip",
+  Resort = "/resort",
   Photo = "/photo",
   Video = "/video",
 }
 
-export type LINK = {
+export type Link = {
   path: string;
   label: string;
 };
 
 export type CountryProps = Record<string, string>;
 
-export type { DB, Member, Resort, Trip, Video };
+export type { DB, Member, Trip, Resort, Video };
 
 export type Table = keyof DB;
 
@@ -27,3 +27,5 @@ export interface OrderBy {
   column: AnyColumn;
   direction?: "asc" | "desc";
 }
+
+export type TableWithPhoto = Table | "photo";

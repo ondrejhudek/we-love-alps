@@ -3,9 +3,11 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Flex,
+  Icon,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { ChevronRightIcon } from "@chakra-ui/icons";
+import { HiChevronRight } from "react-icons/hi2";
 
 const Breadcrump = ({
   links,
@@ -17,7 +19,11 @@ const Breadcrump = ({
     fontWeight="medium"
     fontSize="sm"
     color={useColorModeValue("gray.400", "gray.600")}
-    separator={<ChevronRightIcon color="gray.500" />}
+    separator={
+      <Flex>
+        <Icon as={HiChevronRight} color="gray.500" />
+      </Flex>
+    }
   >
     <BreadcrumbItem>
       <BreadcrumbLink as={Link} href="/">

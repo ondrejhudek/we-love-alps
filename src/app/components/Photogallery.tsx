@@ -40,7 +40,7 @@ const GalleryFolder = ({
       {/* Album thumbnail */}
       {thumbnail && (
         <Box
-          borderRadius="lg"
+          borderRadius={16}
           boxShadow="base"
           overflow="hidden"
           _groupHover={{

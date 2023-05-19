@@ -7,6 +7,8 @@ import { DB, Table, OrderBy, AnyColumn } from "./types";
 const db = createKysely<DB>();
 const { countAll } = db.fn;
 
+// const sleep = (ms = 3000) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const addOrderBy = (
   query: SelectQueryBuilder<DB, keyof DB, AllSelection<DB, keyof DB>>,
   orderBy?: OrderBy[]

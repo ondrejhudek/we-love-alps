@@ -47,12 +47,13 @@ const TripView = ({ data }: { data: TripViewProps }) => {
     data;
 
   const handleClick = (id: string) => {
-    router.push(`/trips/${id}`);
+    router.push(`/trip/${id}`);
   };
 
   return (
     <Card
       key={id}
+      borderRadius={16}
       onClick={() => handleClick(id)}
       _hover={{
         cursor: "pointer",

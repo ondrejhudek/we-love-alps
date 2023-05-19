@@ -45,7 +45,7 @@ const PersonalInfo = ({
       <Text color="gray.500">{label} /</Text>
       <Link
         as={NextLink}
-        href={`/members/${member.id}`}
+        href={`/member/${member.id}`}
         ml={1.5}
         color={color}
         fontWeight={600}
@@ -112,7 +112,12 @@ const Info = ({
   const nicknameColor = useColorModeValue("gray.700", "gray.300");
 
   return (
-    <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
+    <Card
+      borderTopWidth={4}
+      borderStyle="solid"
+      borderColor="secondary.600"
+      borderRadius={16}
+    >
       <CardBody>
         <Flex direction={{ base: "column", md: "row" }} justify="space-between">
           <Flex

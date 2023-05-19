@@ -42,7 +42,7 @@ const View = ({ data }: { data: Resort[] }) => {
   const regionColor = useColorModeValue("gray.400", "gray.500");
 
   const handleClick = (id: string) => {
-    router.push(`/resorts/${id}`);
+    router.push(`/resort/${id}`);
   };
 
   return (
@@ -56,6 +56,7 @@ const View = ({ data }: { data: Resort[] }) => {
         {data.map(({ id, name, region, country_code, map }) => (
           <Card
             key={id}
+            borderRadius={16}
             overflow="hidden"
             _hover={{
               cursor: "pointer",

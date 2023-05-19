@@ -1,24 +1,13 @@
 import { NAV_LINKS_CS } from "./locales";
-import { NavLinkKey, CountryProps } from "./types";
+import { NavLinkKey } from "./types";
 
 export const NAV_LINKS: Record<NavLinkKey, string> = {
   [NavLinkKey.Home]: NAV_LINKS_CS.home,
-  [NavLinkKey.Members]: NAV_LINKS_CS.members,
-  [NavLinkKey.Trips]: NAV_LINKS_CS.trips,
-  [NavLinkKey.Resorts]: NAV_LINKS_CS.resorts,
+  [NavLinkKey.Member]: NAV_LINKS_CS.member,
+  [NavLinkKey.Trip]: NAV_LINKS_CS.trip,
+  [NavLinkKey.Resort]: NAV_LINKS_CS.resort,
   [NavLinkKey.Photo]: NAV_LINKS_CS.photo,
   [NavLinkKey.Video]: NAV_LINKS_CS.video,
 };
 
-export type LINK = {
-  path: string;
-  label: string;
-};
-
 export const NAV_LINK_KEYS = Object.keys(NAV_LINKS) as NavLinkKey[];
-
-export const COUNTRIES: CountryProps = {
-  AT: "Rakousko",
-  IT: "Itálie",
-  FT: "Francie",
-};

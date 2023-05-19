@@ -1,84 +1,139 @@
 import { Suspense } from "react";
-
 import { getRows, getCount } from "@/app/utils/database";
-import { Table, Member, Resort, Trip } from "@/app/utils/types";
+import { Member, Trip, Resort, TableWithPhoto } from "@/app/utils/types";
 
-import TimelineView from "./components/Timeline";
-import StatView, {
-  Stats as StatsView,
-  StatLoading,
-  StatProps,
-} from "./components/Stat";
+import AllResortsMapView from "@/app/components/widget/AllResortsMap";
+import MostMembersView from "@/app/components/widget/MostMembers";
+import MostCountriesView from "@/app/components/widget/MostCountries";
+import { WidgetLoading, WidgetWrapper } from "@/app/components/widget/Widget";
+import CalendarView, {
+  CalendarLoading,
+  CalendarWrapper,
+} from "@/app/components/Calendar";
+import Dashboard from "@/app/components/Dashboard";
+import StatView, { StatLoading } from "@/app/components/Stat";
 
-const STATS: StatProps[] = [
-  {
-    slug: "member",
-    title: "Členové",
-    pathLabel: "Všichni členové",
-    color: "orange",
+const STATS: Record<TableWithPhoto, { title: string; color: string }> = {
+  member: {
+    title: "Všichni členové",
+    color: "red",
   },
-  {
-    slug: "trip",
-    title: "Zájezdy",
-    pathLabel: "Všechny zájezdy",
-    color: "purple",
+  trip: {
+    title: "Všechny zájezdy",
+    color: "yellow",
   },
-  {
-    slug: "resort",
-    title: "Střediska",
-    pathLabel: "Všechny střediska",
+  resort: {
+    title: "Všechny střediska",
     color: "pink",
   },
-];
-
-const Stat = async ({ slug }: { slug: Table }) => {
-  const count = await getCount(slug);
-  return <>{count}</>;
+  photo: {
+    title: "Všechny fotky",
+    color: "cyan",
+  },
+  video: {
+    title: "Všechny videa",
+    color: "green",
+  },
 };
 
-const Timeline = async () => {
-  const [tripsData, resortsData, membersData] = await Promise.all([
-    getRows<Trip>("trip", [
-      {
-        column: "year",
-        direction: "asc",
-      },
-      {
-        column: "month",
-        direction: "asc",
-      },
-    ]),
-    getRows<Resort>("resort"),
-    getRows<Member>("member"),
-  ]);
-
+/**
+ * Statistic of given table.
+ * @param {TableWithPhoto} slug Slug of table.
+ */
+const StatAsync = async ({ slug }: { slug: TableWithPhoto }) => {
+  const stat = STATS[slug];
+  const count = slug === "photo" ? 11 : await getCount(slug);
   return (
-    <TimelineView
-      tripsData={tripsData}
-      membersData={membersData}
-      resortsData={resortsData}
-    />
+    <StatView slug={slug} title={stat.title} color={stat.color} count={count} />
   );
 };
 
-const Page = () => (
-  <>
-    {/* Stats */}
-    <StatsView>
-      {STATS.map((stat) => (
-        <StatView key={stat.slug} {...stat}>
-          <Suspense fallback={<StatLoading color={stat.color} />}>
-            {/* @ts-expect-error Server Component */}
-            <Stat slug={stat.slug} />
-          </Suspense>
-        </StatView>
-      ))}
-    </StatsView>
-
-    {/* Timeline */}
+const Stat = ({ slug }: { slug: TableWithPhoto }) => (
+  <Suspense fallback={<StatLoading color={STATS[slug].color} />}>
     {/* @ts-expect-error Server Component */}
-    <Timeline />
-  </>
+    <StatAsync slug={slug} />
+  </Suspense>
+);
+
+/**
+ * List of most active members.
+ */
+const MostMembersAsync = async () => {
+  const [members, trips] = await Promise.all([
+    getRows<Member>("member"),
+    getRows<Trip>("trip"),
+  ]);
+  return <MostMembersView members={members} trips={trips} />;
+};
+
+const MostMembers = () => (
+  <WidgetWrapper heading="Nejčastěji jezdí">
+    <Suspense fallback={<WidgetLoading />}>
+      {/* @ts-expect-error Server Component */}
+      <MostMembersAsync />
+    </Suspense>
+  </WidgetWrapper>
+);
+
+/**
+ * List of most visited countries.
+ */
+const MostCountriesAsync = async () => {
+  const trips = await getRows<Trip>("trip");
+  return <MostCountriesView trips={trips} />;
+};
+
+const MostCountries = () => (
+  <WidgetWrapper heading="Navštívené země">
+    <Suspense fallback={<WidgetLoading />}>
+      {/* @ts-expect-error Server Component */}
+      <MostCountriesAsync />
+    </Suspense>
+  </WidgetWrapper>
+);
+
+/**
+ * Map with all visited resorts.
+ */
+const AllResortsMap = () => (
+  <WidgetWrapper heading="Navštívená střediska">
+    <AllResortsMapView />
+  </WidgetWrapper>
+);
+
+/**
+ * Calendar with all trips grouped by year.
+ */
+const CalendarAsync = async () => {
+  const [members, trips, resorts] = await Promise.all([
+    getRows<Member>("member"),
+    getRows<Trip>("trip"),
+    getRows<Resort>("resort"),
+  ]);
+  return <CalendarView members={members} trips={trips} resorts={resorts} />;
+};
+
+const Calendar = () => (
+  <CalendarWrapper>
+    <Suspense fallback={<CalendarLoading />}>
+      {/* @ts-expect-error Server Component */}
+      <CalendarAsync />
+    </Suspense>
+  </CalendarWrapper>
+);
+
+const Page = () => (
+  <Dashboard
+    statMembers={<Stat slug="member" />}
+    statTrip={<Stat slug="trip" />}
+    statResort={<Stat slug="resort" />}
+    statPhoto={<Stat slug="photo" />}
+    statVideo={<Stat slug="video" />}
+    widgetMostMembers={<MostMembers />}
+    widgetMostCountries={<MostCountries />}
+    widgetAllResortsMap={<AllResortsMap />}
+    calendar={<Calendar />}
+  />
 );
 
 export default Page;

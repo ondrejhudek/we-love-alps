@@ -45,7 +45,7 @@ const Container = ({
   const dividerColor = useColorModeValue("gray.300", "gray.800");
 
   return (
-    <Card mt={4} {...props}>
+    <Card mt={4} {...props} borderRadius={16}>
       <CardHeader {...headerProps}>
         <Heading as="h2" fontSize="xl" display="flex" alignItems="center">
           {title}

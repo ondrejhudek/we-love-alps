@@ -11,7 +11,7 @@ import {
   Button,
   Icon,
 } from "@chakra-ui/react";
-import { FaArrowLeft } from "react-icons/fa";
+import { HiArrowLeft } from "react-icons/hi2";
 
 const MyAlert = ({
   status = "error",
@@ -40,7 +40,7 @@ const MyAlert = ({
         href={button.path}
         variant="outline"
         mt={4}
-        leftIcon={<Icon as={FaArrowLeft} fontSize="xs" />}
+        leftIcon={<Icon as={HiArrowLeft} fontSize="sm" />}
         fontWeight={500}
       >
         {button.label}

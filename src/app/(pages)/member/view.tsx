@@ -68,7 +68,7 @@ const View = ({ data }: { data: Member[] }) => {
   const borderColor = useColorModeValue("gray.200", "gray.800");
 
   const handleClick = (id: string) => {
-    router.push(`/members/${id}`);
+    router.push(`/member/${id}`);
   };
 
   return (
@@ -82,6 +82,7 @@ const View = ({ data }: { data: Member[] }) => {
         {data.map(({ id, name, facebook, instagram }) => (
           <Card
             key={id}
+            borderRadius={16}
             overflow="hidden"
             onClick={() => handleClick(id)}
             _hover={{

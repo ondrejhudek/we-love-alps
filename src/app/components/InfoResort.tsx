@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 import { FlagImage, ResortImage } from "@/app/components/Image";
-import { COUNTRIES } from "@/app/utils";
+import { COUNTRIES } from "@/app/utils/locales";
 import { Resort, Trip } from "@/app/utils/types";
 
 const MapComponent = ({ id }: { id: string }) => {
@@ -42,7 +42,12 @@ const Info = ({
   resortData: Resort;
   tripsData: Trip[];
 }) => (
-  <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
+  <Card
+    borderTopWidth={4}
+    borderStyle="solid"
+    borderColor="secondary.600"
+    borderRadius={16}
+  >
     <CardBody>
       <Flex justify="space-between">
         <List spacing={3}>

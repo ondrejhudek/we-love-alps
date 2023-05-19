@@ -15,7 +15,7 @@ import {
   Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { HiArrowTopRightOnSquare } from "react-icons/hi2";
 
 import Header from "@/app/components/Header";
 import { Video } from "@/app/utils/types";
@@ -31,7 +31,7 @@ const VideoFrame = ({ id }: { id: string }) => {
   return (
     <Skeleton
       isLoaded={isLoaded}
-      borderRadius="lg"
+      borderRadius={16}
       boxShadow="base"
       overflow="hidden"
     >
@@ -74,7 +74,7 @@ const VideoComponent = ({
           {/* Year & Video by */}
           <Text color={subtitleColor} fontSize="xs">
             {year}&nbsp;&nbsp;·&nbsp;&nbsp;Video od{" "}
-            <Link as={NextLink} href="/members/stuchla" fontWeight={500}>
+            <Link as={NextLink} href="/member/stuchla" fontWeight={500}>
               @stuchla
             </Link>
           </Text>
@@ -88,7 +88,8 @@ const VideoComponent = ({
             target="_blank"
             size="sm"
             variant="ghost"
-            icon={<FaExternalLinkAlt />}
+            icon={<HiArrowTopRightOnSquare />}
+            fontSize="lg"
             aria-label="Otevřít v novém okně"
             _hover={{
               bgColor: linkHoverBg,

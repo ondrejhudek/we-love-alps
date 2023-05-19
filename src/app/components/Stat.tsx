@@ -1,139 +1,135 @@
 "use client";
 
-import NextLink from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Box,
   Card,
   CardBody,
-  CardFooter,
   Flex,
+  Heading,
   Icon,
-  Link,
-  SimpleGrid,
   Skeleton,
+  SkeletonCircle,
   Stat,
-  StatLabel,
   StatNumber,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { IconType } from "react-icons";
-import { HiOutlineUsers, HiOutlineMapPin, HiOutlineMap } from "react-icons/hi2";
+import {
+  HiOutlineUsers,
+  HiOutlineCalendarDays,
+  HiOutlineMapPin,
+  HiOutlinePhoto,
+  HiOutlineVideoCamera,
+  HiArrowLongRight,
+} from "react-icons/hi2";
 
-import { Table } from "@/app/utils/types";
+import { TableWithPhoto } from "@/app/utils/types";
 
 export interface StatProps {
-  slug: Table;
+  slug: TableWithPhoto;
   title: string;
-  pathLabel: string;
   color: string;
+  count: number;
 }
 
-const ICONS: Partial<Record<Table, IconType>> = {
+const ICONS: Partial<Record<TableWithPhoto, IconType>> = {
   member: HiOutlineUsers,
-  trip: HiOutlineMap,
+  trip: HiOutlineCalendarDays,
   resort: HiOutlineMapPin,
+  photo: HiOutlinePhoto,
+  video: HiOutlineVideoCamera,
 };
-
-export const Stats = ({ children }: { children: React.ReactNode }) => (
-  <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, sm: 4, md: 6 }}>
-    {children}
-  </SimpleGrid>
-);
 
 export const StatLoading = ({ color }: { color: string }) => {
-  const startColor = useColorModeValue(
-    `var(--chakra-colors-${color}-200)`,
-    `var(--chakra-colors-${color}-300)`
-  );
-  const endColor = useColorModeValue(
-    `var(--chakra-colors-${color}-400)`,
-    `var(--chakra-colors-${color}-500)`
-  );
+  const bgColor = useColorModeValue(`${color}.400`, `${color}.500`);
 
   return (
-    <Skeleton
-      width={8}
-      height="6"
-      startColor={startColor}
-      endColor={endColor}
-    />
+    <Card height="135px" bgColor={bgColor} borderRadius={22}>
+      <CardBody p={6} position="relative">
+        <Skeleton width={32} height={5} />
+        <Flex mt={5} align="center">
+          <SkeletonCircle size="12" mr={3} />
+          <Skeleton width={8} height={8} />
+        </Flex>
+      </CardBody>
+    </Card>
   );
 };
 
-const MyStat = ({
-  slug,
-  title,
-  pathLabel,
-  color,
-  children,
-}: StatProps & { children: React.ReactNode }) => {
+export const MyStat = ({ slug, title, color, count }: StatProps) => {
+  const router = useRouter();
+
   const bgFrom = useColorModeValue(
     `var(--chakra-colors-${color}-500)`,
-    `var(--chakra-colors-${color}-800)`
+    `var(--chakra-colors-${color}-600)`
   );
   const bgTo = useColorModeValue(
     `var(--chakra-colors-${color}-600)`,
-    `var(--chakra-colors-${color}-900)`
+    `var(--chakra-colors-${color}-700)`
   );
+  const bgHover = useColorModeValue(`${color}.600`, `${color}.700`);
+  const iconColor = useColorModeValue(`${color}.700`, `${color}.800`);
+  const iconBg = useColorModeValue(`${color}.300`, `${color}.400`);
+
+  const handleClick = () => {
+    router.push(`/${slug}`);
+  };
 
   return (
-    <Box>
-      <Card bg={`linear-gradient(210deg, ${bgFrom} 0%, ${bgTo} 100%)`}>
-        <CardBody>
-          <Stat>
-            <Flex align="center">
-              {/* Icon */}
-              <Flex
-                align="center"
-                justify="center"
-                boxSize={12}
-                bgColor={useColorModeValue("whiteAlpha.600", "whiteAlpha.400")}
-                rounded="lg"
-                mr={4}
-              >
-                <Icon
-                  as={ICONS[slug]}
-                  boxSize={6}
-                  color={useColorModeValue(`${color}.800`, `${color}.900`)}
-                />
-              </Flex>
-              <Box>
-                {/* Title */}
-                <StatLabel
-                  color={useColorModeValue("whiteAlpha.600", "whiteAlpha.600")}
-                >
-                  {title}
-                </StatLabel>
-                {/* Value */}
-                <StatNumber
-                  color={useColorModeValue("white", "whiteAlpha.800")}
-                  lineHeight={6}
-                >
-                  {children}
-                </StatNumber>
-              </Box>
+    <Card
+      bg={`linear-gradient(210deg, ${bgFrom} 0%, ${bgTo} 100%)`}
+      borderRadius={22}
+      role="group"
+      _hover={{
+        cursor: "pointer",
+        bg: bgHover,
+      }}
+      onClick={handleClick}
+    >
+      <CardBody p={6} position="relative">
+        <Icon
+          as={HiArrowLongRight}
+          position="absolute"
+          top={6}
+          right={6}
+          boxSize={6}
+          color="white"
+          transition="var(--chakra-transition-primary)"
+          _groupHover={{
+            transform: "scale(1.5)",
+          }}
+        />
+
+        <Stat>
+          {/* Heading */}
+          <Heading size="sm" color="white">
+            {title}
+          </Heading>
+
+          {/* Body */}
+          <Flex align="center" mt={5}>
+            {/* Icon */}
+            <Flex
+              align="center"
+              justify="center"
+              boxSize={12}
+              bgColor={iconBg}
+              rounded="full"
+              mr={3}
+            >
+              <Icon as={ICONS[slug]} boxSize={6} color={iconColor} />
             </Flex>
-          </Stat>
-        </CardBody>
-        {/* Link */}
-        <CardFooter
-          py={4}
-          bgColor={useColorModeValue("whiteAlpha.600", "whiteAlpha.400")}
-          fontSize="sm"
-          fontWeight={500}
-          borderBottomRadius="var(--card-radius)"
-        >
-          <Link
-            as={NextLink}
-            href={`/${slug}s`}
-            color={useColorModeValue(`${color}.800`, `${color}.900`)}
-            _hover={{ textDecoration: "underline" }}
-          >
-            {pathLabel}
-          </Link>
-        </CardFooter>
-      </Card>
-    </Box>
+            <Box>
+              {/* Value */}
+              <StatNumber color="white" lineHeight={6} fontWeight={500}>
+                {count}
+              </StatNumber>
+            </Box>
+          </Flex>
+        </Stat>
+      </CardBody>
+    </Card>
   );
 };
 

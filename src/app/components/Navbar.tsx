@@ -1,57 +1,122 @@
+import { PropsWithChildren, useRef } from "react";
 import NextLink from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
 import {
   Box,
-  Divider,
-  Drawer,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
+  Center,
   Flex,
   IconButton,
   Link,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalOverlay,
+  useColorMode,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { HiBars3, HiXMark, HiMoon, HiSun } from "react-icons/hi2";
 
 import { NAV_LINKS, NAV_LINK_KEYS } from "@/app/utils";
 import { NavLinkKey } from "@/app/utils/types";
-import ColorModeSwitcher from "./ColorModeSwitcher";
 import Logo from "./Logo";
+
+const BG_COLOR = {
+  light: "secondary.600",
+  dark: "secondary.700",
+};
+
+const HOVER_BG_COLOR = {
+  light: "secondary.700",
+  dark: "secondary.600",
+};
 
 const isActiveLink = (link: NavLinkKey, segments: string[]) => {
   const activeLink = `/${segments[1] || ""}`;
   return link === activeLink;
 };
 
+const CircleButton = ({
+  ariaText,
+  onClick,
+  children,
+}: PropsWithChildren<{ ariaText: string; onClick: () => void }>) => {
+  const bgColor = useColorModeValue(BG_COLOR.light, BG_COLOR.dark);
+  const hoverBgColor = useColorModeValue(
+    HOVER_BG_COLOR.light,
+    HOVER_BG_COLOR.dark
+  );
+
+  return (
+    <Box ml={2} bgColor={bgColor} borderRadius="full">
+      <Flex
+        justify="center"
+        align="center"
+        boxSize={{ base: 14, sm: 16 }}
+        color="gray.100"
+        fontSize="xl"
+        borderRadius="full"
+        transition="background-position 0.1s ease"
+        bgGradient={`linear(to-t, ${hoverBgColor} 50%, transparent 50%)`}
+        bgSize="100% 200%"
+        bgPosition="0 0"
+        cursor="pointer"
+        aria-label={ariaText}
+        _hover={{
+          textDecoration: "none",
+          color: "white",
+          bgPosition: "0 100%",
+        }}
+        onClick={onClick}
+      >
+        {children}
+      </Flex>
+    </Box>
+  );
+};
+
+const ColorModeSwitcher = () => {
+  const { toggleColorMode } = useColorMode();
+  const text = useColorModeValue("tmavý", "světlý");
+  const SwitchIcon = useColorModeValue(HiMoon, HiSun);
+
+  return (
+    <CircleButton
+      ariaText={`Přepnout na ${text} mód`}
+      onClick={toggleColorMode}
+    >
+      <SwitchIcon />
+    </CircleButton>
+  );
+};
+
 const NavLink = ({ link }: { link: NavLinkKey }) => {
   const segments = useSelectedLayoutSegments();
   const isActive = isActiveLink(link, segments);
 
-  const color = useColorModeValue("gray.600", "gray.300");
-  const activeColor = useColorModeValue("gray.800", "gray.50");
-  const hoverColor = useColorModeValue("gray.900", "white");
-  const activeBorderColor = useColorModeValue("primary.600", "primary.300");
-  const hoverBorderColor = useColorModeValue("primary.500", "primary.400");
+  const hoverBgColor = useColorModeValue(
+    HOVER_BG_COLOR.light,
+    HOVER_BG_COLOR.dark
+  );
 
   return (
     <Link
       as={NextLink}
       href={link}
       display="block"
-      mx={4}
-      my={2}
       py={5}
-      color={isActive ? activeColor : color}
+      px={7}
       fontWeight={500}
-      borderBottomWidth={2}
-      borderStyle="solid"
-      borderColor={isActive ? activeBorderColor : "transparent"}
+      color={isActive ? "white" : "gray.100"}
+      borderRadius="full"
+      transition="background-position 0.1s ease"
+      bgGradient={`linear(to-t, ${hoverBgColor} 50%, transparent 50%)`}
+      bgSize="100% 200%"
+      bgPosition="0 0"
       _hover={{
-        color: hoverColor,
-        borderColor: hoverBorderColor,
+        textDecoration: "none",
+        color: "white",
+        bgPosition: "0 100%",
       }}
     >
       {NAV_LINKS[link]}
@@ -70,38 +135,38 @@ const MobileNavLink = ({
   const isActive = isActiveLink(link, segments);
 
   const color = useColorModeValue("gray.600", "gray.300");
-  const activeColor = useColorModeValue("gray.800", "gray.50");
+  const activeColor = useColorModeValue("gray.800", "gray.100");
+  const bgColor = useColorModeValue("gray.200", "gray.800");
   const hoverColor = useColorModeValue("gray.900", "white");
-  const activeBorderColor = useColorModeValue("primary.600", "primary.300");
-  const hoverBorderColor = useColorModeValue("primary.500", "primary.400");
+  const hoverBgColor = useColorModeValue("gray.300", "gray.900");
+  const borderColor = useColorModeValue("secondary.700", "secondary.600");
+  const hoverBorderBgColor = useColorModeValue(
+    "secondary.600",
+    "secondary.700"
+  );
 
   return (
     <Link
-      role="group"
       as={NextLink}
       href={link}
-      position="relative"
       display="block"
-      mx={-4}
-      py={4}
-      px={6}
+      my={3}
+      py={5}
+      px={20}
       color={isActive ? activeColor : color}
+      bgColor={bgColor}
+      fontSize="lg"
       fontWeight={500}
+      textAlign="center"
+      borderRadius="full"
       onClick={onClose}
+      borderStyle="solid"
+      borderLeftWidth={4}
+      borderColor={borderColor}
       _hover={{
         color: hoverColor,
-        _before: {
-          borderColor: hoverBorderColor,
-        },
-      }}
-      _before={{
-        content: '""',
-        position: "absolute",
-        left: 0,
-        height: "24px",
-        borderLeftWidth: 3,
-        borderStyle: "solid",
-        borderColor: isActive ? activeBorderColor : "transparent",
+        bgColor: hoverBgColor,
+        borderColor: hoverBorderBgColor,
       }}
     >
       {NAV_LINKS[link]}
@@ -115,32 +180,62 @@ const MobileNavbar = ({
 }: {
   isOpen: boolean;
   onClose: () => void;
-}) => (
-  <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-    <DrawerOverlay backdropFilter="blur(5px)" />
-    <DrawerContent>
-      <DrawerCloseButton />
-      <DrawerHeader>
-        <Logo iconOnly />
-      </DrawerHeader>
-
-      <>
-        {NAV_LINK_KEYS.map((link, i) => (
-          <Box key={link} px={4}>
-            {i > 0 && <Divider />}
-            <MobileNavLink link={link} onClose={onClose} />
+}) => {
+  const initialRef = useRef(null);
+  return (
+    <Modal
+      isOpen={isOpen}
+      size="full"
+      initialFocusRef={initialRef}
+      onClose={onClose}
+    >
+      <ModalOverlay />
+      <ModalContent>
+        <Flex
+          justify="space-between"
+          align="center"
+          width="full"
+          position="absolute"
+          top={0}
+          p={4}
+        >
+          <Box ml={2}>
+            <Logo iconOnly />
           </Box>
-        ))}
-      </>
-    </DrawerContent>
-  </Drawer>
-);
+          <IconButton
+            icon={<HiXMark />}
+            variant="ghost"
+            size="lg"
+            fontSize="3xl"
+            boxSize={16}
+            borderRadius="full"
+            ref={initialRef}
+            aria-label="Zavřít menu"
+            onClick={onClose}
+          />
+        </Flex>
+
+        <ModalBody p={0}>
+          <Center height="100vh">
+            <Box>
+              {NAV_LINK_KEYS.map((link) => (
+                <MobileNavLink key={link} link={link} onClose={onClose} />
+              ))}
+            </Box>
+          </Center>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+};
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const bgColor = useColorModeValue(BG_COLOR.light, BG_COLOR.dark);
+
   return (
-    <Box bg={useColorModeValue("white", "gray.900")} px={4} boxShadow="md">
+    <Box my={4} mx={{ base: 4, sm: 5, md: 6, xl: 0 }}>
       <Flex
         align="center"
         justify="space-between"
@@ -150,13 +245,14 @@ const Navbar = () => {
         {/* Logo */}
         <Logo />
 
-        {/* Desktop */}
         <Flex alignItems="center">
+          {/* Desktop */}
           <Flex
-            display={{ base: "none", md: "flex" }}
-            h={16}
+            display={{ base: "none", lg: "flex" }}
             justify="center"
             alignItems="center"
+            bgColor={bgColor}
+            borderRadius="full"
           >
             {NAV_LINK_KEYS.map((link) => (
               <NavLink key={link} link={link} />
@@ -167,20 +263,18 @@ const Navbar = () => {
           <ColorModeSwitcher />
 
           {/* Mobile hamburger icon button */}
-          <Flex
-            display={{ base: "flex", md: "none" }}
-            h={16}
-            justify="flex-end"
-            alignItems="center"
-          >
-            <IconButton
-              size="md"
-              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-              aria-label="Otevřít"
-              display={{ md: "none" }}
+          <Box display={{ base: "block", lg: "none" }}>
+            <CircleButton
+              ariaText="Otevřít menu"
               onClick={isOpen ? onClose : onOpen}
-            />
-          </Flex>
+            >
+              {isOpen ? (
+                <HiXMark display="block" />
+              ) : (
+                <HiBars3 display="block" />
+              )}
+            </CircleButton>
+          </Box>
         </Flex>
       </Flex>
 
