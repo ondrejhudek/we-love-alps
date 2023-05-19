@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Box, useColorModeValue } from "@chakra-ui/react";
 
 const LogoWithTitle = () => {
-  const pathName = useColorModeValue("logo-navbar", "logo-navbar-white");
+  const pathName = useColorModeValue("logo-navbar", "logo-navbar-dark");
 
   return (
     <Image

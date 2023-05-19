@@ -56,6 +56,7 @@ const View = ({ data }: { data: Resort[] }) => {
         {data.map(({ id, name, region, country_code, map }) => (
           <Card
             key={id}
+            borderRadius={16}
             overflow="hidden"
             _hover={{
               cursor: "pointer",

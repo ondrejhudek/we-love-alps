@@ -112,7 +112,12 @@ const Info = ({
   const nicknameColor = useColorModeValue("gray.700", "gray.300");
 
   return (
-    <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
+    <Card
+      borderTopWidth={4}
+      borderStyle="solid"
+      borderColor="secondary.600"
+      borderRadius={16}
+    >
       <CardBody>
         <Flex direction={{ base: "column", md: "row" }} justify="space-between">
           <Flex

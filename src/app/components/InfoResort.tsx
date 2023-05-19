@@ -42,7 +42,12 @@ const Info = ({
   resortData: Resort;
   tripsData: Trip[];
 }) => (
-  <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
+  <Card
+    borderTopWidth={4}
+    borderStyle="solid"
+    borderColor="secondary.600"
+    borderRadius={16}
+  >
     <CardBody>
       <Flex justify="space-between">
         <List spacing={3}>

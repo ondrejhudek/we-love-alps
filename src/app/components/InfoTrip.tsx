@@ -17,7 +17,12 @@ import { COUNTRIES, MONTHS_CS } from "@/app/utils/locales";
 import { Trip } from "@/app/utils/types";
 
 const Info = ({ data }: { data: Trip }) => (
-  <Card borderTopWidth={4} borderStyle="solid" borderColor="secondary.600">
+  <Card
+    borderTopWidth={4}
+    borderStyle="solid"
+    borderColor="secondary.600"
+    borderRadius={16}
+  >
     <CardBody>
       <List spacing={3}>
         <ListItem fontWeight={500}>

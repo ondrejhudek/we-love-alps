@@ -31,7 +31,7 @@ const VideoFrame = ({ id }: { id: string }) => {
   return (
     <Skeleton
       isLoaded={isLoaded}
-      borderRadius="lg"
+      borderRadius={16}
       boxShadow="base"
       overflow="hidden"
     >

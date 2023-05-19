@@ -53,6 +53,7 @@ const TripView = ({ data }: { data: TripViewProps }) => {
   return (
     <Card
       key={id}
+      borderRadius={16}
       onClick={() => handleClick(id)}
       _hover={{
         cursor: "pointer",

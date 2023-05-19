@@ -21,6 +21,16 @@ import { NAV_LINKS, NAV_LINK_KEYS } from "@/app/utils";
 import { NavLinkKey } from "@/app/utils/types";
 import Logo from "./Logo";
 
+const BG_COLOR = {
+  light: "secondary.600",
+  dark: "secondary.700",
+};
+
+const HOVER_BG_COLOR = {
+  light: "secondary.700",
+  dark: "secondary.600",
+};
+
 const isActiveLink = (link: NavLinkKey, segments: string[]) => {
   const activeLink = `/${segments[1] || ""}`;
   return link === activeLink;
@@ -31,8 +41,11 @@ const CircleButton = ({
   onClick,
   children,
 }: PropsWithChildren<{ ariaText: string; onClick: () => void }>) => {
-  const bgColor = useColorModeValue("secondary.700", "secondary.600");
-  const hoverBgColor = useColorModeValue("secondary.600", "secondary.700");
+  const bgColor = useColorModeValue(BG_COLOR.light, BG_COLOR.dark);
+  const hoverBgColor = useColorModeValue(
+    HOVER_BG_COLOR.light,
+    HOVER_BG_COLOR.dark
+  );
 
   return (
     <Box ml={2} bgColor={bgColor} borderRadius="full">
@@ -81,7 +94,10 @@ const NavLink = ({ link }: { link: NavLinkKey }) => {
   const segments = useSelectedLayoutSegments();
   const isActive = isActiveLink(link, segments);
 
-  const hoverBgColor = useColorModeValue("secondary.600", "secondary.700");
+  const hoverBgColor = useColorModeValue(
+    HOVER_BG_COLOR.light,
+    HOVER_BG_COLOR.dark
+  );
 
   return (
     <Link
@@ -120,26 +136,37 @@ const MobileNavLink = ({
 
   const color = useColorModeValue("gray.600", "gray.300");
   const activeColor = useColorModeValue("gray.800", "gray.100");
+  const bgColor = useColorModeValue("gray.200", "gray.800");
   const hoverColor = useColorModeValue("gray.900", "white");
-  const hoverBgColor = useColorModeValue("gray.300", "gray.800");
+  const hoverBgColor = useColorModeValue("gray.300", "gray.900");
+  const borderColor = useColorModeValue("secondary.700", "secondary.600");
+  const hoverBorderBgColor = useColorModeValue(
+    "secondary.600",
+    "secondary.700"
+  );
 
   return (
     <Link
       as={NextLink}
       href={link}
       display="block"
-      my={1}
-      py={6}
-      px={16}
+      my={3}
+      py={5}
+      px={20}
       color={isActive ? activeColor : color}
+      bgColor={bgColor}
       fontSize="lg"
       fontWeight={500}
       textAlign="center"
       borderRadius="full"
       onClick={onClose}
+      borderStyle="solid"
+      borderLeftWidth={4}
+      borderColor={borderColor}
       _hover={{
         color: hoverColor,
         bgColor: hoverBgColor,
+        borderColor: hoverBorderBgColor,
       }}
     >
       {NAV_LINKS[link]}
@@ -164,21 +191,30 @@ const MobileNavbar = ({
     >
       <ModalOverlay />
       <ModalContent>
-        <IconButton
-          icon={<HiXMark />}
+        <Flex
+          justify="space-between"
+          align="center"
+          width="full"
           position="absolute"
           top={0}
-          right={0}
-          margin={4}
-          variant="ghost"
-          size="lg"
-          fontSize="3xl"
-          boxSize={16}
-          borderRadius="full"
-          ref={initialRef}
-          aria-label="Zavřít menu"
-          onClick={onClose}
-        />
+          p={4}
+        >
+          <Box ml={2}>
+            <Logo iconOnly />
+          </Box>
+          <IconButton
+            icon={<HiXMark />}
+            variant="ghost"
+            size="lg"
+            fontSize="3xl"
+            boxSize={16}
+            borderRadius="full"
+            ref={initialRef}
+            aria-label="Zavřít menu"
+            onClick={onClose}
+          />
+        </Flex>
+
         <ModalBody p={0}>
           <Center height="100vh">
             <Box>
@@ -196,7 +232,7 @@ const MobileNavbar = ({
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const bgColor = useColorModeValue("secondary.700", "secondary.600");
+  const bgColor = useColorModeValue(BG_COLOR.light, BG_COLOR.dark);
 
   return (
     <Box my={4} mx={{ base: 4, sm: 5, md: 6, xl: 0 }}>

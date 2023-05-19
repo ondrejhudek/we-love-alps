@@ -33,7 +33,7 @@ const Album = ({ images }: { images: ImageProps[] }) => {
   }));
 
   return (
-    <Card>
+    <Card borderRadius={16}>
       <CardBody p={3}>
         <PhotoAlbum
           layout="rows"

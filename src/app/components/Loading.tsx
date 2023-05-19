@@ -21,7 +21,12 @@ const Loading = () => (
     </Box>
 
     {/* Body */}
-    <Box bg={useColorModeValue("white", "gray.900")} boxShadow="md">
+    <Box
+      bg={useColorModeValue("white", "gray.900")}
+      borderRadius={16}
+      boxShadow="md"
+      overflow="hidden"
+    >
       <Skeleton width="100%" height={300} />
     </Box>
   </Box>
