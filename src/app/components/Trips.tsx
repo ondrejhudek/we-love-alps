@@ -30,6 +30,7 @@ const Trips = ({ data }: { data: Trip[] }) => {
           m={2}
           width={{ base: "100%", sm: 56 }}
           bgColor={tripBgColor}
+          borderRadius="lg"
           _hover={{
             cursor: "pointer",
             boxShadow: "outline",
