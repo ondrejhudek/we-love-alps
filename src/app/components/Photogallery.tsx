@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   Box,
@@ -81,6 +82,10 @@ const Gallery = ({
   const handleClick = (id: string) => {
     router.push(`/photo/${id}`);
   };
+
+  useEffect(() => {
+    router.prefetch("/photo/[id]");
+  }, [router]);
 
   return (
     <>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   Avatar,
@@ -49,6 +50,10 @@ const TripView = ({ data }: { data: TripViewProps }) => {
   const handleClick = (id: string) => {
     router.push(`/trip/${id}`);
   };
+
+  useEffect(() => {
+    router.prefetch("/trip/[id]");
+  }, [router]);
 
   return (
     <Card

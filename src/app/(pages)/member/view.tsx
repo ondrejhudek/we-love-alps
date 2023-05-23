@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   Box,
@@ -70,6 +71,10 @@ const View = ({ data }: { data: Member[] }) => {
   const handleClick = (id: string) => {
     router.push(`/member/${id}`);
   };
+
+  useEffect(() => {
+    router.prefetch("/member/[id]");
+  }, [router]);
 
   return (
     <>

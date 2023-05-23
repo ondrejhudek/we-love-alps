@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   AspectRatio,
@@ -44,6 +44,10 @@ const View = ({ data }: { data: Resort[] }) => {
   const handleClick = (id: string) => {
     router.push(`/resort/${id}`);
   };
+
+  useEffect(() => {
+    router.prefetch("/resort/[id]");
+  }, [router]);
 
   return (
     <>
