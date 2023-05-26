@@ -1,75 +1,112 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { AspectRatio } from "@chakra-ui/react";
-import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
+import { memo, useState } from "react";
+import NextLink from "next/link";
+import { AspectRatio, Box, Link, Text } from "@chakra-ui/react";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
 
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN ?? "";
+import { Resort } from "@/app/utils/types";
 
-const points = {
-  features: [
-    {
-      type: "Feature",
-      properties: {
-        title: "Schladming",
-        description: "A northside park that is home to the Lincoln Park Zoo",
-      },
-      geometry: {
-        coordinates: [13.554729, 47.70651],
-        type: "Point",
-      },
-      place_name: "Schladming, Styria, Austria",
-    },
-    {
-      type: "Feature",
-      properties: {
-        title: "Kitzbühel",
-        description: "A northside park that is home to the Lincoln Park Zoo",
-      },
-      geometry: {
-        coordinates: [13.686788, 47.394042],
-        type: "Point",
-      },
-      place_name: "Schladming, Styria, Austria",
-    },
-  ],
-  type: "FeatureCollection",
+const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
+
+const CENTER = {
+  lat: 46.8,
+  lng: 10.5,
+};
+const ZOOM = 6;
+const OPTIONS = {
+  streetViewControl: false,
+  controlSize: 26,
 };
 
-const AllResortsMap = () => {
-  const mapContainer = useRef(null);
-
-  // const popup = new mapboxgl.Popup().setText("Description");
-
-  useEffect(() => {
-    const map = new mapboxgl.Map({
-      container: mapContainer.current!,
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [13.686788, 47.394042],
-      zoom: 5,
-    });
-
-    // Create default markers
-    points.features.forEach((feature) =>
-      new mapboxgl.Marker()
-        // .setPopup(popup)
-        .setLngLat(feature.geometry.coordinates as [number, number])
-        .addTo(map)
-    );
-
-    // Add navigation control (the +/- zoom buttons)
-    map.addControl(new mapboxgl.NavigationControl(), "top-right");
-
-    // Clean up on unmount
-    return () => map.remove();
+const MapComponent = memo(({ resorts }: { resorts: Resort[] }) => {
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: GOOGLE_MAPS_API_KEY,
   });
 
-  return (
-    <AspectRatio ratio={2.35 / 1} minHeight="300px">
-      <div ref={mapContainer} />
-    </AspectRatio>
+  const [infoWindowResort, setInfoWindowResort] = useState<Resort>();
+
+  const handleMarkerClick = (e: google.maps.MapMouseEvent) => {
+    const latLng = e.latLng?.toJSON();
+    if (!latLng) return;
+
+    const resort = resorts.find(
+      ({ lat_lng }) => lat_lng.x === latLng.lat && lat_lng.y === latLng.lng
+    );
+    if (!resort) return;
+    setInfoWindowResort(resort);
+  };
+
+  const handleInfoWindowClose = () => {
+    setInfoWindowResort(undefined);
+  };
+
+  return isLoaded ? (
+    <GoogleMap center={CENTER} zoom={ZOOM} options={OPTIONS}>
+      <>
+        {resorts.map(({ id, lat_lng }) => (
+          <Marker
+            key={id}
+            position={{
+              lat: lat_lng.x,
+              lng: lat_lng.y,
+            }}
+            onClick={handleMarkerClick}
+          />
+        ))}
+
+        {infoWindowResort && (
+          <InfoWindow
+            position={{
+              lat: infoWindowResort.lat_lng!.x,
+              lng: infoWindowResort.lat_lng!.y,
+            }}
+            options={{
+              pixelOffset: new window.google.maps.Size(0, -36),
+            }}
+            onCloseClick={handleInfoWindowClose}
+          >
+            <Box mr={2}>
+              <Text color="gray.700" fontSize="sm" fontWeight={700}>
+                {infoWindowResort.name}
+              </Text>
+              <Text color="gray.600" fontSize="xs">
+                {infoWindowResort.region}
+              </Text>
+
+              <Text mt={2}>
+                <Link
+                  as={NextLink}
+                  href={`/resort/${infoWindowResort.id}`}
+                  color="secondary.600"
+                  fontSize="xs"
+                  fontWeight="500"
+                >
+                  Detail
+                </Link>
+              </Text>
+            </Box>
+          </InfoWindow>
+        )}
+      </>
+    </GoogleMap>
+  ) : (
+    <></>
   );
-};
+});
+
+MapComponent.displayName = "MapComponent";
+
+const AllResortsMap = ({ resorts }: { resorts: Resort[] }) => (
+  <AspectRatio ratio={2.35 / 1} minHeight="300px">
+    <MapComponent resorts={resorts} />
+  </AspectRatio>
+);
 
 export default AllResortsMap;

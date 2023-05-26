@@ -92,12 +92,19 @@ const MostCountries = () => (
   </WidgetWrapper>
 );
 
+const AllResortsMapAsync = async () => {
+  const resorts = await getRows<Resort>("resort");
+
+  return <AllResortsMapView resorts={resorts} />;
+};
+
 /**
  * Map with all visited resorts.
  */
 const AllResortsMap = () => (
   <WidgetWrapper heading="Navštívená střediska">
-    <AllResortsMapView />
+    {/* @ts-expect-error Server Component */}
+    <AllResortsMapAsync />
   </WidgetWrapper>
 );
 
