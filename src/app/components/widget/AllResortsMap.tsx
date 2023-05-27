@@ -1,8 +1,8 @@
 "use client";
 
-import { memo, useState } from "react";
+import { PropsWithChildren, memo, useState } from "react";
 import NextLink from "next/link";
-import { AspectRatio, Box, Link, Text } from "@chakra-ui/react";
+import { AspectRatio, Box, Link, Skeleton, Text } from "@chakra-ui/react";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -11,6 +11,27 @@ import {
 } from "@react-google-maps/api";
 
 import { Resort } from "@/app/utils/types";
+
+const AllResortsMapAspectRatio = ({ children }: PropsWithChildren) => (
+  <AspectRatio ratio={2.35 / 1} minHeight="300px">
+    {children}
+  </AspectRatio>
+);
+
+export const AllResortsMapLoading = ({
+  withAspectRatio = true,
+}: {
+  withAspectRatio?: boolean;
+}) => {
+  if (withAspectRatio)
+    return (
+      <AllResortsMapAspectRatio>
+        <Skeleton />
+      </AllResortsMapAspectRatio>
+    );
+
+  return <Skeleton />;
+};
 
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
 
@@ -47,7 +68,9 @@ const MapComponent = memo(({ resorts }: { resorts: Resort[] }) => {
     setInfoWindowResort(undefined);
   };
 
-  return isLoaded ? (
+  if (!isLoaded) return <AllResortsMapLoading withAspectRatio={false} />;
+
+  return (
     <GoogleMap center={CENTER} zoom={ZOOM} options={OPTIONS}>
       <>
         {resorts.map(({ id, lat_lng }) => (
@@ -96,17 +119,15 @@ const MapComponent = memo(({ resorts }: { resorts: Resort[] }) => {
         )}
       </>
     </GoogleMap>
-  ) : (
-    <></>
   );
 });
 
 MapComponent.displayName = "MapComponent";
 
 const AllResortsMap = ({ resorts }: { resorts: Resort[] }) => (
-  <AspectRatio ratio={2.35 / 1} minHeight="300px">
+  <AllResortsMapAspectRatio>
     <MapComponent resorts={resorts} />
-  </AspectRatio>
+  </AllResortsMapAspectRatio>
 );
 
 export default AllResortsMap;

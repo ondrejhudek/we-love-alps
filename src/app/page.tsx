@@ -2,7 +2,9 @@ import { Suspense } from "react";
 import { getRows, getCount } from "@/app/utils/database";
 import { Member, Trip, Resort, TableWithPhoto } from "@/app/utils/types";
 
-import AllResortsMapView from "@/app/components/widget/AllResortsMap";
+import AllResortsMapView, {
+  AllResortsMapLoading,
+} from "@/app/components/widget/AllResortsMap";
 import MostMembersView from "@/app/components/widget/MostMembers";
 import MostCountriesView from "@/app/components/widget/MostCountries";
 import { WidgetLoading, WidgetWrapper } from "@/app/components/widget/Widget";
@@ -92,19 +94,22 @@ const MostCountries = () => (
   </WidgetWrapper>
 );
 
+/**
+ * Map with all visited resorts.
+ */
+
 const AllResortsMapAsync = async () => {
   const resorts = await getRows<Resort>("resort");
 
   return <AllResortsMapView resorts={resorts} />;
 };
 
-/**
- * Map with all visited resorts.
- */
 const AllResortsMap = () => (
   <WidgetWrapper heading="Navštívená střediska">
-    {/* @ts-expect-error Server Component */}
-    <AllResortsMapAsync />
+    <Suspense fallback={<AllResortsMapLoading />}>
+      {/* @ts-expect-error Server Component */}
+      <AllResortsMapAsync />
+    </Suspense>
   </WidgetWrapper>
 );
 
