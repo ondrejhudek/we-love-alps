@@ -26,7 +26,6 @@ export interface Resort {
   country_code: string;
   region: string;
   lat_lng: Point;
-  map: string;
 }
 
 export interface Trip {

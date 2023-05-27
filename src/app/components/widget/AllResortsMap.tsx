@@ -35,14 +35,17 @@ export const AllResortsMapLoading = ({
 
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
 
-const CENTER = {
+const CENTER: google.maps.LatLngLiteral = {
   lat: 46.8,
   lng: 10.5,
 };
-const ZOOM = 6;
-const OPTIONS = {
-  streetViewControl: false,
+const ZOOM: number = 6;
+const OPTIONS: google.maps.MapOptions = {
   controlSize: 26,
+  mapTypeControlOptions: {
+    mapTypeIds: ["roadmap", "hybrid"],
+  },
+  streetViewControl: false,
 };
 
 const MapComponent = memo(({ resorts }: { resorts: Resort[] }) => {

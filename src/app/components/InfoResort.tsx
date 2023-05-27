@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { memo } from "react";
 import {
   AspectRatio,
   Card,
@@ -12,28 +12,44 @@ import {
   Skeleton,
   Text,
 } from "@chakra-ui/react";
+import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 
 import { FlagImage, ResortImage } from "@/app/components/Image";
 import { COUNTRIES } from "@/app/utils/locales";
 import { Resort, Trip } from "@/app/utils/types";
 
-const MapComponent = ({ id }: { id: string }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
+
+const ZOOM: number = 13;
+const OPTIONS: google.maps.MapOptions = {
+  controlSize: 26,
+  mapTypeControlOptions: {
+    mapTypeIds: ["roadmap", "hybrid"],
+  },
+  streetViewControl: false,
+};
+
+const MapComponent = memo(({ latLng }: { latLng: Resort["lat_lng"] }) => {
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: GOOGLE_MAPS_API_KEY,
+  });
+
+  if (!isLoaded) return <Skeleton />;
 
   return (
-    <Skeleton isLoaded={isLoaded} borderRadius="none">
-      <AspectRatio ratio={2.35 / 1} maxH="250px">
-        <iframe
-          src={`https://www.google.com/maps/embed?pb=${encodeURIComponent(id)}`}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          onLoad={() => setIsLoaded(true)}
-        ></iframe>
-      </AspectRatio>
-    </Skeleton>
+    <GoogleMap
+      center={{
+        lat: latLng.x,
+        lng: latLng.y,
+      }}
+      zoom={ZOOM}
+      options={OPTIONS}
+    />
   );
-};
+});
+
+MapComponent.displayName = "MapComponent";
 
 const Info = ({
   resortData,
@@ -85,7 +101,9 @@ const Info = ({
 
     <CardBody pt={0} px={0}>
       {/* Map */}
-      <MapComponent id={resortData.map} />
+      <AspectRatio ratio={2.35 / 1} maxH="250px">
+        <MapComponent latLng={resortData.lat_lng} />
+      </AspectRatio>
     </CardBody>
   </Card>
 );
