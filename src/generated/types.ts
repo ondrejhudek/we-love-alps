@@ -4,6 +4,11 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
   : ColumnType<T, T | undefined, T>;
 
+export type Point = {
+  x: number;
+  y: number;
+};
+
 export interface Member {
   id: string;
   name: string;
@@ -20,7 +25,7 @@ export interface Resort {
   name: string;
   country_code: string;
   region: string;
-  map: string;
+  lat_lng: Point;
 }
 
 export interface Trip {

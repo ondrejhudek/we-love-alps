@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { memo } from "react";
 import { useRouter } from "next/navigation";
 import {
   AspectRatio,
@@ -14,28 +14,45 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 
 import Header from "@/app/components/Header";
 import { FlagImage, ResortImage } from "@/app/components/Image";
 import { Resort } from "@/app/utils/types";
 
-const MapComponent = ({ id }: { id: string }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
+
+const ZOOM: number = 13;
+const OPTIONS: google.maps.MapOptions = {
+  disableDoubleClickZoom: true,
+  fullscreenControl: false,
+  gestureHandling: "none",
+  mapTypeControl: false,
+  streetViewControl: false,
+  zoomControl: false,
+};
+
+const MapComponent = memo(({ latLng }: { latLng: Resort["lat_lng"] }) => {
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: GOOGLE_MAPS_API_KEY,
+  });
+
+  if (!isLoaded) return <Skeleton />;
 
   return (
-    <Skeleton isLoaded={isLoaded} borderRadius="none">
-      <AspectRatio ratio={2.35 / 1}>
-        <iframe
-          src={`https://www.google.com/maps/embed?pb=${encodeURIComponent(id)}`}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          onLoad={() => setIsLoaded(true)}
-        ></iframe>
-      </AspectRatio>
-    </Skeleton>
+    <GoogleMap
+      center={{
+        lat: latLng.x,
+        lng: latLng.y,
+      }}
+      zoom={ZOOM}
+      options={OPTIONS}
+    />
   );
-};
+});
+
+MapComponent.displayName = "MapComponent";
 
 const View = ({ data }: { data: Resort[] }) => {
   const router = useRouter();
@@ -53,7 +70,7 @@ const View = ({ data }: { data: Resort[] }) => {
         columns={{ base: 1, sm: 2, md: 3 }}
         spacing={{ base: 3, sm: 4, lg: 5 }}
       >
-        {data.map(({ id, name, region, country_code, map }) => (
+        {data.map(({ id, name, region, country_code, lat_lng }) => (
           <Card
             key={id}
             borderRadius={16}
@@ -65,7 +82,9 @@ const View = ({ data }: { data: Resort[] }) => {
             onClick={() => handleClick(id)}
           >
             {/* Map */}
-            <MapComponent id={map} />
+            <AspectRatio ratio={2.35 / 1}>
+              <MapComponent latLng={lat_lng} />
+            </AspectRatio>
 
             <CardFooter>
               <Flex justify="space-between" width="full">
