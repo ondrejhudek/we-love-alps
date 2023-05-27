@@ -100,7 +100,6 @@ const MostCountries = () => (
 
 const AllResortsMapAsync = async () => {
   const resorts = await getRows<Resort>("resort");
-
   return <AllResortsMapView resorts={resorts} />;
 };
 

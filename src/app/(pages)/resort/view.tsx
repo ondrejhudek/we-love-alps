@@ -20,8 +20,6 @@ import Header from "@/app/components/Header";
 import { FlagImage, ResortImage } from "@/app/components/Image";
 import { Resort } from "@/app/utils/types";
 
-const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
-
 const ZOOM: number = 13;
 const OPTIONS: google.maps.MapOptions = {
   disableDoubleClickZoom: true,
@@ -35,7 +33,7 @@ const OPTIONS: google.maps.MapOptions = {
 const MapComponent = memo(({ latLng }: { latLng: Resort["lat_lng"] }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
   });
 
   if (!isLoaded) return <Skeleton />;

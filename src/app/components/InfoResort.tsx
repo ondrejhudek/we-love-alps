@@ -18,8 +18,6 @@ import { FlagImage, ResortImage } from "@/app/components/Image";
 import { COUNTRIES } from "@/app/utils/locales";
 import { Resort, Trip } from "@/app/utils/types";
 
-const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
-
 const ZOOM: number = 13;
 const OPTIONS: google.maps.MapOptions = {
   controlSize: 26,
@@ -32,7 +30,7 @@ const OPTIONS: google.maps.MapOptions = {
 const MapComponent = memo(({ latLng }: { latLng: Resort["lat_lng"] }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
   });
 
   if (!isLoaded) return <Skeleton />;

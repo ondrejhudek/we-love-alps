@@ -18,22 +18,11 @@ const AllResortsMapAspectRatio = ({ children }: PropsWithChildren) => (
   </AspectRatio>
 );
 
-export const AllResortsMapLoading = ({
-  withAspectRatio = true,
-}: {
-  withAspectRatio?: boolean;
-}) => {
-  if (withAspectRatio)
-    return (
-      <AllResortsMapAspectRatio>
-        <Skeleton />
-      </AllResortsMapAspectRatio>
-    );
-
-  return <Skeleton />;
-};
-
-const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
+export const AllResortsMapLoading = () => (
+  <AllResortsMapAspectRatio>
+    <Skeleton />
+  </AllResortsMapAspectRatio>
+);
 
 const CENTER: google.maps.LatLngLiteral = {
   lat: 46.8,
@@ -51,7 +40,7 @@ const OPTIONS: google.maps.MapOptions = {
 const MapComponent = memo(({ resorts }: { resorts: Resort[] }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
   });
 
   const [infoWindowResort, setInfoWindowResort] = useState<Resort>();
@@ -64,6 +53,7 @@ const MapComponent = memo(({ resorts }: { resorts: Resort[] }) => {
       ({ lat_lng }) => lat_lng.x === latLng.lat && lat_lng.y === latLng.lng
     );
     if (!resort) return;
+
     setInfoWindowResort(resort);
   };
 
@@ -71,7 +61,7 @@ const MapComponent = memo(({ resorts }: { resorts: Resort[] }) => {
     setInfoWindowResort(undefined);
   };
 
-  if (!isLoaded) return <AllResortsMapLoading withAspectRatio={false} />;
+  if (!isLoaded) return <Skeleton />;
 
   return (
     <GoogleMap center={CENTER} zoom={ZOOM} options={OPTIONS}>
