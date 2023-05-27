@@ -1,5 +1,6 @@
 "use client";
 
+import type { PropsWithChildren } from "react";
 // import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider, Box } from "@chakra-ui/react";
 
@@ -7,7 +8,7 @@ import theme from "../theme";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
-const Body = ({ children }: { children: React.ReactNode }) => (
+const Body = ({ children }: PropsWithChildren) => (
   // <CacheProvider>
   <ChakraProvider theme={theme}>
     <Navbar />

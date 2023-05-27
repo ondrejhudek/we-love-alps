@@ -1,5 +1,6 @@
 "use client";
 
+import type { PropsWithChildren } from "react";
 import NextLink from "next/link";
 import {
   Badge,
@@ -57,7 +58,7 @@ const PersonalInfo = ({
   );
 };
 
-const Interest = ({ children }: { children: React.ReactNode }) => {
+const Interest = ({ children }: PropsWithChildren) => {
   const color = useColorModeValue("gray.700", "gray.300");
   const colorHover = useColorModeValue("gray.800", "gray.200");
   const bgColorHover = useColorModeValue("gray.200", "gray.500");

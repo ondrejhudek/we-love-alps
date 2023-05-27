@@ -2,7 +2,7 @@ import { sql, SelectQueryBuilder } from "kysely";
 import { AllSelection } from "kysely/dist/cjs/parser/select-parser";
 import { createKysely } from "@vercel/postgres-kysely";
 
-import { DB, Table, OrderBy, AnyColumn } from "./types";
+import { DB, TableName, OrderBy, AnyColumn } from "./types";
 
 const db = createKysely<DB>();
 const { countAll } = db.fn;
@@ -39,7 +39,7 @@ const addOffset = (
 };
 
 export const getRows = async <T extends object>(
-  table: Table,
+  table: TableName,
   orderBy?: OrderBy[],
   limit?: number,
   offset?: number
@@ -53,7 +53,7 @@ export const getRows = async <T extends object>(
 };
 
 export const getRowsByValues = async <T extends object>(
-  table: Table,
+  table: TableName,
   column: AnyColumn,
   values: string[],
   orderBy?: OrderBy[],
@@ -69,7 +69,7 @@ export const getRowsByValues = async <T extends object>(
 };
 
 export const getRowsByValueInColumn = async <T extends object>(
-  table: Table,
+  table: TableName,
   column: AnyColumn,
   value: string,
   orderBy?: OrderBy[],
@@ -88,7 +88,7 @@ export const getRowsByValueInColumn = async <T extends object>(
 };
 
 export const getRowByValue = async <T extends object>(
-  table: Table,
+  table: TableName,
   column: AnyColumn,
   value: string
 ) => {
@@ -100,7 +100,7 @@ export const getRowByValue = async <T extends object>(
   return result as T;
 };
 
-export const getCount = async (table: Table) => {
+export const getCount = async (table: TableName) => {
   const { count } = await db
     .selectFrom(table)
     .select(countAll<number>().as("count"))

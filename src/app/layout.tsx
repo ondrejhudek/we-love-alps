@@ -1,3 +1,4 @@
+import type { PropsWithChildren } from "react";
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import AnalyticsWrapper from "./components/Analytics";
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   },
 };
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => (
+const RootLayout = ({ children }: PropsWithChildren) => (
   <html lang="en" className={`${ubuntu.variable}`}>
     <body>
       <Body>{children}</Body>

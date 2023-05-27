@@ -1,6 +1,6 @@
 import Alert from "@/app/components/Alert";
 import { getRowsByValues } from "@/app/utils/database";
-import { Table, AnyColumn, OrderBy } from "@/app/utils/types";
+import { TableName, AnyColumn, OrderBy } from "@/app/utils/types";
 
 const DocumentsByValues = async <T extends object>({
   tableName,
@@ -10,7 +10,7 @@ const DocumentsByValues = async <T extends object>({
   viewComponent: View,
   withError = false,
 }: {
-  tableName: Table;
+  tableName: TableName;
   column: AnyColumn;
   values: string[];
   orderBy?: OrderBy[];
