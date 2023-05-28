@@ -1,8 +1,10 @@
-import { sql, SelectQueryBuilder } from "kysely";
+"use server";
+
+import { sql, SelectQueryBuilder, UpdateObject } from "kysely";
 import { AllSelection } from "kysely/dist/cjs/parser/select-parser";
 import { createKysely } from "@vercel/postgres-kysely";
 
-import { DB, TableName, OrderBy, AnyColumn } from "./types";
+import { DB, TableName, OrderBy, AnyColumn, AnyTable, AnyValue } from "./types";
 
 const db = createKysely<DB>();
 const { countAll } = db.fn;
@@ -106,4 +108,22 @@ export const getCount = async (table: TableName) => {
     .select(countAll<number>().as("count"))
     .executeTakeFirstOrThrow();
   return count;
+};
+
+export const updateRow = async (
+  table: TableName,
+  id: string,
+  data: AnyTable
+) => {
+  const result = await db
+    .updateTable(table)
+    .set(data as UpdateObject<DB, keyof DB>)
+    .where("id", "=", id)
+    .executeTakeFirstOrThrow();
+  return result;
+};
+
+export const deleteRow = async (table: TableName, id: string) => {
+  const result = await db.deleteFrom(table).where("id", "=", id).execute();
+  return result;
 };
