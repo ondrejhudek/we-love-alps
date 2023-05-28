@@ -119,11 +119,15 @@ export const updateRow = async (
     .updateTable(table)
     .set(data as UpdateObject<DB, keyof DB>)
     .where("id", "=", id)
+    .returning("id")
     .executeTakeFirstOrThrow();
   return result;
 };
 
 export const deleteRow = async (table: TableName, id: string) => {
-  const result = await db.deleteFrom(table).where("id", "=", id).execute();
+  const result = await db
+    .deleteFrom(table)
+    .where("id", "=", id)
+    .executeTakeFirstOrThrow();
   return result;
 };

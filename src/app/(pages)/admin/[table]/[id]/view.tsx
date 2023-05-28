@@ -140,12 +140,16 @@ const View = ({
     setIsSaving.on();
 
     updateRow(table, id, parsed)
-      .then(() => {
+      .then((result) => {
         toast({
           status: "success",
           title: "Success",
           description: `Successfully updated ${table} with id ${id}`,
         });
+
+        if (result.id !== id) {
+          router.push(`/admin/${table}/${result.id}`);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -198,7 +202,7 @@ const View = ({
           px={3}
           fontWeight={500}
           textTransform="uppercase"
-          borderRadius={12}
+          borderRadius={6}
           zIndex={10}
           onClick={handleBeautify}
         >
@@ -213,7 +217,7 @@ const View = ({
           rows={20}
           p={8}
           letterSpacing="0.02rem"
-          borderRadius={16}
+          borderRadius={8}
           onChange={handleChange}
         />
       </Box>

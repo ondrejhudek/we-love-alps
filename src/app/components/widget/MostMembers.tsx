@@ -28,6 +28,7 @@ const MostMembers = ({
       id: key,
       count: value,
     }))
+    .filter(({ id }) => members.find((member) => member.id === id))
     .sort((a, b) => b.count - a.count)
     .slice(0, 3);
 
