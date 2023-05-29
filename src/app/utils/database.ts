@@ -4,7 +4,7 @@ import { sql, SelectQueryBuilder, UpdateObject } from "kysely";
 import { AllSelection } from "kysely/dist/cjs/parser/select-parser";
 import { createKysely } from "@vercel/postgres-kysely";
 
-import { DB, TableName, OrderBy, AnyColumn, AnyTable, AnyValue } from "./types";
+import { DB, TableName, OrderBy, AnyColumn, AnyTable } from "./types";
 
 const db = createKysely<DB>();
 const { countAll } = db.fn;

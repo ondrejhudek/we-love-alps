@@ -26,7 +26,6 @@ import {
 
 const User = () => {
   const { status, data: session } = useSession();
-  console.log({ session });
 
   const bgColor = useColorModeValue(BG_COLOR.light, BG_COLOR.dark);
   const nameColor = useColorModeValue("gray.500", "gray.400");
