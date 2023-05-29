@@ -1,4 +1,4 @@
-import { PropsWithChildren, useRef } from "react";
+import { type PropsWithChildren, useRef } from "react";
 import NextLink from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
 import {

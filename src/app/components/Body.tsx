@@ -63,7 +63,7 @@ const Body = ({ children }: PropsWithChildren) => (
       },
     }}
   >
-    <>{children}</>
+    {children}
   </ChakraProvider>
   // </CacheProvider>
 );
