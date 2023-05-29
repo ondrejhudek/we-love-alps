@@ -23,7 +23,7 @@ const SignInWrapper = ({ children }: PropsWithChildren) => (
     flexDirection="column"
     px={{ base: 4, xs: 6, sm: 0 }}
     style={{
-      minHeight: "fill-available",
+      minHeight: "-webkit-fill-available",
     }}
   >
     {children}
