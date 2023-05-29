@@ -18,7 +18,14 @@ import { AdminBody } from "@/app/components/Body";
 import Logo from "@/app/components/Logo";
 
 const SignInWrapper = ({ children }: PropsWithChildren) => (
-  <Center height="100vh" flexDirection="column" px={{ base: 4, xs: 6, sm: 0 }}>
+  <Center
+    minHeight="100vh"
+    flexDirection="column"
+    px={{ base: 4, xs: 6, sm: 0 }}
+    style={{
+      minHeight: "fill-available",
+    }}
+  >
     {children}
   </Center>
 );

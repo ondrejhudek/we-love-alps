@@ -215,22 +215,6 @@ const View = ({
       <Divider my={4} />
 
       <Box position="relative">
-        <Button
-          position="absolute"
-          top={1}
-          right={1}
-          variant="ghost"
-          size="xs"
-          height={7}
-          px={3}
-          fontWeight={500}
-          textTransform="uppercase"
-          borderRadius={6}
-          zIndex={10}
-          onClick={handleBeautify}
-        >
-          Beautify
-        </Button>
         <Textarea
           value={value}
           placeholder="JSON data"
@@ -243,6 +227,21 @@ const View = ({
           borderRadius={8}
           onChange={handleChange}
         />
+        <Button
+          position="absolute"
+          top={1}
+          right={1}
+          variant="ghost"
+          size="xs"
+          height={7}
+          px={3}
+          fontWeight={500}
+          textTransform="uppercase"
+          borderRadius={6}
+          onClick={handleBeautify}
+        >
+          Beautify
+        </Button>
       </Box>
 
       <Divider my={{ base: 4, sm: 6 }} />
