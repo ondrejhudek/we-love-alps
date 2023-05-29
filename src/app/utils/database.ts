@@ -131,3 +131,8 @@ export const deleteRow = async (table: TableName, id: string) => {
     .executeTakeFirstOrThrow();
   return result;
 };
+
+export const getSchema = async () => {
+  const result = await db.introspection.getTables();
+  return result;
+};

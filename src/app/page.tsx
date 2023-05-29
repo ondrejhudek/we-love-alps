@@ -8,6 +8,7 @@ import AllResortsMapView, {
 import MostMembersView from "@/app/components/widget/MostMembers";
 import MostCountriesView from "@/app/components/widget/MostCountries";
 import { WidgetLoading, WidgetWrapper } from "@/app/components/widget/Widget";
+import { PublicBody } from "@/app/components/Body";
 import CalendarView, {
   CalendarLoading,
   CalendarWrapper,
@@ -134,17 +135,19 @@ const Calendar = () => (
 );
 
 const Page = () => (
-  <Dashboard
-    statMembers={<Stat slug="member" />}
-    statTrip={<Stat slug="trip" />}
-    statResort={<Stat slug="resort" />}
-    statPhoto={<Stat slug="photo" />}
-    statVideo={<Stat slug="video" />}
-    widgetMostMembers={<MostMembers />}
-    widgetMostCountries={<MostCountries />}
-    widgetAllResortsMap={<AllResortsMap />}
-    calendar={<Calendar />}
-  />
+  <PublicBody>
+    <Dashboard
+      statMembers={<Stat slug="member" />}
+      statTrip={<Stat slug="trip" />}
+      statResort={<Stat slug="resort" />}
+      statPhoto={<Stat slug="photo" />}
+      statVideo={<Stat slug="video" />}
+      widgetMostMembers={<MostMembers />}
+      widgetMostCountries={<MostCountries />}
+      widgetAllResortsMap={<AllResortsMap />}
+      calendar={<Calendar />}
+    />
+  </PublicBody>
 );
 
 export default Page;

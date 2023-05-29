@@ -1,4 +1,4 @@
-import { getRowByValue, updateRow } from "@/app/utils/database";
+import { getRowByValue } from "@/app/utils/database";
 import { TableName, AnyTable } from "@/app/utils/types";
 
 import View from "./view";

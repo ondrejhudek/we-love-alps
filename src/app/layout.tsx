@@ -1,9 +1,9 @@
 import type { PropsWithChildren } from "react";
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
-import AnalyticsWrapper from "./components/Analytics";
 
-import Body from "./components/Body";
+import AnalyticsWrapper from "@/app/components/Analytics";
+import Body from "@/app/components/Body";
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],

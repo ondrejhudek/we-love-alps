@@ -5,6 +5,8 @@ import type { Session } from "next-auth";
 import { SessionProvider, signIn, useSession } from "next-auth/react";
 import { Skeleton } from "@chakra-ui/react";
 
+import { AdminBody } from "@/app/components/Body";
+
 const ProtectedBody = ({ children }: PropsWithChildren) => {
   const { status } = useSession();
 
@@ -25,7 +27,9 @@ const Body = ({
 
   return (
     <SessionProvider session={session}>
-      <ProtectedBody>{children}</ProtectedBody>
+      <AdminBody>
+        <ProtectedBody>{children}</ProtectedBody>
+      </AdminBody>
     </SessionProvider>
   );
 };

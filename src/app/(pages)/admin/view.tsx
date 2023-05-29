@@ -1,83 +1,140 @@
 "use client";
 
+import { TableMetadata } from "kysely";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
 import {
   Badge,
   Button,
   Card,
+  CardFooter,
+  CardHeader,
   CardBody,
   Code,
   Heading,
+  List,
+  ListItem,
   SimpleGrid,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { HiOutlineWrench } from "react-icons/hi2";
 
-const View = (counts: {
+const normalizeDataType = (value: string) => {
+  if (value === "_text") return "text[]";
+  return value;
+};
+
+const View = ({
+  member,
+  trip,
+  resort,
+  video,
+  schema,
+}: {
   member: number;
   trip: number;
   resort: number;
   video: number;
+  schema: TableMetadata[];
 }) => {
-  const { data: session } = useSession();
+  const counts = {
+    member,
+    trip,
+    resort,
+    video,
+  };
   const entries = Object.entries(counts);
 
-  const bgColor = useColorModeValue("gray.200", "gray.700");
+  const cardBgColor = useColorModeValue("gray.50", "gray.900");
+  const cardBorderColor = useColorModeValue("gray.100", "gray.700");
+  const labelColor = useColorModeValue("gray.500", "gray.400");
 
   return (
     <>
-      <SimpleGrid columns={entries.length} gap={4}>
-        {entries.map(([key, value]) => (
-          <Card key={value} borderRadius={16} bgColor={bgColor}>
-            <CardBody py={6} px={7}>
-              <Heading as="h3" fontSize="xl" mb={1}>
-                <Text as="span" fontWeight={300}>
-                  table:
-                </Text>{" "}
-                {key}
-              </Heading>
+      <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} spacing={4} m={-1} p={1}>
+        {entries.map(([key, value]) => {
+          const tableSchema = schema.find((table) => table.name === key);
 
-              <Text mb={6}>
-                <Badge size="sm" py={0.5} px={3} borderRadius="full">
+          return (
+            <Card
+              key={`table-${value}`}
+              bgColor={cardBgColor}
+              boxShadow="none"
+              borderStyle="solid"
+              borderColor={cardBorderColor}
+              borderWidth={1}
+              borderRadius={8}
+            >
+              {/* Header */}
+              <CardHeader
+                px={6}
+                borderStyle="solid"
+                borderColor={cardBorderColor}
+                borderBottomWidth={1}
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Heading as="h3" fontSize="xl">
+                  <Text as="span" mr={1.5} color={labelColor} fontWeight={400}>
+                    table:
+                  </Text>
+                  {key}
+                </Heading>
+
+                <Badge size="sm" py={0.5} px={3} borderRadius={6}>
                   {value} rows
                 </Badge>
-              </Text>
+              </CardHeader>
 
-              <Button
-                as={Link}
-                href={`/admin/${key}`}
-                variant="outline"
-                colorScheme="red"
-                size="sm"
-                leftIcon={<HiOutlineWrench />}
+              {/* Body */}
+              {tableSchema && (
+                <CardBody>
+                  <List>
+                    {tableSchema.columns.map(
+                      ({ name, dataType, isAutoIncrementing, isNullable }) => (
+                        <ListItem key={`column-${name}`} py="1px" fontSize="sm">
+                          <Text
+                            as="span"
+                            mr={1.5}
+                            color={labelColor}
+                            fontWeight={300}
+                          >
+                            {name}:
+                          </Text>
+                          {normalizeDataType(dataType)}
+                          {isAutoIncrementing && (
+                            <Code ml={1}>isAutoIncrementing</Code>
+                          )}
+                          {isNullable && <Code ml={1}>isNullable</Code>}
+                        </ListItem>
+                      )
+                    )}
+                  </List>
+                </CardBody>
+              )}
+
+              {/* Footer */}
+              <CardFooter
+                borderStyle="solid"
+                borderColor={cardBorderColor}
+                borderTopWidth={1}
               >
-                Manage
-              </Button>
-            </CardBody>
-          </Card>
-        ))}
+                <Button
+                  as={Link}
+                  href={`/admin/${key}`}
+                  variant="ghost"
+                  colorScheme="red"
+                  size="sm"
+                  leftIcon={<HiOutlineWrench />}
+                >
+                  Manage
+                </Button>
+              </CardFooter>
+            </Card>
+          );
+        })}
       </SimpleGrid>
-
-      <Code
-        colorScheme="secondary"
-        display="block"
-        whiteSpace="pre-wrap"
-        borderRadius={16}
-        p={10}
-        my={4}
-      >
-        {JSON.stringify(session, null, 2)}
-      </Code>
-
-      {/* Sign out */}
-      <Button
-        colorScheme="secondary"
-        onClick={() => signOut({ callbackUrl: "/" })}
-      >
-        Sign out
-      </Button>
     </>
   );
 };

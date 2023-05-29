@@ -14,9 +14,13 @@ import {
   Button,
   ButtonGroup,
   Divider,
+  Flex,
+  Heading,
   Stack,
+  Text,
   Textarea,
   useBoolean,
+  useColorModeValue,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
@@ -109,6 +113,8 @@ const View = ({
   const [isRemoving, setIsRemoving] = useBoolean(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const labelColor = useColorModeValue("gray.500", "gray.400");
+
   const parseJson = () => {
     try {
       const parsed = JSON.parse(value);
@@ -192,11 +198,28 @@ const View = ({
 
   return (
     <>
+      {/* Header */}
+      <Flex align="center" justify="space-between" height="40px">
+        <Heading as="h2" fontSize="2xl">
+          <Text as="span" mr={1.5} color={labelColor} fontWeight={300}>
+            table:
+          </Text>
+          {table}
+          <Text as="span" mr={1.5} color={labelColor} fontWeight={300}>
+            , row with id:
+          </Text>
+          {id}
+        </Heading>
+      </Flex>
+
+      <Divider my={4} />
+
       <Box position="relative">
         <Button
           position="absolute"
           top={1}
           right={1}
+          variant="ghost"
           size="xs"
           height={7}
           px={3}
@@ -241,6 +264,7 @@ const View = ({
         <Stack direction={{ base: "column", sm: "row" }}>
           {/* Remove */}
           <Button
+            variant="outline"
             colorScheme="red"
             size="lg"
             leftIcon={<HiOutlineTrash />}

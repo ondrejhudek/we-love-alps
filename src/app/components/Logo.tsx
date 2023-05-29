@@ -26,12 +26,12 @@ const LogoIcon = () => (
   />
 );
 
-const Logo = ({ iconOnly }: { iconOnly?: boolean }) => {
+const Logo = ({ iconOnly, href }: { iconOnly?: boolean; href?: string }) => {
   if (iconOnly) return <LogoIcon />;
 
   return (
     <Box mr={4}>
-      <NextLink href="/">
+      <NextLink href={href ?? "/"}>
         <Box display={{ base: "none", xs: "block" }}>
           <LogoWithTitle />
         </Box>
