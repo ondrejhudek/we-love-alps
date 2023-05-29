@@ -4,6 +4,7 @@ import type { PropsWithChildren } from "react";
 import type { Session } from "next-auth";
 import { SessionProvider, signIn, useSession } from "next-auth/react";
 import {
+  Box,
   Button,
   Card,
   CardBody,
@@ -17,7 +18,7 @@ import { AdminBody } from "@/app/components/Body";
 import Logo from "@/app/components/Logo";
 
 const SignInWrapper = ({ children }: PropsWithChildren) => (
-  <Center height="100vh" flexDirection="column">
+  <Center height="100vh" flexDirection="column" px={{ base: 4, xs: 6, sm: 0 }}>
     {children}
   </Center>
 );
@@ -41,26 +42,28 @@ const ProtectedBody = ({ children }: PropsWithChildren) => {
       <SignInWrapper>
         <Logo iconOnly />
 
-        <Heading as="h2" my={8} fontSize="2xl">
+        <Heading as="h2" my={8} fontSize="2xl" textAlign="center">
           Sign in to your account
         </Heading>
 
-        <Card size="lg" width="400px" borderRadius={10}>
-          <CardBody py={8} px={10} textAlign="center">
-            <Button
-              variant="outline"
-              size="lg"
-              width="full"
-              height={14}
-              leftIcon={<FcGoogle />}
-              fontWeight={500}
-              borderRadius={8}
-              onClick={handleSignIn}
-            >
-              Google
-            </Button>
-          </CardBody>
-        </Card>
+        <Box width={{ base: "full", sm: "400px" }}>
+          <Card size="lg" borderRadius={10}>
+            <CardBody p={{ base: 4, xs: 6, sm: 8 }} textAlign="center">
+              <Button
+                variant="outline"
+                size="lg"
+                width="full"
+                height={14}
+                leftIcon={<FcGoogle />}
+                fontWeight={500}
+                borderRadius={8}
+                onClick={handleSignIn}
+              >
+                Google
+              </Button>
+            </CardBody>
+          </Card>
+        </Box>
       </SignInWrapper>
     );
 
