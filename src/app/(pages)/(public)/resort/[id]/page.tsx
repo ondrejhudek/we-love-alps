@@ -5,7 +5,7 @@ import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
 import Info from "@/app/components/InfoResort";
 import Members, { MembersLoading } from "@/app/components/Members";
-import DocumentsByValues from "@/app/data/DocumentsByValues";
+import DocumentsByValues from "@/app/components/data/DocumentsByValues";
 import { getRowByValue, getRowsByValueInColumn } from "@/app/utils/database";
 import { Member, Resort, Trip } from "@/app/utils/types";
 

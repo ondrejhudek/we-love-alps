@@ -1,5 +1,6 @@
 "use client";
 
+import type { PropsWithChildren } from "react";
 import {
   Card,
   CardProps,
@@ -34,14 +35,13 @@ const Container = ({
   headerProps,
   bodyProps,
   children,
-}: {
+}: PropsWithChildren<{
   title: string;
   count?: number;
   props?: CardProps;
   headerProps?: CardHeaderProps;
   bodyProps?: CardBodyProps;
-  children: React.ReactNode;
-}) => {
+}>) => {
   const dividerColor = useColorModeValue("gray.300", "gray.800");
 
   return (

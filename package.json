@@ -30,6 +30,7 @@
     "kysely-codegen": "^0.10.0",
     "mapbox-gl": "^2.15.0",
     "next": "13.4.4",
+    "next-auth": "^4.22.1",
     "next-cloudinary": "^4.12.0",
     "pg": "^8.11.0",
     "ramda": "^0.29.0",

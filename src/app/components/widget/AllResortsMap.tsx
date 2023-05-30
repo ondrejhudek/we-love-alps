@@ -1,6 +1,6 @@
 "use client";
 
-import { PropsWithChildren, memo, useState } from "react";
+import { type PropsWithChildren, memo, useState } from "react";
 import NextLink from "next/link";
 import { AspectRatio, Box, Link, Skeleton, Text } from "@chakra-ui/react";
 import {

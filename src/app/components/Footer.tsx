@@ -44,14 +44,7 @@ const BackToTop = () => {
 };
 
 const Footer = () => (
-  <Box
-    mt={10}
-    mb={2}
-    px={{ base: 4, md: 0 }}
-    marginInlineStart="auto"
-    marginInlineEnd="auto"
-    maxW="container.xl"
-  >
+  <Box mt={10} mb={2} px={{ base: 4, md: 0 }}>
     <Divider />
     <Flex justify="center">
       <Text
@@ -73,7 +66,14 @@ const Footer = () => (
           @hudy
         </Link>
         . Skol
-        <Icon as={HiHeart} color="red.500" ml={1.5} />.
+        <Icon
+          as={HiHeart}
+          position="relative"
+          top="-1px"
+          color="red.500"
+          ml={1}
+        />
+        .
       </Text>
     </Flex>
 

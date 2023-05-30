@@ -2,6 +2,14 @@ import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
 import type { StyleFunctionProps } from "@chakra-ui/styled-system";
 
+import { tableAnatomy } from "@chakra-ui/anatomy";
+import { createMultiStyleConfigHelpers } from "@chakra-ui/styled-system";
+
+const {
+  definePartsStyle: tableDefinePartsStyle,
+  defineMultiStyleConfig: tableDefineMultiStyleConfig,
+} = createMultiStyleConfigHelpers(tableAnatomy.keys);
+
 const colors = {
   primary: {
     50: "#dbfbff",
@@ -62,18 +70,65 @@ const config: ThemeConfig = {
   useSystemColorMode: true,
 };
 
+const tableVariantStripe = tableDefinePartsStyle((props) => {
+  const { colorScheme: c } = props;
+
+  return {
+    th: {
+      borderWidth: 0,
+    },
+    td: {
+      borderColor: "transparent",
+    },
+    tbody: {
+      td: {
+        "&:first-of-type": {
+          borderLeftRadius: 8,
+        },
+        "&:last-of-type": {
+          borderRightRadius: 8,
+        },
+      },
+      tr: {
+        borderRadius: 8,
+
+        "&:nth-of-type(odd)": {
+          "th, td": {
+            borderColor: "transparent",
+          },
+          td: {
+            background: mode(`${c}.50`, `${c}.800`)(props),
+          },
+        },
+      },
+    },
+  };
+});
+
+export const tableTheme = tableDefineMultiStyleConfig({
+  variants: {
+    striped: tableVariantStripe,
+  },
+});
+
 const theme = extendTheme({
-  config,
   breakpoints: {
     xs: "22em",
     lg2: "68em",
   },
+  colors,
+  config,
+  components: { Table: tableTheme },
   fonts: {
     heading:
       'var(--font-ubuntu), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     body: 'var(--font-ubuntu), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
   },
-  colors,
+  sizes: {
+    container: {
+      "2xl": "1440px",
+    },
+  },
   styles: {
     global: (props: StyleFunctionProps) => ({
       "html, body": {

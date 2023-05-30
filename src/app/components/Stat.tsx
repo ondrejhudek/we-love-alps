@@ -24,16 +24,16 @@ import {
   HiArrowLongRight,
 } from "react-icons/hi2";
 
-import { TableWithPhoto } from "@/app/utils/types";
+import { TableNameWithPhoto } from "@/app/utils/types";
 
 export interface StatProps {
-  slug: TableWithPhoto;
+  slug: TableNameWithPhoto;
   title: string;
   color: string;
   count: number;
 }
 
-const ICONS: Partial<Record<TableWithPhoto, IconType>> = {
+const ICONS: Partial<Record<TableNameWithPhoto, IconType>> = {
   member: HiOutlineUsers,
   trip: HiOutlineCalendarDays,
   resort: HiOutlineMapPin,

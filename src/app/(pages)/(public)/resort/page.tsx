@@ -1,4 +1,4 @@
-import Data from "@/app/data/Documents";
+import Data from "@/app/components/data/Documents";
 import { Resort } from "@/app/utils/types";
 
 import View from "./view";

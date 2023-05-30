@@ -1,10 +1,11 @@
-import { PropsWithChildren, useRef } from "react";
+import { type PropsWithChildren, useRef } from "react";
 import NextLink from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
 import {
   Box,
   Center,
   Flex,
+  FlexProps,
   IconButton,
   Link,
   Modal,
@@ -17,16 +18,16 @@ import {
 } from "@chakra-ui/react";
 import { HiBars3, HiXMark, HiMoon, HiSun } from "react-icons/hi2";
 
+import Logo from "@/app/components/Logo";
 import { NAV_LINKS, NAV_LINK_KEYS } from "@/app/utils";
 import { NavLinkKey } from "@/app/utils/types";
-import Logo from "./Logo";
 
-const BG_COLOR = {
+export const BG_COLOR = {
   light: "secondary.600",
   dark: "secondary.700",
 };
 
-const HOVER_BG_COLOR = {
+export const HOVER_BG_COLOR = {
   light: "secondary.700",
   dark: "secondary.600",
 };
@@ -36,11 +37,19 @@ const isActiveLink = (link: NavLinkKey, segments: string[]) => {
   return link === activeLink;
 };
 
-const CircleButton = ({
+export const CircleButton = ({
   ariaText,
+  fixedSize = true,
   onClick,
   children,
-}: PropsWithChildren<{ ariaText: string; onClick: () => void }>) => {
+  ...flexProps
+}: PropsWithChildren<
+  {
+    ariaText: string;
+    fixedSize?: boolean;
+    onClick: () => void;
+  } & FlexProps
+>) => {
   const bgColor = useColorModeValue(BG_COLOR.light, BG_COLOR.dark);
   const hoverBgColor = useColorModeValue(
     HOVER_BG_COLOR.light,
@@ -52,7 +61,8 @@ const CircleButton = ({
       <Flex
         justify="center"
         align="center"
-        boxSize={{ base: 14, sm: 16 }}
+        boxSize={fixedSize ? { base: 14, sm: 16 } : undefined}
+        height={fixedSize ? undefined : { base: 14, sm: 16 }}
         color="gray.100"
         fontSize="xl"
         borderRadius="full"
@@ -68,6 +78,7 @@ const CircleButton = ({
           bgPosition: "0 100%",
         }}
         onClick={onClick}
+        {...flexProps}
       >
         {children}
       </Flex>
@@ -75,7 +86,7 @@ const CircleButton = ({
   );
 };
 
-const ColorModeSwitcher = () => {
+export const ColorModeSwitcher = () => {
   const { toggleColorMode } = useColorMode();
   const text = useColorModeValue("tmavý", "světlý");
   const SwitchIcon = useColorModeValue(HiMoon, HiSun);
@@ -235,13 +246,8 @@ const Navbar = () => {
   const bgColor = useColorModeValue(BG_COLOR.light, BG_COLOR.dark);
 
   return (
-    <Box my={4} mx={{ base: 4, sm: 5, md: 6, xl: 0 }}>
-      <Flex
-        align="center"
-        justify="space-between"
-        maxW="container.xl"
-        mx="auto"
-      >
+    <>
+      <Flex align="center" justify="space-between">
         {/* Logo */}
         <Logo />
 
@@ -280,7 +286,7 @@ const Navbar = () => {
 
       {/* Mobile navbar */}
       <MobileNavbar isOpen={isOpen} onClose={onClose} />
-    </Box>
+    </>
   );
 };
 export default Navbar;

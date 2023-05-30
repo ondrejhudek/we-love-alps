@@ -7,7 +7,7 @@ import Info from "@/app/components/InfoTrip";
 import Members, { MembersLoading } from "@/app/components/Members";
 import Resorts, { ResortsLoading } from "@/app/components/Resorts";
 import VideoComponent from "@/app/components/Video";
-import DocumentsByValues from "@/app/data/DocumentsByValues";
+import DocumentsByValues from "@/app/components/data/DocumentsByValues";
 import { getRowByValue } from "@/app/utils/database";
 import { Member, Resort, Trip, Video } from "@/app/utils/types";
 

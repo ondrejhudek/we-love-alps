@@ -1,13 +1,13 @@
 import Alert from "@/app/components/Alert";
 import { getRowByValue } from "@/app/utils/database";
-import { Table } from "@/app/utils/types";
+import { TableName } from "@/app/utils/types";
 
 const Document = async <T extends { id: string }>({
   tableName,
   id,
   viewComponent: View,
 }: {
-  tableName: Table;
+  tableName: TableName;
   id: string;
   viewComponent: React.FC<{ data: T }>;
 }) => {
