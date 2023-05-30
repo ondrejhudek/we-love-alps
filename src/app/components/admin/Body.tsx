@@ -22,6 +22,7 @@ const SignInWrapper = ({ children }: PropsWithChildren) => (
   <Center
     height="var(--chakra-vh)"
     flexDirection="column"
+    mt="-5vh"
     px={{ base: 4, xs: 6, sm: 0 }}
   >
     {children}
