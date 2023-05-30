@@ -22,6 +22,7 @@ import { Resort } from "@/app/utils/types";
 
 const ZOOM: number = 13;
 const OPTIONS: google.maps.MapOptions = {
+  clickableIcons: false,
   disableDoubleClickZoom: true,
   fullscreenControl: false,
   gestureHandling: "none",
@@ -80,9 +81,21 @@ const View = ({ data }: { data: Resort[] }) => {
             onClick={() => handleClick(id)}
           >
             {/* Map */}
-            <AspectRatio ratio={2.35 / 1}>
-              <MapComponent latLng={lat_lng} />
-            </AspectRatio>
+            <Box position="relative">
+              <AspectRatio ratio={2.35 / 1}>
+                <MapComponent latLng={lat_lng} />
+              </AspectRatio>
+              <Box
+                position="absolute"
+                top={0}
+                left={0}
+                width="full"
+                height="full"
+                _hover={{
+                  cursor: "pointer",
+                }}
+              />
+            </Box>
 
             <CardFooter>
               <Flex justify="space-between" width="full">
