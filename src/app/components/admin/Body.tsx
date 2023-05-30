@@ -9,6 +9,7 @@ import {
   Card,
   CardBody,
   Center,
+  Flex,
   Heading,
   Spinner,
 } from "@chakra-ui/react";
@@ -19,12 +20,9 @@ import Logo from "@/app/components/Logo";
 
 const SignInWrapper = ({ children }: PropsWithChildren) => (
   <Center
-    minHeight="100vh"
+    height="var(--chakra-vh)"
     flexDirection="column"
     px={{ base: 4, xs: 6, sm: 0 }}
-    style={{
-      minHeight: "-webkit-fill-available",
-    }}
   >
     {children}
   </Center>
@@ -47,7 +45,9 @@ const ProtectedBody = ({ children }: PropsWithChildren) => {
   if (status === "unauthenticated")
     return (
       <SignInWrapper>
-        <Logo iconOnly />
+        <Flex justify="center">
+          <Logo iconOnly />
+        </Flex>
 
         <Heading as="h2" my={8} fontSize="2xl" textAlign="center">
           Sign in to your account
@@ -55,7 +55,7 @@ const ProtectedBody = ({ children }: PropsWithChildren) => {
 
         <Box width={{ base: "full", sm: "400px" }}>
           <Card size="lg" borderRadius={10}>
-            <CardBody p={{ base: 4, xs: 6, sm: 8 }} textAlign="center">
+            <CardBody p={{ base: 4, xs: 6, sm: 8 }}>
               <Button
                 variant="outline"
                 size="lg"
