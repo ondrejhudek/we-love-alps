@@ -42,6 +42,8 @@ const ICONS: Record<Layout, JSX.Element> = {
   card: <HiOutlineSquares2X2 />,
 };
 
+const LOCAL_STORAGE_KEY = "admin-table-layout";
+
 import { TableName, AnyTable, AnyColumn, AnyValue } from "@/app/utils/types";
 
 const renderId = (id: AnyTable["id"]) => {
@@ -77,26 +79,35 @@ const LayoutGroupButton = ({
 }: {
   active: string;
   setActive: Dispatch<SetStateAction<string>>;
-}) => (
-  <ButtonGroup variant="outline" isAttached>
-    {LAYOUTS.map((layout) => (
-      <IconButton
-        key={`layout-${layout}`}
-        aria-label={layout}
-        icon={ICONS[layout]}
-        fontSize="xl"
-        isActive={active === layout}
-        onClick={() => setActive(layout)}
-      />
-    ))}
-  </ButtonGroup>
-);
+}) => {
+  const handleClick = (layout: Layout) => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, layout);
+    setActive(layout);
+  };
+
+  return (
+    <ButtonGroup variant="outline" isAttached>
+      {LAYOUTS.map((layout) => (
+        <IconButton
+          key={`layout-${layout}`}
+          aria-label={layout}
+          icon={ICONS[layout]}
+          fontSize="xl"
+          isActive={active === layout}
+          onClick={() => handleClick(layout)}
+        />
+      ))}
+    </ButtonGroup>
+  );
+};
 
 const View = ({ table, data }: { table: TableName; data: AnyTable[] }) => {
   const router = useRouter();
   const columns = Object.keys(data[0]) as AnyColumn[];
 
-  const [activeLayout, setActiveLayout] = useState("table");
+  const [activeLayout, setActiveLayout] = useState(
+    localStorage.getItem(LOCAL_STORAGE_KEY) ?? "table"
+  );
   const labelColor = useColorModeValue("gray.500", "gray.400");
   const tdBgColor = useColorModeValue("gray.100", "gray.900");
   const cardBgColor = useColorModeValue("gray.50", "gray.900");
