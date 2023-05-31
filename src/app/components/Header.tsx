@@ -5,7 +5,7 @@ import { Heading } from "@chakra-ui/react";
 
 import { NAV_LINKS } from "@/app/utils";
 import { Link, NavLinkKey } from "@/app/utils/types";
-import Breadcrump from "./Breadcrump";
+import Breadcrump from "./Breadcrumb";
 
 const NOT_FOUND = "Nenalezeno";
 

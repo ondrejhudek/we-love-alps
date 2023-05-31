@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import NextLink from "next/link";
 
 import {
   Alert,
@@ -36,7 +36,7 @@ const MyAlert = ({
 
     {button && (
       <Button
-        as={Link}
+        as={NextLink}
         href={button.path}
         variant="outline"
         mt={4}

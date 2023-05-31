@@ -1,7 +1,7 @@
 "use client";
 
 import { TableMetadata } from "kysely";
-import Link from "next/link";
+import NextLink from "next/link";
 import {
   Badge,
   Button,
@@ -121,7 +121,7 @@ const View = ({
                 borderTopWidth={1}
               >
                 <Button
-                  as={Link}
+                  as={NextLink}
                   href={`/admin/${key}`}
                   variant="ghost"
                   colorScheme="red"

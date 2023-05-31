@@ -1,10 +1,11 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
-import Link from "next/link";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import {
   Badge,
+  Box,
   Button,
   ButtonGroup,
   Card,
@@ -35,6 +36,9 @@ import {
 } from "react-icons/hi2";
 import is from "ramda/src/is";
 
+import Breadcrump from "@/app/components/admin/Breadcrumb";
+import { TableName, AnyTable, AnyColumn, AnyValue } from "@/app/utils/types";
+
 type Layout = "table" | "card";
 const LAYOUTS: Layout[] = ["table", "card"];
 const ICONS: Record<Layout, JSX.Element> = {
@@ -43,8 +47,7 @@ const ICONS: Record<Layout, JSX.Element> = {
 };
 
 const LOCAL_STORAGE_KEY = "admin-table-layout";
-
-import { TableName, AnyTable, AnyColumn, AnyValue } from "@/app/utils/types";
+const DEFAULT_LAYOUT = "table";
 
 const renderId = (id: AnyTable["id"]) => {
   // Null, Undefined
@@ -105,9 +108,7 @@ const View = ({ table, data }: { table: TableName; data: AnyTable[] }) => {
   const router = useRouter();
   const columns = Object.keys(data[0]) as AnyColumn[];
 
-  const [activeLayout, setActiveLayout] = useState(
-    localStorage.getItem(LOCAL_STORAGE_KEY) ?? "table"
-  );
+  const [activeLayout, setActiveLayout] = useState(DEFAULT_LAYOUT);
   const labelColor = useColorModeValue("gray.500", "gray.400");
   const tdBgColor = useColorModeValue("gray.100", "gray.900");
   const cardBgColor = useColorModeValue("gray.50", "gray.900");
@@ -118,26 +119,33 @@ const View = ({ table, data }: { table: TableName; data: AnyTable[] }) => {
     router.push(`/admin/${table}/${id}`);
   };
 
+  useEffect(() => {
+    setActiveLayout(localStorage.getItem(LOCAL_STORAGE_KEY) ?? DEFAULT_LAYOUT);
+  }, []);
+
   return (
     <>
       {/* Header */}
-      <Flex align="center" justify="space-between" height="40px">
-        <Heading as="h2" fontSize="2xl">
-          <Text as="span" mr={1.5} color={labelColor} fontWeight={300}>
-            table:
-          </Text>
-          {table}
-          <Badge
-            ml={2}
-            py={1}
-            px={1.5}
-            fontSize="sm"
-            fontWeight={500}
-            borderRadius={6}
-          >
-            {data.length} rows
-          </Badge>
-        </Heading>
+      <Flex align="center" justify="space-between">
+        <Box>
+          <Breadcrump table={table} />
+          <Heading as="h2" fontSize="2xl">
+            <Text as="span" mr={1.5} color={labelColor} fontWeight={300}>
+              table:
+            </Text>
+            {table}
+            <Badge
+              ml={2}
+              py={1}
+              px={1.5}
+              fontSize="sm"
+              fontWeight={500}
+              borderRadius={6}
+            >
+              {data.length} rows
+            </Badge>
+          </Heading>
+        </Box>
 
         <LayoutGroupButton active={activeLayout} setActive={setActiveLayout} />
       </Flex>
@@ -194,7 +202,7 @@ const View = ({ table, data }: { table: TableName; data: AnyTable[] }) => {
       {activeLayout === "card" && (
         <SimpleGrid
           columns={{ base: 1, md: 2, lg: 3, xl: 4 }}
-          spacing={4}
+          spacing={{ base: 3, sm: 4 }}
           m={-1}
           p={1}
         >
@@ -254,7 +262,7 @@ const View = ({ table, data }: { table: TableName; data: AnyTable[] }) => {
 
       {/* Footer */}
       <Button
-        as={Link}
+        as={NextLink}
         href="/admin"
         variant="outline"
         size="lg"

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Alert,
@@ -66,7 +66,7 @@ const NotFound = () => {
         <Box mt={3}>
           {/* TODO: Doesn't refresh the state. It keeps the not found component. */}
           <Button
-            as={Link}
+            as={NextLink}
             href={alertKey}
             replace
             variant="outline"

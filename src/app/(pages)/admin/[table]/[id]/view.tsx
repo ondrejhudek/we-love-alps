@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Link from "next/link";
+import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import {
   AlertDialog,
@@ -32,6 +32,7 @@ import {
   HiOutlineXMark,
 } from "react-icons/hi2";
 
+import Breadcrump from "@/app/components/admin/Breadcrumb";
 import { updateRow, deleteRow } from "@/app/utils/database";
 import { TableName, AnyTable } from "@/app/utils/types";
 
@@ -199,18 +200,17 @@ const View = ({
   return (
     <>
       {/* Header */}
-      <Flex align="center" justify="space-between" height="40px">
-        <Heading as="h2" fontSize="2xl">
-          <Text as="span" mr={1.5} color={labelColor} fontWeight={300}>
-            table:
-          </Text>
-          {table}
-          <Text as="span" mr={1.5} color={labelColor} fontWeight={300}>
-            , row with id:
-          </Text>
-          {id}
-        </Heading>
-      </Flex>
+      <Breadcrump table={table} id={id} />
+      <Heading as="h2" fontSize="2xl">
+        <Text as="span" mr={1.5} color={labelColor} fontWeight={300}>
+          table:
+        </Text>
+        {table}
+        <Text as="span" mr={1.5} color={labelColor} fontWeight={300}>
+          , id:
+        </Text>
+        {id}
+      </Heading>
 
       <Divider my={4} />
 
@@ -250,7 +250,7 @@ const View = ({
       <Stack direction={{ base: "column", sm: "row" }} justify="space-between">
         {/* Cancel */}
         <Button
-          as={Link}
+          as={NextLink}
           href={`/admin/${table}`}
           variant="outline"
           size="lg"

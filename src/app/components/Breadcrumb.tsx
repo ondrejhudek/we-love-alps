@@ -1,4 +1,4 @@
-import Link from "next/link";
+import NextLink from "next/link";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { HiChevronRight } from "react-icons/hi2";
 
-const Breadcrump = ({
+const MyBreadcrumb = ({
   links,
 }: {
   links: { path: string; label: string }[];
@@ -26,17 +26,25 @@ const Breadcrump = ({
     }
   >
     <BreadcrumbItem>
-      <BreadcrumbLink as={Link} href="/">
+      <BreadcrumbLink as={NextLink} href="/">
         Domů
       </BreadcrumbLink>
     </BreadcrumbItem>
 
-    {links.map(({ path, label }, i) => (
-      <BreadcrumbItem key={path} isCurrentPage={links.length === i + 1}>
-        <BreadcrumbLink href={path}>{label}</BreadcrumbLink>
-      </BreadcrumbItem>
-    ))}
+    {links.map(({ path, label }, i) => {
+      const isCurrentPage = links.length === i + 1;
+      return (
+        <BreadcrumbItem key={path} isCurrentPage={isCurrentPage}>
+          <BreadcrumbLink
+            as={isCurrentPage ? "span" : NextLink}
+            href={isCurrentPage ? "#" : path}
+          >
+            {label}
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      );
+    })}
   </Breadcrumb>
 );
 
-export default Breadcrump;
+export default MyBreadcrumb;
