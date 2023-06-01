@@ -1972,14 +1972,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.2.7":
-  version: 18.2.7
-  resolution: "@types/react@npm:18.2.7"
+"@types/react@npm:18.2.8":
+  version: 18.2.8
+  resolution: "@types/react@npm:18.2.8"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: caa5da4cf929766738ec789301dc6fb6624bd48dd317d851c4c9b84b1f47cd8ebe17fe01398cadaa0bc938cd4d502d67f4b9de9ff771dc132096bdc86228efba
+  checksum: 351fe2450d30bff2ceb6aa84788e948317555e5ea22cb44f6778e08c977aab1878a0119bd94bc3d1bec5f5af4a75ffaa2ce111df5cd9d4ce26bfd719e4d971c2
   languageName: node
   linkType: hard
 
@@ -6539,23 +6539,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.0.4":
-  version: 5.0.4
-  resolution: "typescript@npm:5.0.4"
+"typescript@npm:5.1.3":
+  version: 5.1.3
+  resolution: "typescript@npm:5.1.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 82b94da3f4604a8946da585f7d6c3025fff8410779e5bde2855ab130d05e4fd08938b9e593b6ebed165bda6ad9292b230984f10952cf82f0a0ca07bbeaa08172
+  checksum: d9d51862d98efa46534f2800a1071a613751b1585dc78884807d0c179bcd93d6e9d4012a508e276742f5f33c480adefc52ffcafaf9e0e00ab641a14cde9a31c7
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@5.0.4#~builtin<compat/typescript>":
-  version: 5.0.4
-  resolution: "typescript@patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=b5f058"
+"typescript@patch:typescript@5.1.3#~builtin<compat/typescript>":
+  version: 5.1.3
+  resolution: "typescript@patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=77c9e2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: d26b6ba97b6d163c55dbdffd9bbb4c211667ebebc743accfeb2c8c0154aace7afd097b51165a72a5bad2cf65a4612259344ff60f8e642362aa1695c760d303ac
+  checksum: 32a25b2e128a4616f999d4ee502aabb1525d5647bc8955e6edf05d7fbc53af8aa98252e2f6ba80bcedfc0260c982b885f3c09cfac8bb65d2924f3133ad1e1e62
   languageName: node
   linkType: hard
 
@@ -6711,7 +6711,7 @@ __metadata:
     "@types/mapbox-gl": ^2.7.11
     "@types/node": 20.2.5
     "@types/ramda": ^0.29.2
-    "@types/react": 18.2.7
+    "@types/react": 18.2.8
     "@types/react-dom": 18.2.4
     "@vercel/analytics": ^1.0.1
     "@vercel/postgres-kysely": ^0.3.0
@@ -6731,8 +6731,8 @@ __metadata:
     react-dom: 18.2.0
     react-icons: ^4.9.0
     react-photo-album: ^2.2.2
-    typescript: 5.0.4
-    yet-another-react-lightbox: ^3.10.0
+    typescript: 5.1.3
+    yet-another-react-lightbox: ^3.10.1
   languageName: unknown
   linkType: soft
 
@@ -6859,13 +6859,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yet-another-react-lightbox@npm:^3.10.0":
-  version: 3.10.0
-  resolution: "yet-another-react-lightbox@npm:3.10.0"
+"yet-another-react-lightbox@npm:^3.10.1":
+  version: 3.10.1
+  resolution: "yet-another-react-lightbox@npm:3.10.1"
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: d2a642b0e9cf6a9a5fcef5cbf8fb7c498ef64d59753c364b367caf309751cd7e5791238973086e1e1f267b7f2a8e7fd6a24f696aacc2050cafd6c09e429ed1d5
+  checksum: 45d40736981b9660aa7f268e5b8209fc0d9c63f9cb1eb920e2a1fdef6542aa36318db9770f7b2f6f3aa3cdbfef139e3357c7901d7f559213c19d60e9b55949b2
   languageName: node
   linkType: hard
 

@@ -1,5 +1,4 @@
-import NextAuth from "next-auth";
-import type { NextAuthOptions } from "next-auth";
+import NextAuth, { type NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
@@ -9,7 +8,6 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     signIn: async ({ profile }) => profile?.email === process.env.ADMIN_EMAIL,
   },
