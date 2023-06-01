@@ -31,10 +31,10 @@ const MyBreadcrumb = ({ table, id }: { table: TableName; id?: string }) => (
     </BreadcrumbItem>
 
     {/* Table link */}
-    <BreadcrumbItem isCurrentPage={!!id}>
+    <BreadcrumbItem isCurrentPage={!id}>
       <BreadcrumbLink
-        as={id ? "span" : NextLink}
-        href={id ? "#" : `/admin/${table}`}
+        as={!id ? "span" : NextLink}
+        href={!id ? "#" : `/admin/${table}`}
       >
         {table}
       </BreadcrumbLink>
