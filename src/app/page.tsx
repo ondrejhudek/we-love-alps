@@ -53,7 +53,6 @@ const StatAsync = async ({ slug }: { slug: TableNameWithPhoto }) => {
 
 const Stat = ({ slug }: { slug: TableNameWithPhoto }) => (
   <Suspense fallback={<StatLoading color={STATS[slug].color} />}>
-    {/* @ts-expect-error Server Component */}
     <StatAsync slug={slug} />
   </Suspense>
 );
@@ -72,7 +71,6 @@ const MostMembersAsync = async () => {
 const MostMembers = () => (
   <WidgetWrapper heading="Nejčastěji jezdí">
     <Suspense fallback={<WidgetLoading />}>
-      {/* @ts-expect-error Server Component */}
       <MostMembersAsync />
     </Suspense>
   </WidgetWrapper>
@@ -89,7 +87,6 @@ const MostCountriesAsync = async () => {
 const MostCountries = () => (
   <WidgetWrapper heading="Navštívené země">
     <Suspense fallback={<WidgetLoading />}>
-      {/* @ts-expect-error Server Component */}
       <MostCountriesAsync />
     </Suspense>
   </WidgetWrapper>
@@ -107,7 +104,6 @@ const AllResortsMapAsync = async () => {
 const AllResortsMap = () => (
   <WidgetWrapper heading="Navštívená střediska">
     <Suspense fallback={<AllResortsMapLoading />}>
-      {/* @ts-expect-error Server Component */}
       <AllResortsMapAsync />
     </Suspense>
   </WidgetWrapper>
@@ -128,7 +124,6 @@ const CalendarAsync = async () => {
 const Calendar = () => (
   <CalendarWrapper>
     <Suspense fallback={<CalendarLoading />}>
-      {/* @ts-expect-error Server Component */}
       <CalendarAsync />
     </Suspense>
   </CalendarWrapper>

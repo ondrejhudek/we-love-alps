@@ -40,9 +40,6 @@ const Content = async () => {
   );
 };
 
-const Page = async () => (
-  // @ts-expect-error Server Component
-  <Content />
-);
+const Page = async () => <Content />;
 
 export default Page;

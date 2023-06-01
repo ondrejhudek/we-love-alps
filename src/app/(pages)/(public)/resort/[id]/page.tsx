@@ -31,7 +31,6 @@ const Content = async ({ id }: { id: string }) => {
       {/* Members */}
       <Container title="Navšívili">
         <Suspense fallback={<MembersLoading />}>
-          {/* @ts-expect-error Server Component */}
           <DocumentsByValues<Member>
             tableName="member"
             column="id"
@@ -45,7 +44,6 @@ const Content = async ({ id }: { id: string }) => {
 };
 
 const Page = async ({ params: { id } }: { params: { id: string } }) => (
-  //  @ts-expect-error Server Component
   <Content id={id} />
 );
 

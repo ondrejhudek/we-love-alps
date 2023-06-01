@@ -28,7 +28,6 @@ const Content = async ({ id }: { id: string }) => {
       {/* Resorts */}
       <Container title="Střediska">
         <Suspense fallback={<ResortsLoading />}>
-          {/* @ts-expect-error Server Component */}
           <DocumentsByValues<Resort>
             tableName="resort"
             column="id"
@@ -42,7 +41,6 @@ const Content = async ({ id }: { id: string }) => {
       {/* Members */}
       <Container title="Zúčastnili se">
         <Suspense fallback={<MembersLoading />}>
-          {/* @ts-expect-error Server Component */}
           <DocumentsByValues<Member>
             tableName="member"
             column="id"
@@ -56,7 +54,6 @@ const Content = async ({ id }: { id: string }) => {
       {/* TODO: Add Photogallery */}
 
       {/* Video */}
-      {/* @ts-expect-error Server Component */}
       <DocumentsByValues<Video>
         tableName="video"
         column="trip_id"
@@ -68,7 +65,6 @@ const Content = async ({ id }: { id: string }) => {
 };
 
 const Page = async ({ params: { id } }: { params: { id: string } }) => (
-  // @ts-expect-error Server Component
   <Content id={id} />
 );
 

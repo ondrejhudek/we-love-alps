@@ -15,7 +15,7 @@ const DocumentsByValues = async <T extends object>({
   values: string[];
   orderBy?: OrderBy[];
   viewComponent: React.FC<{ data: T[] }>;
-  withError: boolean;
+  withError?: boolean;
 }) => {
   const data = await getRowsByValues<T>(tableName, column, values, orderBy);
 
