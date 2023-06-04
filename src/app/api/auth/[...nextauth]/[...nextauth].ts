@@ -11,6 +11,11 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     signIn: async ({ profile }) => profile?.email === process.env.ADMIN_EMAIL,
   },
+  pages: {
+    error: "/auth/error",
+    signIn: "/auth/signin",
+    signOut: "/auth/signout",
+  },
 };
 
 export default NextAuth(authOptions);

@@ -1,6 +1,8 @@
 "use client";
 
 import type { PropsWithChildren } from "react";
+import type { Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
 // import { CacheProvider } from "@chakra-ui/next-js";
 import {
   ChakraProvider,
@@ -8,6 +10,7 @@ import {
   BoxProps,
   Card,
   CardBody,
+  Center,
 } from "@chakra-ui/react";
 
 import theme from "@/app/theme";
@@ -16,7 +19,7 @@ import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
 import Toast from "@/app/components/Toast";
 
-const Wrapper = ({
+const PageWrapper = ({
   maxWidth,
   navbarComponent,
   children,
@@ -36,18 +39,34 @@ const Wrapper = ({
   </Box>
 );
 
-export const AdminBody = ({ children }: PropsWithChildren) => (
-  <Wrapper maxWidth="container.2xl" navbarComponent={<AdminNavbar />}>
-    <Card borderRadius={10}>
-      <CardBody>{children}</CardBody>
-    </Card>
-  </Wrapper>
+export const AuthBody = ({ children }: PropsWithChildren) => (
+  <Center
+    height="var(--chakra-vh)"
+    flexDirection="column"
+    mt="-5vh"
+    px={{ base: 4, xs: 6, sm: 0 }}
+  >
+    {children}
+  </Center>
+);
+
+export const AdminBody = ({
+  session,
+  children,
+}: PropsWithChildren<{ session: Session | null }>) => (
+  <SessionProvider session={session}>
+    <PageWrapper maxWidth="container.2xl" navbarComponent={<AdminNavbar />}>
+      <Card borderRadius={10}>
+        <CardBody>{children}</CardBody>
+      </Card>
+    </PageWrapper>
+  </SessionProvider>
 );
 
 export const PublicBody = ({ children }: PropsWithChildren) => (
-  <Wrapper maxWidth="container.xl" navbarComponent={<Navbar />}>
+  <PageWrapper maxWidth="container.xl" navbarComponent={<Navbar />}>
     {children}
-  </Wrapper>
+  </PageWrapper>
 );
 
 const Body = ({ children }: PropsWithChildren) => (
