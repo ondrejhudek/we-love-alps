@@ -2548,19 +2548,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cloudinary@npm:^1.37.1":
-  version: 1.37.1
-  resolution: "cloudinary@npm:1.37.1"
+"cloudinary@npm:1.37.0":
+  version: 1.37.0
+  resolution: "cloudinary@npm:1.37.0"
   dependencies:
     cloudinary-core: 2.13.0
-    core-js: 3.30.2
+    core-js: 3.30.1
     lodash: 4.17.21
     proxy-agent: ^5.0.0
     q: 1.5.1
   dependenciesMeta:
     proxy-agent:
       optional: true
-  checksum: 3c37bb86f5302b311ccd3dfe6c2e613502fb7407ae13eefcefd48581997e61036accf3b95c0afcc407555ca55e7baf97292113aebd0588016110c48976e241b8
+  checksum: 5cf10ada087cd0a1eb78dd018783f2033d5e7249b3c1aee473e8efcd1e8b92f45d3bc9e2de03c5dc70a25cf8ca571ce79b20bd8a4ed8a7eebfc618ee440b6a0e
   languageName: node
   linkType: hard
 
@@ -2656,10 +2656,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.30.2":
-  version: 3.30.2
-  resolution: "core-js@npm:3.30.2"
-  checksum: 73d47e2b9d9f502800973982d08e995bbf04832e20b04e04be31dd7607247158271315e9328788a2408190e291c7ffbefad141167b1e57dea9f983e1e723541e
+"core-js@npm:3.30.1":
+  version: 3.30.1
+  resolution: "core-js@npm:3.30.1"
+  checksum: 6d4a00b488694d4c715c424e15dfef31433ac7aa395c39c518a0cfacec918ada1c716fed74682033197e0164e23bbf38bfd598ee9a239c4aaa590ab1ba862ac8
   languageName: node
   linkType: hard
 
@@ -6733,7 +6733,7 @@ __metadata:
     "@types/react-dom": 18.2.5
     "@vercel/analytics": ^1.0.1
     "@vercel/postgres-kysely": ^0.3.1
-    cloudinary: ^1.37.1
+    cloudinary: 1.37.0
     eslint: 8.42.0
     eslint-config-next: 13.4.5
     framer-motion: ^10.12.16
