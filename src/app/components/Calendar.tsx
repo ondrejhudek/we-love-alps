@@ -196,14 +196,13 @@ const Calendar = ({
   return (
     <>
       <SimpleGrid columns={1} spacingY={6}>
-        {groupedKeys.slice(0, limit).map((year) => (
-          <Year
-            key={year}
-            year={year}
-            trips={groupedTrips[year]}
-            onClick={handleClick}
-          />
-        ))}
+        {groupedKeys.slice(0, limit).map((year) => {
+          const trips = groupedTrips[year];
+          if (!trips) return null;
+          return (
+            <Year key={year} year={year} trips={trips} onClick={handleClick} />
+          );
+        })}
       </SimpleGrid>
 
       {limit < trips.length && (

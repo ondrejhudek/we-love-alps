@@ -33,9 +33,11 @@ const Content = async () => {
     <>
       <Header />
 
-      {groupedKeys.map((year) => (
-        <View key={year} year={year} trips={groupedTrips[year]} />
-      ))}
+      {groupedKeys.map((year) => {
+        const trips = groupedTrips[year];
+        if (!trips) return null;
+        return <View key={year} year={year} trips={trips} />;
+      })}
     </>
   );
 };
