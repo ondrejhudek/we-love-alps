@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+
 import { getRows, getCount } from "@/app/utils/database";
 import { Member, Trip, Resort, TableNameWithPhoto } from "@/app/utils/types";
 
