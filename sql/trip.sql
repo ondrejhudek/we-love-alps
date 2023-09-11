@@ -92,7 +92,7 @@ VALUES (
         'Frühstückspension Landhaus Christa',
         'ZXmB1T1U26gSn9Hg8',
         ARRAY ['kitzsteinhorn','schmitten','saalbach'],
-        ARRAY ['hudy','terka','jarin','stuchla','janca','era','pavel','lucka','mara'],
+        ARRAY ['hudy','terka','jarin','stuchla','janca','era','pavel','lucka','mara','lena'],
         0
     ),
     (
