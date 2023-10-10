@@ -16,14 +16,14 @@
     "@emotion/styled": "^11.11.0",
     "@react-google-maps/api": "^2.19.2",
     "@types/mapbox-gl": "^2.7.15",
-    "@types/node": "20.8.2",
+    "@types/node": "20.8.4",
     "@types/ramda": "^0.29.6",
-    "@types/react": "18.2.25",
-    "@types/react-dom": "18.2.10",
+    "@types/react": "18.2.27",
+    "@types/react-dom": "18.2.12",
     "@vercel/analytics": "^1.1.0",
     "@vercel/postgres-kysely": "^0.5.0",
     "cloudinary": "1.41.0",
-    "eslint": "8.50.0",
+    "eslint": "8.51.0",
     "eslint-config-next": "13.5.4",
     "framer-motion": "^10.16.4",
     "kysely": "^0.26.3",
@@ -31,7 +31,7 @@
     "mapbox-gl": "^2.15.0",
     "next": "13.5.4",
     "next-auth": "^4.23.2",
-    "next-cloudinary": "^4.23.1",
+    "next-cloudinary": "^4.24.0",
     "pg": "^8.11.3",
     "ramda": "^0.29.1",
     "react": "18.2.0",
@@ -40,6 +40,6 @@
     "react-photo-album": "^2.3.0",
     "sharp": "^0.32.6",
     "typescript": "5.2.2",
-    "yet-another-react-lightbox": "^3.12.3"
+    "yet-another-react-lightbox": "^3.13.1"
   }
 }
