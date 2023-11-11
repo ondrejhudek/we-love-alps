@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Ubuntu } from "next/font/google";
 import Script from "next/script";
 
@@ -15,7 +15,7 @@ const ubuntu = Ubuntu({
 
 export const metadata: Metadata = {
   title: "We love Alps | Since 2008",
-  themeColor: "#005f7e",
+
   icons: {
     icon: "/images/favicon.ico",
   },
@@ -24,6 +24,10 @@ export const metadata: Metadata = {
     index: false,
     follow: false,
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#005f7e",
 };
 
 const RootLayout = ({ children }: PropsWithChildren) => (
