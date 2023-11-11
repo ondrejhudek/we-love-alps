@@ -159,16 +159,23 @@ const Info = ({
                 {/* Ex partner */}
                 {data.ex_partners && data.ex_partners.length > 0 && (
                   <>
-                    {data.ex_partners.map((exPartner) => (
-                      <ListItem key={exPartner}>
-                        <PersonalInfo
-                          id={exPartner}
-                          label="Ex-partner/ka"
-                          color={nicknameColor}
-                          membersData={membersData}
-                        />
-                      </ListItem>
-                    ))}
+                    {data.ex_partners
+                      // Sort folder asc by name
+                      .sort((a, b) => {
+                        if (a > b) return 1;
+                        if (a < b) return -1;
+                        return 0;
+                      })
+                      .map((exPartner) => (
+                        <ListItem key={exPartner}>
+                          <PersonalInfo
+                            id={exPartner}
+                            label="Ex-partner/ka"
+                            color={nicknameColor}
+                            membersData={membersData}
+                          />
+                        </ListItem>
+                      ))}
                   </>
                 )}
 

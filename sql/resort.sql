@@ -111,4 +111,11 @@ VALUES (
         'AT',
         'Salcbursko',
         POINT(47.22953175680364, 12.726047925978369)
+    ),
+    (
+        'dachstein',
+        'Dachstein West',
+        'AT',
+        'Horní Rakousko',
+        POINT(47.56557997434476, 13.498129198240154)
     );

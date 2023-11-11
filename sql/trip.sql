@@ -178,4 +178,16 @@ VALUES (
         ARRAY ['tonale'],
         ARRAY ['hudy','terka','jarin','stuchla','sally'],
         3
+    ),
+    (
+        '2024-dachstein',
+        'Dachstein',
+        'AT',
+        2024,
+        1,
+        'COOEE alpin Hotel Dachstein',
+        'cvkV6dZxt5F9fYQo9',
+        ARRAY ['dachstein'],
+        ARRAY ['hudy','jarin','daja','stuchla','terez','milan','lena','pavel','era'],
+        1
     );

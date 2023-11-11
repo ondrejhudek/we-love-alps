@@ -4,7 +4,11 @@ import { Member } from "@/app/utils/types";
 import View from "./view";
 
 const Page = async () => (
-  <Data<Member> tableName="member" viewComponent={View} />
+  <Data<Member>
+    tableName="member"
+    orderBy={[{ column: "id" }]}
+    viewComponent={View}
+  />
 );
 
 export default Page;

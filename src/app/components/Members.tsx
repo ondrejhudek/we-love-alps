@@ -23,22 +23,29 @@ const Members = ({ data }: { data: Member[] }) => {
 
   return (
     <Flex wrap="wrap" m={-2}>
-      {data.map(({ id, name }) => (
-        <Tooltip key={id} label={name} shouldWrapChildren>
-          <AvatarImage
-            id={id}
-            name={name}
-            boxSize={24}
-            m={2}
-            boxShadow="md"
-            _hover={{
-              cursor: "pointer",
-              boxShadow: "outline",
-            }}
-            onClick={() => handleClick(id)}
-          />
-        </Tooltip>
-      ))}
+      {data
+        // Sort folder asc by name
+        .sort((a, b) => {
+          if (a.id > b.id) return 1;
+          if (a.id < b.id) return -1;
+          return 0;
+        })
+        .map(({ id, name }) => (
+          <Tooltip key={id} label={name} shouldWrapChildren>
+            <AvatarImage
+              id={id}
+              name={name}
+              boxSize={24}
+              m={2}
+              boxShadow="md"
+              _hover={{
+                cursor: "pointer",
+                boxShadow: "outline",
+              }}
+              onClick={() => handleClick(id)}
+            />
+          </Tooltip>
+        ))}
     </Flex>
   );
 };

@@ -231,4 +231,14 @@ VALUES (
         '{ }',
         '{ }',
         ARRAY ['lyže', 'snowboard']
+    ),
+    (
+        'terez',
+        'Tereza Schwarzová',
+        'terez.schwarzova',
+        'tereza.schwarz',
+        'stuchla',
+        '{ }',
+        '{ }',
+        ARRAY ['lyže']
     );

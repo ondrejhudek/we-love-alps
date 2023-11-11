@@ -43,8 +43,19 @@ const TripView = ({ data }: { data: TripViewProps }) => {
   const monthColor = useColorModeValue("gray.400", "gray.500");
   const resortColor = useColorModeValue("gray.600", "gray.400");
 
-  const { id, title, country_code, month, resorts, members, non_members } =
-    data;
+  const {
+    id,
+    title,
+    country_code,
+    year,
+    month,
+    resorts,
+    members,
+    non_members,
+  } = data;
+
+  const isInFurure = new Date(year, month, 1) > new Date();
+  const inFutureColor = useColorModeValue("primary.50", "primary.800");
 
   const handleClick = (id: string) => {
     router.push(`/trip/${id}`);
@@ -53,6 +64,7 @@ const TripView = ({ data }: { data: TripViewProps }) => {
   return (
     <Card
       key={id}
+      bgColor={isInFurure ? inFutureColor : undefined}
       borderRadius={16}
       onClick={() => handleClick(id)}
       _hover={{
@@ -64,6 +76,11 @@ const TripView = ({ data }: { data: TripViewProps }) => {
         {/*  Month */}
         <Text color={monthColor} fontSize="xs" textTransform="uppercase">
           {MONTHS_CS[month - 1]}
+          {isInFurure && (
+            <Text as="span" ml={1} fontWeight={900}>
+              / nadcházející
+            </Text>
+          )}
         </Text>
 
         {/* Title */}
@@ -97,9 +114,16 @@ const TripView = ({ data }: { data: TripViewProps }) => {
           color="white"
           fontSize="sm"
         >
-          {members.map(({ id, name }) => (
-            <TooltipAvatar key={id} name={name} />
-          ))}
+          {members
+            // Sort folder asc by name
+            .sort((a, b) => {
+              if (a.id > b.id) return 1;
+              if (a.id < b.id) return -1;
+              return 0;
+            })
+            .map(({ id, name }) => (
+              <TooltipAvatar key={id} name={name} />
+            ))}
 
           {/* Non members */}
           {non_members &&

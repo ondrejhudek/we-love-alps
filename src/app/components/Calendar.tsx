@@ -86,6 +86,8 @@ const Year = ({
   const calendarIconColor = useColorModeValue("gray.600", "gray.400");
   const calendarIconNumber = useColorModeValue("gray.800", "gray.200");
   const hoverBgColor = useColorModeValue("gray.300", "gray.600");
+  const inFutureBgColor = useColorModeValue("primary.100", "primary.700");
+  const inFutureHoverBgColor = useColorModeValue("primary.300", "primary.600");
 
   return (
     <>
@@ -93,62 +95,69 @@ const Year = ({
         {year}
       </Heading>
 
-      {trips.map(({ id, month, title, resorts, country_code }) => (
-        <Tooltip
-          key={id}
-          label={`${MONTHS_CS[month - 1]}, ${year}`}
-          placement="top"
-          offset={[0, -6]}
-        >
-          <Box
-            mx={-4}
-            p={4}
-            borderRadius={12}
-            _hover={{
-              cursor: "pointer",
-              bgColor: hoverBgColor,
-            }}
-            onClick={() => onClick(id)}
-          >
-            <Flex alignItems="center">
-              <Box mt={2} width={10} position="relative">
-                <Icon
-                  as={HiCalendar}
-                  position="absolute"
-                  top="-14px"
-                  boxSize={10}
-                  color={calendarIconColor}
-                />
-                <Text
-                  ml="16px"
-                  fontSize="sm"
-                  fontWeight={500}
-                  color={calendarIconNumber}
-                >
-                  {month}
-                </Text>
-              </Box>
+      {trips.map(({ id, year, month, title, resorts, country_code }) => {
+        const isInFurure = new Date(year, month, 1) > new Date();
 
-              <Flex flex={1} justify="space-between" alignItems="center">
-                <Box ml={3}>
+        return (
+          <Tooltip
+            key={id}
+            label={`${MONTHS_CS[month - 1]}, ${year}${
+              isInFurure ? " / nadcházející" : ""
+            }`}
+            placement="top"
+            offset={[0, -6]}
+          >
+            <Box
+              mx={-4}
+              p={4}
+              bgColor={isInFurure ? inFutureBgColor : undefined}
+              borderRadius={12}
+              _hover={{
+                cursor: "pointer",
+                bgColor: isInFurure ? inFutureHoverBgColor : hoverBgColor,
+              }}
+              onClick={() => onClick(id)}
+            >
+              <Flex alignItems="center">
+                <Box mt={2} width={10} position="relative">
+                  <Icon
+                    as={HiCalendar}
+                    position="absolute"
+                    top="-14px"
+                    boxSize={10}
+                    color={calendarIconColor}
+                  />
                   <Text
+                    ml="16px"
                     fontSize="sm"
-                    color={resortsColor}
-                    noOfLines={1}
-                    title={resorts.map(({ name }) => name).join(", ")}
+                    fontWeight={500}
+                    color={calendarIconNumber}
                   >
-                    {resorts.map(({ name }) => name).join(", ")}
+                    {month}
                   </Text>
-                  <Text fontWeight={600}>{title}</Text>
                 </Box>
-                <Box ml={2}>
-                  <FlagImage countryCode={country_code} boxSize={24} />
-                </Box>
+
+                <Flex flex={1} justify="space-between" alignItems="center">
+                  <Box ml={3}>
+                    <Text
+                      fontSize="sm"
+                      color={resortsColor}
+                      noOfLines={1}
+                      title={resorts.map(({ name }) => name).join(", ")}
+                    >
+                      {resorts.map(({ name }) => name).join(", ")}
+                    </Text>
+                    <Text fontWeight={600}>{title}</Text>
+                  </Box>
+                  <Box ml={2}>
+                    <FlagImage countryCode={country_code} boxSize={24} />
+                  </Box>
+                </Flex>
               </Flex>
-            </Flex>
-          </Box>
-        </Tooltip>
-      ))}
+            </Box>
+          </Tooltip>
+        );
+      })}
     </>
   );
 };
