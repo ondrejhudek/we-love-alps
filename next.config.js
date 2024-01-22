@@ -2,7 +2,12 @@
 const nextConfig = {
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "res.cloudinary.com", pathname: "**" },
+      {
+        protocol: "http",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/ddnasijv8/**",
+      },
     ],
     minimumCacheTTL: 3600, // 1 hour
   },
