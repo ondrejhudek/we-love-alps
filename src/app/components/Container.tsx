@@ -1,7 +1,9 @@
 "use client";
 
+import NextLink from "next/link";
 import type { PropsWithChildren } from "react";
 import {
+  Button,
   Card,
   CardProps,
   CardHeader,
@@ -31,6 +33,7 @@ const Count = ({ number }: { number: number }) => (
 const Container = ({
   title,
   count,
+  button,
   props,
   headerProps,
   bodyProps,
@@ -38,6 +41,10 @@ const Container = ({
 }: PropsWithChildren<{
   title: string;
   count?: number;
+  button?: {
+    label: string;
+    href: string;
+  };
   props?: CardProps;
   headerProps?: CardHeaderProps;
   bodyProps?: CardBodyProps;
@@ -50,6 +57,20 @@ const Container = ({
         <Heading as="h2" fontSize="xl" display="flex" alignItems="center">
           {title}
           {count && <Count number={count} />}
+          {button && (
+            <Button
+              as={NextLink}
+              href={button.href}
+              variant="ghost"
+              colorScheme="secondary"
+              size="sm"
+              ml="auto"
+              my={-1}
+              fontWeight={500}
+            >
+              {button.label}
+            </Button>
+          )}
         </Heading>
       </CardHeader>
 

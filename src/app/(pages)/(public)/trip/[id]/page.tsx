@@ -5,9 +5,11 @@ import Container from "@/app/components/Container";
 import Header from "@/app/components/Header";
 import Info from "@/app/components/InfoTrip";
 import Members, { MembersLoading } from "@/app/components/Members";
+import Photos from "@/app/components/Photos";
 import Resorts, { ResortsLoading } from "@/app/components/Resorts";
 import VideoComponent from "@/app/components/Video";
 import DocumentsByValues from "@/app/components/data/DocumentsByValues";
+import { getImages } from "@/app/cloudinary/service";
 import { getRowByValue } from "@/app/utils/database";
 import { Member, Resort, Trip, Video } from "@/app/utils/types";
 
@@ -17,6 +19,8 @@ const Content = async ({ id }: { id: string }) => {
   if (!data) {
     notFound();
   }
+
+  const photos = await getImages(id);
 
   return (
     <>
@@ -57,7 +61,7 @@ const Content = async ({ id }: { id: string }) => {
       </Container>
 
       {/* Photo */}
-      {/* TODO: Add Photogallery */}
+      <Photos id={id} images={photos} />
 
       {/* Video */}
       <DocumentsByValues<Video>

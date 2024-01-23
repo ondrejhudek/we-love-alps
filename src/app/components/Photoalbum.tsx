@@ -10,10 +10,40 @@ import Alert from "@/app/components/Alert";
 import { AlbumThumbnailImage, LightboxImage } from "@/app/components/Image";
 import { ImageProps } from "@/app/cloudinary/types";
 
-const Album = ({ images }: { images: ImageProps[] }) => {
+export const PhotoalbumImages = ({ images }: { images: ImageProps[] }) => {
+  const photos = images.map((image) => ({
+    ...image,
+    src: image.url,
+  }));
+
   const [index, setIndex] = useState(-1);
   const handleClick = (i: number) => setIndex(i);
 
+  return (
+    <>
+      <PhotoAlbum
+        layout="rows"
+        spacing={5}
+        rowConstraints={{
+          singleRowMaxHeight: 200,
+        }}
+        photos={photos}
+        renderPhoto={AlbumThumbnailImage}
+        onClick={({ index }) => handleClick(index)}
+      />
+
+      <Lightbox
+        index={index}
+        slides={photos}
+        render={{ slide: LightboxImage }}
+        open={index >= 0}
+        close={() => setIndex(-1)}
+      />
+    </>
+  );
+};
+
+const Photoalbum = ({ images }: { images: ImageProps[] }) => {
   if (!images.length)
     return (
       <Alert
@@ -27,33 +57,13 @@ const Album = ({ images }: { images: ImageProps[] }) => {
       />
     );
 
-  const photos = images.map((image) => ({
-    ...image,
-    src: image.url,
-  }));
-
   return (
     <Card borderRadius={16}>
       <CardBody p={3}>
-        <PhotoAlbum
-          layout="rows"
-          spacing={5}
-          targetRowHeight={180}
-          photos={photos}
-          renderPhoto={AlbumThumbnailImage}
-          onClick={({ index }) => handleClick(index)}
-        />
-
-        <Lightbox
-          index={index}
-          slides={photos}
-          render={{ slide: LightboxImage }}
-          open={index >= 0}
-          close={() => setIndex(-1)}
-        />
+        <PhotoalbumImages images={images} />
       </CardBody>
     </Card>
   );
 };
 
-export default Album;
+export default Photoalbum;
