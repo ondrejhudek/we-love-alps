@@ -29,7 +29,7 @@ const Content = async ({ id }: { id: string }) => {
       <Info resortData={resortData} tripsData={tripsData} />
 
       {/* Members */}
-      <Container title="Navšívili">
+      <Container title="Navšívili" count={members.length}>
         <Suspense fallback={<MembersLoading />}>
           <DocumentsByValues<Member>
             tableName="member"

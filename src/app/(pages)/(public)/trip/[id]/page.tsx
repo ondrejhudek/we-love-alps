@@ -26,7 +26,7 @@ const Content = async ({ id }: { id: string }) => {
       <Info data={data} />
 
       {/* Resorts */}
-      <Container title="Střediska">
+      <Container title="Střediska" count={data.resorts.length}>
         <Suspense fallback={<ResortsLoading />}>
           <DocumentsByValues<Resort>
             tableName="resort"
@@ -39,12 +39,18 @@ const Content = async ({ id }: { id: string }) => {
       </Container>
 
       {/* Members */}
-      <Container title="Zúčastnili se">
+      <Container
+        title="Zúčastnili se"
+        count={data.members.length + (data.non_members || 0)}
+      >
         <Suspense fallback={<MembersLoading />}>
           <DocumentsByValues<Member>
             tableName="member"
             column="id"
             values={data.members}
+            extraValues={{
+              nonMembers: data.non_members || undefined,
+            }}
             viewComponent={Members}
           />
         </Suspense>

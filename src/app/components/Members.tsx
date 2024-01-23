@@ -1,7 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Flex, SkeletonCircle, Tooltip } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  SkeletonCircle,
+  Tooltip,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
 import { AvatarImage } from "@/app/components/Image";
 import { Member } from "@/app/utils/types";
@@ -14,8 +21,17 @@ export const MembersLoading = () => (
   </Flex>
 );
 
-const Members = ({ data }: { data: Member[] }) => {
+const Members = ({
+  data,
+  nonMembers,
+}: {
+  data: Member[];
+  nonMembers?: number;
+}) => {
   const router = useRouter();
+
+  const nonMembersBgColor = useColorModeValue("gray.100", "gray.800");
+  const nonMembersColor = useColorModeValue("gray.400", "gray.500");
 
   const handleClick = (id: string) => {
     router.push(`/member/${id}`);
@@ -46,6 +62,20 @@ const Members = ({ data }: { data: Member[] }) => {
             />
           </Tooltip>
         ))}
+
+      {nonMembers && (
+        <Flex
+          alignItems="center"
+          justifyContent="center"
+          boxSize={24}
+          m={2}
+          borderRadius="full"
+          bgColor={nonMembersBgColor}
+          color={nonMembersColor}
+        >
+          <Text fontSize="lg">+{nonMembers}</Text>
+        </Flex>
+      )}
     </Flex>
   );
 };
