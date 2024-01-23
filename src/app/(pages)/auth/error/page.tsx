@@ -2,6 +2,7 @@
 
 import NextLink from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import {
   Box,
   Button,
@@ -10,6 +11,7 @@ import {
   Flex,
   Heading,
   Icon,
+  Spinner,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -49,7 +51,7 @@ const ERRORS = {
 };
 const DEFAULT_ERROR: Error = "AccessDenied";
 
-const Page = () => {
+const Content = () => {
   const searchParams = useSearchParams();
   const error = searchParams.get("error") as Error | null;
 
@@ -108,5 +110,11 @@ const Page = () => {
     </AuthBody>
   );
 };
+
+const Page = () => (
+  <Suspense fallback={<Spinner size="xl" />}>
+    <Content />
+  </Suspense>
+);
 
 export default Page;

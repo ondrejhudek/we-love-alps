@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { Suspense } from "react";
 import {
   Alert,
   AlertIcon,
@@ -11,6 +12,7 @@ import {
   CardBody,
   Flex,
   Heading,
+  Spinner,
 } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
 
@@ -34,7 +36,7 @@ const ERRORS = {
   Default: "Unable to sign in.",
 };
 
-const Page = () => {
+const Content = () => {
   const searchParams = useSearchParams();
   const error = searchParams.get("error") as keyof typeof ERRORS | null;
   const callbackUrl = searchParams.get("callbackUrl") ?? "/admin";
@@ -82,5 +84,11 @@ const Page = () => {
     </AuthBody>
   );
 };
+
+const Page = () => (
+  <Suspense fallback={<Spinner size="xl" />}>
+    <Content />
+  </Suspense>
+);
 
 export default Page;

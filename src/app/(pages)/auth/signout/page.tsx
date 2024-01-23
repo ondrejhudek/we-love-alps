@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { signOut } from "next-auth/react";
+import { Suspense } from "react";
 import {
   Box,
   Button,
@@ -9,6 +10,7 @@ import {
   CardBody,
   Flex,
   Heading,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
 import { HiOutlineArrowRightOnRectangle } from "react-icons/hi2";
@@ -16,7 +18,7 @@ import { HiOutlineArrowRightOnRectangle } from "react-icons/hi2";
 import { AuthBody } from "@/app/components/Body";
 import Logo from "@/app/components/Logo";
 
-const Page = () => {
+const Content = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") ?? "/";
 
@@ -55,5 +57,11 @@ const Page = () => {
     </AuthBody>
   );
 };
+
+const Page = () => (
+  <Suspense fallback={<Spinner size="xl" />}>
+    <Content />
+  </Suspense>
+);
 
 export default Page;
