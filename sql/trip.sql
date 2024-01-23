@@ -68,8 +68,8 @@ VALUES (
         NULL,
         NULL,
         ARRAY ['aprica'],
-        ARRAY ['hudy','jarin','stuchla','majki','era','kopy','lena','tomas','lucka','mara'],
-        4
+        ARRAY ['hudy','jarin','stuchla','majki','era','kopy','lena','tomas','lucka','mara','vobo','toupy'],
+        2
     ),
     (
         '2015-les-sybelles',
@@ -84,6 +84,18 @@ VALUES (
         6
     ),
     (
+        '2015-passo-del-tonale',
+        'Passo del Tonale',
+        'IT',
+        2015,
+        3,
+        NULL,
+        NULL,
+        ARRAY ['tonale'],
+        ARRAY ['lenka','lucka','era','vobo','toupy'],
+        2
+    ),
+    (
         '2016-zell-am-see',
         'Zell am See',
         'AT',
@@ -96,14 +108,14 @@ VALUES (
         0
     ),
     (
-        '2017-ponte-di-legno',
-        'Ponte di Legno',
+        '2017-sella-ronda',
+        'Sella Ronda',
         'IT',
         2017,
-        3,
+        2,
         NULL,
         NULL,
-        ARRAY ['tonale'],
+        ARRAY ['sella'],
         ARRAY ['stuchla','janca','era','pavel','lena','lucka','jarda','junior1','zahrada'],
         0
     ),

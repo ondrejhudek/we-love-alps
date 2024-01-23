@@ -241,4 +241,24 @@ VALUES (
         '{ }',
         '{ }',
         ARRAY ['lyže']
+    ),
+    (
+        'vobo',
+        'Tomáš Voborník',
+        'tomas.vobornik.3',
+        'vobotom',
+        '',
+        '{ }',
+        '{ }',
+        ARRAY ['snowboard']
+    ),
+(
+        'toupy',
+        'Ondřej Ťoupal',
+        'ondrej.toupal',
+        'toupis06',
+        '',
+        '{ }',
+        '{ }',
+        ARRAY ['lyže']
     );
