@@ -18,7 +18,7 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
 
   return (
     <>
-      <Header label={data.title} />
+      <Header label={data.title} badge={`${images.length} fotek`} />
       <Photoalbum images={images} />
     </>
   );

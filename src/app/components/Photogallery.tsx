@@ -12,18 +12,32 @@ import {
 import { GalleryThumbnailImage } from "@/app/components/Image";
 import { GalleryFolderProps, ImageProps } from "@/app/cloudinary/types";
 import { Trip } from "@/app/utils/types";
-// import { PHOTO_CS } from "@/app/utils/locales";
+import { PHOTO_CS } from "@/app/utils/locales";
+
+const GALLERY_SIZES: Record<string, number> = {
+  "gallery/2023-passo-del-tonale": 15,
+  "gallery/2022-kitzbuhel": 3,
+  "gallery/2020-schladming": 2,
+  "gallery/2019-kronplatz": 17,
+  "gallery/2018-solden": 13,
+  "gallery/2017-sella-ronda": 19,
+  "gallery/2016-zell-am-see": 27,
+  "gallery/2015-passo-del-tonale": 8,
+  "gallery/2015-les-sybelles": 1,
+  "gallery/2013-aprica": 36,
+  "gallery/2011-tauplitz": 11,
+  "gallery/2009-ponte-di-legno": 13,
+  "gallery/2008-lienz": 5,
+};
 
 const GalleryFolder = ({
-  path,
   thumbnail,
-  // total,
+  total,
   trip,
   onClick,
 }: {
-  path: string;
   thumbnail?: ImageProps;
-  // total: number;
+  total: number;
   trip: Trip;
   onClick: (id: string) => void;
 }) => {
@@ -57,12 +71,9 @@ const GalleryFolder = ({
           {trip.title}
         </Heading>
         {/* Year & photo count */}
-        {/* <Text color={subtitleColor} fontSize="xs">
+        <Text color={subtitleColor} fontSize="xs">
           {trip.year}&nbsp;&nbsp;·&nbsp;&nbsp;{total}{" "}
           {PHOTO_CS[total] || PHOTO_CS[5]}
-        </Text> */}
-        <Text color={subtitleColor} fontSize="xs">
-          {trip.year}
         </Text>
       </Box>
     </Box>
@@ -95,9 +106,8 @@ const Gallery = ({
           return (
             <GalleryFolder
               key={path}
-              path={path}
               trip={trip}
-              // total={total_count}
+              total={GALLERY_SIZES[path]}
               thumbnail={thumbnailImage}
               onClick={handleClick}
             />
