@@ -1543,6 +1543,11 @@
     utf-8-validate "6.0.3"
     ws "8.14.2"
 
+"@vercel/speed-insights@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@vercel/speed-insights/-/speed-insights-1.0.7.tgz#f258b6021e862a318279b9c0c609dd18c2d15dc3"
+  integrity sha512-1XYZO/OlrAco8QPoXXIOPoMrj0O+slB9k6poRo1drQJ+DWTbdUUT18Mtm4ybA8KMj4mGEMEgbw0BKR/yq/VPhA==
+
 "@zag-js/dom-query@0.16.0":
   version "0.16.0"
   resolved "https://registry.npmjs.org/@zag-js/dom-query/-/dom-query-0.16.0.tgz"

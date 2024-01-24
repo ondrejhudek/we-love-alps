@@ -1,6 +1,7 @@
-import type { PropsWithChildren } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { Ubuntu } from "next/font/google";
+import type { PropsWithChildren } from "react";
 
 import AnalyticsWrapper from "@/app/components/Analytics";
 import Body from "@/app/components/Body";
@@ -33,6 +34,7 @@ const RootLayout = ({ children }: PropsWithChildren) => (
   <html lang="en" className={`${ubuntu.variable}`}>
     <body>
       <Body>{children}</Body>
+      <SpeedInsights />
     </body>
     <AnalyticsWrapper />
   </html>
