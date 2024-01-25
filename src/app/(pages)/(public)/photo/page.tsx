@@ -17,7 +17,9 @@ const Page = async () => {
   const tripsWithPhotos = tripsData
     .filter((trip) =>
       folders.find(
-        (folder) => folder.replace(/.*\/(\d{4}-[\w-]+)\/$/, "$1") === trip.id
+        (folder) =>
+          folder.substring(folder.indexOf("/") + 1, folder.lastIndexOf("/")) ===
+          trip.id
       )
     )
     .sort((a, b) => b.year - a.year);
