@@ -8,6 +8,12 @@ const nextConfig = {
         port: "",
         pathname: "/ddnasijv8/**",
       },
+      {
+        protocol: "https",
+        hostname: "laicmrkbwfhogqcl.public.blob.vercel-storage.com",
+        port: "",
+        pathname: "**",
+      },
     ],
     minimumCacheTTL: 3600, // 1 hour
   },

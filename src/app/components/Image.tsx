@@ -13,6 +13,9 @@ import { getBlurredUrl } from "@/app/cloudinary/generateBlurPlaceholder";
 import { ImageProps } from "@/app/cloudinary/types";
 import { COUNTRIES } from "@/app/utils/locales";
 
+const VERCEL_BLOB_URL =
+  "https://laicmrkbwfhogqcl.public.blob.vercel-storage.com";
+
 export const FlagImage = ({
   countryCode,
   boxSize = 20,
@@ -23,33 +26,18 @@ export const FlagImage = ({
   boxSize?: number;
   ml?: number;
   mr?: number;
-}) => {
-  const publicId = `flags/${countryCode.toLowerCase()}`;
-  const urlBlurred = getBlurredUrl(
-    publicId,
-    "w_20,h_20,r_20,e_blur:1000,q_auto,f_webp"
-  );
-
-  return (
-    <Box
-      boxSize={`${boxSize}px`}
-      ml={ml}
-      mr={mr}
-      bgImage={`url(${urlBlurred})`}
-      bgPosition="center"
-      bgSize="contain"
-    >
-      <CldImage
-        src={publicId}
-        alt={countryCode}
-        title={COUNTRIES[countryCode]}
-        width={64}
-        height={64}
-        quality={100}
-      />
-    </Box>
-  );
-};
+}) => (
+  <Box boxSize={`${boxSize}px`} ml={ml} mr={mr}>
+    <Image
+      src={`${VERCEL_BLOB_URL}/flags/${countryCode.toLowerCase()}.png`}
+      alt={countryCode}
+      title={COUNTRIES[countryCode]}
+      width={64}
+      height={64}
+      quality={100}
+    />
+  </Box>
+);
 
 export const AvatarImage = ({
   id,
@@ -58,32 +46,17 @@ export const AvatarImage = ({
 }: {
   id: string;
   name: string;
-} & BoxProps) => {
-  const publicId = `members/${id}`;
-  const urlBlurred = getBlurredUrl(
-    publicId,
-    "w_100,h_100,e_blur:1000,q_auto,f_webp"
-  );
-
-  return (
-    <Box
-      borderRadius="full"
-      overflow="hidden"
-      bgImage={`url(${urlBlurred})`}
-      bgPosition="center"
-      bgSize="contain"
-      {...boxRest}
-    >
-      <CldImage
-        src={publicId}
-        alt={name}
-        width={150}
-        height={150}
-        quality={100}
-      />
-    </Box>
-  );
-};
+} & BoxProps) => (
+  <Box borderRadius="full" overflow="hidden" {...boxRest}>
+    <Image
+      src={`${VERCEL_BLOB_URL}/members/${id}.jpg`}
+      alt={name}
+      width={150}
+      height={150}
+      quality={100}
+    />
+  </Box>
+);
 
 export const ResortImage = ({
   id,
