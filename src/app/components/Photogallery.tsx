@@ -15,30 +15,32 @@ import { Trip } from "@/app/utils/types";
 import { PHOTO_CS } from "@/app/utils/locales";
 
 const GALLERY_SIZES: Record<string, number> = {
-  "gallery/2023-passo-del-tonale": 15,
-  "gallery/2022-kitzbuhel": 3,
-  "gallery/2020-schladming": 2,
-  "gallery/2019-kronplatz": 17,
-  "gallery/2018-solden": 13,
-  "gallery/2017-sella-ronda": 19,
-  "gallery/2016-zell-am-see": 27,
-  "gallery/2015-passo-del-tonale": 8,
-  "gallery/2015-les-sybelles": 1,
-  "gallery/2013-aprica": 36,
-  "gallery/2011-tauplitz": 11,
-  "gallery/2009-ponte-di-legno": 13,
-  "gallery/2008-lienz": 5,
+  "2023-passo-del-tonale": 15,
+  "2022-kitzbuhel": 3,
+  "2020-schladming": 2,
+  "2019-kronplatz": 17,
+  "2018-solden": 13,
+  "2017-sella-ronda": 19,
+  "2016-zell-am-see": 27,
+  "2015-passo-del-tonale": 8,
+  "2015-les-sybelles": 1,
+  "2013-aprica": 36,
+  "2011-tauplitz": 11,
+  "2009-ponte-di-legno": 13,
+  "2008-lienz": 5,
 };
 
 const GalleryFolder = ({
-  thumbnail,
+  id,
+  title,
+  year,
   total,
-  trip,
   onClick,
 }: {
-  thumbnail?: ImageProps;
+  id: string;
+  title: string;
+  year: number;
   total: number;
-  trip: Trip;
   onClick: (id: string) => void;
 }) => {
   const subtitleColor = useColorModeValue("gray.600", "gray.400");
@@ -49,30 +51,30 @@ const GalleryFolder = ({
       _hover={{
         cursor: "pointer",
       }}
-      onClick={() => onClick(trip.id)}
+      onClick={() => onClick(id)}
     >
       {/* Album thumbnail */}
-      {thumbnail && (
-        <Box
-          borderRadius={16}
-          boxShadow="base"
-          overflow="hidden"
-          _groupHover={{
-            boxShadow: "outline",
-          }}
-        >
-          <GalleryThumbnailImage alt={trip.title} image={thumbnail} />
-        </Box>
-      )}
+      <Box
+        position="relative"
+        height={220}
+        borderRadius={16}
+        boxShadow="base"
+        overflow="hidden"
+        _groupHover={{
+          boxShadow: "outline",
+        }}
+      >
+        <GalleryThumbnailImage filename={`${id}/img_1`} />
+      </Box>
 
       <Box py={3}>
         {/* Title */}
         <Heading as="h2" display="flex" alignItems="baseline" fontSize="lg">
-          {trip.title}
+          {title}
         </Heading>
         {/* Year & photo count */}
         <Text color={subtitleColor} fontSize="xs">
-          {trip.year}&nbsp;&nbsp;·&nbsp;&nbsp;{total}{" "}
+          {year}&nbsp;&nbsp;·&nbsp;&nbsp;{total}{" "}
           {PHOTO_CS[total] || PHOTO_CS[5]}
         </Text>
       </Box>
@@ -80,13 +82,7 @@ const GalleryFolder = ({
   );
 };
 
-const Gallery = ({
-  folders,
-  tripsData,
-}: {
-  folders: GalleryFolderProps[];
-  tripsData: Trip[];
-}) => {
+const Gallery = ({ tripsData }: { tripsData: Trip[] }) => {
   const router = useRouter();
 
   const handleClick = (id: string) => {
@@ -99,20 +95,16 @@ const Gallery = ({
         columns={{ base: 1, xs: 2, sm: 3, md: 4 }}
         spacing={{ base: 3, sm: 4, lg: 5 }}
       >
-        {folders.map(({ path, thumbnailImage }) => {
-          const trip = tripsData.find(({ id }) => `gallery/${id}` === path);
-          if (!trip) return null;
-
-          return (
-            <GalleryFolder
-              key={path}
-              trip={trip}
-              total={GALLERY_SIZES[path]}
-              thumbnail={thumbnailImage}
-              onClick={handleClick}
-            />
-          );
-        })}
+        {tripsData.map(({ id, title, year }) => (
+          <GalleryFolder
+            key={id}
+            id={id}
+            title={title}
+            year={year}
+            total={GALLERY_SIZES[id]}
+            onClick={handleClick}
+          />
+        ))}
       </SimpleGrid>
     </>
   );

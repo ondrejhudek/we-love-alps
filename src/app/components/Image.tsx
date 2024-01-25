@@ -103,24 +103,16 @@ export const ResortImage = ({
   );
 };
 
-export const GalleryThumbnailImage = ({
-  alt,
-  image,
-}: {
-  alt: string;
-  image: ImageProps;
-}) => (
-  <CldImage
-    src={image.public_id}
-    alt={alt}
-    width={480}
-    height={360}
+export const GalleryThumbnailImage = ({ filename }: { filename: string }) => (
+  <Image
+    src={`${VERCEL_BLOB_URL}/photogallery/${filename}.jpg`}
+    alt={filename}
+    fill
     sizes="(max-width: 22em) 50vw, (max-width: 30em) 50vw, (max-width: 48em) 33vw, 25vw"
-    crop="fill"
-    gravity="center"
     priority
-    placeholder="blur"
-    blurDataURL={image.blurDataUrl}
+    style={{
+      objectFit: "cover",
+    }}
   />
 );
 
