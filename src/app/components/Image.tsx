@@ -9,7 +9,6 @@ import {
 import type { RenderPhotoProps } from "react-photo-album";
 import { Box, BoxProps, useColorModeValue } from "@chakra-ui/react";
 
-import { getBlurredUrl } from "@/app/cloudinary/generateBlurPlaceholder";
 import { ImageProps } from "@/app/cloudinary/types";
 import { COUNTRIES } from "@/app/utils/locales";
 
@@ -69,11 +68,6 @@ export const ResortImage = ({
   asAvatar?: boolean;
 } & BoxProps) => {
   const resortBgColor = useColorModeValue("gray.100", "gray.800");
-  const publicId = `resorts/${id}`;
-  const urlBlurred = getBlurredUrl(
-    publicId,
-    "w_100,h_100,e_blur:1000,q_auto,f_webp"
-  );
 
   const AS_AVATAR_PROPS: BoxProps = {
     m: 2,
@@ -94,15 +88,12 @@ export const ResortImage = ({
     <Box
       position="relative"
       overflow="hidden"
-      bgImage={`url(${urlBlurred})`}
-      bgPosition="center"
-      bgSize="contain"
       {...(asAvatar && AS_AVATAR_PROPS)}
       {...(boxRest.onClick && ON_CLICK_PROPS)}
       {...boxRest}
     >
-      <CldImage
-        src={publicId}
+      <Image
+        src={`${VERCEL_BLOB_URL}/resorts/${id}.png`}
         alt={name}
         width={260}
         height={260}
