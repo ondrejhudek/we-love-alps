@@ -1,7 +1,7 @@
 "use client";
 
-import { memo } from "react";
-import { useRouter } from "next/navigation";
+import { memo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   AspectRatio,
   Box,
@@ -9,6 +9,7 @@ import {
   CardFooter,
   Flex,
   Heading,
+  Select,
   SimpleGrid,
   Skeleton,
   Text,
@@ -19,6 +20,7 @@ import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import Header from "@/app/components/Header";
 import { FlagImage, ResortImage } from "@/app/components/Image";
 import { Resort } from "@/app/utils/types";
+import { COUNTRIES } from "@/app/utils/locales";
 
 const ZOOM: number = 13;
 const OPTIONS: google.maps.MapOptions = {
@@ -55,21 +57,53 @@ MapComponent.displayName = "MapComponent";
 
 const View = ({ data }: { data: Resort[] }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const countryCode = searchParams.get("countryCode");
+  const [selectedCountryCode, setSelectedCountryCode] = useState(
+    countryCode ?? ""
+  );
+
+  const filteredData =
+    countryCode && Object.keys(COUNTRIES).includes(countryCode)
+      ? data.filter(({ country_code }) => country_code === countryCode)
+      : data;
+
   const regionColor = useColorModeValue("gray.400", "gray.500");
 
   const handleClick = (id: string) => {
     router.push(`/resort/${id}`);
   };
 
+  const handleSelect = (value: string) => {
+    router.push(`/resort?countryCode=${value}`);
+    setSelectedCountryCode(value);
+  };
+
   return (
     <>
-      <Header />
+      <Header
+        rightComponent={
+          <Select
+            size="sm"
+            placeholder="Vyber zemi"
+            borderRadius={6}
+            value={selectedCountryCode}
+            onChange={(e) => handleSelect(e.target.value)}
+          >
+            {Object.entries(COUNTRIES).map(([key, value]) => (
+              <option key={key} value={key}>
+                {value}
+              </option>
+            ))}
+          </Select>
+        }
+      />
 
       <SimpleGrid
         columns={{ base: 1, sm: 2, md: 3 }}
         spacing={{ base: 3, sm: 4, lg: 5 }}
       >
-        {data.map(({ id, name, region, country_code, lat_lng }) => (
+        {filteredData.map(({ id, name, region, country_code, lat_lng }) => (
           <Card
             key={id}
             borderRadius={16}

@@ -16,7 +16,7 @@ const MostCountries = ({ trips }: { trips: Trip[] }) => {
   const top3Countries = countBy((trip) => trip.country_code, trips);
 
   const handleClick = (countryCode: string) => {
-    router.push(`/resort?country_code=${countryCode}`);
+    router.push(`/resort?countryCode=${countryCode}`);
   };
 
   return (

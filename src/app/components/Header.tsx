@@ -9,7 +9,15 @@ import Breadcrump from "./Breadcrumb";
 
 const NOT_FOUND = "Nenalezeno";
 
-const Header = ({ label, badge }: { label?: string; badge?: string }) => {
+const Header = ({
+  label,
+  badge,
+  rightComponent,
+}: {
+  label?: string;
+  badge?: string;
+  rightComponent?: React.ReactNode;
+}) => {
   const pathname = usePathname();
   const segments = pathname
     .split("/")
@@ -29,6 +37,9 @@ const Header = ({ label, badge }: { label?: string; badge?: string }) => {
       <Flex alignItems="center" mt={1} mb={{ base: 2, sm: 4, md: 6 }}>
         <Heading as="h1">{links[links.length - 1].label}</Heading>
         {badge && <Badge ml={2.5}>{badge}</Badge>}
+
+        {/* Right component */}
+        {rightComponent && <Flex ml="auto">{rightComponent}</Flex>}
       </Flex>
     </>
   );
