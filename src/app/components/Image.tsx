@@ -9,10 +9,16 @@ import {
 import type { RenderPhotoProps } from "react-photo-album";
 import { Box, BoxProps, useColorModeValue } from "@chakra-ui/react";
 
-import { getBlurredUrl } from "@/app/cloudinary/generateBlurPlaceholder";
 import { ImageProps } from "@/app/cloudinary/types";
 import { COUNTRIES } from "@/app/utils/locales";
 
+const VERCEL_BLOB_URL =
+  "https://laicmrkbwfhogqcl.public.blob.vercel-storage.com";
+
+/**
+ * Images of flags.
+ * Served from Vercel Blob Storage.
+ */
 export const FlagImage = ({
   countryCode,
   boxSize = 20,
@@ -23,34 +29,23 @@ export const FlagImage = ({
   boxSize?: number;
   ml?: number;
   mr?: number;
-}) => {
-  const publicId = `flags/${countryCode.toLowerCase()}`;
-  const urlBlurred = getBlurredUrl(
-    publicId,
-    "w_20,h_20,r_20,e_blur:1000,q_auto,f_webp"
-  );
+}) => (
+  <Box boxSize={`${boxSize}px`} ml={ml} mr={mr}>
+    <Image
+      src={`${VERCEL_BLOB_URL}/flags/${countryCode.toLowerCase()}.png`}
+      alt={countryCode}
+      title={COUNTRIES[countryCode]}
+      width={64}
+      height={64}
+      quality={100}
+    />
+  </Box>
+);
 
-  return (
-    <Box
-      boxSize={`${boxSize}px`}
-      ml={ml}
-      mr={mr}
-      bgImage={`url(${urlBlurred})`}
-      bgPosition="center"
-      bgSize="contain"
-    >
-      <CldImage
-        src={publicId}
-        alt={countryCode}
-        title={COUNTRIES[countryCode]}
-        width={64}
-        height={64}
-        quality={100}
-      />
-    </Box>
-  );
-};
-
+/**
+ * Images of member avatars.
+ * Served from Vercel Blob Storage.
+ */
 export const AvatarImage = ({
   id,
   name,
@@ -58,33 +53,22 @@ export const AvatarImage = ({
 }: {
   id: string;
   name: string;
-} & BoxProps) => {
-  const publicId = `members/${id}`;
-  const urlBlurred = getBlurredUrl(
-    publicId,
-    "w_100,h_100,e_blur:1000,q_auto,f_webp"
-  );
+} & BoxProps) => (
+  <Box borderRadius="full" overflow="hidden" {...boxRest}>
+    <Image
+      src={`${VERCEL_BLOB_URL}/members/${id}.jpg`}
+      alt={name}
+      width={150}
+      height={150}
+      quality={100}
+    />
+  </Box>
+);
 
-  return (
-    <Box
-      borderRadius="full"
-      overflow="hidden"
-      bgImage={`url(${urlBlurred})`}
-      bgPosition="center"
-      bgSize="contain"
-      {...boxRest}
-    >
-      <CldImage
-        src={publicId}
-        alt={name}
-        width={150}
-        height={150}
-        quality={100}
-      />
-    </Box>
-  );
-};
-
+/**
+ * Images of resort logos.
+ * Served from Vercel Blob Storage.
+ */
 export const ResortImage = ({
   id,
   name,
@@ -96,11 +80,6 @@ export const ResortImage = ({
   asAvatar?: boolean;
 } & BoxProps) => {
   const resortBgColor = useColorModeValue("gray.100", "gray.800");
-  const publicId = `resorts/${id}`;
-  const urlBlurred = getBlurredUrl(
-    publicId,
-    "w_100,h_100,e_blur:1000,q_auto,f_webp"
-  );
 
   const AS_AVATAR_PROPS: BoxProps = {
     m: 2,
@@ -121,15 +100,12 @@ export const ResortImage = ({
     <Box
       position="relative"
       overflow="hidden"
-      bgImage={`url(${urlBlurred})`}
-      bgPosition="center"
-      bgSize="contain"
       {...(asAvatar && AS_AVATAR_PROPS)}
       {...(boxRest.onClick && ON_CLICK_PROPS)}
       {...boxRest}
     >
-      <CldImage
-        src={publicId}
+      <Image
+        src={`${VERCEL_BLOB_URL}/resorts/${id}.png`}
         alt={name}
         width={260}
         height={260}
@@ -139,6 +115,11 @@ export const ResortImage = ({
   );
 };
 
+/**
+ * Images of photogallery thumbnails.
+ * Served from Cloudinary.
+ * TODO: Migrate to Vercel Blob Storage.
+ */
 export const GalleryThumbnailImage = ({
   alt,
   image,
@@ -160,6 +141,11 @@ export const GalleryThumbnailImage = ({
   />
 );
 
+/**
+ * Images of one photoalbum thumbnails.
+ * Served from Cloudinary.
+ * TODO: Migrate to Vercel Blob Storage.
+ */
 export const AlbumThumbnailImage: React.FC<
   RenderPhotoProps<ImageProps & { src: string }>
 > = ({ photo, imageProps: { onClick }, wrapperStyle, layout }) => (
@@ -185,6 +171,9 @@ export const AlbumThumbnailImage: React.FC<
   </Box>
 );
 
+/**
+ * Images for Lightbox.
+ */
 export const LightboxImage = ({
   slide,
   rect,
