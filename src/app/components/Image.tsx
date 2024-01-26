@@ -15,6 +15,10 @@ import { COUNTRIES } from "@/app/utils/locales";
 const VERCEL_BLOB_URL =
   "https://laicmrkbwfhogqcl.public.blob.vercel-storage.com";
 
+/**
+ * Images of flags.
+ * Served from Vercel Blob Storage.
+ */
 export const FlagImage = ({
   countryCode,
   boxSize = 20,
@@ -38,6 +42,10 @@ export const FlagImage = ({
   </Box>
 );
 
+/**
+ * Images of member avatars.
+ * Served from Vercel Blob Storage.
+ */
 export const AvatarImage = ({
   id,
   name,
@@ -57,6 +65,10 @@ export const AvatarImage = ({
   </Box>
 );
 
+/**
+ * Images of resort logos.
+ * Served from Vercel Blob Storage.
+ */
 export const ResortImage = ({
   id,
   name,
@@ -103,19 +115,37 @@ export const ResortImage = ({
   );
 };
 
-export const GalleryThumbnailImage = ({ filename }: { filename: string }) => (
-  <Image
-    src={`${VERCEL_BLOB_URL}/photogallery/${filename}.jpg`}
-    alt={filename}
-    fill
+/**
+ * Images of photogallery thumbnails.
+ * Served from Cloudinary.
+ * TODO: Migrate to Vercel Blob Storage.
+ */
+export const GalleryThumbnailImage = ({
+  alt,
+  image,
+}: {
+  alt: string;
+  image: ImageProps;
+}) => (
+  <CldImage
+    src={image.public_id}
+    alt={alt}
+    width={480}
+    height={360}
     sizes="(max-width: 22em) 50vw, (max-width: 30em) 50vw, (max-width: 48em) 33vw, 25vw"
+    crop="fill"
+    gravity="center"
     priority
-    style={{
-      objectFit: "cover",
-    }}
+    placeholder="blur"
+    blurDataURL={image.blurDataUrl}
   />
 );
 
+/**
+ * Images of one photoalbum thumbnails.
+ * Served from Cloudinary.
+ * TODO: Migrate to Vercel Blob Storage.
+ */
 export const AlbumThumbnailImage: React.FC<
   RenderPhotoProps<ImageProps & { src: string }>
 > = ({ photo, imageProps: { onClick }, wrapperStyle, layout }) => (
@@ -141,6 +171,9 @@ export const AlbumThumbnailImage: React.FC<
   </Box>
 );
 
+/**
+ * Images for Lightbox.
+ */
 export const LightboxImage = ({
   slide,
   rect,
