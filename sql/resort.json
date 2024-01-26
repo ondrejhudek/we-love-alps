@@ -1,0 +1,172 @@
+[
+  {
+    "id": "schladming",
+    "name": "Schladming Dachstein",
+    "country_code": "AT",
+    "region": "Štýrsko",
+    "lat_lng": {
+      "x": 47.39446003525241,
+      "y": 13.68755210680316
+    }
+  },
+  {
+    "id": "solden",
+    "name": "Sölden",
+    "country_code": "AT",
+    "region": "Tyrolsko",
+    "lat_lng": {
+      "x": 46.96557490011528,
+      "y": 11.007304944319257
+    }
+  },
+  {
+    "id": "aprica",
+    "name": "Aprica",
+    "country_code": "IT",
+    "region": "Lombardie",
+    "lat_lng": {
+      "x": 46.15400036668482,
+      "y": 10.15254442633989
+    }
+  },
+  {
+    "id": "kronplatz",
+    "name": "Kronplatz",
+    "country_code": "IT",
+    "region": "Jižní Tyrolsko",
+    "lat_lng": {
+      "x": 46.739746710818615,
+      "y": 11.95924947494885
+    }
+  },
+  {
+    "id": "tauplitzalm",
+    "name": "Tauplitzalm",
+    "country_code": "AT",
+    "region": "Štýrsko",
+    "lat_lng": {
+      "x": 47.59350337223156,
+      "y": 13.986149893645042
+    }
+  },
+  {
+    "id": "kitzbuhel",
+    "name": "Kitzbühel",
+    "country_code": "AT",
+    "region": "Savojsko",
+    "lat_lng": {
+      "x": 47.449156382653854,
+      "y": 12.394587487288598
+    }
+  },
+  {
+    "id": "brixen",
+    "name": "Brixen im Thale",
+    "country_code": "AT",
+    "region": "Tyrolsko",
+    "lat_lng": {
+      "x": 47.449666552350934,
+      "y": 12.25135407197131
+    }
+  },
+  {
+    "id": "lienz",
+    "name": "Lienz",
+    "country_code": "AT",
+    "region": "Východní Tyrolsko",
+    "lat_lng": {
+      "x": 46.827606426838436,
+      "y": 12.763454637413815
+    }
+  },
+  {
+    "id": "molltaler",
+    "name": "Mölltaler Gletscher",
+    "country_code": "AT",
+    "region": "Korutany",
+    "lat_lng": {
+      "x": 47.03848043270894,
+      "y": 13.00620333009706
+    }
+  },
+  {
+    "id": "saalbach",
+    "name": "Saalbach Hinterglemm",
+    "country_code": "AT",
+    "region": "Salcbursko",
+    "lat_lng": {
+      "x": 47.39195163095809,
+      "y": 12.640385839581585
+    }
+  },
+  {
+    "id": "grossglockner",
+    "name": "Grossglockner",
+    "country_code": "AT",
+    "region": "Východní Tyrolsko",
+    "lat_lng": {
+      "x": 47.040451770634554,
+      "y": 12.840869655058114
+    }
+  },
+  {
+    "id": "tonale",
+    "name": "Tonale Ponte di Legno",
+    "country_code": "IT",
+    "region": "Val di Sole",
+    "lat_lng": {
+      "x": 46.26029175099372,
+      "y": 10.587155167030668
+    }
+  },
+  {
+    "id": "les-sybelles",
+    "name": "Les Sybellles",
+    "country_code": "FR",
+    "region": "Savojsko",
+    "lat_lng": {
+      "x": 45.22070289749466,
+      "y": 6.219960892528522
+    }
+  },
+  {
+    "id": "schmitten",
+    "name": "Zell am See - Schmitten",
+    "country_code": "AT",
+    "region": "Salcbursko",
+    "lat_lng": {
+      "x": 47.32859045694457,
+      "y": 12.782863077375179
+    }
+  },
+  {
+    "id": "kitzsteinhorn",
+    "name": "Kaprun - Kitzsteinhorn",
+    "country_code": "AT",
+    "region": "Salcbursko",
+    "lat_lng": {
+      "x": 47.22953175680364,
+      "y": 12.726047925978369
+    }
+  },
+  {
+    "id": "dachstein",
+    "name": "Dachstein West",
+    "country_code": "AT",
+    "region": "Horní Rakousko",
+    "lat_lng": {
+      "x": 47.56557997434476,
+      "y": 13.498129198240154
+    }
+  },
+  {
+    "id": "sella",
+    "name": "Sella Ronda",
+    "country_code": "IT",
+    "region": "Jižní Tyrolsko",
+    "lat_lng": {
+      "x": 46.576487871328276,
+      "y": 11.671212392936976
+    }
+  }
+]
