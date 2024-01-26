@@ -13,8 +13,9 @@
 
 ### Storage
 
-- PostgreSQL
-- Cloudinary
+- Vercel PostgreSQL
+- Vercel Blob (flags, members, resorts)
+- Cloudinary (photogallery)
 
 ### Libraries
 
@@ -24,7 +25,7 @@
 - Ramda
 - Kysely
 
-### Deployment
+### Deployment and Hosting
 
 - Vercel
 
