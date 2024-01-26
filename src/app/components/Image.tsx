@@ -1,5 +1,4 @@
 import Image, { StaticImageData } from "next/image";
-import { CldImage } from "next-cloudinary";
 import { SlideImage, ContainerRect } from "yet-another-react-lightbox";
 import {
   isImageFitCover,
@@ -9,7 +8,6 @@ import {
 import type { RenderPhotoProps } from "react-photo-album";
 import { Box, BoxProps, useColorModeValue } from "@chakra-ui/react";
 
-import { ImageProps } from "@/app/cloudinary/types";
 import { COUNTRIES } from "@/app/utils/locales";
 
 const VERCEL_BLOB_URL =
@@ -116,26 +114,26 @@ export const GalleryThumbnailImage = ({ filename }: { filename: string }) => (
   />
 );
 
-export const AlbumThumbnailImage: React.FC<
-  RenderPhotoProps<ImageProps & { src: string }>
-> = ({ photo, imageProps: { onClick }, wrapperStyle, layout }) => (
+export const AlbumThumbnailImage: React.FC<RenderPhotoProps> = ({
+  photo,
+  imageProps: { onClick },
+  wrapperStyle,
+  layout,
+}) => (
   <Box
-    key={photo.public_id}
+    key={photo.src}
+    position="relative"
     style={{ ...wrapperStyle, cursor: "zoom-in" }}
     _hover={{
       opacity: "0.85",
     }}
   >
-    <CldImage
-      src={photo.public_id}
-      alt={photo.public_id}
-      width={Math.ceil(layout.width)}
-      height={Math.ceil(layout.height)}
-      crop="fill"
-      gravity="center"
+    <Image
+      src={photo.src}
+      alt={photo.alt ?? photo.src}
+      fill
+      sizes="100vw"
       priority
-      placeholder="blur"
-      blurDataURL={photo.blurDataUrl}
       onClick={onClick}
     />
   </Box>

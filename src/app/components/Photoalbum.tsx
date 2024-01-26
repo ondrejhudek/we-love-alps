@@ -3,17 +3,21 @@
 import { useState } from "react";
 import { Card, CardBody } from "@chakra-ui/react";
 import PhotoAlbum from "react-photo-album";
+import type { PhotoAlbumProps } from "react-photo-album";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
 import Alert from "@/app/components/Alert";
 import { AlbumThumbnailImage, LightboxImage } from "@/app/components/Image";
-import { ImageProps } from "@/app/cloudinary/types";
+import { Blob } from "@/app/utils/types";
 
-export const PhotoalbumImages = ({ images }: { images: ImageProps[] }) => {
-  const photos = images.map((image) => ({
-    ...image,
-    src: image.url,
+export const PhotoalbumImages = ({ images }: { images: Blob[] }) => {
+  const photos: PhotoAlbumProps["photos"] = images.map(({ url, pathname }) => ({
+    key: pathname,
+    src: url,
+    alt: pathname,
+    width: 640, // TODO: use real width
+    height: 480, // TODO: use real height
   }));
 
   const [index, setIndex] = useState(-1);
@@ -25,7 +29,7 @@ export const PhotoalbumImages = ({ images }: { images: ImageProps[] }) => {
         layout="rows"
         spacing={5}
         rowConstraints={{
-          singleRowMaxHeight: 200,
+          singleRowMaxHeight: 100,
         }}
         photos={photos}
         renderPhoto={AlbumThumbnailImage}
@@ -43,7 +47,7 @@ export const PhotoalbumImages = ({ images }: { images: ImageProps[] }) => {
   );
 };
 
-const Photoalbum = ({ images }: { images: ImageProps[] }) => {
+const Photoalbum = ({ images }: { images: Blob[] }) => {
   if (!images.length)
     return (
       <Alert

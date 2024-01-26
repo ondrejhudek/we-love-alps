@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 
 import { GalleryThumbnailImage } from "@/app/components/Image";
-import { GalleryFolderProps, ImageProps } from "@/app/cloudinary/types";
 import { Trip } from "@/app/utils/types";
 import { PHOTO_CS } from "@/app/utils/locales";
 
