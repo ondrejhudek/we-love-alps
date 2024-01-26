@@ -43,3 +43,10 @@ export interface OrderBy {
 }
 
 export type TableNameWithPhoto = TableName | "photo";
+
+export interface Blob {
+  url: string;
+  pathname: string;
+  size: number;
+  uploadedAt: Date;
+}
