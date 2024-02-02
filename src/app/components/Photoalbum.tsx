@@ -5,15 +5,35 @@ import { Card, CardBody } from "@chakra-ui/react";
 import PhotoAlbum from "react-photo-album";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 import Alert from "@/app/components/Alert";
-import { AlbumThumbnailImage, LightboxImage } from "@/app/components/Image";
+import { AlbumThumbnailImage } from "@/app/components/Image";
 import { ImageProps } from "@/app/cloudinary/types";
+
+const IMAGE_SIZES = [16, 32, 48, 64, 96, 128, 256, 384];
+const DEVICE_SIZES = [640, 750, 828, 1080, 1200, 1920, 2048, 3840];
+
+const nextImageUrl = (src: string, size: number) =>
+  `/_next/image?url=${encodeURIComponent(src)}&w=${size}&q=75`;
 
 export const PhotoalbumImages = ({ images }: { images: ImageProps[] }) => {
   const photos = images.map((image) => ({
     ...image,
     src: image.url,
+  }));
+
+  const slides = photos.map(({ src, width, height }) => ({
+    width,
+    height,
+    src: nextImageUrl(src, width),
+    srcSet: IMAGE_SIZES.concat(...DEVICE_SIZES)
+      .filter((size) => size <= width)
+      .map((size) => ({
+        src: nextImageUrl(src, size),
+        width: size,
+        height: Math.round((height / width) * size),
+      })),
   }));
 
   const [index, setIndex] = useState(-1);
@@ -34,10 +54,13 @@ export const PhotoalbumImages = ({ images }: { images: ImageProps[] }) => {
 
       <Lightbox
         index={index}
-        slides={photos}
-        render={{ slide: LightboxImage }}
+        slides={slides}
         open={index >= 0}
         close={() => setIndex(-1)}
+        plugins={[Zoom]}
+        zoom={{
+          scrollToZoom: true,
+        }}
       />
     </>
   );
