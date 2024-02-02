@@ -114,6 +114,36 @@ export const GalleryThumbnailImage = ({ filename }: { filename: string }) => (
   />
 );
 
+export const AlbumImage = ({
+  src,
+  pathname,
+  onClick,
+}: {
+  src: string;
+  pathname: string;
+  onClick: () => void;
+}) => (
+  <Box
+    width={240}
+    height={180}
+    position="relative"
+    _hover={{
+      cursor: "zoom-in",
+      boxShadow: "outline",
+    }}
+    onClick={onClick}
+  >
+    <Image
+      src={src}
+      alt={pathname}
+      fill
+      style={{
+        objectFit: "cover",
+      }}
+    />
+  </Box>
+);
+
 export const AlbumThumbnailImage: React.FC<RenderPhotoProps> = ({
   photo,
   imageProps: { onClick },

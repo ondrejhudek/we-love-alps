@@ -1,3 +1,4 @@
+import { list } from "@vercel/blob";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
@@ -9,7 +10,6 @@ import Photos from "@/app/components/Photos";
 import Resorts, { ResortsLoading } from "@/app/components/Resorts";
 import VideoComponent from "@/app/components/Video";
 import DocumentsByValues from "@/app/components/data/DocumentsByValues";
-import { getImages } from "@/app/cloudinary/service";
 import { getRowByValue } from "@/app/utils/database";
 import { Member, Resort, Trip, Video } from "@/app/utils/types";
 
@@ -20,7 +20,10 @@ const Content = async ({ id }: { id: string }) => {
     notFound();
   }
 
-  const photos = await getImages(id);
+  const { blobs } = await list({
+    prefix: `photogallery/${id}`,
+    limit: 5,
+  });
 
   return (
     <>
@@ -61,7 +64,7 @@ const Content = async ({ id }: { id: string }) => {
       </Container>
 
       {/* Photo */}
-      <Photos id={id} images={photos} />
+      <Photos id={id} images={blobs} />
 
       {/* Video */}
       <DocumentsByValues<Video>
