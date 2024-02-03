@@ -1,0 +1,233 @@
+[
+  {
+    "id": 1,
+    "trip_id": "2019-kronplatz",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "24.15",
+    "runs": 10,
+    "max_speed_km_h": "147.8",
+    "garmin_id": "3423334190",
+    "date": "2019-02-28"
+  },
+  {
+    "id": 2,
+    "trip_id": "2019-kronplatz",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "40.75",
+    "runs": 12,
+    "max_speed_km_h": "158.4",
+    "garmin_id": "3425814316",
+    "date": "2019-03-01"
+  },
+  {
+    "id": 3,
+    "trip_id": "2019-kronplatz",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "35.75",
+    "runs": 16,
+    "max_speed_km_h": "78.6",
+    "garmin_id": "3428672110",
+    "date": "2019-03-02"
+  },
+  {
+    "id": 4,
+    "trip_id": "2020-schladming",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "8.57",
+    "runs": 5,
+    "max_speed_km_h": "55.3",
+    "garmin_id": "4530693687",
+    "date": "2020-02-09"
+  },
+  {
+    "id": 5,
+    "trip_id": "2020-schladming",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "24.09",
+    "runs": 13,
+    "max_speed_km_h": "64.7",
+    "garmin_id": "4532138797",
+    "date": "2020-02-09"
+  },
+  {
+    "id": 6,
+    "trip_id": "2020-schladming",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "29.76",
+    "runs": 15,
+    "max_speed_km_h": "46.9",
+    "garmin_id": "4534810857",
+    "date": "2020-02-10"
+  },
+  {
+    "id": 7,
+    "trip_id": "2020-schladming",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "23.86",
+    "runs": 12,
+    "max_speed_km_h": "46.9",
+    "garmin_id": "4538591255",
+    "date": "2020-02-11"
+  },
+  {
+    "id": 8,
+    "trip_id": "2020-schladming",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "24.76",
+    "runs": 14,
+    "max_speed_km_h": "69.7",
+    "garmin_id": "4541915521",
+    "date": "2020-02-12"
+  },
+  {
+    "id": 9,
+    "trip_id": "2020-zell-am-see",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "29.27",
+    "runs": 14,
+    "max_speed_km_h": "60.7",
+    "garmin_id": "4603896067",
+    "date": "2020-02-29"
+  },
+  {
+    "id": 10,
+    "trip_id": "2020-zell-am-see",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "28.74",
+    "runs": 17,
+    "max_speed_km_h": "61.8",
+    "garmin_id": "4607957978",
+    "date": "2020-03-01"
+  },
+  {
+    "id": 11,
+    "trip_id": "2020-zell-am-see",
+    "member_id": "hudy",
+    "type": "ski",
+    "distance_km": "26.80",
+    "runs": 16,
+    "max_speed_km_h": "97.3",
+    "garmin_id": "4611067206",
+    "date": "2020-03-02"
+  },
+  {
+    "id": 12,
+    "trip_id": "2022-kitzbuhel",
+    "member_id": "hudy",
+    "type": "ski",
+    "distance_km": "45.12",
+    "runs": 18,
+    "max_speed_km_h": "58.4",
+    "garmin_id": "8265925042",
+    "date": "2022-02-09"
+  },
+  {
+    "id": 13,
+    "trip_id": "2022-kitzbuhel",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "37.44",
+    "runs": 21,
+    "max_speed_km_h": "52.3",
+    "garmin_id": "8271881343",
+    "date": "2022-02-10"
+  },
+  {
+    "id": 14,
+    "trip_id": "2022-kitzbuhel",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "38.02",
+    "runs": 18,
+    "max_speed_km_h": "64.6",
+    "garmin_id": "8277842345",
+    "date": "2022-02-11"
+  },
+  {
+    "id": 15,
+    "trip_id": "2022-kitzbuhel",
+    "member_id": "hudy",
+    "type": "ski",
+    "distance_km": "38.57",
+    "runs": 17,
+    "max_speed_km_h": "64.5",
+    "garmin_id": "8287095627",
+    "date": "2022-02-12"
+  },
+  {
+    "id": 16,
+    "trip_id": "2022-kitzbuhel",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "22.62",
+    "runs": 11,
+    "max_speed_km_h": "53.2",
+    "garmin_id": "8289048148",
+    "date": "2022-02-13"
+  },
+  {
+    "id": 17,
+    "trip_id": "2023-passo-del-tonale",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "21.65",
+    "runs": 14,
+    "max_speed_km_h": "49.8",
+    "garmin_id": "10274712597",
+    "date": "2023-01-09"
+  },
+  {
+    "id": 18,
+    "trip_id": "2023-passo-del-tonale",
+    "member_id": "hudy",
+    "type": "ski",
+    "distance_km": "30.63",
+    "runs": 23,
+    "max_speed_km_h": "59.7",
+    "garmin_id": "10281315159",
+    "date": "2023-01-10"
+  },
+  {
+    "id": 19,
+    "trip_id": "2023-passo-del-tonale",
+    "member_id": "hudy",
+    "type": "ski",
+    "distance_km": "30.98",
+    "runs": 17,
+    "max_speed_km_h": "57.9",
+    "garmin_id": "10287921119",
+    "date": "2023-01-11"
+  },
+  {
+    "id": 20,
+    "trip_id": "2023-passo-del-tonale",
+    "member_id": "hudy",
+    "type": "snowboard",
+    "distance_km": "27.33",
+    "runs": 16,
+    "max_speed_km_h": "50.4",
+    "garmin_id": "10294299922",
+    "date": "2023-01-12"
+  },
+  {
+    "id": 21,
+    "trip_id": "2024-dachstein",
+    "member_id": "hudy",
+    "type": "ski",
+    "distance_km": "40.42",
+    "runs": 19,
+    "max_speed_km_h": "75",
+    "garmin_id": "13756144121",
+    "date": "2024-01-31"
+  }
+]
