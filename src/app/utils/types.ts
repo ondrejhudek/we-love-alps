@@ -41,9 +41,10 @@ export type AnyColumn = _AnyColumn<DB, TableName>;
 
 export type AnyAliasedColumn = _AnyAliasedColumn<DB, TableName>;
 
-export type AnyTable = Member | Trip | Resort | Video;
+export type AnyTable = Activity | Member | Trip | Resort | Video;
 
 export type AnyValue =
+  | Activity[keyof Activity]
   | Member[keyof Member]
   | Trip[keyof Trip]
   | Resort[keyof Resort]
