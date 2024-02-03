@@ -19,6 +19,7 @@ import {
   Th,
   Td,
   TableContainer,
+  useBreakpointValue,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -43,9 +44,10 @@ const GarminEmbed = ({
   onClose: () => void;
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const width = useBreakpointValue({ base: "100%", sm: "464px" });
 
   return (
-    <Modal isOpen={isOpen} size="lg" onClose={onClose}>
+    <Modal isOpen={isOpen} size={{ base: "full", sm: "lg" }} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Detail aktivity</ModalHeader>
@@ -55,9 +57,11 @@ const GarminEmbed = ({
             <iframe
               src={`https://connect.garmin.com/modern/activity/embed/${id}`}
               title="Garmin aktivita"
-              width="464"
-              height="500"
               allowFullScreen
+              style={{
+                width,
+                height: "500px",
+              }}
               onLoad={() => setIsLoaded(true)}
             />
           </Skeleton>
