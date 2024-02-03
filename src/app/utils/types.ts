@@ -56,3 +56,5 @@ export interface OrderBy {
 }
 
 export type TableNameWithPhoto = TableName | "photo";
+
+export type StatKey = "member" | "trip" | "resort" | "photo" | "video";
