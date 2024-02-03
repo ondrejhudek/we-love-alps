@@ -3,7 +3,19 @@ import {
   AnyAliasedColumn as _AnyAliasedColumn,
 } from "kysely";
 
-import { DB, Member, Resort, Trip, Video } from "@/generated/types";
+import { DB, Generated, Member, Resort, Trip, Video } from "@/generated/types";
+
+interface Activity {
+  date: Date;
+  distance_km: number;
+  garmin_id: number;
+  id: Generated<number>;
+  max_speed_km_h: number;
+  member_id: string;
+  runs: number;
+  trip_id: string;
+  type: "ski" | "snowboard";
+}
 
 export enum NavLinkKey {
   Home = "/",
@@ -21,7 +33,7 @@ export type Link = {
 
 export type CountryProps = Record<string, string>;
 
-export type { DB, Member, Trip, Resort, Video };
+export type { Activity, DB, Member, Trip, Resort, Video };
 
 export type TableName = keyof DB;
 
