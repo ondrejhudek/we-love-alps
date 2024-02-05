@@ -13,6 +13,13 @@ import {
   CardBody,
   Code,
   Divider,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
   Flex,
   IconButton,
   Heading,
@@ -27,17 +34,29 @@ import {
   Td,
   TableContainer,
   Text,
+  useBoolean,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import {
   HiOutlineArrowLongLeft,
   HiOutlineTableCells,
   HiOutlineSquares2X2,
+  HiOutlineDocumentPlus,
 } from "react-icons/hi2";
 import is from "ramda/src/is";
 
 import Breadcrump from "@/app/components/admin/Breadcrumb";
-import { TableName, AnyTable, AnyColumn, AnyValue } from "@/app/utils/types";
+import Editor from "@/app/components/Editor";
+import { createRow } from "@/app/utils/database";
+import {
+  TableName,
+  AnyTable,
+  AnyColumn,
+  AnyValue,
+  AnyEmptyTable,
+} from "@/app/utils/types";
+import { EMPTY_ENTITY } from "@/app/utils";
 
 type Layout = "table" | "card";
 const LAYOUTS: Layout[] = ["table", "card"];
@@ -104,8 +123,66 @@ const LayoutGroupButton = ({
   );
 };
 
+const AddComponent = ({
+  table,
+  isOpen,
+  onClose,
+}: {
+  table: TableName;
+  isOpen: boolean;
+  onClose: () => void;
+}) => {
+  const router = useRouter();
+  const [value, setValue] = useState<AnyEmptyTable>(EMPTY_ENTITY[table]);
+  const [isCreating, setIsCreating] = useBoolean(false);
+
+  const handleAdd = () => {
+    setIsCreating.on();
+    createRow(table, value)
+      .then((res) => {
+        router.push(`/admin/${table}/${res.id}`);
+      })
+      .finally(() => {
+        setIsCreating.off();
+      });
+  };
+
+  return (
+    <Drawer onClose={onClose} isOpen={isOpen} size="sm">
+      <DrawerOverlay />
+      <DrawerContent>
+        <DrawerCloseButton />
+        <DrawerHeader>Add new {table}</DrawerHeader>
+        <DrawerBody>
+          <Editor data={value} setData={setValue} />
+        </DrawerBody>
+
+        <DrawerFooter>
+          <Button
+            variant="outline"
+            mr={3}
+            isDisabled={isCreating}
+            onClick={onClose}
+          >
+            Cancel
+          </Button>
+          <Button
+            colorScheme="primary"
+            isDisabled={isCreating}
+            isLoading={isCreating}
+            onClick={handleAdd}
+          >
+            Create
+          </Button>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+};
+
 const View = ({ table, data }: { table: TableName; data: AnyTable[] }) => {
   const router = useRouter();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const columns = Object.keys(data[0]) as AnyColumn[];
 
   const [activeLayout, setActiveLayout] = useState(DEFAULT_LAYOUT);
@@ -114,7 +191,7 @@ const View = ({ table, data }: { table: TableName; data: AnyTable[] }) => {
   const cardBgColor = useColorModeValue("gray.50", "gray.900");
   const cardBorderColor = useColorModeValue("gray.100", "gray.700");
 
-  const handleClick = (id: string | number | null) => {
+  const handleOpen = (id: string | number | null) => {
     if (!id) return;
     router.push(`/admin/${table}/${id}`);
   };
@@ -172,7 +249,7 @@ const View = ({ table, data }: { table: TableName; data: AnyTable[] }) => {
                 <Tr
                   key={`tr-${renderId(row.id)}`}
                   role="group"
-                  onClick={() => handleClick(renderId(row.id))}
+                  onClick={() => handleOpen(renderId(row.id))}
                   _hover={{ cursor: "pointer" }}
                 >
                   {columns.map((column, i) => {
@@ -215,7 +292,7 @@ const View = ({ table, data }: { table: TableName; data: AnyTable[] }) => {
               borderColor={cardBorderColor}
               borderWidth={1}
               borderRadius={8}
-              onClick={() => handleClick(renderId(row.id))}
+              onClick={() => handleOpen(renderId(row.id))}
               _hover={{
                 cursor: "pointer",
                 boxShadow: "outline",
@@ -261,15 +338,28 @@ const View = ({ table, data }: { table: TableName; data: AnyTable[] }) => {
       <Divider my={6} />
 
       {/* Footer */}
-      <Button
-        as={NextLink}
-        href="/admin"
-        variant="outline"
-        size="lg"
-        leftIcon={<HiOutlineArrowLongLeft />}
-      >
-        Back
-      </Button>
+      <Flex justifyContent="space-between">
+        <Button
+          as={NextLink}
+          href="/admin"
+          variant="outline"
+          size="lg"
+          leftIcon={<HiOutlineArrowLongLeft />}
+        >
+          Back
+        </Button>
+        <Button
+          variant="solid"
+          colorScheme="primary"
+          size="lg"
+          leftIcon={<HiOutlineDocumentPlus />}
+          onClick={onOpen}
+        >
+          Add new
+        </Button>
+      </Flex>
+
+      <AddComponent table={table} isOpen={isOpen} onClose={onClose} />
     </>
   );
 };

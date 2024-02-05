@@ -10,15 +10,12 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogOverlay,
-  Box,
   Button,
   ButtonGroup,
   Divider,
-  Flex,
   Heading,
   Stack,
   Text,
-  Textarea,
   useBoolean,
   useColorModeValue,
   useDisclosure,
@@ -33,10 +30,9 @@ import {
 } from "react-icons/hi2";
 
 import Breadcrump from "@/app/components/admin/Breadcrumb";
+import Editor from "@/app/components/Editor";
 import { updateRow, deleteRow } from "@/app/utils/database";
 import { TableName, AnyTable } from "@/app/utils/types";
-
-const strigify = (data: AnyTable) => JSON.stringify(data, null, 4);
 
 const ConfirmRemove = ({
   id,
@@ -108,45 +104,17 @@ const View = ({
   const router = useRouter();
   const toast = useToast();
 
-  const [value, setValue] = useState(strigify(data));
-  const [isInvalid, setIsInvalid] = useBoolean(false);
+  const [value, setValue] = useState(data);
   const [isSaving, setIsSaving] = useBoolean(false);
   const [isRemoving, setIsRemoving] = useBoolean(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const labelColor = useColorModeValue("gray.500", "gray.400");
 
-  const parseJson = () => {
-    try {
-      const parsed = JSON.parse(value);
-      return parsed;
-    } catch (e) {
-      setIsInvalid.on();
-      toast({
-        status: "error",
-        title: "Invalid JSON",
-        description: "Please enter a valid JSON",
-      });
-    }
-  };
-
-  const handleChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
-    setIsInvalid.off();
-    setValue(e.currentTarget.value);
-  };
-
-  const handleBeautify = () => {
-    const parsed = parseJson();
-    if (!parsed) return;
-    setValue(strigify(parsed));
-  };
-
   const handleSave = () => {
-    const parsed = parseJson();
-    if (!parsed) return;
     setIsSaving.on();
 
-    updateRow(table, id, parsed)
+    updateRow(table, id, value)
       .then((result) => {
         toast({
           status: "success",
@@ -214,35 +182,7 @@ const View = ({
 
       <Divider my={4} />
 
-      <Box position="relative">
-        <Textarea
-          value={value}
-          placeholder="JSON data"
-          isInvalid={isInvalid}
-          variant="filled"
-          resize="vertical"
-          rows={20}
-          p={8}
-          letterSpacing="0.02rem"
-          borderRadius={8}
-          onChange={handleChange}
-        />
-        <Button
-          position="absolute"
-          top={1}
-          right={1}
-          variant="ghost"
-          size="xs"
-          height={7}
-          px={3}
-          fontWeight={500}
-          textTransform="uppercase"
-          borderRadius={6}
-          onClick={handleBeautify}
-        >
-          Beautify
-        </Button>
-      </Box>
+      <Editor data={value} setData={setValue} />
 
       <Divider my={{ base: 4, sm: 6 }} />
 

@@ -43,3 +43,5 @@ export interface OrderBy {
 }
 
 export type TableNameWithPhoto = TableName | "photo";
+
+export type AnyEmptyTable = Member | Resort | Trip | Omit<Video, "id">;
