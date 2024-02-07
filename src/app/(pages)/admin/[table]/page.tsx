@@ -4,6 +4,7 @@ import { TableName, AnyTable, OrderBy } from "@/app/utils/types";
 import View from "./view";
 
 const ORDER_BY: Record<TableName, OrderBy[]> = {
+  activity: [{ column: "date", direction: "desc" }],
   member: [{ column: "id", direction: "asc" }],
   trip: [
     { column: "year", direction: "desc" },

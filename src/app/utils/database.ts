@@ -17,8 +17,6 @@ import { PointPlugin } from "./kysely";
 const db = createKysely<DB>({}, { plugins: [new PointPlugin()] });
 const { countAll } = db.fn;
 
-// const sleep = (ms = 3000) => new Promise((resolve) => setTimeout(resolve, ms));
-
 const addOrderBy = (
   query: SelectQueryBuilder<DB, keyof DB, AllSelection<DB, keyof DB>>,
   orderBy?: OrderBy[]

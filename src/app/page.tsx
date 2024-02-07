@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import { getRows, getCount } from "@/app/utils/database";
-import { Member, Trip, Resort, TableNameWithPhoto } from "@/app/utils/types";
+import { Member, Trip, Resort, StatKey } from "@/app/utils/types";
 
 import AllResortsMapView, {
   AllResortsMapLoading,
@@ -17,7 +17,7 @@ import CalendarView, {
 import Dashboard from "@/app/components/Dashboard";
 import StatView, { StatLoading } from "@/app/components/Stat";
 
-const STATS: Record<TableNameWithPhoto, { title: string; color: string }> = {
+const STATS: Record<StatKey, { title: string; color: string }> = {
   member: {
     title: "Všichni členové",
     color: "red",
@@ -44,7 +44,7 @@ const STATS: Record<TableNameWithPhoto, { title: string; color: string }> = {
  * Statistic of given table.
  * @param {TableWithPhoto} slug Slug of table.
  */
-const StatAsync = async ({ slug }: { slug: TableNameWithPhoto }) => {
+const StatAsync = async ({ slug }: { slug: StatKey }) => {
   const stat = STATS[slug];
   const count = slug === "photo" ? 11 : await getCount(slug);
   return (
@@ -52,7 +52,7 @@ const StatAsync = async ({ slug }: { slug: TableNameWithPhoto }) => {
   );
 };
 
-const Stat = ({ slug }: { slug: TableNameWithPhoto }) => (
+const Stat = ({ slug }: { slug: StatKey }) => (
   <Suspense fallback={<StatLoading color={STATS[slug].color} />}>
     <StatAsync slug={slug} />
   </Suspense>
