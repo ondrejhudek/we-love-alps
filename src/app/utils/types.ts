@@ -57,6 +57,11 @@ export interface OrderBy {
 
 export type TableNameWithPhoto = TableName | "photo";
 
-export type AnyEmptyTable = Member | Resort | Trip | Omit<Video, "id">;
+export type AnyEmptyTable =
+  | Omit<Activity, "id">
+  | Member
+  | Resort
+  | Trip
+  | Omit<Video, "id">;
 
 export type StatKey = "member" | "trip" | "resort" | "photo" | "video";

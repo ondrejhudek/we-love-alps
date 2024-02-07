@@ -1,5 +1,5 @@
 import { NAV_LINKS_CS } from "./locales";
-import { NavLinkKey, Member, Resort, Trip, Video } from "./types";
+import { NavLinkKey, Activity, Member, Resort, Trip, Video } from "./types";
 
 export const NAV_LINKS: Record<NavLinkKey, string> = {
   [NavLinkKey.Home]: NAV_LINKS_CS.home,
@@ -11,6 +11,17 @@ export const NAV_LINKS: Record<NavLinkKey, string> = {
 };
 
 export const NAV_LINK_KEYS = Object.keys(NAV_LINKS) as NavLinkKey[];
+
+const EMPTY_ACTIVITY: Omit<Activity, "id"> = {
+  trip_id: "",
+  type: "ski",
+  member_id: "",
+  date: new Date(),
+  distance_km: 0,
+  max_speed_km_h: 0,
+  runs: 0,
+  garmin_id: 0,
+};
 
 const EMPTY_MEMBER: Member = {
   id: "",
@@ -53,6 +64,7 @@ const EMPTY_VIDEO: Omit<Video, "id"> = {
 };
 
 export const EMPTY_ENTITY = {
+  activity: EMPTY_ACTIVITY,
   member: EMPTY_MEMBER,
   resort: EMPTY_RESORT,
   trip: EMPTY_TRIP,
