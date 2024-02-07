@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import {
-  Box,
   Flex,
   SkeletonCircle,
   Tooltip,
@@ -39,7 +38,7 @@ const Members = ({
 
   return (
     <Flex wrap="wrap" m={-2}>
-      {data
+      {[...data]
         // Sort folder asc by name
         .sort((a, b) => {
           if (a.id > b.id) return 1;

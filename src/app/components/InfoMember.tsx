@@ -159,7 +159,7 @@ const Info = ({
                 {/* Ex partner */}
                 {data.ex_partners && data.ex_partners.length > 0 && (
                   <>
-                    {data.ex_partners
+                    {[...data.ex_partners]
                       // Sort folder asc by name
                       .sort((a, b) => {
                         if (a > b) return 1;

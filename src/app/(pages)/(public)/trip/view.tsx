@@ -114,7 +114,7 @@ const TripView = ({ data }: { data: TripViewProps }) => {
           color="white"
           fontSize="sm"
         >
-          {members
+          {[...members]
             // Sort folder asc by name
             .sort((a, b) => {
               if (a.id > b.id) return 1;

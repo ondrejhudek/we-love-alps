@@ -1,6 +1,6 @@
 import Alert from "@/app/components/Alert";
 import { getRowsByValues } from "@/app/utils/database";
-import { TableName, AnyColumn, OrderBy, Member } from "@/app/utils/types";
+import { TableName, AnyColumn, OrderBy } from "@/app/utils/types";
 
 const DocumentsByValues = async <T extends object>({
   tableName,
