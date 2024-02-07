@@ -1,11 +1,5 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { CldImage } from "next-cloudinary";
-import { SlideImage, ContainerRect } from "yet-another-react-lightbox";
-import {
-  isImageFitCover,
-  isImageSlide,
-  useLightboxProps,
-} from "yet-another-react-lightbox/core";
 import type { RenderPhotoProps } from "react-photo-album";
 import { Box, BoxProps, useColorModeValue } from "@chakra-ui/react";
 
@@ -118,7 +112,6 @@ export const ResortImage = ({
 /**
  * Images of photogallery thumbnails.
  * Served from Cloudinary.
- * TODO: Migrate to Vercel Blob Storage.
  */
 export const GalleryThumbnailImage = ({
   alt,
@@ -144,7 +137,6 @@ export const GalleryThumbnailImage = ({
 /**
  * Images of one photoalbum thumbnails.
  * Served from Cloudinary.
- * TODO: Migrate to Vercel Blob Storage.
  */
 export const AlbumThumbnailImage: React.FC<
   RenderPhotoProps<ImageProps & { src: string }>

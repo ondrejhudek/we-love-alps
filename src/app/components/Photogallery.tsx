@@ -95,27 +95,25 @@ const Gallery = ({
   };
 
   return (
-    <>
-      <SimpleGrid
-        columns={{ base: 1, xs: 2, sm: 3, md: 4 }}
-        spacing={{ base: 3, sm: 4, lg: 5 }}
-      >
-        {folders.map(({ path, thumbnailImage }) => {
-          const trip = tripsData.find(({ id }) => `gallery/${id}` === path);
-          if (!trip) return null;
+    <SimpleGrid
+      columns={{ base: 1, xs: 2, sm: 3, md: 4 }}
+      spacing={{ base: 3, sm: 4, lg: 5 }}
+    >
+      {folders.map(({ path, thumbnailImage }) => {
+        const trip = tripsData.find(({ id }) => `gallery/${id}` === path);
+        if (!trip) return null;
 
-          return (
-            <GalleryFolder
-              key={path}
-              trip={trip}
-              total={GALLERY_SIZES[path]}
-              thumbnail={thumbnailImage}
-              onClick={handleClick}
-            />
-          );
-        })}
-      </SimpleGrid>
-    </>
+        return (
+          <GalleryFolder
+            key={path}
+            trip={trip}
+            total={GALLERY_SIZES[path]}
+            thumbnail={thumbnailImage}
+            onClick={handleClick}
+          />
+        );
+      })}
+    </SimpleGrid>
   );
 };
 
