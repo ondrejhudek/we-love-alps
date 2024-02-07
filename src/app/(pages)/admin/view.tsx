@@ -25,12 +25,14 @@ const normalizeDataType = (value: string) => {
 };
 
 const View = ({
+  activity,
   member,
   trip,
   resort,
   video,
   schema,
 }: {
+  activity: number;
   member: number;
   trip: number;
   resort: number;
@@ -38,6 +40,7 @@ const View = ({
   schema: TableMetadata[];
 }) => {
   const counts = {
+    activity,
     member,
     trip,
     resort,
