@@ -15,6 +15,7 @@ import { Trip } from "@/app/utils/types";
 import { PHOTO_CS } from "@/app/utils/locales";
 
 const GALLERY_SIZES: Record<string, number> = {
+  "gallery/2024-dachstein": 17,
   "gallery/2023-passo-del-tonale": 15,
   "gallery/2022-kitzbuhel": 3,
   "gallery/2020-schladming": 2,
