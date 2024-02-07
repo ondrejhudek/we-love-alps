@@ -1,12 +1,20 @@
 "use server";
 
-import { sql, SelectQueryBuilder, UpdateObject } from "kysely";
+import { sql, SelectQueryBuilder, UpdateObject, InsertObject } from "kysely";
 import { AllSelection } from "kysely/dist/cjs/parser/select-parser";
 import { createKysely } from "@vercel/postgres-kysely";
 
-import { DB, TableName, OrderBy, AnyColumn, AnyTable } from "./types";
+import {
+  DB,
+  TableName,
+  OrderBy,
+  AnyColumn,
+  AnyTable,
+  AnyEmptyTable,
+} from "./types";
+import { PointPlugin } from "./kysely";
 
-const db = createKysely<DB>();
+const db = createKysely<DB>({}, { plugins: [new PointPlugin()] });
 const { countAll } = db.fn;
 
 const addOrderBy = (
@@ -108,6 +116,15 @@ export const getCount = async (table: TableName) => {
   return count;
 };
 
+export const createRow = async (table: TableName, data: AnyEmptyTable) => {
+  const result = await db
+    .insertInto(table)
+    .values(data as InsertObject<DB, keyof DB>)
+    .returning("id")
+    .executeTakeFirstOrThrow();
+  return result;
+};
+
 export const updateRow = async (
   table: TableName,
   id: string,
@@ -127,7 +144,7 @@ export const deleteRow = async (table: TableName, id: string) => {
     .deleteFrom(table)
     .where("id", "=", id)
     .executeTakeFirstOrThrow();
-  return result;
+  return result.numDeletedRows === BigInt(1);
 };
 
 export const getSchema = async () => {
