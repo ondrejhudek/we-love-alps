@@ -9,7 +9,6 @@ const Page = async ({
   params: { table: TableName; id: string };
 }) => {
   const data = await getRowByValue<AnyTable>(table, "id", id);
-
   return <View table={table} id={id} data={data} />;
 };
 

@@ -126,8 +126,7 @@ const View = ({
           router.push(`/admin/${table}/${result.id}`);
         }
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
         toast({
           status: "error",
           title: "Error occurred",
@@ -150,8 +149,7 @@ const View = ({
           description: `Successfully removed ${table} with id ${id}`,
         });
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
         toast({
           status: "error",
           title: "Error occurred",
