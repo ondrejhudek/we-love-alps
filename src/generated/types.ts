@@ -24,6 +24,7 @@ export interface Activity {
   member_id: string;
   runs: number;
   trip_id: string;
+  type: string;
 }
 
 export interface Member {
