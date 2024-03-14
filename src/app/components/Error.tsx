@@ -11,7 +11,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-const Error = () => (
+const ErrorComponent = () => (
   <Box position="relative" height="100vh">
     <AbsoluteCenter axis="both" width={{ base: "100%", md: "auto" }}>
       <Alert
@@ -42,4 +42,4 @@ const Error = () => (
   </Box>
 );
 
-export default Error;
+export default ErrorComponent;
