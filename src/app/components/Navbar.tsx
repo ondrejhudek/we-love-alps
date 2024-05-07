@@ -1,6 +1,6 @@
 import { type PropsWithChildren, useRef } from "react";
 import NextLink from "next/link";
-import { useSelectedLayoutSegments } from "next/navigation";
+import { useSelectedLayoutSegment } from "next/navigation";
 import {
   Box,
   Center,
@@ -30,11 +30,6 @@ export const BG_COLOR = {
 export const HOVER_BG_COLOR = {
   light: "secondary.700",
   dark: "secondary.600",
-};
-
-const isActiveLink = (link: NavLinkKey, segments: string[]) => {
-  const activeLink = `/${segments[1] || ""}`;
-  return link === activeLink;
 };
 
 export const CircleButton = ({
@@ -102,8 +97,8 @@ export const ColorModeSwitcher = () => {
 };
 
 const NavLink = ({ link }: { link: NavLinkKey }) => {
-  const segments = useSelectedLayoutSegments();
-  const isActive = isActiveLink(link, segments);
+  const segment = useSelectedLayoutSegment();
+  const isActive = link === `/${segment || ""}`;
 
   const hoverBgColor = useColorModeValue(
     HOVER_BG_COLOR.light,
@@ -123,7 +118,7 @@ const NavLink = ({ link }: { link: NavLinkKey }) => {
       transition="background-position 0.1s ease"
       bgGradient={`linear(to-t, ${hoverBgColor} 50%, transparent 50%)`}
       bgSize="100% 200%"
-      bgPosition="0 0"
+      bgPosition={isActive ? "0 100%" : "0 0"}
       _hover={{
         textDecoration: "none",
         color: "white",
@@ -142,8 +137,8 @@ const MobileNavLink = ({
   link: NavLinkKey;
   onClose: () => void;
 }) => {
-  const segments = useSelectedLayoutSegments();
-  const isActive = isActiveLink(link, segments);
+  const segment = useSelectedLayoutSegment();
+  const isActive = link === `/${segment || ""}`;
 
   const color = useColorModeValue("gray.600", "gray.300");
   const activeColor = useColorModeValue("gray.800", "gray.100");
