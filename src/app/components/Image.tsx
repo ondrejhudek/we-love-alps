@@ -1,10 +1,16 @@
 import Image from "next/image";
 import { CldImage } from "next-cloudinary";
-import type { RenderPhotoProps } from "react-photo-album";
+import type {
+  RenderImageProps,
+  RenderImageContext,
+  Photo,
+} from "react-photo-album";
 import { Box, BoxProps, useColorModeValue } from "@chakra-ui/react";
 
 import { ImageProps } from "@/app/cloudinary/types";
 import { COUNTRIES } from "@/app/utils/locales";
+
+export type PhotoalbumImage = Photo & ImageProps;
 
 const VERCEL_BLOB_URL =
   "https://laicmrkbwfhogqcl.public.blob.vercel-storage.com";
@@ -138,12 +144,13 @@ export const GalleryThumbnailImage = ({
  * Images of one photoalbum thumbnails.
  * Served from Cloudinary.
  */
-export const AlbumThumbnailImage: React.FC<
-  RenderPhotoProps<ImageProps & { src: string }>
-> = ({ photo, imageProps: { onClick }, wrapperStyle, layout }) => (
+
+export const AlbumThumbnailImage = (
+  _: RenderImageProps,
+  { photo, height, width }: RenderImageContext<PhotoalbumImage>
+) => (
   <Box
     key={photo.public_id}
-    style={{ ...wrapperStyle, cursor: "zoom-in" }}
     _hover={{
       opacity: "0.85",
     }}
@@ -151,14 +158,13 @@ export const AlbumThumbnailImage: React.FC<
     <CldImage
       src={photo.public_id}
       alt={photo.public_id}
-      width={Math.ceil(layout.width)}
-      height={Math.ceil(layout.height)}
+      height={height}
+      width={width}
       crop="fill"
       gravity="center"
       priority
       placeholder="blur"
       blurDataURL={photo.blurDataUrl}
-      onClick={onClick}
     />
   </Box>
 );

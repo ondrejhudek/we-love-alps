@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import { Card, CardBody } from "@chakra-ui/react";
-import PhotoAlbum from "react-photo-album";
+import { RowsPhotoAlbum } from "react-photo-album";
+import "react-photo-album/rows.css";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 import Alert from "@/app/components/Alert";
 import { AlbumThumbnailImage } from "@/app/components/Image";
+import type { PhotoalbumImage } from "@/app/components/Image";
 import { ImageProps } from "@/app/cloudinary/types";
 
 const IMAGE_SIZES = [16, 32, 48, 64, 96, 128, 256, 384];
@@ -18,7 +20,7 @@ const nextImageUrl = (src: string, size: number) =>
   `/_next/image?url=${encodeURIComponent(src)}&w=${size}&q=75`;
 
 export const PhotoalbumImages = ({ images }: { images: ImageProps[] }) => {
-  const photos = images.map((image) => ({
+  const photos: PhotoalbumImage[] = images.map((image) => ({
     ...image,
     src: image.url,
   }));
@@ -41,14 +43,15 @@ export const PhotoalbumImages = ({ images }: { images: ImageProps[] }) => {
 
   return (
     <>
-      <PhotoAlbum
-        layout="rows"
+      <RowsPhotoAlbum
         spacing={5}
         rowConstraints={{
           singleRowMaxHeight: 200,
         }}
         photos={photos}
-        renderPhoto={AlbumThumbnailImage}
+        render={{
+          image: AlbumThumbnailImage,
+        }}
         onClick={({ index }) => handleClick(index)}
       />
 

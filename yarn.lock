@@ -3683,10 +3683,10 @@ react-is@^16.13.1, react-is@^16.7.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-photo-album@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/react-photo-album/-/react-photo-album-2.4.1.tgz#9754b22501a157c3c1774260bd3da8a38d88cf4b"
-  integrity sha512-dzqP5QbYAugA0uZTl3qsVldckzDXYDkDOvA8CpACl51hSEfhJmCfwhbnI4WBHnETQHv48nnNQ1jhrulst8njLA==
+react-photo-album@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-photo-album/-/react-photo-album-3.0.1.tgz#7e597cc907a186501761e75f71141e3616e21749"
+  integrity sha512-yk3FJAuQn8UPZufbdYURa1wy+3tVVNaflyMOQ0mC8dlAWbDhlLDWJ0oGKSbbZkHMX7L3SGRIyWieix++AlD+TQ==
 
 react-remove-scroll-bar@^2.3.4:
   version "2.3.4"
