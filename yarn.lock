@@ -870,30 +870,30 @@
   resolved "https://registry.npmjs.org/@chakra-ui/visually-hidden/-/visually-hidden-2.2.0.tgz"
   integrity sha512-KmKDg01SrQ7VbTD3+cPWf/UfpF5MSwm3v7MWi0n5t8HnnadT13MF0MJCDSXbBWnzLv1ZKJ6zlyAOeARWX+DpjQ==
 
-"@cloudinary-util/types@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.1.0.tgz#7de7590bc9adc9f3e5b6f2b51e586864e3224161"
-  integrity sha512-hlaN/+3wulAe+wGJNO2XrtFHKGrjt80F02BJFE4nEucAmv5OVYxRIQg/aroYb56X8jdSAHU1nPw9GRqApYdNog==
+"@cloudinary-util/types@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.2.0.tgz#c67ee4c4948236327872239165bf798eeeb899c5"
+  integrity sha512-2Mo5juB1HV+GmVLq2+bU0Yg5FB6r+csbHyDN6njc0AqkEkp+AW+Q6kYbbTYkT7zk3x9tBWfKn3lfR7wUCwowJw==
 
-"@cloudinary-util/url-loader@5.5.0":
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.5.0.tgz#7d73f37d650f827fc571fa3bd8dfd6d59036b75e"
-  integrity sha512-oFDyeRzvnawhmP1OSnXb/A09LiUyROylpTSfaNgb0eJ4oP1Lc60VMuzJsbsiLVTOf8N5pf7MHlUtM9y/Q9JrUA==
+"@cloudinary-util/types@1.2.0-beta.1":
+  version "1.2.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.2.0-beta.1.tgz#ba3461e97a26ba8d9d0d733dd983f504a3db0303"
+  integrity sha512-zdMPqadGhRWwSZQcgsUoouJhr2Dnpc4p1ytGLtnEmVFNvwDhYMR6ER3xLP5FoSNzPx10SoWfNl6UWQKInkk+iQ==
+
+"@cloudinary-util/url-loader@5.6.0":
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.6.0.tgz#778c9b09faa02edd19702e742c931ce9927a7790"
+  integrity sha512-oWTXaaBralKLfk9tD2fWaTfwflx9Acug6L3GO72sLPxIssg+SyeNDiIrNwIFRx6SkFR74bWWNqjp2yu135gaDQ==
   dependencies:
-    "@cloudinary-util/types" "1.1.0"
-    "@cloudinary-util/util" "3.1.0"
+    "@cloudinary-util/types" "1.2.0-beta.1"
+    "@cloudinary-util/util" "3.2.0"
     "@cloudinary/url-gen" "1.15.0"
     zod "^3.22.4"
 
-"@cloudinary-util/util@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/util/-/util-3.1.0.tgz#007e68b3446ed9967781228f858ee8751470f5fc"
-  integrity sha512-BPy6wLDf+mILZTb8zR44MJxqGp3z8Y9W4DZ0kHC+SJjQYKbYUqcdzFhDKGZNOTAO7pWhkf8E5ViZGy+A0lD44w==
-
-"@cloudinary-util/util@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/util/-/util-3.0.0.tgz#4096e0190108b2680c0027bf9afaeca039cea6cc"
-  integrity sha512-o6cJsN49OIelLcSkqUf4WzgefpePDFsAaeQfJbpcKhVdtvmWv71K0oZwMXuX62IY1OolqIg0etMiHtWZPhvPNA==
+"@cloudinary-util/util@3.2.0", "@cloudinary-util/util@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/util/-/util-3.2.0.tgz#cdfb15ca0f04063203109ffbf3a5bc6de7f94c2b"
+  integrity sha512-VJBqAT3W0HQ9kyMagv+EzXkM/VYR9Ks01ewGxsS8T8b2N0NZFPAhYKeU2H9fOXSl6BVrD6aVYjJZAoT8pfQIyA==
 
 "@cloudinary/transformation-builder-sdk@^1.10.0":
   version "1.10.1"
@@ -2513,10 +2513,10 @@ foreground-child@^3.1.0:
     cross-spawn "^7.0.0"
     signal-exit "^4.0.1"
 
-framer-motion@^11.3.22:
-  version "11.3.22"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.3.22.tgz#59b09479e3e8919edb44171bb5e9a5a814ba2351"
-  integrity sha512-NS9TnPOJhkUrKKe7sl9zAMmQlzm70bwzJ6/gs/DkYP3kCqc0wO350CEqiEcBuVjhyqVNnDf33SkenzByi8x8Gg==
+framer-motion@^11.3.24:
+  version "11.3.24"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.3.24.tgz#c4c62b18be7c09814e809b4c9dca5b23a748b1b4"
+  integrity sha512-kl0YI7HwAtyV0VOAWuU/rXoOS8+z5qSkMN6rZS+a9oe6fIha6SC3vjJN6u/hBpvjrg5MQNdSnqnjYxm0WYTX9g==
   dependencies:
     tslib "^2.4.0"
 
@@ -3222,14 +3222,14 @@ next-auth@^4.24.7:
     preact-render-to-string "^5.1.19"
     uuid "^8.3.2"
 
-next-cloudinary@^6.9.0:
-  version "6.9.0"
-  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.9.0.tgz#5b44cede7300b2123c4f1e2825ce8e429647ddf4"
-  integrity sha512-WVsVT/AY1Zud1PYGojUIQa+Wbndfh/N4pXI8MLHYgboTb9rW6YZOpgIVSJ7calMMYhC2z6xdZOfZPnObEgn4aA==
+next-cloudinary@^6.10.0:
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.10.0.tgz#e40272dc850d8c8445b8c6525b63390e5439ef48"
+  integrity sha512-iGKg4bPAkGjrWQDovbqQJVb3VPzj6TESgEk46D+dS3cVaFJqnVjwGtGlK9wLA/KX7lhZinvnHvouufuiL7f9ig==
   dependencies:
-    "@cloudinary-util/types" "1.1.0"
-    "@cloudinary-util/url-loader" "5.5.0"
-    "@cloudinary-util/util" "^3.0.0"
+    "@cloudinary-util/types" "1.2.0"
+    "@cloudinary-util/url-loader" "5.6.0"
+    "@cloudinary-util/util" "^3.2.0"
     "@tsconfig/recommended" "^1.0.7"
 
 next@14.2.5:
@@ -4378,10 +4378,10 @@ yaml@^1.10.0:
   resolved "https://registry.npmjs.org/yaml/-/yaml-1.10.2.tgz"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
-yet-another-react-lightbox@^3.21.2:
-  version "3.21.2"
-  resolved "https://registry.yarnpkg.com/yet-another-react-lightbox/-/yet-another-react-lightbox-3.21.2.tgz#a5791b193357199bb7fbd715fd3618b751c43092"
-  integrity sha512-dRkeGkKFH9EF49VMfnxQpClc8T+cpn50uZLmRgzlRg+QHuk9avRNh+2bVUR3Ad6C29m2lNiiubv27Vyv8nmmAg==
+yet-another-react-lightbox@^3.21.3:
+  version "3.21.3"
+  resolved "https://registry.yarnpkg.com/yet-another-react-lightbox/-/yet-another-react-lightbox-3.21.3.tgz#cb61645a66adf58fb37726d49a10f882d037bafe"
+  integrity sha512-RE40Q10h70L31KNd7q6TCjYRNS5XARbZlD5zLeDpwZ6nk0URS9z0rkRNAeQLp99ybjbQK2rX/G2ipEmZL5PcKA==
 
 yocto-queue@^0.1.0:
   version "0.1.0"
