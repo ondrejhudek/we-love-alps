@@ -119,7 +119,7 @@ VALUES (
         'Horní Rakousko',
         POINT(47.56557997434476, 13.498129198240154)
     ),
-(
+    (
         'sella',
         'Sella Ronda',
         'IT',

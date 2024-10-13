@@ -72,7 +72,7 @@ const Info = ({ data }: { data: Trip }) => {
               {data.accomodation_map && (
                 <Tooltip label="Otevřít ubýtování na Google Maps">
                   <Link
-                    href={`https://goo.gl/maps/${data.accomodation_map}`}
+                    href={`https://maps.app.goo.gl/${data.accomodation_map}`}
                     target="_blank"
                   >
                     <Icon

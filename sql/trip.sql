@@ -202,4 +202,16 @@ VALUES (
         ARRAY ['dachstein'],
         ARRAY ['hudy','jarin','daja','stuchla','terez','milan','lena','pavel','era'],
         1
+    ),
+    (
+        '2025-st-johann-in-tirol',
+        'St. Johann in Tirol',
+        'AT',
+        2025,
+        1,
+        'COOEE alpin Hotel Kitzbüheler Alpen',
+        'gyvB61Hz9svSzurX7',
+        ARRAY ['kitzbuhel','brixen'],
+        ARRAY ['hudy', 'terka', 'era', 'pavel', 'lena', 'milan', 'stuchla', 'terez', 'sally'],
+        0
     );
