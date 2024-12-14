@@ -14,11 +14,11 @@ const ORDER_BY: Record<TableName, OrderBy[]> = {
   video: [{ column: "id", direction: "desc" }],
 };
 
-const Page = async ({
-  params: { table },
-}: {
-  params: { table: TableName };
-}) => {
+type Params = Promise<{ table: TableName }>;
+
+const Page = async ({ params }: { params: Params }) => {
+  const { table } = await params;
+
   const data = await getRows<AnyTable>(table, ORDER_BY[table]);
 
   return <View table={table} data={data} />;

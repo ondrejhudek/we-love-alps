@@ -6,7 +6,11 @@ import Photoalbum from "@/app/components/Photoalbum";
 import { getRowByValue } from "@/app/utils/database";
 import { Trip } from "@/app/utils/types";
 
-const Page = async ({ params: { id } }: { params: { id: string } }) => {
+type Params = Promise<{ id: string }>;
+
+const Page = async ({ params }: { params: Params }) => {
+  const { id } = await params;
+
   const [data, images] = await Promise.all([
     getRowByValue<Trip>("trip", "id", id),
     getImages(id),

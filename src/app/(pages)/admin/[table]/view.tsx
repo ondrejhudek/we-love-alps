@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState, type JSX } from "react";
 import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import {
