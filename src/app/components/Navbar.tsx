@@ -1,4 +1,4 @@
-import { type PropsWithChildren, useRef } from "react";
+import { type PropsWithChildren, useRef, type RefObject } from "react";
 import NextLink from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import {
@@ -16,6 +16,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { type FocusableElement } from "@chakra-ui/utils";
 import { HiBars3, HiXMark, HiMoon, HiSun } from "react-icons/hi2";
 
 import Logo from "@/app/components/Logo";
@@ -192,7 +193,7 @@ const MobileNavbar = ({
     <Modal
       isOpen={isOpen}
       size="full"
-      initialFocusRef={initialRef}
+      initialFocusRef={initialRef as unknown as RefObject<FocusableElement>}
       onClose={onClose}
     >
       <ModalOverlay />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type RefObject } from "react";
 import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -21,6 +21,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import { type FocusableElement } from "@chakra-ui/utils";
 import {
   HiOutlineArrowLongLeft,
   HiOutlineCheck,
@@ -52,7 +53,7 @@ const ConfirmRemove = ({
   return (
     <AlertDialog
       isOpen={isOpen}
-      leastDestructiveRef={cancelRef}
+      leastDestructiveRef={cancelRef as unknown as RefObject<FocusableElement>}
       onClose={onClose}
     >
       <AlertDialogOverlay>
