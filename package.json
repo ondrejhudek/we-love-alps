@@ -20,7 +20,7 @@
     "@types/react": "18.3.11",
     "@types/react-dom": "18.3.1",
     "@vercel/analytics": "^1.4.1",
-    "@vercel/blob": "^0.25.0",
+    "@vercel/blob": "^0.27.0",
     "@vercel/postgres-kysely": "^0.10.0",
     "@vercel/speed-insights": "^1.1.0",
     "cloudinary": "2.5.1",
