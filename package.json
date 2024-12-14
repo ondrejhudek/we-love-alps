@@ -30,9 +30,9 @@
     "kysely": "^0.27.4",
     "kysely-codegen": "^0.16.8",
     "next": "14.2.15",
-    "next-auth": "^4.24.8",
+    "next-auth": "^4.24.11",
     "next-cloudinary": "^6.14.1",
-    "pg": "^8.13.0",
+    "pg": "^8.13.1",
     "ramda": "^0.30.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -40,6 +40,6 @@
     "react-photo-album": "^3.0.2",
     "sharp": "^0.33.5",
     "typescript": "5.6.3",
-    "yet-another-react-lightbox": "^3.21.6"
+    "yet-another-react-lightbox": "^3.21.7"
   }
 }
