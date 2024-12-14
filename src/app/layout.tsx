@@ -1,5 +1,5 @@
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import type { PropsWithChildren } from "react";
 
@@ -24,10 +24,6 @@ export const metadata: Metadata = {
     index: false,
     follow: false,
   },
-};
-
-export const viewport: Viewport = {
-  themeColor: "#005f7e",
 };
 
 const RootLayout = ({ children }: PropsWithChildren) => (

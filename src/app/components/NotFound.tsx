@@ -60,7 +60,7 @@ const NotFound = () => {
     >
       <AlertIcon boxSize={8} mt={1} mr={3} />
       <Box>
-        <AlertTitle fontSize="lg">HOVNO{alert.title}</AlertTitle>
+        <AlertTitle fontSize="lg">{alert.title}</AlertTitle>
         <AlertDescription>{alert.description}</AlertDescription>
 
         <Box mt={3}>

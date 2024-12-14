@@ -101,8 +101,11 @@ const Content = async ({ id }: { id: string }) => {
   );
 };
 
-const Page = async ({ params: { id } }: { params: { id: string } }) => (
-  <Content id={id} />
-);
+type Params = Promise<{ id: string }>;
+
+const Page = async ({ params }: { params: Params }) => {
+  const { id } = await params;
+  return <Content id={id} />;
+};
 
 export default Page;
