@@ -8,8 +8,8 @@ CREATE TABLE
     type TEXT NOT NULL,
     distance_km DECIMAL NOT NULL,
     runs INT NOT NULL,
-    max_speed_km_h DECIMAL NOT NULL,
-    garmin_id BIGINT NOT NULL,
+    max_speed_km_h DECIMAL,
+    garmin_id BIGINT,
     date DATE NOT NULL
   );
 
@@ -234,4 +234,74 @@ VALUES
     75,
     13756144121,
     '2024-01-31'
+  ),
+  (
+    '2025-st-johann-in-tirol',
+    'hudy',
+    'ski',
+    23.05,
+    16,
+    57.9,
+    17982749416,
+    '2025-01-12'
+  ),
+  (
+    '2025-st-johann-in-tirol',
+    'hudy',
+    'ski',
+    16.77,
+    9,
+    63,
+    17991893836,
+    '2025-01-13'
+  ),
+  (
+    '2025-st-johann-in-tirol',
+    'sally',
+    'ski',
+    14.77,
+    8,
+    NULL,
+    NULL,
+    '2025-01-13'
+  ),
+  (
+    '2025-st-johann-in-tirol',
+    'hudy',
+    'ski',
+    18.03,
+    7,
+    66.2,
+    18000721290,
+    '2025-01-14'
+  ),
+  (
+    '2025-st-johann-in-tirol',
+    'sally',
+    'ski',
+    30.49,
+    13,
+    NULL,
+    NULL,
+    '2025-01-14'
+  ),
+  (
+    '2025-st-johann-in-tirol',
+    'hudy',
+    'ski',
+    12.31,
+    5,
+    54.9,
+    18010102170,
+    '2025-01-15'
+  ),
+  (
+    '2025-st-johann-in-tirol',
+    'sally',
+    'ski',
+    18.27,
+    10,
+    NULL,
+    NULL,
+    '2025-01-15'
   );

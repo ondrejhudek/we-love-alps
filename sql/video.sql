@@ -16,4 +16,6 @@ VALUES
   ('2019-kronplatz', 'twGFDV4YvxQ'),
   ('2020-schladming', '_HHgYaV00Ds'),
   ('2022-kitzbuhel', 'zIo_PU-8UYw'),
-  ('2023-passo-del-tonale', 'KJlZEukVEcw');
+  ('2023-passo-del-tonale', 'KJlZEukVEcw'),
+  ('2024-dachstein', 'Rw-9jNUg9RQ'),
+  ('2025-st-johann-in-tirol', 'uXE9qPfKs1E');
