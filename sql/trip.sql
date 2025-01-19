@@ -301,7 +301,7 @@ VALUES
     1,
     'COOEE alpin Hotel Kitzbüheler Alpen',
     'gyvB61Hz9svSzurX7',
-    ARRAY['st-johann', 'kitzbuhel', 'brixen'],
+    ARRAY['st-johann', 'brixen'],
     ARRAY[
       'hudy',
       'terka',
@@ -311,7 +311,9 @@ VALUES
       'milan',
       'stuchla',
       'terez',
-      'sally'
+      'sally',
+      'sima',
+      'zahrada'
     ],
     0
   );
